@@ -1729,36 +1729,32 @@ a:focus-visible, button:focus-visible {
 }
 
 /* ==================== RTL SUPPORT FOR URDU ==================== */
-[dir="rtl"] {
+/* Only apply RTL to content text, not navigation layout */
+
+[dir="rtl"] .hero-content,
+[dir="rtl"] .section-header,
+[dir="rtl"] .journey-card,
+[dir="rtl"] .pricing-card,
+[dir="rtl"] .value-card,
+[dir="rtl"] .faq-item,
+[dir="rtl"] .content-block,
+[dir="rtl"] .story-content,
+[dir="rtl"] .cta-content,
+[dir="rtl"] .footer-brand,
+[dir="rtl"] .footer-links,
+[dir="rtl"] .contact-info,
+[dir="rtl"] .page-hero-content {
     text-align: right;
 }
 
-[dir="rtl"] .nav-inner {
-    flex-direction: row-reverse;
-}
-
-[dir="rtl"] .nav-links {
-    flex-direction: row-reverse;
-}
-
-[dir="rtl"] .hero-meta {
-    flex-direction: row-reverse;
-}
-
-[dir="rtl"] .footer-content {
-    flex-direction: row-reverse;
-}
-
-[dir="rtl"] .btn {
-    flex-direction: row-reverse;
-}
-
-[dir="rtl"] .contact-grid {
-    direction: rtl;
-}
-
-[dir="rtl"] .content-grid {
-    direction: rtl;
+/* Keep navigation and buttons LTR */
+[dir="rtl"] .nav-inner,
+[dir="rtl"] .nav-links,
+[dir="rtl"] .lang-toggle,
+[dir="rtl"] .nav-right,
+[dir="rtl"] .hero-buttons,
+[dir="rtl"] .cta-buttons {
+    direction: ltr;
 }
 
 [data-lang="ur"] body {
