@@ -1,6 +1,7 @@
 /* ==================== VARIABLES ==================== */
 :root {
     --color-cream: #FDF8F3;
+    /* --color-cream: black; */
     --color-warm-white: #FEFCFA;
     --color-sand: #F5EDE4;
     --color-sage: #9BAA8F;
@@ -369,7 +370,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     font-family: var(--font-display);
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     font-style: italic;
-    color: var(--color-terracotta);
+    color: #b93302;
     margin-bottom: var(--space-lg);
     animation: fadeUp 0.8s ease-out 0.1s forwards;
     opacity: 0;
