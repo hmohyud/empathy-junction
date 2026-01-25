@@ -1,12 +1,14 @@
 const translations = {
     en: {
-        brand: "Empathy Junction",
+        brand: "Join the Dots",
         "nav.journey": "The Journey",
         "nav.schedule": "Schedule",
         "nav.pricing": "Pricing",
         "nav.forWhom": "Who It's For",
         "nav.join": "Join Now",
-        "hero.title": "Empathy Junction",
+        "nav.about": "About Us",
+        "nav.contact": "Contact",
+        "hero.title": "Join the Dots",
         "hero.tagline": "Many Paths. One Warm Hearth.",
         "hero.description": "A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.",
         "hero.cta1": "Join the Free Listening Lounge",
@@ -83,7 +85,7 @@ const translations = {
         "compassion.badge": "Deeper Journey (Optional Path)",
         "compassion.title": "The Compassion Course",
         "compassion.duration": "52 Weeks with Thom Bond (International NVC Trainer)",
-        "compassion.text": "A year-long transformational journey where empathy becomes not just something you practice, but who you are. Special rate exclusively for Empathy Junction participants.",
+        "compassion.text": "A year-long transformational journey where empathy becomes not just something you practice, but who you are. Special rate exclusively for Join the Dots participants.",
         "compassion.savings": "Save ₹5,000",
         "compassion.cta": "Explore the Compassion Course",
         "reflection.badge": "Reflection Compass",
@@ -103,7 +105,7 @@ const translations = {
         "audience.item5": "Anyone longing to be heard",
         "audience.item6": "Those learning to listen with empathy",
         "cta.title": "Come Home to Yourself",
-        "cta.line1": "Come to Empathy Junction.",
+        "cta.line1": "Come to Join the Dots.",
         "cta.line2": "Sit in the Listening Lounge.",
         "cta.line3": "Find your map in Join the Dots.",
         "cta.line4": "Warm yourself in the Empathy Café.",
@@ -124,16 +126,81 @@ const translations = {
         "footer.connect": "Connect",
         "footer.registerNow": "Register Now",
         "footer.madeWith": "Made with",
-        "footer.forThose": "for those seeking connection."
+        "footer.forThose": "for those seeking connection.",
+
+        // ==================== ABOUT PAGE ====================
+        "about.badge": "About Us",
+        "about.title": "Our Story",
+        "about.subtitle": "Where listening becomes a way of life",
+        "about.mission.title": "Our Mission",
+        "about.mission.text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        "about.mission.text2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "about.vision.title": "Our Vision",
+        "about.vision.text1": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+        "about.vision.text2": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+        "about.values.title": "Our Values",
+        "about.values.subtitle": "The principles that guide everything we do",
+        "about.values.v1.title": "Presence",
+        "about.values.v1.text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.",
+        "about.values.v2.title": "Compassion",
+        "about.values.v2.text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+        "about.values.v3.title": "Connection",
+        "about.values.v3.text": "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "about.values.v4.title": "Growth",
+        "about.values.v4.text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+        "about.story.title": "How It All Began",
+        "about.story.text1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "about.story.text2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "about.story.text3": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+        "about.cta.title": "Join Our Community",
+        "about.cta.text": "Begin your journey with us today.",
+        "about.cta.button": "Get Started",
+        "about.cta.contact": "Contact Us",
+
+        // ==================== CONTACT PAGE ====================
+        "contact.badge": "Contact Us",
+        "contact.title": "Get in Touch",
+        "contact.subtitle": "We'd love to hear from you",
+        "contact.info.title": "Let's Connect",
+        "contact.info.text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "contact.info.whatsapp": "Chat with us",
+        "contact.info.emailLabel": "Email",
+        "contact.info.locationLabel": "Location",
+        "contact.info.location": "Online / Hybrid Sessions",
+        "contact.info.hoursLabel": "Hours",
+        "contact.info.hours": "Weekend Sessions Available",
+        "contact.form.name": "Your Name",
+        "contact.form.email": "Email Address",
+        "contact.form.phone": "Phone Number (Optional)",
+        "contact.form.subject": "Subject",
+        "contact.form.selectSubject": "Select a subject",
+        "contact.form.subjectLounge": "Listening Lounge",
+        "contact.form.subjectDots": "Join the Dots",
+        "contact.form.subjectCompassion": "Compassion Course",
+        "contact.form.subjectGeneral": "General Inquiry",
+        "contact.form.message": "Your Message",
+        "contact.form.submit": "Send Message",
+        "contact.faq.title": "Frequently Asked Questions",
+        "contact.faq.subtitle": "Quick answers to common questions",
+        "contact.faq.q1": "How do I join a session?",
+        "contact.faq.a1": "Simply register through our website or WhatsApp us. We'll send you the details for the upcoming session.",
+        "contact.faq.q2": "Are sessions in Hindi or English?",
+        "contact.faq.a2": "We offer sessions in both Hindi and English. You can choose the language that feels most comfortable for you.",
+        "contact.faq.q3": "Do I need any prior experience?",
+        "contact.faq.a3": "No prior experience is needed. Our Listening Lounge is designed for beginners and is completely free to join.",
+        "contact.faq.q4": "Can I attend online?",
+        "contact.faq.a4": "Yes! All our sessions are available online. We also offer hybrid options for those who prefer in-person connection."
     },
     hi: {
-        brand: "एम्पैथी जंक्शन",
+        brand: "जॉइन द डॉट्स",
         "nav.journey": "यात्रा",
         "nav.schedule": "समय सारणी",
         "nav.pricing": "शुल्क",
         "nav.forWhom": "किसके लिए",
         "nav.join": "जुड़ें",
-        "hero.title": "एम्पैथी जंक्शन",
+        "nav.about": "हमारे बारे में",
+        "nav.contact": "संपर्क करें",
+        "hero.title": "जॉइन द डॉट्स",
         "hero.tagline": "अनेक पथ। एक गर्म आश्रय।",
         "hero.description": "एक सुनने पर आधारित कल्याण स्थान जहाँ भावनाओं को समझा जाता है, रिश्तों को धीरे-धीरे ठीक किया जाता है, और जागरूकता धीरे-धीरे जीवन का एक तरीका बन जाती है।",
         "hero.cta1": "मुफ्त लिसनिंग लाउंज में शामिल हों",
@@ -230,7 +297,7 @@ const translations = {
         "audience.item5": "कोई भी जो सुना जाना चाहता है",
         "audience.item6": "जो सहानुभूति से सुनना सीख रहे हैं",
         "cta.title": "अपने आप में घर आएं",
-        "cta.line1": "एम्पैथी जंक्शन आएं।",
+        "cta.line1": "जॉइन द डॉट्स आएं।",
         "cta.line2": "लिसनिंग लाउंज में बैठें।",
         "cta.line3": "जॉइन द डॉट्स में अपना नक्शा खोजें।",
         "cta.line4": "एम्पैथी कैफ़े में खुद को गर्म करें।",
@@ -251,16 +318,79 @@ const translations = {
         "footer.connect": "जुड़ें",
         "footer.registerNow": "अभी रजिस्टर करें",
         "footer.madeWith": "बनाया गया",
-        "footer.forThose": "जुड़ाव चाहने वालों के लिए।"
+        "footer.forThose": "जुड़ाव चाहने वालों के लिए।",
+
+        // ==================== ABOUT PAGE ====================
+        "about.badge": "हमारे बारे में",
+        "about.title": "हमारी कहानी",
+        "about.subtitle": "जहाँ सुनना जीवन का एक तरीका बन जाता है",
+        "about.mission.title": "हमारा मिशन",
+        "about.mission.text1": "लोरेम इप्सम डोलर सिट अमेट, कंसेक्टेचर एडिपिसिंग एलीट। सेड डू एयुस्मोड टेम्पोर इंसीडिडंट उट लेबोर एट डोलोरे मैग्ना एलिक्वा। उट एनिम एड मिनिम वेनियम।",
+        "about.mission.text2": "डुइस ऑटे इरूरे डोलर इन रेप्रहेंडेरिट इन वोलुप्टेट वेलित एस्से सिलम डोलोरे यू फुगियाट नुल्ला परियातुर। एक्सेप्टुर सिंट ओकेकाट कुपिडाटाट नॉन प्रोइडेंट।",
+        "about.vision.title": "हमारी दृष्टि",
+        "about.vision.text1": "सेड उट पर्स्पिसियाटिस उंडे ओमनिस इस्ते नाटुस एरर सिट वोलुप्टाटेम एक्युसांटियम डोलोरेमक्वे लाउडांटियम, टोटम रेम एपेरियम।",
+        "about.vision.text2": "नेमो एनिम इप्सम वोलुप्टाटेम क्विया वोलुप्टास सिट एस्पर्नाटुर औट ओडिट औट फुगिट, सेड क्विया कंसेक्वुंटुर मैग्नी डोलोरेस।",
+        "about.values.title": "हमारे मूल्य",
+        "about.values.subtitle": "वे सिद्धांत जो हम जो कुछ भी करते हैं उसका मार्गदर्शन करते हैं",
+        "about.values.v1.title": "उपस्थिति",
+        "about.values.v1.text": "लोरेम इप्सम डोलर सिट अमेट, कंसेक्टेचर एडिपिसिंग एलीट। विवामुस लसीनिया ओडियो विटे वेस्टीबुलम।",
+        "about.values.v2.title": "करुणा",
+        "about.values.v2.text": "सेड डू एयुस्मोड टेम्पोर इंसीडिडंट उट लेबोर एट डोलोरे मैग्ना एलिक्वा। उट एनिम एड मिनिम वेनियम।",
+        "about.values.v3.title": "जुड़ाव",
+        "about.values.v3.text": "क्विस नॉस्ट्रड एक्सरसिटेशन उल्लामको लेबोरिस निसि उट एलिक्विप एक्स एआ कमोडो कंसेक्वाट।",
+        "about.values.v4.title": "विकास",
+        "about.values.v4.text": "डुइस ऑटे इरूरे डोलर इन रेप्रहेंडेरिट इन वोलुप्टेट वेलित एस्से सिलम डोलोरे यू फुगियाट।",
+        "about.story.title": "यह सब कैसे शुरू हुआ",
+        "about.story.text1": "लोरेम इप्सम डोलर सिट अमेट, कंसेक्टेचर एडिपिसिंग एलीट। सेड डू एयुस्मोड टेम्पोर इंसीडिडंट उट लेबोर एट डोलोरे मैग्ना एलिक्वा।",
+        "about.story.text2": "डुइस ऑटे इरूरे डोलर इन रेप्रहेंडेरिट इन वोलुप्टेट वेलित एस्से सिलम डोलोरे यू फुगियाट नुल्ला परियातुर।",
+        "about.story.text3": "एट वेरो इओस एट एक्युसामुस एट इउस्टो ओडियो डिग्निस्सिमोस डुसिमुस क्वी ब्लैंडिटीस प्राएसेंटियम वोलुप्टाटम डेलेनिटी।",
+        "about.cta.title": "हमारे समुदाय में शामिल हों",
+        "about.cta.text": "आज ही हमारे साथ अपनी यात्रा शुरू करें।",
+        "about.cta.button": "शुरू करें",
+        "about.cta.contact": "संपर्क करें",
+
+        // ==================== CONTACT PAGE ====================
+        "contact.badge": "संपर्क करें",
+        "contact.title": "संपर्क में रहें",
+        "contact.subtitle": "हम आपसे सुनना चाहेंगे",
+        "contact.info.title": "आइए जुड़ें",
+        "contact.info.text": "लोरेम इप्सम डोलर सिट अमेट, कंसेक्टेचर एडिपिसिंग एलीट। सेड डू एयुस्मोड टेम्पोर इंसीडिडंट उट लेबोर एट डोलोरे मैग्ना एलिक्वा।",
+        "contact.info.whatsapp": "हमसे चैट करें",
+        "contact.info.emailLabel": "ईमेल",
+        "contact.info.locationLabel": "स्थान",
+        "contact.info.location": "ऑनलाइन / हाइब्रिड सत्र",
+        "contact.info.hoursLabel": "समय",
+        "contact.info.hours": "वीकेंड सत्र उपलब्ध",
+        "contact.form.name": "आपका नाम",
+        "contact.form.email": "ईमेल पता",
+        "contact.form.phone": "फ़ोन नंबर (वैकल्पिक)",
+        "contact.form.subject": "विषय",
+        "contact.form.selectSubject": "एक विषय चुनें",
+        "contact.form.subjectLounge": "लिसनिंग लाउंज",
+        "contact.form.subjectDots": "जॉइन द डॉट्स",
+        "contact.form.subjectCompassion": "कंपैशन कोर्स",
+        "contact.form.subjectGeneral": "सामान्य पूछताछ",
+        "contact.form.message": "आपका संदेश",
+        "contact.form.submit": "संदेश भेजें",
+        "contact.faq.title": "अक्सर पूछे जाने वाले प्रश्न",
+        "contact.faq.subtitle": "सामान्य प्रश्नों के त्वरित उत्तर",
+        "contact.faq.q1": "मैं सत्र में कैसे शामिल होऊं?",
+        "contact.faq.a1": "बस हमारी वेबसाइट के माध्यम से रजिस्टर करें या हमें WhatsApp करें। हम आपको आगामी सत्र का विवरण भेज देंगे।",
+        "contact.faq.q2": "सत्र हिंदी में हैं या अंग्रेज़ी में?",
+        "contact.faq.a2": "हम हिंदी और अंग्रेज़ी दोनों में सत्र प्रदान करते हैं। आप वह भाषा चुन सकते हैं जो आपके लिए सबसे आरामदायक हो।",
+        "contact.faq.q3": "क्या मुझे किसी पूर्व अनुभव की आवश्यकता है?",
+        "contact.faq.a3": "किसी पूर्व अनुभव की आवश्यकता नहीं है। हमारा लिसनिंग लाउंज शुरुआती लोगों के लिए बनाया गया है और पूरी तरह से मुफ्त है।",
+        "contact.faq.q4": "क्या मैं ऑनलाइन भाग ले सकता हूँ?",
+        "contact.faq.a4": "हाँ! हमारे सभी सत्र ऑनलाइन उपलब्ध हैं। हम उन लोगों के लिए हाइब्रिड विकल्प भी प्रदान करते हैं जो व्यक्तिगत रूप से जुड़ना पसंद करते हैं।"
     }
 };
 
 // Language switching
-let currentLang = localStorage.getItem('empathy-lang') || 'en';
+let currentLang = localStorage.getItem('jointhedots-lang') || 'en';
 
 function setLanguage(lang) {
     currentLang = lang;
-    localStorage.setItem('empathy-lang', lang);
+    localStorage.setItem('jointhedots-lang', lang);
     document.documentElement.setAttribute('data-lang', lang);
     
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -274,9 +404,21 @@ function setLanguage(lang) {
         btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
     
-    document.title = lang === 'hi' 
-        ? 'एम्पैथी जंक्शन — अनेक पथ। एक गर्म आश्रय।'
-        : 'Empathy Junction — Many Paths. One Warm Hearth.';
+    // Update page title based on current page
+    const path = window.location.pathname;
+    if (path.includes('about')) {
+        document.title = lang === 'hi' 
+            ? 'हमारे बारे में — जॉइन द डॉट्स'
+            : 'About Us — Join the Dots';
+    } else if (path.includes('contact')) {
+        document.title = lang === 'hi' 
+            ? 'संपर्क करें — जॉइन द डॉट्स'
+            : 'Contact Us — Join the Dots';
+    } else {
+        document.title = lang === 'hi' 
+            ? 'जॉइन द डॉट्स — अनेक पथ। एक गर्म आश्रय।'
+            : 'Join the Dots — Many Paths. One Warm Hearth.';
+    }
 }
 
 // Initialize on DOM ready

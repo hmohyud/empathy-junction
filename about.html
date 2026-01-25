@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — Join the Dots</title>
+    <meta name="description" content="Learn about Join the Dots - our mission, story, and the team behind this listening-based wellbeing space.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M8 20c0-8 6-14 14-14' stroke='%239BAA8F' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 20c0 8-6 14-14 14' stroke='%23C4846C' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='20' cy='20' r='5' fill='%239BAA8F'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="bgCanvas" class="bg-canvas"></canvas>
+
+    <nav class="nav" id="nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-logo">
+                <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none">
+                    <path d="M8 20c0-8 6-14 14-14" stroke="var(--color-sage)" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M32 20c0 8-6 14-14 14" stroke="var(--color-terracotta)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="20" cy="20" r="5" fill="var(--color-sage)"/>
+                </svg>
+                <span class="nav-logo-text" data-i18n="brand">Join the Dots</span>
+            </a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html#journey" class="nav-link" data-i18n="nav.journey">The Journey</a></li>
+                    <li><a href="index.html#rhythm" class="nav-link" data-i18n="nav.schedule">Schedule</a></li>
+                    <li><a href="index.html#pricing" class="nav-link" data-i18n="nav.pricing">Pricing</a></li>
+                    <li><a href="about.html" class="nav-link active" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div class="lang-toggle">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="hi">हि</button>
+                </div>
+                <a href="index.html#cta" class="nav-cta" data-i18n="nav.join">Join Now</a>
+            </div>
+            <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html#journey" data-i18n="nav.journey">The Journey</a>
+        <a href="index.html#rhythm" data-i18n="nav.schedule">Schedule</a>
+        <a href="index.html#pricing" data-i18n="nav.pricing">Pricing</a>
+        <a href="about.html" data-i18n="nav.about">About Us</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        <a href="index.html#cta" class="btn btn-primary" data-i18n="nav.join">Join Now</a>
+        <div class="lang-toggle mobile-lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="hi">हि</button>
+        </div>
+    </div>
+
+    <section class="page-hero">
+        <div class="hero-bg">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="page-hero-content animate-on-scroll">
+                <span class="section-badge">
+                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4M12 8h.01"/>
+                    </svg>
+                    <span data-i18n="about.badge">About Us</span>
+                </span>
+                <h1 data-i18n="about.title">Our Story</h1>
+                <p class="page-hero-subtitle" data-i18n="about.subtitle">Where listening becomes a way of life</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+                <div class="content-block animate-on-scroll">
+                    <h2 data-i18n="about.mission.title">Our Mission</h2>
+                    <p data-i18n="about.mission.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <p data-i18n="about.mission.text2">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                </div>
+                <div class="content-block animate-on-scroll">
+                    <h2 data-i18n="about.vision.title">Our Vision</h2>
+                    <p data-i18n="about.vision.text1">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    <p data-i18n="about.vision.text2">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 data-i18n="about.values.title">Our Values</h2>
+                <p data-i18n="about.values.subtitle">The principles that guide everything we do</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 10v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="about.values.v1.title">Presence</h3>
+                    <p data-i18n="about.values.v1.text">Being fully present with ourselves and others, creating space for authentic connection.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <path d="M16 6C10 6 6 12 6 16s4 10 10 10 10-4 10-10" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="16" cy="16" r="4" fill="currentColor" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="about.values.v2.title">Compassion</h3>
+                    <p data-i18n="about.values.v2.text">Meeting ourselves and others with kindness, understanding that everyone is doing their best.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <path d="M8 16h16M16 8v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="about.values.v3.title">Connection</h3>
+                    <p data-i18n="about.values.v3.text">Building bridges between hearts, fostering understanding and shared humanity.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <path d="M6 26L16 6l10 20H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <circle cx="16" cy="18" r="2" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="about.values.v4.title">Growth</h3>
+                    <p data-i18n="about.values.v4.text">Embracing the journey of continuous learning and transformation at our own pace.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="story-section">
+        <div class="container">
+            <div class="story-content animate-on-scroll">
+                <h2 data-i18n="about.story.title">How It All Began</h2>
+                <p data-i18n="about.story.text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p data-i18n="about.story.text2">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p data-i18n="about.story.text3">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="cta">
+        <div class="cta-bg">
+            <div class="cta-orb cta-orb-1"></div>
+            <div class="cta-orb cta-orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content animate-on-scroll">
+                <h2 data-i18n="about.cta.title">Join Our Community</h2>
+                <p data-i18n="about.cta.text">Begin your journey with us today.</p>
+                <div class="cta-buttons">
+                    <a href="index.html#cta" class="btn btn-primary" data-i18n="about.cta.button">Get Started</a>
+                    <a href="contact.html" class="btn btn-secondary" data-i18n="about.cta.contact">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>
+                        <svg class="footer-logo-icon" viewBox="0 0 40 40" fill="none">
+                            <path d="M8 20c0-8 6-14 14-14" stroke="var(--color-sage-light)" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M32 20c0 8-6 14-14 14" stroke="var(--color-terracotta-light)" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="20" cy="20" r="5" fill="var(--color-sage-light)"/>
+                        </svg>
+                        <span data-i18n="brand">Join the Dots</span>
+                    </h3>
+                    <p data-i18n="footer.description">A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.</p>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.journey">Journey</h4>
+                    <ul>
+                        <li><a href="index.html#journey" data-i18n="footer.listeningLounge">Listening Lounge</a></li>
+                        <li><a href="index.html#journey" data-i18n="footer.joinTheDots">Join the Dots</a></li>
+                        <li><a href="index.html#compassion" data-i18n="footer.compassionCourse">Compassion Course</a></li>
+                        <li><a href="index.html#journey" data-i18n="footer.empathyCafe">Empathy Café</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.info">Information</h4>
+                    <ul>
+                        <li><a href="index.html#rhythm" data-i18n="footer.schedule">Schedule</a></li>
+                        <li><a href="index.html#pricing" data-i18n="footer.pricing">Pricing</a></li>
+                        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+                        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.connect">Connect</h4>
+                    <ul>
+                        <li><a href="https://wa.me/your-number" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><a href="mailto:hello@jointhedots.com">Email</a></li>
+                        <li><a href="index.html#cta" data-i18n="footer.registerNow">Register Now</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Join the Dots. <span data-i18n="footer.madeWith">Made with</span> care <span data-i18n="footer.forThose">for those seeking connection.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="animations.js"></script>
+    <script src="translations.js"></script>
+</body>
+</html>
