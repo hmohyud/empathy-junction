@@ -1,6 +1,6 @@
 const translations = {
     en: {
-        brand: "Join the Dots",
+        brand: "Empathy Junction",
         "nav.journey": "The Journey",
         "nav.schedule": "Schedule",
         "nav.pricing": "Pricing",
@@ -9,7 +9,7 @@ const translations = {
         "nav.about": "About Us",
         "nav.contact": "Contact",
         "hero.title": "Join the Dots",
-        "hero.tagline": "Many Paths. One Warm Hearth.",
+        "hero.tagline": "Connecting Hearts. Celebrating Life",
         "hero.description": "A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.",
         "hero.cta1": "Join the Free Listening Lounge",
         "hero.cta2": "Explore the Journey",
@@ -85,7 +85,7 @@ const translations = {
         "compassion.badge": "Deeper Journey (Optional Path)",
         "compassion.title": "The Compassion Course",
         "compassion.duration": "52 Weeks with Thom Bond (International NVC Trainer)",
-        "compassion.text": "A year-long transformational journey where empathy becomes not just something you practice, but who you are. Special rate exclusively for Join the Dots participants.",
+        "compassion.text": "A year-long transformational journey where empathy becomes not just something you practice, but who you are. Special rate exclusively for Empathy Junction participants.",
         "compassion.savings": "Save ₹5,000",
         "compassion.cta": "Explore the Compassion Course",
         "reflection.badge": "Reflection Compass",
@@ -105,7 +105,7 @@ const translations = {
         "audience.item5": "Anyone longing to be heard",
         "audience.item6": "Those learning to listen with empathy",
         "cta.title": "Come Home to Yourself",
-        "cta.line1": "Come to Join the Dots.",
+        "cta.line1": "Come to Empathy Junction.",
         "cta.line2": "Sit in the Listening Lounge.",
         "cta.line3": "Find your map in Join the Dots.",
         "cta.line4": "Warm yourself in the Empathy Café.",
@@ -182,17 +182,17 @@ const translations = {
         "contact.form.submit": "Send Message",
         "contact.faq.title": "Frequently Asked Questions",
         "contact.faq.subtitle": "Quick answers to common questions",
-        "contact.faq.q1": "How do I join a session?",
-        "contact.faq.a1": "Simply register through our website or WhatsApp us. We'll send you the details for the upcoming session.",
-        "contact.faq.q2": "Are sessions in Hindi or English?",
-        "contact.faq.a2": "We offer sessions in both Hindi and English. You can choose the language that feels most comfortable for you.",
-        "contact.faq.q3": "Do I need any prior experience?",
-        "contact.faq.a3": "No prior experience is needed. Our Listening Lounge is designed for beginners and is completely free to join.",
-        "contact.faq.q4": "Can I attend online?",
-        "contact.faq.a4": "Yes! All our sessions are available online. We also offer hybrid options for those who prefer in-person connection."
+        "contact.faq.q1": "Lorem ipsum dolor sit amet?",
+        "contact.faq.a1": "Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+        "contact.faq.q2": "Quis nostrud exercitation ullamco?",
+        "contact.faq.a2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "contact.faq.q3": "Excepteur sint occaecat cupidatat?",
+        "contact.faq.a3": "Sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error.",
+        "contact.faq.q4": "Nemo enim ipsam voluptatem?",
+        "contact.faq.a4": "Quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione."
     },
     hi: {
-        brand: "जॉइन द डॉट्स",
+        brand: "एम्पैथी जंक्शन",
         "nav.journey": "यात्रा",
         "nav.schedule": "समय सारणी",
         "nav.pricing": "शुल्क",
@@ -200,7 +200,7 @@ const translations = {
         "nav.join": "जुड़ें",
         "nav.about": "हमारे बारे में",
         "nav.contact": "संपर्क करें",
-        "hero.title": "जॉइन द डॉट्स",
+        "hero.title": "एम्पैथी जंक्शन",
         "hero.tagline": "अनेक पथ। एक गर्म आश्रय।",
         "hero.description": "एक सुनने पर आधारित कल्याण स्थान जहाँ भावनाओं को समझा जाता है, रिश्तों को धीरे-धीरे ठीक किया जाता है, और जागरूकता धीरे-धीरे जीवन का एक तरीका बन जाती है।",
         "hero.cta1": "मुफ्त लिसनिंग लाउंज में शामिल हों",
@@ -297,7 +297,7 @@ const translations = {
         "audience.item5": "कोई भी जो सुना जाना चाहता है",
         "audience.item6": "जो सहानुभूति से सुनना सीख रहे हैं",
         "cta.title": "अपने आप में घर आएं",
-        "cta.line1": "जॉइन द डॉट्स आएं।",
+        "cta.line1": "एम्पैथी जंक्शन आएं।",
         "cta.line2": "लिसनिंग लाउंज में बैठें।",
         "cta.line3": "जॉइन द डॉट्स में अपना नक्शा खोजें।",
         "cta.line4": "एम्पैथी कैफ़े में खुद को गर्म करें।",
@@ -374,23 +374,23 @@ const translations = {
         "contact.form.submit": "संदेश भेजें",
         "contact.faq.title": "अक्सर पूछे जाने वाले प्रश्न",
         "contact.faq.subtitle": "सामान्य प्रश्नों के त्वरित उत्तर",
-        "contact.faq.q1": "मैं सत्र में कैसे शामिल होऊं?",
-        "contact.faq.a1": "बस हमारी वेबसाइट के माध्यम से रजिस्टर करें या हमें WhatsApp करें। हम आपको आगामी सत्र का विवरण भेज देंगे।",
-        "contact.faq.q2": "सत्र हिंदी में हैं या अंग्रेज़ी में?",
-        "contact.faq.a2": "हम हिंदी और अंग्रेज़ी दोनों में सत्र प्रदान करते हैं। आप वह भाषा चुन सकते हैं जो आपके लिए सबसे आरामदायक हो।",
-        "contact.faq.q3": "क्या मुझे किसी पूर्व अनुभव की आवश्यकता है?",
-        "contact.faq.a3": "किसी पूर्व अनुभव की आवश्यकता नहीं है। हमारा लिसनिंग लाउंज शुरुआती लोगों के लिए बनाया गया है और पूरी तरह से मुफ्त है।",
-        "contact.faq.q4": "क्या मैं ऑनलाइन भाग ले सकता हूँ?",
-        "contact.faq.a4": "हाँ! हमारे सभी सत्र ऑनलाइन उपलब्ध हैं। हम उन लोगों के लिए हाइब्रिड विकल्प भी प्रदान करते हैं जो व्यक्तिगत रूप से जुड़ना पसंद करते हैं।"
+        "contact.faq.q1": "लोरेम इप्सम डोलर सिट अमेट?",
+        "contact.faq.a1": "कंसेक्टेचर एडिपिसिंग एलीट। सेड डू एयुस्मोड टेम्पोर इंसीडिडंट उट लेबोर एट डोलोरे मैग्ना एलिक्वा।",
+        "contact.faq.q2": "क्विस नॉस्ट्रड एक्सरसिटेशन उल्लामको?",
+        "contact.faq.a2": "डुइस ऑटे इरूरे डोलर इन रेप्रहेंडेरिट इन वोलुप्टेट वेलित एस्से सिलम डोलोरे यू फुगियाट।",
+        "contact.faq.q3": "एक्सेप्टुर सिंट ओकेकाट कुपिडाटाट?",
+        "contact.faq.a3": "सुंट इन कुल्पा क्वी ऑफिसिया देसेरुंट मोलिट एनिम इद एस्ट लेबोरम। सेड उट पर्स्पिसियाटिस।",
+        "contact.faq.q4": "नेमो एनिम इप्सम वोलुप्टाटेम?",
+        "contact.faq.a4": "क्विया वोलुप्टास सिट एस्पर्नाटुर औट ओडिट औट फुगिट, सेड क्विया कंसेक्वुंटुर मैग्नी डोलोरेस।"
     }
 };
 
 // Language switching
-let currentLang = localStorage.getItem('jointhedots-lang') || 'en';
+let currentLang = localStorage.getItem('empathy-lang') || 'en';
 
 function setLanguage(lang) {
     currentLang = lang;
-    localStorage.setItem('jointhedots-lang', lang);
+    localStorage.setItem('empathy-lang', lang);
     document.documentElement.setAttribute('data-lang', lang);
     
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -408,16 +408,16 @@ function setLanguage(lang) {
     const path = window.location.pathname;
     if (path.includes('about')) {
         document.title = lang === 'hi' 
-            ? 'हमारे बारे में — जॉइन द डॉट्स'
-            : 'About Us — Join the Dots';
+            ? 'हमारे बारे में — एम्पैथी जंक्शन'
+            : 'About Us — Empathy Junction';
     } else if (path.includes('contact')) {
         document.title = lang === 'hi' 
-            ? 'संपर्क करें — जॉइन द डॉट्स'
-            : 'Contact Us — Join the Dots';
+            ? 'संपर्क करें — एम्पैथी जंक्शन'
+            : 'Contact Us — Empathy Junction';
     } else {
         document.title = lang === 'hi' 
-            ? 'जॉइन द डॉट्स — अनेक पथ। एक गर्म आश्रय।'
-            : 'Join the Dots — Many Paths. One Warm Hearth.';
+            ? 'एम्पैथी जंक्शन — अनेक पथ। एक गर्म आश्रय।'
+            : 'Empathy Junction — Connecting Hearts. Celebrating Life..';
     }
 }
 

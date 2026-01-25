@@ -371,7 +371,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     font-style: italic;
     /* color: var(--color-terracotta); */
-    color: #b93100;
+    color: #b84015;
     margin-bottom: var(--space-lg);
     animation: fadeUp 0.8s ease-out 0.1s forwards;
     opacity: 0;
