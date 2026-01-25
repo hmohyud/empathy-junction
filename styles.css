@@ -1724,3 +1724,49 @@ a:focus-visible, button:focus-visible {
         grid-template-columns: 1fr;
     }
 }
+
+/* ==================== RTL SUPPORT FOR URDU ==================== */
+[dir="rtl"] {
+    text-align: right;
+}
+
+[dir="rtl"] .nav-inner {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav-links {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .hero-meta {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .footer-content {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .btn {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .contact-grid {
+    direction: rtl;
+}
+
+[dir="rtl"] .content-grid {
+    direction: rtl;
+}
+
+[data-lang="ur"] body {
+    font-family: 'Noto Sans Arabic', 'Noto Nastaliq Urdu', var(--font-body);
+}
+
+[data-lang="ur"] h1, [data-lang="ur"] h2, [data-lang="ur"] h3, [data-lang="ur"] h4,
+[data-lang="ur"] .hero-tagline, [data-lang="ur"] .reflection-note {
+    font-family: 'Noto Sans Arabic', 'Noto Nastaliq Urdu', var(--font-display);
+}
+
+[data-lang="ur"] .nav-logo-text {
+    font-family: 'Noto Sans Arabic', 'Noto Nastaliq Urdu', var(--font-display);
+}
