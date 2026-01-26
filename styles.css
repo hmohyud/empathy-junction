@@ -1161,13 +1161,28 @@ section { padding: var(--space-3xl) 0; position: relative; }
 
 /* ==================== REFLECTION SECTION ==================== */
 .reflection { 
-    background: var(--color-cream); 
+    background: var(--color-cream);
+    position: relative;
+    overflow: hidden;
+}
+
+.reflection-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
 }
 
 .reflection-content { 
     max-width: 900px; 
     margin: 0 auto; 
-    text-align: center; 
+    text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .reflection-content .section-subtitle {
@@ -1181,6 +1196,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     background: var(--color-warm-white);
     border-radius: var(--radius-xl);
     border: 1px solid rgba(155, 170, 143, 0.2);
+    opacity: 0.75;
 }
 
 .reflection-path {
@@ -1270,6 +1286,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     color: var(--color-terracotta);
     font-size: 1.2rem;
     margin-top: var(--space-lg);
+    justify-self: center;
 }
 
 /* Reflection responsive */

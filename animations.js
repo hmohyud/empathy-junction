@@ -1010,6 +1010,252 @@ class SunMoonArc {
   }
 }
 
+// ==================== WANDERING PATH (REFLECTION SECTION) ====================
+class WanderingPath {
+  constructor() {
+    this.canvas = document.getElementById('reflectionCanvas');
+    if (!this.canvas) {
+      log("No reflectionCanvas found");
+      return;
+    }
+
+    this.ctx = this.canvas.getContext('2d');
+    this.isVisible = false;
+    this.animationId = null;
+    this.time = 0;
+
+    // Path configuration
+    this.numDots = 60;
+    this.pathPoints = [];
+    this.targetPoints = [];
+    this.dotPositions = [];
+
+    // Colors from the site palette
+    this.colors = [
+      { r: 155, g: 170, b: 143 }, // sage
+      { r: 196, g: 132, b: 108 }, // terracotta
+      { r: 212, g: 165, b: 116 }, // amber
+      { r: 139, g: 155, b: 128 }, // sage darker
+    ];
+
+    this.resize();
+    this.initPath();
+    this.bindEvents();
+    this.observeVisibility();
+
+    log("WanderingPath initialized");
+  }
+
+  resize() {
+    const section = this.canvas.parentElement;
+    const rect = section.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    this.canvas.width = rect.width * dpr;
+    this.canvas.height = rect.height * dpr;
+    this.canvas.style.width = rect.width + 'px';
+    this.canvas.style.height = rect.height + 'px';
+
+    this.ctx.scale(dpr, dpr);
+    this.width = rect.width;
+    this.height = rect.height;
+
+    // Reinitialize path on resize
+    this.initPath();
+  }
+
+  initPath() {
+    // Create initial wandering path control points
+    this.pathPoints = [];
+    this.targetPoints = [];
+
+    const numControlPoints = 8;
+    const padding = 60;
+
+    for (let i = 0; i < numControlPoints; i++) {
+      const t = i / (numControlPoints - 1);
+      const baseX = padding + t * (this.width - padding * 2);
+      const baseY = this.height * 0.3 + Math.sin(t * Math.PI) * (this.height * 0.4);
+
+      // Add randomness
+      const offsetX = (Math.random() - 0.5) * 100;
+      const offsetY = (Math.random() - 0.5) * 80;
+
+      this.pathPoints.push({
+        x: baseX + offsetX,
+        y: baseY + offsetY,
+        baseX: baseX,
+        baseY: baseY
+      });
+
+      this.targetPoints.push({
+        x: baseX + offsetX,
+        y: baseY + offsetY
+      });
+    }
+
+    // Initialize dot positions along the path
+    this.dotPositions = [];
+    for (let i = 0; i < this.numDots; i++) {
+      const t = i / (this.numDots - 1);
+      this.dotPositions.push({
+        t: t,
+        offset: (Math.random() - 0.5) * 20,
+        size: 2 + Math.random() * 3,
+        colorIndex: Math.floor(Math.random() * this.colors.length),
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  bindEvents() {
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => this.resize(), 100);
+    });
+  }
+
+  observeVisibility() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          this.isVisible = entry.isIntersecting;
+          if (this.isVisible && !this.animationId) {
+            this.animate();
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+    observer.observe(this.canvas.parentElement);
+  }
+
+  // Catmull-Rom spline interpolation for smooth path
+  catmullRom(p0, p1, p2, p3, t) {
+    const t2 = t * t;
+    const t3 = t2 * t;
+
+    return {
+      x: 0.5 * ((2 * p1.x) + (-p0.x + p2.x) * t + (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * t2 + (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * t3),
+      y: 0.5 * ((2 * p1.y) + (-p0.y + p2.y) * t + (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * t2 + (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * t3)
+    };
+  }
+
+  getPointOnPath(t) {
+    const points = this.pathPoints;
+    const n = points.length - 1;
+    const segment = Math.floor(t * n);
+    const localT = (t * n) - segment;
+
+    const i0 = Math.max(0, segment - 1);
+    const i1 = segment;
+    const i2 = Math.min(n, segment + 1);
+    const i3 = Math.min(n, segment + 2);
+
+    return this.catmullRom(points[i0], points[i1], points[i2], points[i3], localT);
+  }
+
+  updatePath() {
+    // Slowly move control points toward new random targets
+    for (let i = 0; i < this.pathPoints.length; i++) {
+      const point = this.pathPoints[i];
+      const target = this.targetPoints[i];
+
+      // Ease toward target
+      point.x += (target.x - point.x) * 0.01;
+      point.y += (target.y - point.y) * 0.01;
+
+      // Randomly update target occasionally
+      if (Math.random() < 0.005) {
+        const wanderRadius = 80;
+        target.x = point.baseX + (Math.random() - 0.5) * wanderRadius * 2;
+        target.y = point.baseY + (Math.random() - 0.5) * wanderRadius * 2;
+
+        // Keep within bounds
+        target.x = Math.max(40, Math.min(this.width - 40, target.x));
+        target.y = Math.max(40, Math.min(this.height - 40, target.y));
+      }
+    }
+  }
+
+  animate() {
+    if (!this.isVisible) {
+      this.animationId = null;
+      return;
+    }
+
+    this.time += 0.016;
+    this.updatePath();
+
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    // Draw the wandering dotted path
+    this.dotPositions.forEach((dot, index) => {
+      // Add subtle movement to each dot's position along path
+      const waveOffset = Math.sin(this.time * 0.5 + dot.phase) * 0.02;
+      const t = Math.max(0, Math.min(1, dot.t + waveOffset));
+
+      const pathPoint = this.getPointOnPath(t);
+
+      // Add perpendicular offset for organic feel
+      const nextT = Math.min(1, t + 0.01);
+      const nextPoint = this.getPointOnPath(nextT);
+      const dx = nextPoint.x - pathPoint.x;
+      const dy = nextPoint.y - pathPoint.y;
+      const len = Math.sqrt(dx * dx + dy * dy) || 1;
+
+      // Perpendicular direction
+      const perpX = -dy / len;
+      const perpY = dx / len;
+
+      // Oscillating perpendicular offset
+      const perpOffset = Math.sin(this.time * 0.8 + dot.phase * 2) * dot.offset;
+
+      const x = pathPoint.x + perpX * perpOffset;
+      const y = pathPoint.y + perpY * perpOffset;
+
+      // Pulsing size
+      const pulseSize = dot.size + Math.sin(this.time * 1.5 + dot.phase) * 1;
+
+      // Color with slight alpha variation
+      const color = this.colors[dot.colorIndex];
+      const alpha = 0.4 + Math.sin(this.time + dot.phase) * 0.2;
+
+      ctx.beginPath();
+      ctx.arc(x, y, pulseSize, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+      ctx.fill();
+    });
+
+    // Draw subtle connecting lines between nearby dots
+    ctx.strokeStyle = 'rgba(155, 170, 143, 0.1)';
+    ctx.lineWidth = 1;
+
+    for (let i = 0; i < this.dotPositions.length - 1; i++) {
+      const dot1 = this.dotPositions[i];
+      const dot2 = this.dotPositions[i + 1];
+
+      const t1 = Math.max(0, Math.min(1, dot1.t + Math.sin(this.time * 0.5 + dot1.phase) * 0.02));
+      const t2 = Math.max(0, Math.min(1, dot2.t + Math.sin(this.time * 0.5 + dot2.phase) * 0.02));
+
+      const p1 = this.getPointOnPath(t1);
+      const p2 = this.getPointOnPath(t2);
+
+      // Only draw every few segments for a dotted effect
+      if (i % 3 === 0) {
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+    }
+
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+}
+
 // ==================== INITIALIZE ====================
 document.addEventListener("DOMContentLoaded", () => {
   log("DOM Content Loaded");
@@ -1026,6 +1272,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Start the sun-moon arc animation for rhythm section
   log("Starting SunMoonArc...");
   window.sunMoonArc = new SunMoonArc();
+
+  // Start the wandering path animation for reflection section
+  log("Starting WanderingPath...");
+  window.wanderingPath = new WanderingPath();
 
   log("All initializations complete");
 });
