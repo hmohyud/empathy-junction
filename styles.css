@@ -1280,7 +1280,6 @@ section { padding: var(--space-3xl) 0; position: relative; }
     color: var(--color-terracotta);
     font-size: 1.2rem;
     margin-top: var(--space-lg);
-    justify-self: center;
 }
 
 /* Reflection responsive */
@@ -1940,22 +1939,32 @@ a:focus-visible, button:focus-visible {
 }
 
 /* ==================== RTL SUPPORT FOR URDU ==================== */
-/* Only apply RTL to content text, not navigation layout */
+/* Only apply RTL text-align to elements that are left-aligned in LTR */
 
-[dir="rtl"] .hero-content,
-[dir="rtl"] .section-header,
 [dir="rtl"] .journey-card,
-[dir="rtl"] .pricing-card,
-[dir="rtl"] .value-card,
+[dir="rtl"] .pricing-features,
 [dir="rtl"] .faq-item,
 [dir="rtl"] .content-block,
-[dir="rtl"] .story-content,
-[dir="rtl"] .cta-content,
 [dir="rtl"] .footer-brand,
 [dir="rtl"] .footer-links,
 [dir="rtl"] .contact-info,
-[dir="rtl"] .page-hero-content {
+[dir="rtl"] .contact-method-details,
+[dir="rtl"] .audience-text,
+[dir="rtl"] .topic-tag-text {
     text-align: right;
+}
+
+/* Keep centered elements centered in RTL */
+[dir="rtl"] .hero-content,
+[dir="rtl"] .section-header,
+[dir="rtl"] .cta-content,
+[dir="rtl"] .story-content,
+[dir="rtl"] .page-hero-content,
+[dir="rtl"] .reflection-content,
+[dir="rtl"] .pricing-card-inner,
+[dir="rtl"] .value-card,
+[dir="rtl"] .schedule-card {
+    text-align: center;
 }
 
 /* Keep navigation and buttons LTR */
