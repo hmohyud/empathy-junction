@@ -138,7 +138,6 @@
             </div>
 
             <div class="journey-wrapper">
-                <!-- Animated connecting path -->
                 <svg class="journey-path" viewBox="0 0 1000 800" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -147,9 +146,7 @@
                             <stop offset="100%" stop-color="var(--color-amber)" />
                         </linearGradient>
                     </defs>
-                    <!-- Background dotted path -->
                     <path class="journey-path-bg" id="journeyPathBg" d="" />
-                    <!-- Dynamic path that JS fills based on card positions -->
                     <path class="journey-path-line" id="travelPath" d="" />
                 </svg>
 
@@ -361,6 +358,7 @@
 
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
+        <canvas id="pricingCanvas" class="pricing-canvas"></canvas>
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="section-badge">
@@ -541,6 +539,7 @@
 
     <!-- Audience Section -->
     <section class="audience" id="audience">
+        <canvas id="audienceCanvas" class="audience-canvas"></canvas>
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="section-badge">

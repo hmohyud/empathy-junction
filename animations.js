@@ -5,7 +5,7 @@ function log(...args) {
 }
 
 // ==================== INTERACTIVE BACKGROUND ====================
-// Combines fluid color blobs + floating dots with connections + ripple clicks
+// Combines fluid color blobs + connecting human figures + ripple clicks
 class InteractiveBackground {
   constructor() {
     log("InteractiveBackground: Constructor called");
@@ -165,19 +165,38 @@ class InteractiveBackground {
     ctx.fill();
   }
 
-  // ==================== FLOATING DOTS ====================
+  // ==================== FLOATING FIGURES (Connecting People) ====================
   createDots() {
     this.dots = [];
-    for (let i = 0; i < this.config.dotCount; i++) {
+    // More connecting figures for a livelier feel
+    const figureCount = Math.floor(this.config.dotCount * 0.65);
+    for (let i = 0; i < figureCount; i++) {
       this.dots.push({
         x: Math.random() * this.canvas.width,
         y: Math.random() * this.canvas.height,
-        vx: (Math.random() - 0.5) * this.config.dotSpeed,
-        vy: (Math.random() - 0.5) * this.config.dotSpeed,
-        radius: 2.5 + Math.random() * 3,
-        color: this.colorArray[Math.floor(Math.random() * this.colorArray.length)]
+        vx: (Math.random() - 0.5) * this.config.dotSpeed * 0.7,
+        vy: (Math.random() - 0.5) * this.config.dotSpeed * 0.7,
+        size: 12 + Math.random() * 10, // Figure size
+        color: this.colorArray[Math.floor(Math.random() * this.colorArray.length)],
+        phase: Math.random() * Math.PI * 2 // For gentle bobbing
       });
     }
+  }
+
+  // Draw a simple human figure silhouette
+  drawFigure(x, y, size, color, alpha) {
+    const ctx = this.ctx;
+    ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+    
+    // Head
+    ctx.beginPath();
+    ctx.arc(x, y - size * 0.55, size * 0.22, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Body (oval)
+    ctx.beginPath();
+    ctx.ellipse(x, y + size * 0.1, size * 0.18, size * 0.38, 0, 0, Math.PI * 2);
+    ctx.fill();
   }
 
   updateDots() {
@@ -187,10 +206,13 @@ class InteractiveBackground {
       // Move
       dot.x += dot.vx;
       dot.y += dot.vy;
+      
+      // Update phase for bobbing
+      dot.phase += 0.02;
 
       // Bounce off edges with padding
-      if (dot.x < 0 || dot.x > this.canvas.width) dot.vx *= -1;
-      if (dot.y < 0 || dot.y > this.canvas.height) dot.vy *= -1;
+      if (dot.x < 20 || dot.x > this.canvas.width - 20) dot.vx *= -1;
+      if (dot.y < 20 || dot.y > this.canvas.height - 20) dot.vy *= -1;
 
       // Gentle attraction to mouse
       if (this.mouse.x !== null) {
@@ -199,15 +221,15 @@ class InteractiveBackground {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < mouseConnectionDistance && dist > 0) {
-          const force = 0.00015;
+          const force = 0.0001;
           dot.vx += dx * force;
           dot.vy += dy * force;
         }
       }
 
-      // Limit speed
+      // Limit speed (slower for figures)
       const speed = Math.sqrt(dot.vx * dot.vx + dot.vy * dot.vy);
-      const maxSpeed = dotSpeed * 2.5;
+      const maxSpeed = dotSpeed * 1.5;
       if (speed > maxSpeed) {
         dot.vx = (dot.vx / speed) * maxSpeed;
         dot.vy = (dot.vy / speed) * maxSpeed;
@@ -220,26 +242,26 @@ class InteractiveBackground {
     const { dotConnectionDistance, mouseConnectionDistance } = this.config;
     const connDistSq = dotConnectionDistance * dotConnectionDistance;
 
-    // Draw connections between dots (with early-exit optimization)
+    // Draw connections between figures
     for (let i = 0; i < this.dots.length; i++) {
       const dotA = this.dots[i];
 
-      // Connect to other dots
+      // Connect to other figures
       for (let j = i + 1; j < this.dots.length; j++) {
         const dotB = this.dots[j];
         const dx = dotA.x - dotB.x;
         const dy = dotA.y - dotB.y;
         
-        // Quick squared distance check (avoids expensive sqrt)
+        // Quick squared distance check
         const distSq = dx * dx + dy * dy;
         if (distSq < connDistSq) {
           const dist = Math.sqrt(distSq);
-          const opacity = (1 - dist / dotConnectionDistance) * 0.3;
+          const opacity = (1 - dist / dotConnectionDistance) * 0.25;
           ctx.beginPath();
           ctx.moveTo(dotA.x, dotA.y);
           ctx.lineTo(dotB.x, dotB.y);
           ctx.strokeStyle = `rgba(155, 170, 143, ${opacity})`;
-          ctx.lineWidth = 1;
+          ctx.lineWidth = 1.5;
           ctx.stroke();
         }
       }
@@ -251,7 +273,7 @@ class InteractiveBackground {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < mouseConnectionDistance) {
-          const opacity = (1 - dist / mouseConnectionDistance) * 0.6;
+          const opacity = (1 - dist / mouseConnectionDistance) * 0.5;
           ctx.beginPath();
           ctx.moveTo(dotA.x, dotA.y);
           ctx.lineTo(this.mouse.x, this.mouse.y);
@@ -262,12 +284,10 @@ class InteractiveBackground {
       }
     }
 
-    // Draw the dots themselves
+    // Draw the figures with gentle bobbing
     this.dots.forEach(dot => {
-      ctx.beginPath();
-      ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${dot.color.r}, ${dot.color.g}, ${dot.color.b}, 0.65)`;
-      ctx.fill();
+      const bobY = Math.sin(dot.phase) * 2;
+      this.drawFigure(dot.x, dot.y + bobY, dot.size, dot.color, 0.5);
     });
   }
 
@@ -1256,11 +1276,333 @@ class WanderingPath {
   }
 }
 
+// ==================== RISING BUBBLES (PRICING SECTION) ====================
+class RisingBubbles {
+  constructor() {
+    this.canvas = document.getElementById('pricingCanvas');
+    if (!this.canvas) {
+      log("No pricingCanvas found");
+      return;
+    }
+
+    this.ctx = this.canvas.getContext('2d');
+    this.isVisible = false;
+    this.animationId = null;
+    this.time = 0;
+    this.bubbles = [];
+
+    // Colors from the site palette
+    this.colors = {
+      sage: { r: 155, g: 170, b: 143 },
+      terracotta: { r: 196, g: 132, b: 108 },
+      amber: { r: 212, g: 165, b: 116 }
+    };
+
+    // Tier configs: Free (minimal) -> Weekly (medium) -> Monthly (most prominent)
+    // Effects magnified for higher tiers
+    this.tierConfigs = [
+      { spawnRate: 0.015, speed: 0.25, sizeMulti: 0.8, color: this.colors.sage, glowIntensity: 0 },
+      { spawnRate: 0.04, speed: 0.45, sizeMulti: 1.2, color: this.colors.terracotta, glowIntensity: 0.2 },
+      { spawnRate: 0.09, speed: 0.75, sizeMulti: 1.8, color: this.colors.amber, glowIntensity: 0.4 }
+    ];
+
+    this.resize();
+    this.bindEvents();
+    this.observeVisibility();
+
+    log("RisingBubbles initialized");
+  }
+
+  resize() {
+    const section = this.canvas.parentElement;
+    const rect = section.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    this.canvas.width = rect.width * dpr;
+    this.canvas.height = rect.height * dpr;
+    this.canvas.style.width = rect.width + 'px';
+    this.canvas.style.height = rect.height + 'px';
+
+    this.ctx.scale(dpr, dpr);
+    this.width = rect.width;
+    this.height = rect.height;
+  }
+
+  bindEvents() {
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => this.resize(), 100);
+    });
+  }
+
+  observeVisibility() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          this.isVisible = entry.isIntersecting;
+          if (this.isVisible && !this.animationId) {
+            this.animate();
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+    observer.observe(this.canvas.parentElement);
+  }
+
+  getCardBounds() {
+    const section = this.canvas.parentElement;
+    const cards = section.querySelectorAll('.pricing-card');
+    const sectionRect = section.getBoundingClientRect();
+
+    return Array.from(cards).map(card => {
+      const rect = card.getBoundingClientRect();
+      return {
+        left: rect.left - sectionRect.left - 30,
+        right: rect.right - sectionRect.left + 30,
+        top: rect.top - sectionRect.top,
+        bottom: rect.bottom - sectionRect.top,
+        centerX: rect.left + rect.width / 2 - sectionRect.left
+      };
+    });
+  }
+
+  spawnBubble(tierIndex, bounds) {
+    const cfg = this.tierConfigs[tierIndex];
+    return {
+      x: bounds.left + Math.random() * (bounds.right - bounds.left),
+      y: this.height + 15,
+      tier: tierIndex,
+      speed: cfg.speed + Math.random() * 0.35,
+      size: (1.5 + Math.random() * 4) * cfg.sizeMulti,
+      wobblePhase: Math.random() * Math.PI * 2,
+      wobbleSpeed: 1.5 + Math.random() * 1,
+      color: cfg.color,
+      glowIntensity: cfg.glowIntensity
+    };
+  }
+
+  animate() {
+    if (!this.isVisible) {
+      this.animationId = null;
+      return;
+    }
+
+    this.time += 0.016;
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    const bounds = this.getCardBounds();
+
+    // Spawn bubbles for each tier (more for higher tiers)
+    bounds.forEach((bound, tierIndex) => {
+      const cfg = this.tierConfigs[tierIndex];
+      if (Math.random() < cfg.spawnRate) {
+        this.bubbles.push(this.spawnBubble(tierIndex, bound));
+      }
+    });
+
+    // Limit total bubbles
+    if (this.bubbles.length > 300) {
+      this.bubbles = this.bubbles.slice(-300);
+    }
+
+    // Update and draw bubbles
+    this.bubbles = this.bubbles.filter(b => {
+      b.y -= b.speed;
+      b.x += Math.sin(this.time * b.wobbleSpeed + b.wobblePhase) * 0.5;
+
+      if (b.y < -30) return false;
+
+      // Fade based on vertical position
+      const distFromBottom = this.height - b.y;
+      const fadeInAlpha = Math.min(1, distFromBottom / 100);
+      const fadeOutAlpha = b.y > 50 ? 1 : b.y / 50;
+      const alpha = fadeInAlpha * fadeOutAlpha * 0.6;
+
+      // Draw glow for higher tiers
+      if (b.glowIntensity > 0) {
+        const glowSize = b.size * 2.5;
+        const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, glowSize);
+        gradient.addColorStop(0, `rgba(${b.color.r}, ${b.color.g}, ${b.color.b}, ${alpha * b.glowIntensity})`);
+        gradient.addColorStop(1, `rgba(${b.color.r}, ${b.color.g}, ${b.color.b}, 0)`);
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, glowSize, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      }
+
+      // Draw main bubble
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${b.color.r}, ${b.color.g}, ${b.color.b}, ${alpha})`;
+      ctx.fill();
+
+      return true;
+    });
+
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+}
+
+// ==================== GENTLE WAVES (AUDIENCE SECTION) ====================
+class GentleWaves {
+  constructor() {
+    this.canvas = document.getElementById('audienceCanvas');
+    if (!this.canvas) {
+      log("No audienceCanvas found");
+      return;
+    }
+
+    this.ctx = this.canvas.getContext('2d');
+    this.isVisible = false;
+    this.animationId = null;
+    this.time = 0;
+
+    // Colors from the site palette
+    this.colors = {
+      sage: { r: 155, g: 170, b: 143 },
+      terracotta: { r: 196, g: 132, b: 108 },
+      amber: { r: 212, g: 165, b: 116 },
+      sageLight: { r: 184, g: 196, b: 174 }
+    };
+
+    // Wave configurations
+    this.waves = [
+      { color: this.colors.sage, yOffset: 0.25, amplitude: 25, frequency: 0.008, speed: 0.8, alpha: 0.12 },
+      { color: this.colors.terracotta, yOffset: 0.4, amplitude: 20, frequency: 0.01, speed: 1.0, alpha: 0.10 },
+      { color: this.colors.amber, yOffset: 0.55, amplitude: 30, frequency: 0.006, speed: 0.6, alpha: 0.08 },
+      { color: this.colors.sageLight, yOffset: 0.7, amplitude: 18, frequency: 0.012, speed: 1.2, alpha: 0.06 }
+    ];
+
+    // Floating particles
+    this.particles = [];
+    
+    this.resize();
+    this.initParticles();
+    this.bindEvents();
+    this.observeVisibility();
+
+    log("GentleWaves initialized");
+  }
+
+  resize() {
+    const section = this.canvas.parentElement;
+    const rect = section.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    this.canvas.width = rect.width * dpr;
+    this.canvas.height = rect.height * dpr;
+    this.canvas.style.width = rect.width + 'px';
+    this.canvas.style.height = rect.height + 'px';
+
+    this.ctx.scale(dpr, dpr);
+    this.width = rect.width;
+    this.height = rect.height;
+  }
+
+  initParticles() {
+    this.particles = [];
+    const particleCount = 25;
+    for (let i = 0; i < particleCount; i++) {
+      this.particles.push({
+        x: Math.random() * this.width,
+        baseY: this.height * (0.3 + Math.random() * 0.4),
+        phase: Math.random() * Math.PI * 2,
+        size: 2 + Math.random() * 2,
+        speed: 0.5 + Math.random() * 0.5,
+        color: [this.colors.sage, this.colors.terracotta, this.colors.amber][Math.floor(Math.random() * 3)]
+      });
+    }
+  }
+
+  bindEvents() {
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        this.resize();
+        this.initParticles();
+      }, 100);
+    });
+  }
+
+  observeVisibility() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          this.isVisible = entry.isIntersecting;
+          if (this.isVisible && !this.animationId) {
+            this.animate();
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+    observer.observe(this.canvas.parentElement);
+  }
+
+  animate() {
+    if (!this.isVisible) {
+      this.animationId = null;
+      return;
+    }
+
+    this.time += 0.012;
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    // Draw waves (back to front)
+    this.waves.forEach(wave => {
+      const baseY = this.height * wave.yOffset;
+
+      ctx.beginPath();
+      ctx.moveTo(0, this.height);
+
+      for (let x = 0; x <= this.width; x += 4) {
+        const y = baseY + Math.sin(x * wave.frequency + this.time * wave.speed) * wave.amplitude;
+        ctx.lineTo(x, y);
+      }
+
+      ctx.lineTo(this.width, this.height);
+      ctx.closePath();
+
+      const grad = ctx.createLinearGradient(0, baseY - wave.amplitude, 0, this.height);
+      grad.addColorStop(0, `rgba(${wave.color.r}, ${wave.color.g}, ${wave.color.b}, ${wave.alpha})`);
+      grad.addColorStop(1, `rgba(${wave.color.r}, ${wave.color.g}, ${wave.color.b}, 0)`);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    });
+
+    // Draw floating particles that ride the waves
+    this.particles.forEach(p => {
+      // Move particle horizontally
+      p.x += p.speed * 0.3;
+      if (p.x > this.width + 10) p.x = -10;
+
+      // Calculate Y based on wave motion
+      const waveY = Math.sin(p.x * 0.008 + this.time * 0.8) * 20;
+      const y = p.baseY + waveY + Math.sin(this.time + p.phase) * 5;
+
+      const pulse = 1 + Math.sin(this.time * 2 + p.phase) * 0.2;
+      const alpha = 0.25 + Math.sin(this.time + p.phase) * 0.1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, y, p.size * pulse, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${alpha})`;
+      ctx.fill();
+    });
+
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+}
+
 // ==================== INITIALIZE ====================
 document.addEventListener("DOMContentLoaded", () => {
   log("DOM Content Loaded");
 
-  // Start the interactive background (dots + blobs + ripples)
+  // Start the interactive background (connecting figures + blobs + ripples)
   log("Starting InteractiveBackground...");
   window.interactiveBg = new InteractiveBackground();
 
@@ -1276,6 +1618,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Start the wandering path animation for reflection section
   log("Starting WanderingPath...");
   window.wanderingPath = new WanderingPath();
+
+  // Start the rising bubbles animation for pricing section
+  log("Starting RisingBubbles...");
+  window.risingBubbles = new RisingBubbles();
+
+  // Start the gentle waves animation for audience section
+  log("Starting GentleWaves...");
+  window.gentleWaves = new GentleWaves();
 
   log("All initializations complete");
 });
