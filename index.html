@@ -149,21 +149,8 @@
                     </defs>
                     <!-- Background dotted path -->
                     <path class="journey-path-bg" id="journeyPathBg" d="" />
+                    <!-- Dynamic path that JS fills based on card positions -->
                     <path class="journey-path-line" id="travelPath" d="" />
-                    <!-- Animated drawing path -->
-                    <path class="journey-path-line" d="
-                        M 150,200 
-                        C 200,180 280,160 350,180
-                        Q 420,200 450,280
-                        C 480,360 420,400 480,450
-                        Q 540,500 650,480
-                        C 760,460 800,380 850,420
-                        Q 900,460 920,540
-                        C 940,620 880,680 800,700
-                        Q 720,720 600,700
-                        C 480,680 400,720 350,780
-                        L 300,820
-                    " />
                     <!-- Dots at key points -->
                     <circle class="journey-dot journey-dot-1" data-step="1" cx="0" cy="0" r="8" />
                     <circle class="journey-dot journey-dot-2" data-step="2" cx="0" cy="0" r="8" />
@@ -267,11 +254,6 @@
                         <span class="journey-card-number">04</span>
                     </div>
                 </div>
-
-                <!-- Journey insight -->
-                <!-- <div class="journey-insight animate-on-scroll">
-                    <p data-i18n="journey.insight">Each stage flows into the next: <strong>Listening</strong> cultivates awareness → <strong>Compassion</strong> transforms awareness into action → <strong>Empathy</strong> brings action into community → <strong>Integration</strong> connects everything into shared understanding.</p>
-                </div> -->
             </div>
         </div>
     </section>

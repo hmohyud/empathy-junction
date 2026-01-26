@@ -614,10 +614,10 @@ section { padding: var(--space-3xl) 0; position: relative; }
 }
 
 /* Optional per-step tweaks (edit these) */
-.journey-card[data-step="1"] { --journey-anchor-x: 18%; --journey-anchor-y: 18%; }
-.journey-card[data-step="2"] { --journey-anchor-x: 82%; --journey-anchor-y: 22%; }
-.journey-card[data-step="3"] { --journey-anchor-x: 18%; --journey-anchor-y: 22%; }
-.journey-card[data-step="4"] { --journey-anchor-x: 82%; --journey-anchor-y: 22%; }
+.journey-card[data-step="1"] { --journey-anchor-x: 82%; --journey-anchor-y: 18%; }
+.journey-card[data-step="2"] { --journey-anchor-x: 82%; --journey-anchor-y: 50%; }
+.journey-card[data-step="3"] { --journey-anchor-x: 18%; --journey-anchor-y: 48%; }
+.journey-card[data-step="4"] { --journey-anchor-x: 18%; --journey-anchor-y: 22%; }
 
 /* Layout (this got removed previously; keeping it minimal so card positions return to normal) */
 .journey-wrapper {
@@ -652,7 +652,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     opacity: 0.7;
 }
 
-/* DOTTED LINE (both the faint base + the colorful “active” layer) */
+/* DOTTED LINE (both the faint base + the colorful "active" layer) */
 .journey-path-bg,
 .journey-path-line {
     fill: none;
@@ -675,7 +675,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     filter: drop-shadow(0 0 6px rgba(196, 132, 108, 0.25));
 }
 
-/* Make the dots “travel” along the path (1 → 4 direction) */
+/* Make the dots "travel" along the path (1 → 4 direction) */
 @keyframes dotsDrift {
     to { stroke-dashoffset: -220; }
 }
