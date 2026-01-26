@@ -137,85 +137,163 @@
                 <p class="section-subtitle" data-i18n="journey.subtitle">Each step is an invitation—not a requirement. Move at your own pace.</p>
             </div>
 
-            <div class="journey-grid">
-                <div class="journey-card free animate-on-scroll">
-                    <div class="journey-card-glow"></div>
-                    <div class="journey-card-header">
-                        <div class="journey-card-icon">
-                            <svg viewBox="0 0 40 40" fill="none">
-                                <rect x="4" y="20" width="32" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-                                <path d="M8 20V12a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v8" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="20" cy="28" r="4" fill="currentColor" opacity="0.3"/>
-                            </svg>
+            <div class="journey-wrapper">
+                <!-- Animated connecting path -->
+                <svg class="journey-path" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--color-sage)" />
+                            <stop offset="50%" stop-color="var(--color-terracotta)" />
+                            <stop offset="100%" stop-color="var(--color-amber)" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Background dotted path -->
+                    <path class="journey-path-bg" d="
+                        M 150,200 
+                        C 200,180 280,160 350,180
+                        Q 420,200 450,280
+                        C 480,360 420,400 480,450
+                        Q 540,500 650,480
+                        C 760,460 800,380 850,420
+                        Q 900,460 920,540
+                        C 940,620 880,680 800,700
+                        Q 720,720 600,700
+                        C 480,680 400,720 350,780
+                        L 300,820
+                    " />
+                    <!-- Animated drawing path -->
+                    <path class="journey-path-line" d="
+                        M 150,200 
+                        C 200,180 280,160 350,180
+                        Q 420,200 450,280
+                        C 480,360 420,400 480,450
+                        Q 540,500 650,480
+                        C 760,460 800,380 850,420
+                        Q 900,460 920,540
+                        C 940,620 880,680 800,700
+                        Q 720,720 600,700
+                        C 480,680 400,720 350,780
+                        L 300,820
+                    " />
+                    <!-- Dots at key points -->
+                    <circle class="journey-dot journey-dot-1" cx="150" cy="200" r="8" />
+                    <circle class="journey-dot journey-dot-2" cx="480" cy="450" r="8" />
+                    <circle class="journey-dot journey-dot-3" cx="850" cy="420" r="8" />
+                    <circle class="journey-dot journey-dot-4" cx="300" cy="820" r="8" />
+                    <!-- Moving dot along path -->
+                    <circle class="journey-traveler" r="6">
+                        <animateMotion dur="8s" repeatCount="indefinite">
+                            <mpath href="#travelPath" />
+                        </animateMotion>
+                    </circle>
+                    <path id="travelPath" d="
+                        M 150,200 
+                        C 200,180 280,160 350,180
+                        Q 420,200 450,280
+                        C 480,360 420,400 480,450
+                        Q 540,500 650,480
+                        C 760,460 800,380 850,420
+                        Q 900,460 920,540
+                        C 940,620 880,680 800,700
+                        Q 720,720 600,700
+                        C 480,680 400,720 350,780
+                        L 300,820
+                    " fill="none" />
+                </svg>
+
+                <div class="journey-grid">
+                    <div class="journey-card free animate-on-scroll" data-step="1">
+                        <div class="journey-card-glow"></div>
+                        <div class="journey-card-header">
+                            <div class="journey-card-icon">
+                                <svg viewBox="0 0 40 40" fill="none">
+                                    <rect x="4" y="20" width="32" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M8 20V12a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v8" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="20" cy="28" r="4" fill="currentColor" opacity="0.3"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="journey-card-badge" data-i18n="journey.card1.badge">Free</span>
+                                <h3 class="journey-card-title" data-i18n="journey.card1.title">The Listening Lounge</h3>
+                                <p class="journey-card-subtitle" data-i18n="journey.card1.subtitle">Cultivating Awareness</p>
+                            </div>
                         </div>
-                        <div>
-                            <span class="journey-card-badge" data-i18n="journey.card1.badge">Free</span>
-                            <h3 class="journey-card-title" data-i18n="journey.card1.title">The Listening Lounge</h3>
-                            <p class="journey-card-subtitle" data-i18n="journey.card1.subtitle">At the Threshold (Clarity)</p>
-                        </div>
+                        <p class="journey-card-text" data-i18n="journey.card1.text">A calm, reflective space where you practice deep listening without judgment. This is where empathy begins—listening before responding. Here, awareness is cultivated as the foundation for all that follows.</p>
+                        <p class="journey-card-theme" data-i18n="journey.card1.theme">Theme: Deep listening and presence</p>
+                        <span class="journey-card-number">01</span>
                     </div>
-                    <p class="journey-card-text" data-i18n="journey.card1.text">Arrive just as you are. Rest. Speak. Be heard. In our free monthly listening circles, you are met with presence, not judgment, and gently begin to sense your inner direction.</p>
-                    <span class="journey-card-number">01</span>
+
+                    <div class="journey-card animate-on-scroll" data-step="2">
+                        <div class="journey-card-glow"></div>
+                        <div class="journey-card-header">
+                            <div class="journey-card-icon">
+                                <svg viewBox="0 0 40 40" fill="none">
+                                    <path d="M8 36V20L20 8l12 12v16H8z" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="14" y="24" width="12" height="12" fill="currentColor" opacity="0.3"/>
+                                    <path d="M20 8v8" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="journey-card-badge" data-i18n="journey.card2.badge">Deep Practice</span>
+                                <h3 class="journey-card-title" data-i18n="journey.card2.title">The Compassion Course</h3>
+                                <p class="journey-card-subtitle" data-i18n="journey.card2.subtitle">Awareness into Action</p>
+                            </div>
+                        </div>
+                        <p class="journey-card-text" data-i18n="journey.card2.text">Building on listening, learn how to translate empathy into compassionate behavior. A 52-week immersion where understanding becomes caring action—not just something you know, but something you embody.</p>
+                        <p class="journey-card-theme" data-i18n="journey.card2.theme">Theme: Understanding and responding with care</p>
+                        <span class="journey-card-number">02</span>
+                    </div>
+
+                    <div class="journey-card animate-on-scroll" data-step="3">
+                        <div class="journey-card-glow"></div>
+                        <div class="journey-card-header">
+                            <div class="journey-card-icon">
+                                <svg viewBox="0 0 40 40" fill="none">
+                                    <ellipse cx="20" cy="32" rx="14" ry="4" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M10 32V18c0-6 4-10 10-10s10 4 10 10v14" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.3"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="journey-card-badge" data-i18n="journey.card3.badge">Community</span>
+                                <h3 class="journey-card-title" data-i18n="journey.card3.title">The Empathy Café</h3>
+                                <p class="journey-card-subtitle" data-i18n="journey.card3.subtitle">Compassion into Community</p>
+                            </div>
+                        </div>
+                        <p class="journey-card-text" data-i18n="journey.card3.text">A social, conversational setting where empathy is practiced through dialogue and storytelling. Extend the skills you've learned into real-world interactions and bring compassion into community.</p>
+                        <p class="journey-card-theme" data-i18n="journey.card3.theme">Theme: Shared stories and emotional connection</p>
+                        <span class="journey-card-number">03</span>
+                    </div>
+
+                    <div class="journey-card animate-on-scroll" data-step="4">
+                        <div class="journey-card-glow"></div>
+                        <div class="journey-card-header">
+                            <div class="journey-card-icon">
+                                <svg viewBox="0 0 40 40" fill="none">
+                                    <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="20" cy="20" r="6" fill="currentColor" opacity="0.3"/>
+                                    <path d="M20 4v6M20 30v6M4 20h6M30 20h6" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.5"/>
+                                    <circle cx="30" cy="10" r="3" fill="currentColor" opacity="0.5"/>
+                                    <circle cx="10" cy="30" r="3" fill="currentColor" opacity="0.5"/>
+                                    <circle cx="30" cy="30" r="3" fill="currentColor" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="journey-card-badge" data-i18n="journey.card4.badge">Integration</span>
+                                <h3 class="journey-card-title" data-i18n="journey.card4.title">Join the Dots</h3>
+                                <p class="journey-card-subtitle" data-i18n="journey.card4.subtitle">The Complete Picture</p>
+                            </div>
+                        </div>
+                        <p class="journey-card-text" data-i18n="journey.card4.text">The meta-space that connects insights from all experiences—listening, compassion, and empathy—into a cohesive framework. Here, isolated practices become a connected ecosystem of emotional intelligence.</p>
+                        <p class="journey-card-theme" data-i18n="journey.card4.theme">Theme: Integration and synthesis</p>
+                        <span class="journey-card-number">04</span>
+                    </div>
                 </div>
 
-                <div class="journey-card animate-on-scroll">
-                    <div class="journey-card-glow"></div>
-                    <div class="journey-card-header">
-                        <div class="journey-card-icon">
-                            <svg viewBox="0 0 40 40" fill="none">
-                                <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="20" cy="20" r="6" fill="currentColor" opacity="0.3"/>
-                                <path d="M20 4v6M20 30v6M4 20h6M30 20h6" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <span class="journey-card-badge" data-i18n="journey.card2.badge">Core Program</span>
-                            <h3 class="journey-card-title" data-i18n="journey.card2.title">Join the Dots</h3>
-                            <p class="journey-card-subtitle" data-i18n="journey.card2.subtitle">Finding My Way (Connection)</p>
-                        </div>
-                    </div>
-                    <p class="journey-card-text" data-i18n="journey.card2.text">Through themed awareness modules on love, power, anger, boundaries, and emotional pain, you begin to recognise patterns, connect with what truly matters, and discover new, life-serving choices.</p>
-                    <span class="journey-card-number">02</span>
-                </div>
-
-                <div class="journey-card animate-on-scroll">
-                    <div class="journey-card-glow"></div>
-                    <div class="journey-card-header">
-                        <div class="journey-card-icon">
-                            <svg viewBox="0 0 40 40" fill="none">
-                                <path d="M8 36V20L20 8l12 12v16H8z" stroke="currentColor" stroke-width="2"/>
-                                <rect x="14" y="24" width="12" height="12" fill="currentColor" opacity="0.3"/>
-                                <path d="M20 8v8" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <span class="journey-card-badge" data-i18n="journey.card3.badge">Deep Immersion</span>
-                            <h3 class="journey-card-title" data-i18n="journey.card3.title">The Compassion Course</h3>
-                            <p class="journey-card-subtitle" data-i18n="journey.card3.subtitle">At Home in This Understanding (Practice)</p>
-                        </div>
-                    </div>
-                    <p class="journey-card-text" data-i18n="journey.card3.text">A 52-week immersion where empathy, honest expression, and deep listening become a lived consciousness—not just something you know, but something you embody.</p>
-                    <span class="journey-card-number">03</span>
-                </div>
-
-                <div class="journey-card animate-on-scroll">
-                    <div class="journey-card-glow"></div>
-                    <div class="journey-card-header">
-                        <div class="journey-card-icon">
-                            <svg viewBox="0 0 40 40" fill="none">
-                                <ellipse cx="20" cy="32" rx="14" ry="4" stroke="currentColor" stroke-width="2"/>
-                                <path d="M10 32V18c0-6 4-10 10-10s10 4 10 10v14" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.3"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <span class="journey-card-badge" data-i18n="journey.card4.badge">Community</span>
-                            <h3 class="journey-card-title" data-i18n="journey.card4.title">The Empathy Café</h3>
-                            <p class="journey-card-subtitle" data-i18n="journey.card4.subtitle">The Hearth (Healing)</p>
-                        </div>
-                    </div>
-                    <p class="journey-card-text" data-i18n="journey.card4.text">An ongoing community space to pause, reconnect, and be nourished. Here, shared presence and compassionate listening help integrate the journey and remind us that we do not walk alone.</p>
-                    <span class="journey-card-number">04</span>
+                <!-- Journey insight -->
+                <div class="journey-insight animate-on-scroll">
+                    <p data-i18n="journey.insight">Each stage flows into the next: <strong>Listening</strong> cultivates awareness → <strong>Compassion</strong> transforms awareness into action → <strong>Empathy</strong> brings action into community → <strong>Integration</strong> connects everything into shared understanding.</p>
                 </div>
             </div>
         </div>

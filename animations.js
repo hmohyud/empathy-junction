@@ -240,6 +240,46 @@ function initSmoothScroll() {
   log("Smooth scroll initialized");
 }
 
+// ==================== JOURNEY PATH ANIMATION ====================
+function initJourneyPath() {
+  const journeySection = document.querySelector('.journey');
+  const pathLine = document.querySelector('.journey-path-line');
+  const dots = document.querySelectorAll('.journey-dot');
+  
+  if (!journeySection || !pathLine) return;
+  
+  // Reset animation state
+  const resetAnimation = () => {
+    pathLine.style.animation = 'none';
+    pathLine.offsetHeight; // Trigger reflow
+    pathLine.style.animation = 'drawPath 4s ease-out forwards';
+    
+    dots.forEach(dot => {
+      dot.style.animation = 'none';
+      dot.offsetHeight;
+    });
+    
+    setTimeout(() => {
+      dots.forEach((dot, i) => {
+        dot.style.animation = `dotAppear 0.5s ease-out forwards ${0.5 + i}s`;
+      });
+    }, 10);
+  };
+  
+  // Observe when journey section enters viewport
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        resetAnimation();
+      }
+    });
+  }, { threshold: 0.2 });
+  
+  observer.observe(journeySection);
+  
+  log("Journey path animation initialized");
+}
+
 // ==================== INITIALIZE ====================
 document.addEventListener("DOMContentLoaded", () => {
   log("DOM Content Loaded");
@@ -251,6 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   initScrollAnimations();
   initSmoothScroll();
+  initJourneyPath();
 
   log("All initializations complete");
 });
