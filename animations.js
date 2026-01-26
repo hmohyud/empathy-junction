@@ -242,42 +242,203 @@ function initSmoothScroll() {
 
 // ==================== JOURNEY PATH ANIMATION ====================
 function initJourneyPath() {
-  const journeySection = document.querySelector('.journey');
-  const pathLine = document.querySelector('.journey-path-line');
-  const dots = document.querySelectorAll('.journey-dot');
-  
-  if (!journeySection || !pathLine) return;
-  
-  // Reset animation state
-  const resetAnimation = () => {
-    pathLine.style.animation = 'none';
-    pathLine.offsetHeight; // Trigger reflow
-    pathLine.style.animation = 'drawPath 4s ease-out forwards';
-    
-    dots.forEach(dot => {
-      dot.style.animation = 'none';
-      dot.offsetHeight;
+  const journeySection = document.querySelector(".journey");
+  if (!journeySection) return;
+
+  const wrapper = journeySection.querySelector(".journey-wrapper");
+  const svg = journeySection.querySelector("svg.journey-path");
+  if (!wrapper || !svg) return;
+
+  const pathBg = svg.querySelector(".journey-path-bg");
+  const pathLine = svg.querySelector(".journey-path-line#travelPath") || svg.querySelector("#travelPath");
+  const dots = Array.from(svg.querySelectorAll(".journey-dot"));
+  const cardsAll = Array.from(wrapper.querySelectorAll(".journey-card"));
+  // Ensure each card has a stable step index (1..N) so you can target it in CSS.
+  cardsAll.forEach((card, i) => {
+    if (!card.dataset.step) card.dataset.step = String(i + 1);
+  });
+
+  const cards = cardsAll
+    .filter((c) => c.dataset.step)
+    .sort((a, b) => Number(a.dataset.step) - Number(b.dataset.step));
+
+  if (!pathBg || !pathLine || cards.length < 2) return;
+
+  const parseLen = (raw, size) => {
+    if (!raw) return null;
+    const v = raw.trim();
+    if (!v) return null;
+    if (v.endsWith("%")) return (parseFloat(v) / 100) * size;
+    return parseFloat(v); // px or unitless
+  };
+
+  const getAnchor = (card) => {
+    const cardRect = card.getBoundingClientRect();
+    const wrapRect = wrapper.getBoundingClientRect();
+
+    const cs = getComputedStyle(card);
+    const axRaw = cs.getPropertyValue("--journey-anchor-x");
+    const ayRaw = cs.getPropertyValue("--journey-anchor-y");
+
+    const ax = parseLen(axRaw, cardRect.width);
+    const ay = parseLen(ayRaw, cardRect.height);
+
+    const x = (cardRect.left - wrapRect.left) + (ax != null ? ax : cardRect.width / 2);
+    const y = (cardRect.top - wrapRect.top) + (ay != null ? ay : cardRect.height / 2);
+
+    return { x, y, step: Number(card.dataset.step) };
+  };
+
+  const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+  const lerp = (a, b, t) => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+
+  const buildMeanderPath = (pts, wiggle) => {
+    if (!pts.length) return "";
+
+    let d = `M ${pts[0].x.toFixed(2)} ${pts[0].y.toFixed(2)}`;
+
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i];
+      const b = pts[i + 1];
+
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const dist = Math.hypot(dx, dy) || 1;
+
+      const ux = dx / dist;
+      const uy = dy / dist;
+      const nx = -uy;
+      const ny = ux;
+
+      // More waves for longer segments
+      const waves = clamp(Math.round(dist / 260), 1, 3);
+
+      for (let w = 1; w <= waves; w++) {
+        const t0 = (w - 1) / waves;
+        const t1 = w / waves;
+
+        const s = lerp(a, b, t0);
+        const e = lerp(a, b, t1);
+
+        const segDx = e.x - s.x;
+        const segDy = e.y - s.y;
+        const segDist = Math.hypot(segDx, segDy) || 1;
+
+        // amplitude scales with segment length, alternates direction
+        const ampBase = clamp(segDist * 0.22, 18, wiggle);
+        const dir = ((i + w) % 2 === 0) ? 1 : -1;
+        const amp = ampBase * dir;
+
+        const c1 = {
+          x: s.x + segDx * 0.33 + nx * amp,
+          y: s.y + segDy * 0.33 + ny * amp
+        };
+        const c2 = {
+          x: s.x + segDx * 0.66 - nx * amp * 0.65,
+          y: s.y + segDy * 0.66 - ny * amp * 0.65
+        };
+
+        d += ` C ${c1.x.toFixed(2)} ${c1.y.toFixed(2)} ${c2.x.toFixed(2)} ${c2.y.toFixed(2)} ${e.x.toFixed(2)} ${e.y.toFixed(2)}`;
+      }
+    }
+
+    return d;
+  };
+
+  const restartSmil = (el) => {
+    // Cloning restarts SVG SMIL animations (the traveler dot)
+    const clone = el.cloneNode(true);
+    el.parentNode.replaceChild(clone, el);
+    return clone;
+  };
+
+  let raf = 0;
+  const scheduleUpdate = () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      updateNow(false);
     });
-    
-    setTimeout(() => {
+  };
+
+  const updateNow = (doRestart) => {
+    const w = wrapper.clientWidth;
+    const h = wrapper.clientHeight;
+
+    // Keep a 1:1 coordinate system (px == svg units)
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    svg.setAttribute("preserveAspectRatio", "none");
+
+    const points = cards.map(getAnchor);
+
+    const wiggle = clamp(Math.min(w, h) * 0.18, 40, 110);
+    const d = buildMeanderPath(points, wiggle);
+
+    pathBg.setAttribute("d", d);
+    pathLine.setAttribute("d", d);
+
+    // Place dot circles on the anchor points
+    points.forEach((p) => {
+      const dot = svg.querySelector(`.journey-dot[data-step="${p.step}"]`);
+      if (dot) {
+        dot.setAttribute("cx", p.x.toFixed(2));
+        dot.setAttribute("cy", p.y.toFixed(2));
+      }
+    });
+
+    if (doRestart) {
+      // Restart CSS animations by toggling the class
+      wrapper.classList.remove("path-on");
+      wrapper.getBoundingClientRect(); // reflow
+
+      // Restart dot pop-ins
+      dots.forEach((dot) => {
+        dot.style.animation = "none";
+        dot.getBoundingClientRect();
+      });
+
+      // Restart traveler motion
+      const traveler = wrapper.querySelector(".journey-traveler");
+      if (traveler && traveler.parentNode) restartSmil(traveler);
+
+      wrapper.classList.add("path-on");
+
       dots.forEach((dot, i) => {
         dot.style.animation = `dotAppear 0.5s ease-out forwards ${0.5 + i}s`;
       });
-    }, 10);
+    }
   };
-  
-  // Observe when journey section enters viewport
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        resetAnimation();
-      }
-    });
-  }, { threshold: 0.2 });
-  
+
+  // Initial compute (no restart yet)
+  updateNow(false);
+
+  // Keep it correct on resize/zoom/layout changes
+  const ro = new ResizeObserver(scheduleUpdate);
+  ro.observe(wrapper);
+  cards.forEach((c) => ro.observe(c));
+  window.addEventListener("resize", scheduleUpdate, { passive: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", scheduleUpdate, { passive: true });
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(scheduleUpdate).catch(() => {});
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Recompute with a restart so the traveler follows the latest path
+          updateNow(true);
+        }
+      });
+    },
+    { threshold: 0.25 }
+  );
+
   observer.observe(journeySection);
-  
-  log("Journey path animation initialized");
+
+  log("Journey path (dynamic) initialized");
 }
 
 // ==================== INITIALIZE ====================
