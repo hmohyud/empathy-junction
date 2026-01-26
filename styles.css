@@ -1193,10 +1193,10 @@ section { padding: var(--space-3xl) 0; position: relative; }
     position: relative; 
     margin: var(--space-xl) 0; 
     padding: var(--space-xl) var(--space-lg);
-    background: var(--color-warm-white);
-    border-radius: var(--radius-xl);
-    border: 1px solid rgba(155, 170, 143, 0.2);
-    opacity: 0.75;
+    /* background: var(--color-warm-white); */
+    /* border-radius: var(--radius-xl); */
+    /* border: 1px solid rgba(155, 170, 143, 0.2); */
+    opacity: 0.85;
 }
 
 .reflection-path {
