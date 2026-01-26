@@ -231,14 +231,6 @@ class InteractiveBackground {
       ctx.fillStyle = `rgba(${dot.color.r}, ${dot.color.g}, ${dot.color.b}, 0.65)`;
       ctx.fill();
     });
-
-    // Draw mouse cursor dot
-    if (this.mouse.x !== null) {
-      ctx.beginPath();
-      ctx.arc(this.mouse.x, this.mouse.y, 6, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(196, 132, 108, 0.8)';
-      ctx.fill();
-    }
   }
 
   // ==================== RIPPLE EFFECT ====================
