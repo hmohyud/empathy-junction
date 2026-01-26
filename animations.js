@@ -668,6 +668,348 @@ function initJourneyPath() {
   log("Journey path (dynamic) initialized");
 }
 
+// ==================== SUN-MOON ARC ANIMATION ====================
+class SunMoonArc {
+  constructor() {
+    this.canvas = document.getElementById('rhythmCanvas');
+    if (!this.canvas) {
+      log("SunMoonArc: No canvas found");
+      return;
+    }
+
+    this.ctx = this.canvas.getContext('2d');
+    this.section = document.getElementById('rhythm');
+    this.timeSlots = this.section.querySelectorAll('.time-slot');
+    
+    this.timePosition = 0;
+    this.isRunning = false;
+    this.animationId = null;
+
+    // Color stops for sky interpolation (0-1 = sun, 1-1.5 = moon at 2x speed)
+    // Improved text visibility with higher contrast colors
+    this.skyColors = [
+      { time: 0.0, bg: ['#1a2a3a', '#243448', '#1a2a3a'], text: '#e8eef4', muted: '#b8c8d8', accent: '#8ab4d4', cardAlpha: 0.12 },
+      { time: 0.08, bg: ['#3d3a5a', '#5a4f7a', '#2a2a3e'], text: '#f0e8f4', muted: '#c8c0d8', accent: '#b8a0c8', cardAlpha: 0.15 },
+      { time: 0.15, bg: ['#ff9a56', '#ffb88c', '#ffd4a8'], text: '#3a2010', muted: '#5a4030', accent: '#b86040', cardAlpha: 0.85 },
+      { time: 0.25, bg: ['#87ceeb', '#b0e0f0', '#f5f0e8'], text: '#1d2a1e', muted: '#3a4b3d', accent: '#c4846c', cardAlpha: 0.9 },
+      { time: 0.5, bg: ['#5dade2', '#85c1e9', '#e8ede6'], text: '#1d2a1e', muted: '#3a4b3d', accent: '#b86040', cardAlpha: 0.9 },
+      { time: 0.75, bg: ['#f4d03f', '#f8e473', '#f5f0e8'], text: '#2a2010', muted: '#4a4030', accent: '#b86040', cardAlpha: 0.88 },
+      { time: 0.85, bg: ['#e74c3c', '#f39c12', '#f5c6a0'], text: '#2a1010', muted: '#4a3030', accent: '#a04020', cardAlpha: 0.85 },
+      { time: 0.92, bg: ['#6c3483', '#a04080', '#e08050'], text: '#f8f0e8', muted: '#d8c8b8', accent: '#e8b888', cardAlpha: 0.2 },
+      { time: 1.0, bg: ['#1a2a3a', '#243448', '#1a2a3a'], text: '#e8eef4', muted: '#b8c8d8', accent: '#8ab4d4', cardAlpha: 0.12 },
+      { time: 1.25, bg: ['#0a1018', '#101820', '#0a1018'], text: '#d0d8e0', muted: '#98a8b8', accent: '#7090b0', cardAlpha: 0.1 },
+      { time: 1.5, bg: ['#1a2a3a', '#243448', '#1a2a3a'], text: '#e8eef4', muted: '#b8c8d8', accent: '#8ab4d4', cardAlpha: 0.12 }
+    ];
+
+    // Sun color stops for smooth interpolation
+    this.sunColors = [
+      { time: 0.0, color: { r: 230, g: 100, b: 60 } },   // Rising - deep orange
+      { time: 0.15, color: { r: 250, g: 160, b: 80 } },  // Early morning - warm orange
+      { time: 0.3, color: { r: 255, g: 200, b: 100 } },  // Morning - golden
+      { time: 0.5, color: { r: 255, g: 220, b: 120 } },  // Midday - bright yellow
+      { time: 0.7, color: { r: 255, g: 200, b: 100 } },  // Afternoon - golden
+      { time: 0.85, color: { r: 250, g: 140, b: 60 } },  // Evening - orange
+      { time: 1.0, color: { r: 230, g: 80, b: 50 } }     // Setting - deep red-orange
+    ];
+
+    this.resize();
+    this.bindEvents();
+    this.observeVisibility();
+
+    log("SunMoonArc initialized");
+  }
+
+  resize() {
+    if (!this.canvas) return;
+    this.canvas.width = this.section.offsetWidth;
+    this.canvas.height = this.section.offsetHeight;
+  }
+
+  bindEvents() {
+    window.addEventListener('resize', () => this.resize());
+  }
+
+  observeVisibility() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!this.isRunning) {
+              this.isRunning = true;
+              this.animate();
+            }
+          } else {
+            this.isRunning = false;
+            if (this.animationId) {
+              cancelAnimationFrame(this.animationId);
+            }
+          }
+        });
+      },
+      { threshold: 0, rootMargin: '100px' }
+    );
+
+    observer.observe(this.section);
+  }
+
+  lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
+
+  lerpColor(c1, c2, t) {
+    const parse = (hex) => ({
+      r: parseInt(hex.slice(1, 3), 16),
+      g: parseInt(hex.slice(3, 5), 16),
+      b: parseInt(hex.slice(5, 7), 16)
+    });
+    const a = parse(c1);
+    const b = parse(c2);
+    const r = Math.round(this.lerp(a.r, b.r, t));
+    const g = Math.round(this.lerp(a.g, b.g, t));
+    const bl = Math.round(this.lerp(a.b, b.b, t));
+    return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${bl.toString(16).padStart(2, '0')}`;
+  }
+
+  getSkyColorsAtTime(t) {
+    for (let i = 0; i < this.skyColors.length - 1; i++) {
+      if (t >= this.skyColors[i].time && t < this.skyColors[i + 1].time) {
+        const range = this.skyColors[i + 1].time - this.skyColors[i].time;
+        const localT = (t - this.skyColors[i].time) / range;
+        const from = this.skyColors[i];
+        const to = this.skyColors[i + 1];
+
+        return {
+          bg: [
+            this.lerpColor(from.bg[0], to.bg[0], localT),
+            this.lerpColor(from.bg[1], to.bg[1], localT),
+            this.lerpColor(from.bg[2], to.bg[2], localT)
+          ],
+          text: this.lerpColor(from.text, to.text, localT),
+          muted: this.lerpColor(from.muted, to.muted, localT),
+          accent: this.lerpColor(from.accent, to.accent, localT),
+          cardAlpha: this.lerp(from.cardAlpha, to.cardAlpha, localT)
+        };
+      }
+    }
+    return this.skyColors[0];
+  }
+
+  getSunColorAtTime(t) {
+    for (let i = 0; i < this.sunColors.length - 1; i++) {
+      if (t >= this.sunColors[i].time && t < this.sunColors[i + 1].time) {
+        const range = this.sunColors[i + 1].time - this.sunColors[i].time;
+        const localT = (t - this.sunColors[i].time) / range;
+        const from = this.sunColors[i].color;
+        const to = this.sunColors[i + 1].color;
+
+        return {
+          r: Math.round(this.lerp(from.r, to.r, localT)),
+          g: Math.round(this.lerp(from.g, to.g, localT)),
+          b: Math.round(this.lerp(from.b, to.b, localT))
+        };
+      }
+    }
+    return this.sunColors[0].color;
+  }
+
+  getArcPoint(t) {
+    const pad = 80;
+    const w = this.canvas.width - pad * 2;
+    const h = this.canvas.height * 0.35;
+    const baseY = this.canvas.height * 0.55;
+
+    return {
+      x: pad + t * w,
+      y: baseY - Math.sin(t * Math.PI) * h
+    };
+  }
+
+  getActiveTimeSlot(arcT, isSun) {
+    if (!isSun) return null;
+    if (arcT >= 0.12 && arcT < 0.38) return 'morning';
+    if (arcT >= 0.38 && arcT < 0.62) return 'afternoon';
+    if (arcT >= 0.62 && arcT < 0.88) return 'evening';
+    return null;
+  }
+
+  updateUI(colors) {
+    // Update section background
+    this.section.style.background = `linear-gradient(180deg, ${colors.bg[0]} 0%, ${colors.bg[1]} 50%, ${colors.bg[2]} 100%)`;
+
+    // Update text colors for elements in the section
+    const title = this.section.querySelector('.section-title');
+    const subtitle = this.section.querySelector('.section-subtitle');
+    const badge = this.section.querySelector('.section-badge');
+
+    if (title) title.style.color = colors.text;
+    if (subtitle) subtitle.style.color = colors.muted;
+    if (badge) {
+      badge.style.color = colors.accent;
+      badge.style.background = colors.accent + '25';
+    }
+
+    // Update cards
+    this.section.querySelectorAll('.schedule-card').forEach(card => {
+      card.style.background = `rgba(255,255,255,${colors.cardAlpha})`;
+      const cardTitle = card.querySelector('.schedule-card-title');
+      const cardWeek = card.querySelector('.schedule-card-week');
+      const cardText = card.querySelector('.schedule-card-text');
+      if (cardTitle) cardTitle.style.color = colors.text;
+      if (cardWeek) cardWeek.style.color = colors.accent;
+      if (cardText) cardText.style.color = colors.muted;
+    });
+
+    // Update time slots
+    this.section.querySelectorAll('.time-slot').forEach(slot => {
+      slot.style.background = `rgba(255,255,255,${colors.cardAlpha})`;
+      const span = slot.querySelector('span');
+      const svg = slot.querySelector('svg');
+      if (span) span.style.color = colors.text;
+      if (svg) svg.style.color = colors.accent;
+    });
+  }
+
+  updateTimeSlotHighlights(arcT, isSun) {
+    const activeSlot = this.getActiveTimeSlot(arcT, isSun);
+
+    this.timeSlots.forEach(slot => {
+      const slotTime = slot.querySelector('span')?.textContent;
+      let slotType = null;
+      if (slotTime?.includes('10:30')) slotType = 'morning';
+      else if (slotTime?.includes('2:30')) slotType = 'afternoon';
+      else if (slotTime?.includes('6:30')) slotType = 'evening';
+
+      if (slotType === activeSlot) {
+        slot.style.transform = 'scale(1.05)';
+        slot.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+      } else {
+        slot.style.transform = 'scale(1)';
+        slot.style.boxShadow = 'none';
+      }
+    });
+  }
+
+  animate() {
+    if (!this.isRunning) return;
+
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Sun phase: 0-1, Moon phase: 1-1.5 (moon goes 2x faster)
+    // Doubled speed from previous
+    if (this.timePosition < 1) {
+      this.timePosition += 0.00044; // Sun speed (doubled)
+    } else {
+      this.timePosition += 0.00088; // Moon speed (doubled, 2x sun)
+    }
+    if (this.timePosition >= 1.5) this.timePosition = 0;
+
+    const isSun = this.timePosition < 1;
+    const arcT = isSun ? this.timePosition : (this.timePosition - 1) * 2;
+
+    // Update colors
+    const currentColors = this.getSkyColorsAtTime(this.timePosition);
+    this.updateUI(currentColors);
+    this.updateTimeSlotHighlights(arcT, isSun);
+
+    // Calculate brightness
+    let brightness;
+    if (this.timePosition < 0.15) brightness = 0.3;
+    else if (this.timePosition < 0.85) brightness = 0.8 + Math.sin((this.timePosition - 0.15) / 0.7 * Math.PI) * 0.2;
+    else if (this.timePosition < 1.0) brightness = 0.3;
+    else brightness = 0.2;
+
+    // Draw horizon
+    const horizonY = this.canvas.height * 0.55;
+    ctx.beginPath();
+    ctx.moveTo(60, horizonY);
+    ctx.lineTo(this.canvas.width - 60, horizonY);
+    ctx.strokeStyle = isSun
+      ? `rgba(155, 170, 143, ${0.1 + brightness * 0.2})`
+      : `rgba(100, 120, 150, 0.2)`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw arc path dots
+    for (let i = 0; i <= 35; i++) {
+      const t = i / 35;
+      const p = this.getArcPoint(t);
+      const distToCelestial = Math.abs(t - arcT);
+      const glow = Math.max(0, 1 - distToCelestial * 5);
+
+      let dotColor, dotOpacity;
+      if (isSun) {
+        if (t < 0.33) dotColor = { r: 212, g: 165, b: 116 };
+        else if (t < 0.66) dotColor = { r: 196, g: 132, b: 108 };
+        else dotColor = { r: 155, g: 170, b: 143 };
+        dotOpacity = 0.15 + glow * 0.5 + brightness * 0.2;
+      } else {
+        dotColor = { r: 150, g: 170, b: 200 };
+        dotOpacity = 0.1 + glow * 0.4;
+      }
+
+      const dotSize = 2 + glow * 3;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, dotSize, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${dotColor.r}, ${dotColor.g}, ${dotColor.b}, ${dotOpacity})`;
+      ctx.fill();
+    }
+
+    // Draw sun or moon
+    if (arcT > 0.02 && arcT < 0.98) {
+      const pos = this.getArcPoint(arcT);
+
+      if (isSun) {
+        // Get interpolated sun color
+        const sunColor = this.getSunColorAtTime(arcT);
+
+        const glowSize = 50 + Math.sin(this.timePosition * 4) * 5;
+        const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, glowSize);
+        grad.addColorStop(0, `rgba(${sunColor.r}, ${sunColor.g}, ${sunColor.b}, 0.6)`);
+        grad.addColorStop(0.4, `rgba(${sunColor.r}, ${sunColor.g}, ${sunColor.b}, 0.2)`);
+        grad.addColorStop(1, `rgba(${sunColor.r}, ${sunColor.g}, ${sunColor.b}, 0)`);
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, glowSize, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, 16, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${sunColor.r}, ${sunColor.g}, ${sunColor.b}, 0.95)`;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(pos.x - 4, pos.y - 4, 6, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 240, 0.5)`;
+        ctx.fill();
+      } else {
+        const moonColor = { r: 220, g: 225, b: 240 };
+        const glowSize = 40 + Math.sin(this.timePosition * 3) * 3;
+        const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, glowSize);
+        grad.addColorStop(0, `rgba(${moonColor.r}, ${moonColor.g}, ${moonColor.b}, 0.4)`);
+        grad.addColorStop(0.5, `rgba(${moonColor.r}, ${moonColor.g}, ${moonColor.b}, 0.1)`);
+        grad.addColorStop(1, `rgba(${moonColor.r}, ${moonColor.g}, ${moonColor.b}, 0)`);
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, glowSize, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, 14, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${moonColor.r}, ${moonColor.g}, ${moonColor.b}, 0.95)`;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(pos.x + 5, pos.y - 3, 10, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(30, 40, 60, 0.4)`;
+        ctx.fill();
+      }
+    }
+
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+}
+
 // ==================== INITIALIZE ====================
 document.addEventListener("DOMContentLoaded", () => {
   log("DOM Content Loaded");
@@ -680,6 +1022,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollAnimations();
   initSmoothScroll();
   initJourneyPath();
+
+  // Start the sun-moon arc animation for rhythm section
+  log("Starting SunMoonArc...");
+  window.sunMoonArc = new SunMoonArc();
 
   log("All initializations complete");
 });

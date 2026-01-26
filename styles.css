@@ -444,11 +444,12 @@ section { padding: var(--space-3xl) 0; position: relative; }
     font-weight: 600;
     margin-bottom: var(--space-md);
     border: 1px solid rgba(155, 170, 143, 0.3);
+    transition: background 1s ease, color 1s ease;
 }
 
 .badge-icon { width: 18px; height: 18px; }
-.section-title { margin-bottom: var(--space-sm); }
-.section-subtitle { color: var(--color-text-muted); font-size: 1.15rem; line-height: 1.7; }
+.section-title { margin-bottom: var(--space-sm); transition: color 1s ease; }
+.section-subtitle { color: var(--color-text-muted); font-size: 1.15rem; line-height: 1.7; transition: color 1s ease; }
 
 /* ==================== JOURNEY SECTION ==================== */
 .journey {
@@ -711,7 +712,26 @@ section { padding: var(--space-3xl) 0; position: relative; }
 
 /* ==================== RHYTHM SECTION ==================== */
 .rhythm {
+    position: relative;
+    overflow: hidden;
+    /* Background will be controlled by JS for day/night cycle */
     background: linear-gradient(135deg, var(--color-sage-pale) 0%, var(--color-sand) 50%, var(--color-amber-light) 100%);
+    transition: background 1s ease;
+}
+
+.rhythm-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.rhythm-content {
+    position: relative;
+    z-index: 2;
 }
 
 .time-slots-wrapper { margin-bottom: var(--space-2xl); }
@@ -739,7 +759,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     font-weight: 500;
     border: 1px solid rgba(255, 255, 255, 0.8);
     cursor: pointer;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, background 1s ease, transform 0.3s ease;
 }
 
 .time-slot:hover {
@@ -751,10 +771,12 @@ section { padding: var(--space-3xl) 0; position: relative; }
     width: 24px;
     height: 24px;
     color: var(--color-amber);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 1s ease;
 }
 
 .time-slot:hover .time-slot-icon { transform: rotate(15deg); }
+
+.time-slot span { transition: color 1s ease; }
 
 .schedule-grid {
     display: grid;
@@ -771,7 +793,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     border-radius: var(--radius-lg);
     text-align: center;
     overflow: hidden;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, background 1s ease;
 }
 
 /* Hover buffer */
@@ -823,9 +845,10 @@ section { padding: var(--space-3xl) 0; position: relative; }
     margin-bottom: var(--space-xs);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    transition: color 1s ease;
 }
 
-.schedule-card-title { font-size: 1.2rem; margin-bottom: var(--space-xs); }
+.schedule-card-title { font-size: 1.2rem; margin-bottom: var(--space-xs); transition: color 1s ease; }
 
 .schedule-card-badge {
     display: inline-block;
@@ -838,7 +861,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     margin-bottom: var(--space-sm);
 }
 
-.schedule-card-text { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; }
+.schedule-card-text { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; transition: color 1s ease; }
 
 .upcoming-topics {
     background: var(--color-warm-white);
