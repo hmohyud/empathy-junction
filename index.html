@@ -139,7 +139,7 @@
 
             <div class="journey-wrapper">
                 <!-- Animated connecting path -->
-                <svg class="journey-path" viewBox="0 0 1000 800" preserveAspectRatio="none" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg class="journey-path" viewBox="0 0 1000 800" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="var(--color-sage)" />
@@ -151,18 +151,6 @@
                     <path class="journey-path-bg" id="journeyPathBg" d="" />
                     <!-- Dynamic path that JS fills based on card positions -->
                     <path class="journey-path-line" id="travelPath" d="" />
-                    <!-- Dots at key points -->
-                    <circle class="journey-dot journey-dot-1" data-step="1" cx="0" cy="0" r="8" />
-                    <circle class="journey-dot journey-dot-2" data-step="2" cx="0" cy="0" r="8" />
-                    <circle class="journey-dot journey-dot-3" data-step="3" cx="0" cy="0" r="8" />
-                    <circle class="journey-dot journey-dot-4" data-step="4" cx="0" cy="0" r="8" />
-                    <!-- Moving dot along path -->
-                    <circle class="journey-traveler" r="6">
-                        <animateMotion dur="8s" repeatCount="indefinite">
-                            <mpath href="#travelPath" xlink:href="#travelPath"></mpath>
-                        </animateMotion>
-                    </circle>
-                    
                 </svg>
 
                 <div class="journey-grid">

@@ -63,11 +63,49 @@ class InteractiveBackground {
     this.createBlobs();
     this.createDots();
     this.bindEvents();
+    this.observeVisibility();
 
     this.isRunning = true;
     this.animate(0);
 
     log("InteractiveBackground initialized");
+  }
+
+  observeVisibility() {
+    // Pause main background when neither hero nor footer is visible
+    const hero = document.querySelector('.hero');
+    const footer = document.querySelector('.footer');
+    
+    if (!hero && !footer) return;
+
+    // Track which sections are visible
+    this.visibleSections = new Set();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.visibleSections.add(entry.target);
+          } else {
+            this.visibleSections.delete(entry.target);
+          }
+        });
+
+        // Run animation if any tracked section is visible
+        if (this.visibleSections.size > 0) {
+          if (!this.isRunning) {
+            this.isRunning = true;
+            this.animate(performance.now());
+          }
+        } else {
+          this.isRunning = false;
+        }
+      },
+      { threshold: 0, rootMargin: '200px' }
+    );
+
+    if (hero) observer.observe(hero);
+    if (footer) observer.observe(footer);
   }
 
   resize() {
@@ -480,7 +518,6 @@ function initJourneyPath() {
 
   const pathBg = svg.querySelector(".journey-path-bg");
   const pathLine = svg.querySelector(".journey-path-line#travelPath") || svg.querySelector("#travelPath");
-  const dots = Array.from(svg.querySelectorAll(".journey-dot"));
   const cardsAll = Array.from(wrapper.querySelectorAll(".journey-card"));
   
   cardsAll.forEach((card, i) => {
@@ -572,12 +609,6 @@ function initJourneyPath() {
     return d;
   };
 
-  const restartSmil = (el) => {
-    const clone = el.cloneNode(true);
-    el.parentNode.replaceChild(clone, el);
-    return clone;
-  };
-
   let raf = 0;
   const scheduleUpdate = () => {
     if (raf) return;
@@ -602,31 +633,8 @@ function initJourneyPath() {
     pathBg.setAttribute("d", d);
     pathLine.setAttribute("d", d);
 
-    points.forEach((p) => {
-      const dot = svg.querySelector(`.journey-dot[data-step="${p.step}"]`);
-      if (dot) {
-        dot.setAttribute("cx", p.x.toFixed(2));
-        dot.setAttribute("cy", p.y.toFixed(2));
-      }
-    });
-
-    if (doRestart) {
-      wrapper.classList.remove("path-on");
-      wrapper.getBoundingClientRect();
-
-      dots.forEach((dot) => {
-        dot.style.animation = "none";
-        dot.getBoundingClientRect();
-      });
-
-      const traveler = wrapper.querySelector(".journey-traveler");
-      if (traveler && traveler.parentNode) restartSmil(traveler);
-
+    if (doRestart && !wrapper.classList.contains("path-on")) {
       wrapper.classList.add("path-on");
-
-      dots.forEach((dot, i) => {
-        dot.style.animation = `dotAppear 0.5s ease-out forwards ${0.5 + i}s`;
-      });
     }
   };
 
@@ -648,6 +656,7 @@ function initJourneyPath() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           updateNow(true);
+          observer.unobserve(journeySection); // Only trigger once
         }
       });
     },
