@@ -74,9 +74,10 @@ class InteractiveBackground {
   observeVisibility() {
     // Pause main background when neither hero nor footer is visible
     const hero = document.querySelector('.hero');
+    const pageHero = document.querySelector('.page-hero'); // For about/contact pages
     const footer = document.querySelector('.footer');
     
-    if (!hero && !footer) return;
+    if (!hero && !pageHero && !footer) return;
 
     // Track which sections are visible
     this.visibleSections = new Set();
@@ -105,6 +106,7 @@ class InteractiveBackground {
     );
 
     if (hero) observer.observe(hero);
+    if (pageHero) observer.observe(pageHero);
     if (footer) observer.observe(footer);
   }
 
@@ -1598,6 +1600,147 @@ class GentleWaves {
   }
 }
 
+// ==================== BREATHING MANDALA (COMPASSION SECTION) ====================
+class CompassionMandala {
+  constructor() {
+    this.canvas = document.getElementById('compassionCanvas');
+    if (!this.canvas) {
+      log("No compassionCanvas found");
+      return;
+    }
+
+    this.ctx = this.canvas.getContext('2d');
+    this.isVisible = false;
+    this.animationId = null;
+    this.time = 0;
+
+    // Colors from the site palette
+    this.colors = {
+      sage: { r: 155, g: 170, b: 143 },
+      terracotta: { r: 196, g: 132, b: 108 },
+      amber: { r: 212, g: 165, b: 116 },
+      sageLight: { r: 184, g: 196, b: 174 }
+    };
+
+    // Ring configurations - spread out significantly to be visible around the card
+    this.rings = [
+      { radius: 0.5, dots: 8, color: this.colors.amber, size: 6 },
+      { radius: 0.8, dots: 12, color: this.colors.terracotta, size: 5 },
+      { radius: 1.1, dots: 18, color: this.colors.sage, size: 5 },
+      { radius: 1.4, dots: 24, color: this.colors.sageLight, size: 4 },
+      { radius: 1.7, dots: 32, color: this.colors.sage, size: 4 },
+      { radius: 2.0, dots: 40, color: this.colors.terracotta, size: 3.5 },
+      { radius: 2.3, dots: 48, color: this.colors.amber, size: 3 }
+    ];
+
+    this.resize();
+    this.bindEvents();
+    this.observeVisibility();
+
+    log("CompassionMandala initialized");
+  }
+
+  resize() {
+    const section = this.canvas.parentElement;
+    const rect = section.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    this.canvas.width = rect.width * dpr;
+    this.canvas.height = rect.height * dpr;
+    this.canvas.style.width = rect.width + 'px';
+    this.canvas.style.height = rect.height + 'px';
+
+    this.ctx.scale(dpr, dpr);
+    this.width = rect.width;
+    this.height = rect.height;
+  }
+
+  bindEvents() {
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => this.resize(), 100);
+    });
+  }
+
+  observeVisibility() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          this.isVisible = entry.isIntersecting;
+          if (this.isVisible && !this.animationId) {
+            this.animate();
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+    observer.observe(this.canvas.parentElement);
+  }
+
+  animate() {
+    if (!this.isVisible) {
+      this.animationId = null;
+      return;
+    }
+
+    this.time += 0.012;
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    const centerX = this.width / 2;
+    const centerY = this.height / 2;
+    // Use larger multiplier to ensure rings extend well beyond the card
+    const maxRadius = Math.min(this.width, this.height) * 0.38;
+
+    // Breathing effect
+    const breathe = 1 + Math.sin(this.time * 0.5) * 0.12;
+
+    // Draw rings of dots
+    this.rings.forEach((ring, ri) => {
+      const ringRadius = ring.radius * maxRadius * breathe;
+      const rotationOffset = this.time * (0.1 + ri * 0.05) * (ri % 2 === 0 ? 1 : -1);
+
+      for (let i = 0; i < ring.dots; i++) {
+        const angle = (i / ring.dots) * Math.PI * 2 + rotationOffset;
+        const x = centerX + Math.cos(angle) * ringRadius;
+        const y = centerY + Math.sin(angle) * ringRadius;
+
+        const pulse = 1 + Math.sin(this.time * 2 + i + ri) * 0.25;
+        const alpha = 0.4 + Math.sin(this.time + i * 0.5) * 0.15;
+
+        // Glow
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, ring.size * 2.5);
+        grad.addColorStop(0, `rgba(${ring.color.r}, ${ring.color.g}, ${ring.color.b}, ${alpha * 0.4})`);
+        grad.addColorStop(1, `rgba(${ring.color.r}, ${ring.color.g}, ${ring.color.b}, 0)`);
+        ctx.beginPath();
+        ctx.arc(x, y, ring.size * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        // Dot
+        ctx.beginPath();
+        ctx.arc(x, y, ring.size * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${ring.color.r}, ${ring.color.g}, ${ring.color.b}, ${alpha})`;
+        ctx.fill();
+      }
+    });
+
+    // Center glow
+    const centerSize = 25 * breathe;
+    const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, centerSize);
+    grad.addColorStop(0, 'rgba(212, 165, 116, 0.6)');
+    grad.addColorStop(0.6, 'rgba(196, 132, 108, 0.2)');
+    grad.addColorStop(1, 'rgba(155, 170, 143, 0)');
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, centerSize, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+}
+
 // ==================== INITIALIZE ====================
 document.addEventListener("DOMContentLoaded", () => {
   log("DOM Content Loaded");
@@ -1626,6 +1769,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Start the gentle waves animation for audience section
   log("Starting GentleWaves...");
   window.gentleWaves = new GentleWaves();
+
+  // Start the breathing mandala animation for compassion section
+  log("Starting CompassionMandala...");
+  window.compassionMandala = new CompassionMandala();
 
   log("All initializations complete");
 });

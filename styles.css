@@ -1067,12 +1067,31 @@ section { padding: var(--space-3xl) 0; position: relative; }
 /* ==================== COMPASSION SECTION ==================== */
 .compassion {
     background: linear-gradient(135deg, var(--color-terracotta-pale) 0%, var(--color-amber-light) 50%, var(--color-sand) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.compassion-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.9;
+}
+
+.compassion .container {
+    position: relative;
+    z-index: 1;
 }
 
 .compassion-card {
     max-width: 850px;
     margin: 0 auto;
-    background: var(--color-warm-white);
+    background: rgba(253, 251, 247, 0.72);
+    backdrop-filter: blur(6px);
     padding: var(--space-2xl) var(--space-xl);
     border-radius: var(--radius-xl);
     text-align: center;
@@ -1751,12 +1770,29 @@ a:focus-visible, button:focus-visible {
 /* ==================== STORY SECTION ==================== */
 .story-section {
     padding: var(--space-2xl) 0;
+    background: linear-gradient(135deg, var(--color-sage-pale) 0%, var(--color-sand) 50%, var(--color-terracotta-pale) 100%);
+    position: relative;
+}
+
+.story-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(155, 170, 143, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(196, 132, 108, 0.12) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .story-content {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .story-content h2 {
