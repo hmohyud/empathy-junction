@@ -1627,7 +1627,8 @@ section { padding: var(--space-3xl) 0; position: relative; }
 }
 
 /* ==================== UTILITIES ==================== */
-section[id] { scroll-margin-top: 100px; }
+section[id] { scroll-margin-top: 90px; }
+.page-hero { scroll-margin-top: 90px; }
 
 a:focus-visible, button:focus-visible {
     outline: 3px solid var(--color-sage);
@@ -1678,6 +1679,9 @@ a:focus-visible, button:focus-visible {
 /* ==================== CONTENT SECTIONS ==================== */
 .content-section {
     padding: var(--space-2xl) 0;
+    background: var(--color-warm-white);
+    position: relative;
+    z-index: 2;
 }
 
 .content-grid {
@@ -1706,6 +1710,8 @@ a:focus-visible, button:focus-visible {
 .values-section {
     padding: var(--space-2xl) 0;
     background: linear-gradient(135deg, var(--color-sage-pale) 0%, var(--color-cream) 100%);
+    position: relative;
+    z-index: 2;
 }
 
 .values-section .section-header {
@@ -1770,8 +1776,10 @@ a:focus-visible, button:focus-visible {
 /* ==================== STORY SECTION ==================== */
 .story-section {
     padding: var(--space-2xl) 0;
-    background: linear-gradient(135deg, var(--color-sage-pale) 0%, var(--color-sand) 50%, var(--color-terracotta-pale) 100%);
+    background-color: #F5EDE4; /* Solid fallback */
+    background: linear-gradient(135deg, #E8EDE5 0%, #F5EDE4 50%, #F5E6E0 100%);
     position: relative;
+    z-index: 2;
 }
 
 .story-section::before {
@@ -1782,9 +1790,10 @@ a:focus-visible, button:focus-visible {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(ellipse at 20% 30%, rgba(155, 170, 143, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(196, 132, 108, 0.12) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 30%, rgba(155, 170, 143, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(196, 132, 108, 0.15) 0%, transparent 50%);
     pointer-events: none;
+    z-index: 0;
 }
 
 .story-content {
@@ -1814,6 +1823,9 @@ a:focus-visible, button:focus-visible {
 /* ==================== CONTACT SECTION ==================== */
 .contact-section {
     padding: var(--space-2xl) 0;
+    background: var(--color-warm-white);
+    position: relative;
+    z-index: 2;
 }
 
 .contact-grid {
@@ -1951,6 +1963,8 @@ a:focus-visible, button:focus-visible {
 .faq-section {
     padding: var(--space-2xl) 0;
     background: linear-gradient(135deg, var(--color-terracotta-pale) 0%, var(--color-cream) 100%);
+    position: relative;
+    z-index: 2;
 }
 
 .faq-section .section-header {

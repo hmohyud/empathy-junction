@@ -72,12 +72,13 @@ class InteractiveBackground {
   }
 
   observeVisibility() {
-    // Pause main background when neither hero nor footer is visible
+    // Pause main background when no tracked sections are visible
     const hero = document.querySelector('.hero');
     const pageHero = document.querySelector('.page-hero'); // For about/contact pages
+    const ctaSection = document.querySelector('.cta'); // CTA section on all pages
     const footer = document.querySelector('.footer');
     
-    if (!hero && !pageHero && !footer) return;
+    if (!hero && !pageHero && !ctaSection && !footer) return;
 
     // Track which sections are visible
     this.visibleSections = new Set();
@@ -107,6 +108,7 @@ class InteractiveBackground {
 
     if (hero) observer.observe(hero);
     if (pageHero) observer.observe(pageHero);
+    if (ctaSection) observer.observe(ctaSection);
     if (footer) observer.observe(footer);
   }
 
@@ -518,7 +520,15 @@ function initSmoothScroll() {
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          // Account for fixed navbar height
+          const nav = document.querySelector('.nav');
+          const navHeight = nav ? nav.offsetHeight : 0;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
         }
       } catch (err) {
         log("Error with selector:", href, err);
