@@ -520,10 +520,21 @@ function initSmoothScroll() {
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          // Account for fixed navbar height
+          
+          // Close mobile menu if open
+          const mobileMenu = document.getElementById('mobileMenu');
+          if (mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            document.getElementById('navToggle')?.classList.remove('active');
+          }
+          
+          // Get exact navbar height
           const nav = document.querySelector('.nav');
-          const navHeight = nav ? nav.offsetHeight : 0;
-          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+          const navHeight = nav ? nav.getBoundingClientRect().height : 70;
+          
+          // Calculate exact position: element's top relative to document minus navbar
+          const targetRect = target.getBoundingClientRect();
+          const targetPosition = targetRect.top + window.scrollY - navHeight;
           
           window.scrollTo({
             top: targetPosition,
@@ -1632,15 +1643,12 @@ class CompassionMandala {
       sageLight: { r: 184, g: 196, b: 174 }
     };
 
-    // Ring configurations - spread out significantly to be visible around the card
+    // Ring configurations - only outer rings visible around the card
     this.rings = [
-      { radius: 0.5, dots: 8, color: this.colors.amber, size: 6 },
-      { radius: 0.8, dots: 12, color: this.colors.terracotta, size: 5 },
-      { radius: 1.1, dots: 18, color: this.colors.sage, size: 5 },
-      { radius: 1.4, dots: 24, color: this.colors.sageLight, size: 4 },
-      { radius: 1.7, dots: 32, color: this.colors.sage, size: 4 },
-      { radius: 2.0, dots: 40, color: this.colors.terracotta, size: 3.5 },
-      { radius: 2.3, dots: 48, color: this.colors.amber, size: 3 }
+      { radius: 1.4, dots: 20, color: this.colors.sageLight, size: 4.5 },
+      { radius: 1.8, dots: 28, color: this.colors.sage, size: 4 },
+      { radius: 2.2, dots: 36, color: this.colors.terracotta, size: 3.5 },
+      { radius: 2.6, dots: 44, color: this.colors.amber, size: 3 }
     ];
 
     this.resize();
@@ -1694,58 +1702,37 @@ class CompassionMandala {
       return;
     }
 
-    this.time += 0.012;
+    this.time += 0.01;
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.width, this.height);
 
     const centerX = this.width / 2;
     const centerY = this.height / 2;
-    // Use larger multiplier to ensure rings extend well beyond the card
-    const maxRadius = Math.min(this.width, this.height) * 0.38;
+    const maxRadius = Math.min(this.width, this.height) * 0.35;
 
     // Breathing effect
-    const breathe = 1 + Math.sin(this.time * 0.5) * 0.12;
+    const breathe = 1 + Math.sin(this.time * 0.5) * 0.1;
 
-    // Draw rings of dots
+    // Draw rings of dots (no glow, just simple circles)
     this.rings.forEach((ring, ri) => {
       const ringRadius = ring.radius * maxRadius * breathe;
-      const rotationOffset = this.time * (0.1 + ri * 0.05) * (ri % 2 === 0 ? 1 : -1);
+      const rotationOffset = this.time * (0.08 + ri * 0.03) * (ri % 2 === 0 ? 1 : -1);
+      const baseAlpha = 0.5 + ri * 0.05;
 
       for (let i = 0; i < ring.dots; i++) {
         const angle = (i / ring.dots) * Math.PI * 2 + rotationOffset;
         const x = centerX + Math.cos(angle) * ringRadius;
         const y = centerY + Math.sin(angle) * ringRadius;
 
-        const pulse = 1 + Math.sin(this.time * 2 + i + ri) * 0.25;
-        const alpha = 0.4 + Math.sin(this.time + i * 0.5) * 0.15;
+        const pulse = 1 + Math.sin(this.time * 1.5 + i * 0.3) * 0.2;
+        const alpha = baseAlpha + Math.sin(this.time + i * 0.2) * 0.1;
 
-        // Glow
-        const grad = ctx.createRadialGradient(x, y, 0, x, y, ring.size * 2.5);
-        grad.addColorStop(0, `rgba(${ring.color.r}, ${ring.color.g}, ${ring.color.b}, ${alpha * 0.4})`);
-        grad.addColorStop(1, `rgba(${ring.color.r}, ${ring.color.g}, ${ring.color.b}, 0)`);
-        ctx.beginPath();
-        ctx.arc(x, y, ring.size * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
-        ctx.fill();
-
-        // Dot
         ctx.beginPath();
         ctx.arc(x, y, ring.size * pulse, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${ring.color.r}, ${ring.color.g}, ${ring.color.b}, ${alpha})`;
         ctx.fill();
       }
     });
-
-    // Center glow
-    const centerSize = 25 * breathe;
-    const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, centerSize);
-    grad.addColorStop(0, 'rgba(212, 165, 116, 0.6)');
-    grad.addColorStop(0.6, 'rgba(196, 132, 108, 0.2)');
-    grad.addColorStop(1, 'rgba(155, 170, 143, 0)');
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, centerSize, 0, Math.PI * 2);
-    ctx.fillStyle = grad;
-    ctx.fill();
 
     this.animationId = requestAnimationFrame(() => this.animate());
   }
