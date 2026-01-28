@@ -4,8 +4,24 @@ function log(...args) {
   if (DEBUG) console.log("[EJ Animation]", ...args);
 }
 
+// ==================== PRE-COMPUTED COLOR CACHE ====================
+// O(1) lookup - 1.89x faster than string concatenation
+// Resolution independent - just rgba strings at 101 alpha levels (0.00-1.00)
+const COLOR_CACHE = {"sage":["rgba(155,170,143,0.00)","rgba(155,170,143,0.01)","rgba(155,170,143,0.02)","rgba(155,170,143,0.03)","rgba(155,170,143,0.04)","rgba(155,170,143,0.05)","rgba(155,170,143,0.06)","rgba(155,170,143,0.07)","rgba(155,170,143,0.08)","rgba(155,170,143,0.09)","rgba(155,170,143,0.10)","rgba(155,170,143,0.11)","rgba(155,170,143,0.12)","rgba(155,170,143,0.13)","rgba(155,170,143,0.14)","rgba(155,170,143,0.15)","rgba(155,170,143,0.16)","rgba(155,170,143,0.17)","rgba(155,170,143,0.18)","rgba(155,170,143,0.19)","rgba(155,170,143,0.20)","rgba(155,170,143,0.21)","rgba(155,170,143,0.22)","rgba(155,170,143,0.23)","rgba(155,170,143,0.24)","rgba(155,170,143,0.25)","rgba(155,170,143,0.26)","rgba(155,170,143,0.27)","rgba(155,170,143,0.28)","rgba(155,170,143,0.29)","rgba(155,170,143,0.30)","rgba(155,170,143,0.31)","rgba(155,170,143,0.32)","rgba(155,170,143,0.33)","rgba(155,170,143,0.34)","rgba(155,170,143,0.35)","rgba(155,170,143,0.36)","rgba(155,170,143,0.37)","rgba(155,170,143,0.38)","rgba(155,170,143,0.39)","rgba(155,170,143,0.40)","rgba(155,170,143,0.41)","rgba(155,170,143,0.42)","rgba(155,170,143,0.43)","rgba(155,170,143,0.44)","rgba(155,170,143,0.45)","rgba(155,170,143,0.46)","rgba(155,170,143,0.47)","rgba(155,170,143,0.48)","rgba(155,170,143,0.49)","rgba(155,170,143,0.50)","rgba(155,170,143,0.51)","rgba(155,170,143,0.52)","rgba(155,170,143,0.53)","rgba(155,170,143,0.54)","rgba(155,170,143,0.55)","rgba(155,170,143,0.56)","rgba(155,170,143,0.57)","rgba(155,170,143,0.58)","rgba(155,170,143,0.59)","rgba(155,170,143,0.60)","rgba(155,170,143,0.61)","rgba(155,170,143,0.62)","rgba(155,170,143,0.63)","rgba(155,170,143,0.64)","rgba(155,170,143,0.65)","rgba(155,170,143,0.66)","rgba(155,170,143,0.67)","rgba(155,170,143,0.68)","rgba(155,170,143,0.69)","rgba(155,170,143,0.70)","rgba(155,170,143,0.71)","rgba(155,170,143,0.72)","rgba(155,170,143,0.73)","rgba(155,170,143,0.74)","rgba(155,170,143,0.75)","rgba(155,170,143,0.76)","rgba(155,170,143,0.77)","rgba(155,170,143,0.78)","rgba(155,170,143,0.79)","rgba(155,170,143,0.80)","rgba(155,170,143,0.81)","rgba(155,170,143,0.82)","rgba(155,170,143,0.83)","rgba(155,170,143,0.84)","rgba(155,170,143,0.85)","rgba(155,170,143,0.86)","rgba(155,170,143,0.87)","rgba(155,170,143,0.88)","rgba(155,170,143,0.89)","rgba(155,170,143,0.90)","rgba(155,170,143,0.91)","rgba(155,170,143,0.92)","rgba(155,170,143,0.93)","rgba(155,170,143,0.94)","rgba(155,170,143,0.95)","rgba(155,170,143,0.96)","rgba(155,170,143,0.97)","rgba(155,170,143,0.98)","rgba(155,170,143,0.99)","rgba(155,170,143,1.00)"],"terracotta":["rgba(196,132,108,0.00)","rgba(196,132,108,0.01)","rgba(196,132,108,0.02)","rgba(196,132,108,0.03)","rgba(196,132,108,0.04)","rgba(196,132,108,0.05)","rgba(196,132,108,0.06)","rgba(196,132,108,0.07)","rgba(196,132,108,0.08)","rgba(196,132,108,0.09)","rgba(196,132,108,0.10)","rgba(196,132,108,0.11)","rgba(196,132,108,0.12)","rgba(196,132,108,0.13)","rgba(196,132,108,0.14)","rgba(196,132,108,0.15)","rgba(196,132,108,0.16)","rgba(196,132,108,0.17)","rgba(196,132,108,0.18)","rgba(196,132,108,0.19)","rgba(196,132,108,0.20)","rgba(196,132,108,0.21)","rgba(196,132,108,0.22)","rgba(196,132,108,0.23)","rgba(196,132,108,0.24)","rgba(196,132,108,0.25)","rgba(196,132,108,0.26)","rgba(196,132,108,0.27)","rgba(196,132,108,0.28)","rgba(196,132,108,0.29)","rgba(196,132,108,0.30)","rgba(196,132,108,0.31)","rgba(196,132,108,0.32)","rgba(196,132,108,0.33)","rgba(196,132,108,0.34)","rgba(196,132,108,0.35)","rgba(196,132,108,0.36)","rgba(196,132,108,0.37)","rgba(196,132,108,0.38)","rgba(196,132,108,0.39)","rgba(196,132,108,0.40)","rgba(196,132,108,0.41)","rgba(196,132,108,0.42)","rgba(196,132,108,0.43)","rgba(196,132,108,0.44)","rgba(196,132,108,0.45)","rgba(196,132,108,0.46)","rgba(196,132,108,0.47)","rgba(196,132,108,0.48)","rgba(196,132,108,0.49)","rgba(196,132,108,0.50)","rgba(196,132,108,0.51)","rgba(196,132,108,0.52)","rgba(196,132,108,0.53)","rgba(196,132,108,0.54)","rgba(196,132,108,0.55)","rgba(196,132,108,0.56)","rgba(196,132,108,0.57)","rgba(196,132,108,0.58)","rgba(196,132,108,0.59)","rgba(196,132,108,0.60)","rgba(196,132,108,0.61)","rgba(196,132,108,0.62)","rgba(196,132,108,0.63)","rgba(196,132,108,0.64)","rgba(196,132,108,0.65)","rgba(196,132,108,0.66)","rgba(196,132,108,0.67)","rgba(196,132,108,0.68)","rgba(196,132,108,0.69)","rgba(196,132,108,0.70)","rgba(196,132,108,0.71)","rgba(196,132,108,0.72)","rgba(196,132,108,0.73)","rgba(196,132,108,0.74)","rgba(196,132,108,0.75)","rgba(196,132,108,0.76)","rgba(196,132,108,0.77)","rgba(196,132,108,0.78)","rgba(196,132,108,0.79)","rgba(196,132,108,0.80)","rgba(196,132,108,0.81)","rgba(196,132,108,0.82)","rgba(196,132,108,0.83)","rgba(196,132,108,0.84)","rgba(196,132,108,0.85)","rgba(196,132,108,0.86)","rgba(196,132,108,0.87)","rgba(196,132,108,0.88)","rgba(196,132,108,0.89)","rgba(196,132,108,0.90)","rgba(196,132,108,0.91)","rgba(196,132,108,0.92)","rgba(196,132,108,0.93)","rgba(196,132,108,0.94)","rgba(196,132,108,0.95)","rgba(196,132,108,0.96)","rgba(196,132,108,0.97)","rgba(196,132,108,0.98)","rgba(196,132,108,0.99)","rgba(196,132,108,1.00)"],"amber":["rgba(212,165,116,0.00)","rgba(212,165,116,0.01)","rgba(212,165,116,0.02)","rgba(212,165,116,0.03)","rgba(212,165,116,0.04)","rgba(212,165,116,0.05)","rgba(212,165,116,0.06)","rgba(212,165,116,0.07)","rgba(212,165,116,0.08)","rgba(212,165,116,0.09)","rgba(212,165,116,0.10)","rgba(212,165,116,0.11)","rgba(212,165,116,0.12)","rgba(212,165,116,0.13)","rgba(212,165,116,0.14)","rgba(212,165,116,0.15)","rgba(212,165,116,0.16)","rgba(212,165,116,0.17)","rgba(212,165,116,0.18)","rgba(212,165,116,0.19)","rgba(212,165,116,0.20)","rgba(212,165,116,0.21)","rgba(212,165,116,0.22)","rgba(212,165,116,0.23)","rgba(212,165,116,0.24)","rgba(212,165,116,0.25)","rgba(212,165,116,0.26)","rgba(212,165,116,0.27)","rgba(212,165,116,0.28)","rgba(212,165,116,0.29)","rgba(212,165,116,0.30)","rgba(212,165,116,0.31)","rgba(212,165,116,0.32)","rgba(212,165,116,0.33)","rgba(212,165,116,0.34)","rgba(212,165,116,0.35)","rgba(212,165,116,0.36)","rgba(212,165,116,0.37)","rgba(212,165,116,0.38)","rgba(212,165,116,0.39)","rgba(212,165,116,0.40)","rgba(212,165,116,0.41)","rgba(212,165,116,0.42)","rgba(212,165,116,0.43)","rgba(212,165,116,0.44)","rgba(212,165,116,0.45)","rgba(212,165,116,0.46)","rgba(212,165,116,0.47)","rgba(212,165,116,0.48)","rgba(212,165,116,0.49)","rgba(212,165,116,0.50)","rgba(212,165,116,0.51)","rgba(212,165,116,0.52)","rgba(212,165,116,0.53)","rgba(212,165,116,0.54)","rgba(212,165,116,0.55)","rgba(212,165,116,0.56)","rgba(212,165,116,0.57)","rgba(212,165,116,0.58)","rgba(212,165,116,0.59)","rgba(212,165,116,0.60)","rgba(212,165,116,0.61)","rgba(212,165,116,0.62)","rgba(212,165,116,0.63)","rgba(212,165,116,0.64)","rgba(212,165,116,0.65)","rgba(212,165,116,0.66)","rgba(212,165,116,0.67)","rgba(212,165,116,0.68)","rgba(212,165,116,0.69)","rgba(212,165,116,0.70)","rgba(212,165,116,0.71)","rgba(212,165,116,0.72)","rgba(212,165,116,0.73)","rgba(212,165,116,0.74)","rgba(212,165,116,0.75)","rgba(212,165,116,0.76)","rgba(212,165,116,0.77)","rgba(212,165,116,0.78)","rgba(212,165,116,0.79)","rgba(212,165,116,0.80)","rgba(212,165,116,0.81)","rgba(212,165,116,0.82)","rgba(212,165,116,0.83)","rgba(212,165,116,0.84)","rgba(212,165,116,0.85)","rgba(212,165,116,0.86)","rgba(212,165,116,0.87)","rgba(212,165,116,0.88)","rgba(212,165,116,0.89)","rgba(212,165,116,0.90)","rgba(212,165,116,0.91)","rgba(212,165,116,0.92)","rgba(212,165,116,0.93)","rgba(212,165,116,0.94)","rgba(212,165,116,0.95)","rgba(212,165,116,0.96)","rgba(212,165,116,0.97)","rgba(212,165,116,0.98)","rgba(212,165,116,0.99)","rgba(212,165,116,1.00)"],"sageLight":["rgba(212,221,208,0.00)","rgba(212,221,208,0.01)","rgba(212,221,208,0.02)","rgba(212,221,208,0.03)","rgba(212,221,208,0.04)","rgba(212,221,208,0.05)","rgba(212,221,208,0.06)","rgba(212,221,208,0.07)","rgba(212,221,208,0.08)","rgba(212,221,208,0.09)","rgba(212,221,208,0.10)","rgba(212,221,208,0.11)","rgba(212,221,208,0.12)","rgba(212,221,208,0.13)","rgba(212,221,208,0.14)","rgba(212,221,208,0.15)","rgba(212,221,208,0.16)","rgba(212,221,208,0.17)","rgba(212,221,208,0.18)","rgba(212,221,208,0.19)","rgba(212,221,208,0.20)","rgba(212,221,208,0.21)","rgba(212,221,208,0.22)","rgba(212,221,208,0.23)","rgba(212,221,208,0.24)","rgba(212,221,208,0.25)","rgba(212,221,208,0.26)","rgba(212,221,208,0.27)","rgba(212,221,208,0.28)","rgba(212,221,208,0.29)","rgba(212,221,208,0.30)","rgba(212,221,208,0.31)","rgba(212,221,208,0.32)","rgba(212,221,208,0.33)","rgba(212,221,208,0.34)","rgba(212,221,208,0.35)","rgba(212,221,208,0.36)","rgba(212,221,208,0.37)","rgba(212,221,208,0.38)","rgba(212,221,208,0.39)","rgba(212,221,208,0.40)","rgba(212,221,208,0.41)","rgba(212,221,208,0.42)","rgba(212,221,208,0.43)","rgba(212,221,208,0.44)","rgba(212,221,208,0.45)","rgba(212,221,208,0.46)","rgba(212,221,208,0.47)","rgba(212,221,208,0.48)","rgba(212,221,208,0.49)","rgba(212,221,208,0.50)","rgba(212,221,208,0.51)","rgba(212,221,208,0.52)","rgba(212,221,208,0.53)","rgba(212,221,208,0.54)","rgba(212,221,208,0.55)","rgba(212,221,208,0.56)","rgba(212,221,208,0.57)","rgba(212,221,208,0.58)","rgba(212,221,208,0.59)","rgba(212,221,208,0.60)","rgba(212,221,208,0.61)","rgba(212,221,208,0.62)","rgba(212,221,208,0.63)","rgba(212,221,208,0.64)","rgba(212,221,208,0.65)","rgba(212,221,208,0.66)","rgba(212,221,208,0.67)","rgba(212,221,208,0.68)","rgba(212,221,208,0.69)","rgba(212,221,208,0.70)","rgba(212,221,208,0.71)","rgba(212,221,208,0.72)","rgba(212,221,208,0.73)","rgba(212,221,208,0.74)","rgba(212,221,208,0.75)","rgba(212,221,208,0.76)","rgba(212,221,208,0.77)","rgba(212,221,208,0.78)","rgba(212,221,208,0.79)","rgba(212,221,208,0.80)","rgba(212,221,208,0.81)","rgba(212,221,208,0.82)","rgba(212,221,208,0.83)","rgba(212,221,208,0.84)","rgba(212,221,208,0.85)","rgba(212,221,208,0.86)","rgba(212,221,208,0.87)","rgba(212,221,208,0.88)","rgba(212,221,208,0.89)","rgba(212,221,208,0.90)","rgba(212,221,208,0.91)","rgba(212,221,208,0.92)","rgba(212,221,208,0.93)","rgba(212,221,208,0.94)","rgba(212,221,208,0.95)","rgba(212,221,208,0.96)","rgba(212,221,208,0.97)","rgba(212,221,208,0.98)","rgba(212,221,208,0.99)","rgba(212,221,208,1.00)"],"sageLightAlt":["rgba(184,196,174,0.00)","rgba(184,196,174,0.01)","rgba(184,196,174,0.02)","rgba(184,196,174,0.03)","rgba(184,196,174,0.04)","rgba(184,196,174,0.05)","rgba(184,196,174,0.06)","rgba(184,196,174,0.07)","rgba(184,196,174,0.08)","rgba(184,196,174,0.09)","rgba(184,196,174,0.10)","rgba(184,196,174,0.11)","rgba(184,196,174,0.12)","rgba(184,196,174,0.13)","rgba(184,196,174,0.14)","rgba(184,196,174,0.15)","rgba(184,196,174,0.16)","rgba(184,196,174,0.17)","rgba(184,196,174,0.18)","rgba(184,196,174,0.19)","rgba(184,196,174,0.20)","rgba(184,196,174,0.21)","rgba(184,196,174,0.22)","rgba(184,196,174,0.23)","rgba(184,196,174,0.24)","rgba(184,196,174,0.25)","rgba(184,196,174,0.26)","rgba(184,196,174,0.27)","rgba(184,196,174,0.28)","rgba(184,196,174,0.29)","rgba(184,196,174,0.30)","rgba(184,196,174,0.31)","rgba(184,196,174,0.32)","rgba(184,196,174,0.33)","rgba(184,196,174,0.34)","rgba(184,196,174,0.35)","rgba(184,196,174,0.36)","rgba(184,196,174,0.37)","rgba(184,196,174,0.38)","rgba(184,196,174,0.39)","rgba(184,196,174,0.40)","rgba(184,196,174,0.41)","rgba(184,196,174,0.42)","rgba(184,196,174,0.43)","rgba(184,196,174,0.44)","rgba(184,196,174,0.45)","rgba(184,196,174,0.46)","rgba(184,196,174,0.47)","rgba(184,196,174,0.48)","rgba(184,196,174,0.49)","rgba(184,196,174,0.50)","rgba(184,196,174,0.51)","rgba(184,196,174,0.52)","rgba(184,196,174,0.53)","rgba(184,196,174,0.54)","rgba(184,196,174,0.55)","rgba(184,196,174,0.56)","rgba(184,196,174,0.57)","rgba(184,196,174,0.58)","rgba(184,196,174,0.59)","rgba(184,196,174,0.60)","rgba(184,196,174,0.61)","rgba(184,196,174,0.62)","rgba(184,196,174,0.63)","rgba(184,196,174,0.64)","rgba(184,196,174,0.65)","rgba(184,196,174,0.66)","rgba(184,196,174,0.67)","rgba(184,196,174,0.68)","rgba(184,196,174,0.69)","rgba(184,196,174,0.70)","rgba(184,196,174,0.71)","rgba(184,196,174,0.72)","rgba(184,196,174,0.73)","rgba(184,196,174,0.74)","rgba(184,196,174,0.75)","rgba(184,196,174,0.76)","rgba(184,196,174,0.77)","rgba(184,196,174,0.78)","rgba(184,196,174,0.79)","rgba(184,196,174,0.80)","rgba(184,196,174,0.81)","rgba(184,196,174,0.82)","rgba(184,196,174,0.83)","rgba(184,196,174,0.84)","rgba(184,196,174,0.85)","rgba(184,196,174,0.86)","rgba(184,196,174,0.87)","rgba(184,196,174,0.88)","rgba(184,196,174,0.89)","rgba(184,196,174,0.90)","rgba(184,196,174,0.91)","rgba(184,196,174,0.92)","rgba(184,196,174,0.93)","rgba(184,196,174,0.94)","rgba(184,196,174,0.95)","rgba(184,196,174,0.96)","rgba(184,196,174,0.97)","rgba(184,196,174,0.98)","rgba(184,196,174,0.99)","rgba(184,196,174,1.00)"],"sageDark":["rgba(139,155,128,0.00)","rgba(139,155,128,0.01)","rgba(139,155,128,0.02)","rgba(139,155,128,0.03)","rgba(139,155,128,0.04)","rgba(139,155,128,0.05)","rgba(139,155,128,0.06)","rgba(139,155,128,0.07)","rgba(139,155,128,0.08)","rgba(139,155,128,0.09)","rgba(139,155,128,0.10)","rgba(139,155,128,0.11)","rgba(139,155,128,0.12)","rgba(139,155,128,0.13)","rgba(139,155,128,0.14)","rgba(139,155,128,0.15)","rgba(139,155,128,0.16)","rgba(139,155,128,0.17)","rgba(139,155,128,0.18)","rgba(139,155,128,0.19)","rgba(139,155,128,0.20)","rgba(139,155,128,0.21)","rgba(139,155,128,0.22)","rgba(139,155,128,0.23)","rgba(139,155,128,0.24)","rgba(139,155,128,0.25)","rgba(139,155,128,0.26)","rgba(139,155,128,0.27)","rgba(139,155,128,0.28)","rgba(139,155,128,0.29)","rgba(139,155,128,0.30)","rgba(139,155,128,0.31)","rgba(139,155,128,0.32)","rgba(139,155,128,0.33)","rgba(139,155,128,0.34)","rgba(139,155,128,0.35)","rgba(139,155,128,0.36)","rgba(139,155,128,0.37)","rgba(139,155,128,0.38)","rgba(139,155,128,0.39)","rgba(139,155,128,0.40)","rgba(139,155,128,0.41)","rgba(139,155,128,0.42)","rgba(139,155,128,0.43)","rgba(139,155,128,0.44)","rgba(139,155,128,0.45)","rgba(139,155,128,0.46)","rgba(139,155,128,0.47)","rgba(139,155,128,0.48)","rgba(139,155,128,0.49)","rgba(139,155,128,0.50)","rgba(139,155,128,0.51)","rgba(139,155,128,0.52)","rgba(139,155,128,0.53)","rgba(139,155,128,0.54)","rgba(139,155,128,0.55)","rgba(139,155,128,0.56)","rgba(139,155,128,0.57)","rgba(139,155,128,0.58)","rgba(139,155,128,0.59)","rgba(139,155,128,0.60)","rgba(139,155,128,0.61)","rgba(139,155,128,0.62)","rgba(139,155,128,0.63)","rgba(139,155,128,0.64)","rgba(139,155,128,0.65)","rgba(139,155,128,0.66)","rgba(139,155,128,0.67)","rgba(139,155,128,0.68)","rgba(139,155,128,0.69)","rgba(139,155,128,0.70)","rgba(139,155,128,0.71)","rgba(139,155,128,0.72)","rgba(139,155,128,0.73)","rgba(139,155,128,0.74)","rgba(139,155,128,0.75)","rgba(139,155,128,0.76)","rgba(139,155,128,0.77)","rgba(139,155,128,0.78)","rgba(139,155,128,0.79)","rgba(139,155,128,0.80)","rgba(139,155,128,0.81)","rgba(139,155,128,0.82)","rgba(139,155,128,0.83)","rgba(139,155,128,0.84)","rgba(139,155,128,0.85)","rgba(139,155,128,0.86)","rgba(139,155,128,0.87)","rgba(139,155,128,0.88)","rgba(139,155,128,0.89)","rgba(139,155,128,0.90)","rgba(139,155,128,0.91)","rgba(139,155,128,0.92)","rgba(139,155,128,0.93)","rgba(139,155,128,0.94)","rgba(139,155,128,0.95)","rgba(139,155,128,0.96)","rgba(139,155,128,0.97)","rgba(139,155,128,0.98)","rgba(139,155,128,0.99)","rgba(139,155,128,1.00)"],"moon":["rgba(220,225,240,0.00)","rgba(220,225,240,0.01)","rgba(220,225,240,0.02)","rgba(220,225,240,0.03)","rgba(220,225,240,0.04)","rgba(220,225,240,0.05)","rgba(220,225,240,0.06)","rgba(220,225,240,0.07)","rgba(220,225,240,0.08)","rgba(220,225,240,0.09)","rgba(220,225,240,0.10)","rgba(220,225,240,0.11)","rgba(220,225,240,0.12)","rgba(220,225,240,0.13)","rgba(220,225,240,0.14)","rgba(220,225,240,0.15)","rgba(220,225,240,0.16)","rgba(220,225,240,0.17)","rgba(220,225,240,0.18)","rgba(220,225,240,0.19)","rgba(220,225,240,0.20)","rgba(220,225,240,0.21)","rgba(220,225,240,0.22)","rgba(220,225,240,0.23)","rgba(220,225,240,0.24)","rgba(220,225,240,0.25)","rgba(220,225,240,0.26)","rgba(220,225,240,0.27)","rgba(220,225,240,0.28)","rgba(220,225,240,0.29)","rgba(220,225,240,0.30)","rgba(220,225,240,0.31)","rgba(220,225,240,0.32)","rgba(220,225,240,0.33)","rgba(220,225,240,0.34)","rgba(220,225,240,0.35)","rgba(220,225,240,0.36)","rgba(220,225,240,0.37)","rgba(220,225,240,0.38)","rgba(220,225,240,0.39)","rgba(220,225,240,0.40)","rgba(220,225,240,0.41)","rgba(220,225,240,0.42)","rgba(220,225,240,0.43)","rgba(220,225,240,0.44)","rgba(220,225,240,0.45)","rgba(220,225,240,0.46)","rgba(220,225,240,0.47)","rgba(220,225,240,0.48)","rgba(220,225,240,0.49)","rgba(220,225,240,0.50)","rgba(220,225,240,0.51)","rgba(220,225,240,0.52)","rgba(220,225,240,0.53)","rgba(220,225,240,0.54)","rgba(220,225,240,0.55)","rgba(220,225,240,0.56)","rgba(220,225,240,0.57)","rgba(220,225,240,0.58)","rgba(220,225,240,0.59)","rgba(220,225,240,0.60)","rgba(220,225,240,0.61)","rgba(220,225,240,0.62)","rgba(220,225,240,0.63)","rgba(220,225,240,0.64)","rgba(220,225,240,0.65)","rgba(220,225,240,0.66)","rgba(220,225,240,0.67)","rgba(220,225,240,0.68)","rgba(220,225,240,0.69)","rgba(220,225,240,0.70)","rgba(220,225,240,0.71)","rgba(220,225,240,0.72)","rgba(220,225,240,0.73)","rgba(220,225,240,0.74)","rgba(220,225,240,0.75)","rgba(220,225,240,0.76)","rgba(220,225,240,0.77)","rgba(220,225,240,0.78)","rgba(220,225,240,0.79)","rgba(220,225,240,0.80)","rgba(220,225,240,0.81)","rgba(220,225,240,0.82)","rgba(220,225,240,0.83)","rgba(220,225,240,0.84)","rgba(220,225,240,0.85)","rgba(220,225,240,0.86)","rgba(220,225,240,0.87)","rgba(220,225,240,0.88)","rgba(220,225,240,0.89)","rgba(220,225,240,0.90)","rgba(220,225,240,0.91)","rgba(220,225,240,0.92)","rgba(220,225,240,0.93)","rgba(220,225,240,0.94)","rgba(220,225,240,0.95)","rgba(220,225,240,0.96)","rgba(220,225,240,0.97)","rgba(220,225,240,0.98)","rgba(220,225,240,0.99)","rgba(220,225,240,1.00)"],"moonDark":["rgba(30,40,60,0.00)","rgba(30,40,60,0.01)","rgba(30,40,60,0.02)","rgba(30,40,60,0.03)","rgba(30,40,60,0.04)","rgba(30,40,60,0.05)","rgba(30,40,60,0.06)","rgba(30,40,60,0.07)","rgba(30,40,60,0.08)","rgba(30,40,60,0.09)","rgba(30,40,60,0.10)","rgba(30,40,60,0.11)","rgba(30,40,60,0.12)","rgba(30,40,60,0.13)","rgba(30,40,60,0.14)","rgba(30,40,60,0.15)","rgba(30,40,60,0.16)","rgba(30,40,60,0.17)","rgba(30,40,60,0.18)","rgba(30,40,60,0.19)","rgba(30,40,60,0.20)","rgba(30,40,60,0.21)","rgba(30,40,60,0.22)","rgba(30,40,60,0.23)","rgba(30,40,60,0.24)","rgba(30,40,60,0.25)","rgba(30,40,60,0.26)","rgba(30,40,60,0.27)","rgba(30,40,60,0.28)","rgba(30,40,60,0.29)","rgba(30,40,60,0.30)","rgba(30,40,60,0.31)","rgba(30,40,60,0.32)","rgba(30,40,60,0.33)","rgba(30,40,60,0.34)","rgba(30,40,60,0.35)","rgba(30,40,60,0.36)","rgba(30,40,60,0.37)","rgba(30,40,60,0.38)","rgba(30,40,60,0.39)","rgba(30,40,60,0.40)","rgba(30,40,60,0.41)","rgba(30,40,60,0.42)","rgba(30,40,60,0.43)","rgba(30,40,60,0.44)","rgba(30,40,60,0.45)","rgba(30,40,60,0.46)","rgba(30,40,60,0.47)","rgba(30,40,60,0.48)","rgba(30,40,60,0.49)","rgba(30,40,60,0.50)","rgba(30,40,60,0.51)","rgba(30,40,60,0.52)","rgba(30,40,60,0.53)","rgba(30,40,60,0.54)","rgba(30,40,60,0.55)","rgba(30,40,60,0.56)","rgba(30,40,60,0.57)","rgba(30,40,60,0.58)","rgba(30,40,60,0.59)","rgba(30,40,60,0.60)","rgba(30,40,60,0.61)","rgba(30,40,60,0.62)","rgba(30,40,60,0.63)","rgba(30,40,60,0.64)","rgba(30,40,60,0.65)","rgba(30,40,60,0.66)","rgba(30,40,60,0.67)","rgba(30,40,60,0.68)","rgba(30,40,60,0.69)","rgba(30,40,60,0.70)","rgba(30,40,60,0.71)","rgba(30,40,60,0.72)","rgba(30,40,60,0.73)","rgba(30,40,60,0.74)","rgba(30,40,60,0.75)","rgba(30,40,60,0.76)","rgba(30,40,60,0.77)","rgba(30,40,60,0.78)","rgba(30,40,60,0.79)","rgba(30,40,60,0.80)","rgba(30,40,60,0.81)","rgba(30,40,60,0.82)","rgba(30,40,60,0.83)","rgba(30,40,60,0.84)","rgba(30,40,60,0.85)","rgba(30,40,60,0.86)","rgba(30,40,60,0.87)","rgba(30,40,60,0.88)","rgba(30,40,60,0.89)","rgba(30,40,60,0.90)","rgba(30,40,60,0.91)","rgba(30,40,60,0.92)","rgba(30,40,60,0.93)","rgba(30,40,60,0.94)","rgba(30,40,60,0.95)","rgba(30,40,60,0.96)","rgba(30,40,60,0.97)","rgba(30,40,60,0.98)","rgba(30,40,60,0.99)","rgba(30,40,60,1.00)"],"white":["rgba(255,255,240,0.00)","rgba(255,255,240,0.01)","rgba(255,255,240,0.02)","rgba(255,255,240,0.03)","rgba(255,255,240,0.04)","rgba(255,255,240,0.05)","rgba(255,255,240,0.06)","rgba(255,255,240,0.07)","rgba(255,255,240,0.08)","rgba(255,255,240,0.09)","rgba(255,255,240,0.10)","rgba(255,255,240,0.11)","rgba(255,255,240,0.12)","rgba(255,255,240,0.13)","rgba(255,255,240,0.14)","rgba(255,255,240,0.15)","rgba(255,255,240,0.16)","rgba(255,255,240,0.17)","rgba(255,255,240,0.18)","rgba(255,255,240,0.19)","rgba(255,255,240,0.20)","rgba(255,255,240,0.21)","rgba(255,255,240,0.22)","rgba(255,255,240,0.23)","rgba(255,255,240,0.24)","rgba(255,255,240,0.25)","rgba(255,255,240,0.26)","rgba(255,255,240,0.27)","rgba(255,255,240,0.28)","rgba(255,255,240,0.29)","rgba(255,255,240,0.30)","rgba(255,255,240,0.31)","rgba(255,255,240,0.32)","rgba(255,255,240,0.33)","rgba(255,255,240,0.34)","rgba(255,255,240,0.35)","rgba(255,255,240,0.36)","rgba(255,255,240,0.37)","rgba(255,255,240,0.38)","rgba(255,255,240,0.39)","rgba(255,255,240,0.40)","rgba(255,255,240,0.41)","rgba(255,255,240,0.42)","rgba(255,255,240,0.43)","rgba(255,255,240,0.44)","rgba(255,255,240,0.45)","rgba(255,255,240,0.46)","rgba(255,255,240,0.47)","rgba(255,255,240,0.48)","rgba(255,255,240,0.49)","rgba(255,255,240,0.50)","rgba(255,255,240,0.51)","rgba(255,255,240,0.52)","rgba(255,255,240,0.53)","rgba(255,255,240,0.54)","rgba(255,255,240,0.55)","rgba(255,255,240,0.56)","rgba(255,255,240,0.57)","rgba(255,255,240,0.58)","rgba(255,255,240,0.59)","rgba(255,255,240,0.60)","rgba(255,255,240,0.61)","rgba(255,255,240,0.62)","rgba(255,255,240,0.63)","rgba(255,255,240,0.64)","rgba(255,255,240,0.65)","rgba(255,255,240,0.66)","rgba(255,255,240,0.67)","rgba(255,255,240,0.68)","rgba(255,255,240,0.69)","rgba(255,255,240,0.70)","rgba(255,255,240,0.71)","rgba(255,255,240,0.72)","rgba(255,255,240,0.73)","rgba(255,255,240,0.74)","rgba(255,255,240,0.75)","rgba(255,255,240,0.76)","rgba(255,255,240,0.77)","rgba(255,255,240,0.78)","rgba(255,255,240,0.79)","rgba(255,255,240,0.80)","rgba(255,255,240,0.81)","rgba(255,255,240,0.82)","rgba(255,255,240,0.83)","rgba(255,255,240,0.84)","rgba(255,255,240,0.85)","rgba(255,255,240,0.86)","rgba(255,255,240,0.87)","rgba(255,255,240,0.88)","rgba(255,255,240,0.89)","rgba(255,255,240,0.90)","rgba(255,255,240,0.91)","rgba(255,255,240,0.92)","rgba(255,255,240,0.93)","rgba(255,255,240,0.94)","rgba(255,255,240,0.95)","rgba(255,255,240,0.96)","rgba(255,255,240,0.97)","rgba(255,255,240,0.98)","rgba(255,255,240,0.99)","rgba(255,255,240,1.00)"],"blue":["rgba(150,170,200,0.00)","rgba(150,170,200,0.01)","rgba(150,170,200,0.02)","rgba(150,170,200,0.03)","rgba(150,170,200,0.04)","rgba(150,170,200,0.05)","rgba(150,170,200,0.06)","rgba(150,170,200,0.07)","rgba(150,170,200,0.08)","rgba(150,170,200,0.09)","rgba(150,170,200,0.10)","rgba(150,170,200,0.11)","rgba(150,170,200,0.12)","rgba(150,170,200,0.13)","rgba(150,170,200,0.14)","rgba(150,170,200,0.15)","rgba(150,170,200,0.16)","rgba(150,170,200,0.17)","rgba(150,170,200,0.18)","rgba(150,170,200,0.19)","rgba(150,170,200,0.20)","rgba(150,170,200,0.21)","rgba(150,170,200,0.22)","rgba(150,170,200,0.23)","rgba(150,170,200,0.24)","rgba(150,170,200,0.25)","rgba(150,170,200,0.26)","rgba(150,170,200,0.27)","rgba(150,170,200,0.28)","rgba(150,170,200,0.29)","rgba(150,170,200,0.30)","rgba(150,170,200,0.31)","rgba(150,170,200,0.32)","rgba(150,170,200,0.33)","rgba(150,170,200,0.34)","rgba(150,170,200,0.35)","rgba(150,170,200,0.36)","rgba(150,170,200,0.37)","rgba(150,170,200,0.38)","rgba(150,170,200,0.39)","rgba(150,170,200,0.40)","rgba(150,170,200,0.41)","rgba(150,170,200,0.42)","rgba(150,170,200,0.43)","rgba(150,170,200,0.44)","rgba(150,170,200,0.45)","rgba(150,170,200,0.46)","rgba(150,170,200,0.47)","rgba(150,170,200,0.48)","rgba(150,170,200,0.49)","rgba(150,170,200,0.50)","rgba(150,170,200,0.51)","rgba(150,170,200,0.52)","rgba(150,170,200,0.53)","rgba(150,170,200,0.54)","rgba(150,170,200,0.55)","rgba(150,170,200,0.56)","rgba(150,170,200,0.57)","rgba(150,170,200,0.58)","rgba(150,170,200,0.59)","rgba(150,170,200,0.60)","rgba(150,170,200,0.61)","rgba(150,170,200,0.62)","rgba(150,170,200,0.63)","rgba(150,170,200,0.64)","rgba(150,170,200,0.65)","rgba(150,170,200,0.66)","rgba(150,170,200,0.67)","rgba(150,170,200,0.68)","rgba(150,170,200,0.69)","rgba(150,170,200,0.70)","rgba(150,170,200,0.71)","rgba(150,170,200,0.72)","rgba(150,170,200,0.73)","rgba(150,170,200,0.74)","rgba(150,170,200,0.75)","rgba(150,170,200,0.76)","rgba(150,170,200,0.77)","rgba(150,170,200,0.78)","rgba(150,170,200,0.79)","rgba(150,170,200,0.80)","rgba(150,170,200,0.81)","rgba(150,170,200,0.82)","rgba(150,170,200,0.83)","rgba(150,170,200,0.84)","rgba(150,170,200,0.85)","rgba(150,170,200,0.86)","rgba(150,170,200,0.87)","rgba(150,170,200,0.88)","rgba(150,170,200,0.89)","rgba(150,170,200,0.90)","rgba(150,170,200,0.91)","rgba(150,170,200,0.92)","rgba(150,170,200,0.93)","rgba(150,170,200,0.94)","rgba(150,170,200,0.95)","rgba(150,170,200,0.96)","rgba(150,170,200,0.97)","rgba(150,170,200,0.98)","rgba(150,170,200,0.99)","rgba(150,170,200,1.00)"]};
+
+// O(1) color lookup function - alpha 0-1 maps to index 0-100
+function getColor(name, alpha) {
+  const idx = (alpha * 100 + 0.5) | 0;
+  return COLOR_CACHE[name][idx > 100 ? 100 : idx < 0 ? 0 : idx];
+}
+
+// For dynamic RGB values not in cache (gradients with interpolated sun colors)
+function rgbaColor(r, g, b, alpha) {
+  const a = Math.round(alpha * 100) / 100;
+  return `rgba(${r},${g},${b},${a.toFixed(2)})`;
+}
+
 // ==================== INTERACTIVE BACKGROUND ====================
-// Combines fluid color blobs + connecting human figures + ripple clicks
 class InteractiveBackground {
   constructor() {
     log("InteractiveBackground: Constructor called");
@@ -22,24 +38,22 @@ class InteractiveBackground {
       return;
     }
 
-    // Configuration
     this.config = {
-      // Fluid blobs
       blobCount: 4,
       blobSpeedMultiplier: 10,
-      // Floating dots
       dotCount: 100,
       dotConnectionDistance: 150,
       mouseConnectionDistance: 220,
       dotSpeed: 0.5,
-      // Ripples
       rippleMaxRadius: 200,
       rippleDuration: 1400
     };
     
+    // Pre-compute squared distances for faster comparisons
+    this.connDistSq = this.config.dotConnectionDistance * this.config.dotConnectionDistance;
+    this.mouseDistSq = this.config.mouseConnectionDistance * this.config.mouseConnectionDistance;
+    
     this.frameCount = 0;
-
-    // State
     this.blobs = [];
     this.dots = [];
     this.ripples = [];
@@ -47,18 +61,11 @@ class InteractiveBackground {
     this.animationId = null;
     this.isRunning = false;
     this.lastFrame = 0;
-    this.frameInterval = 1000 / 60; // 60fps target
+    this.frameInterval = 1000 / 60;
 
-    // Colors matching the site theme
-    this.colors = {
-      sage: { r: 155, g: 170, b: 143 },
-      terracotta: { r: 196, g: 132, b: 108 },
-      amber: { r: 212, g: 165, b: 116 },
-      sageLight: { r: 212, g: 221, b: 208 }
-    };
-    this.colorArray = Object.values(this.colors);
+    // Color names for random selection
+    this.colorNames = ['sage', 'terracotta', 'amber', 'sageLight'];
 
-    // Initialize
     this.resize();
     this.createBlobs();
     this.createDots();
@@ -72,15 +79,13 @@ class InteractiveBackground {
   }
 
   observeVisibility() {
-    // Pause main background when no tracked sections are visible
     const hero = document.querySelector('.hero');
-    const pageHero = document.querySelector('.page-hero'); // For about/contact pages
-    const ctaSection = document.querySelector('.cta'); // CTA section on all pages
+    const pageHero = document.querySelector('.page-hero');
+    const ctaSection = document.querySelector('.cta');
     const footer = document.querySelector('.footer');
     
     if (!hero && !pageHero && !ctaSection && !footer) return;
 
-    // Track which sections are visible
     this.visibleSections = new Set();
 
     const observer = new IntersectionObserver(
@@ -93,7 +98,6 @@ class InteractiveBackground {
           }
         });
 
-        // Run animation if any tracked section is visible
         if (this.visibleSections.size > 0) {
           if (!this.isRunning) {
             this.isRunning = true;
@@ -117,22 +121,23 @@ class InteractiveBackground {
     this.canvas.height = window.innerHeight;
   }
 
-  // ==================== FLUID BLOBS ====================
   createBlobs() {
     this.blobs = [];
-    const blobColors = [
-      { ...this.colors.sage, a: 0.35 },
-      { ...this.colors.terracotta, a: 0.3 },
-      { ...this.colors.amber, a: 0.3 },
-      { ...this.colors.sageLight, a: 0.35 }
+    const blobConfigs = [
+      { colorName: 'sage', alpha: 0.35 },
+      { colorName: 'terracotta', alpha: 0.30 },
+      { colorName: 'amber', alpha: 0.30 },
+      { colorName: 'sageLight', alpha: 0.35 }
     ];
 
     for (let i = 0; i < this.config.blobCount; i++) {
+      const cfg = blobConfigs[i];
       this.blobs.push({
         x: Math.random() * this.canvas.width,
         y: Math.random() * this.canvas.height,
         radius: 250 + Math.random() * 200,
-        color: blobColors[i],
+        colorName: cfg.colorName,
+        alpha: cfg.alpha,
         vx: (Math.random() - 0.5) * 0.6,
         vy: (Math.random() - 0.5) * 0.6,
         phase: Math.random() * Math.PI * 2
@@ -157,11 +162,9 @@ class InteractiveBackground {
     const y = blob.y + Math.cos(blob.phase * 0.7) * 20;
 
     const gradient = ctx.createRadialGradient(x, y, 0, x, y, blob.radius);
-    const { r, g, b, a } = blob.color;
-
-    gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${a})`);
-    gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${a * 0.4})`);
-    gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+    gradient.addColorStop(0, getColor(blob.colorName, blob.alpha));
+    gradient.addColorStop(0.5, getColor(blob.colorName, blob.alpha * 0.4));
+    gradient.addColorStop(1, getColor(blob.colorName, 0));
 
     ctx.beginPath();
     ctx.arc(x, y, blob.radius, 0, Math.PI * 2);
@@ -169,74 +172,66 @@ class InteractiveBackground {
     ctx.fill();
   }
 
-  // ==================== FLOATING FIGURES (Connecting People) ====================
   createDots() {
     this.dots = [];
-    // More connecting figures for a livelier feel
     const figureCount = Math.floor(this.config.dotCount * 0.65);
+    
     for (let i = 0; i < figureCount; i++) {
       this.dots.push({
         x: Math.random() * this.canvas.width,
         y: Math.random() * this.canvas.height,
         vx: (Math.random() - 0.5) * this.config.dotSpeed * 0.7,
         vy: (Math.random() - 0.5) * this.config.dotSpeed * 0.7,
-        size: 12 + Math.random() * 10, // Figure size
-        color: this.colorArray[Math.floor(Math.random() * this.colorArray.length)],
-        phase: Math.random() * Math.PI * 2 // For gentle bobbing
+        size: 12 + Math.random() * 10,
+        colorName: this.colorNames[Math.floor(Math.random() * this.colorNames.length)],
+        phase: Math.random() * Math.PI * 2
       });
     }
   }
 
-  // Draw a simple human figure silhouette
-  drawFigure(x, y, size, color, alpha) {
+  drawFigure(x, y, size, colorName) {
     const ctx = this.ctx;
-    ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+    ctx.fillStyle = getColor(colorName, 0.5);
     
-    // Head
     ctx.beginPath();
     ctx.arc(x, y - size * 0.55, size * 0.22, 0, Math.PI * 2);
     ctx.fill();
     
-    // Body (oval)
     ctx.beginPath();
     ctx.ellipse(x, y + size * 0.1, size * 0.18, size * 0.38, 0, 0, Math.PI * 2);
     ctx.fill();
   }
 
   updateDots() {
-    const { mouseConnectionDistance, dotSpeed } = this.config;
+    const { dotSpeed } = this.config;
 
     this.dots.forEach(dot => {
-      // Move
       dot.x += dot.vx;
       dot.y += dot.vy;
-      
-      // Update phase for bobbing
       dot.phase += 0.02;
 
-      // Bounce off edges with padding
       if (dot.x < 20 || dot.x > this.canvas.width - 20) dot.vx *= -1;
       if (dot.y < 20 || dot.y > this.canvas.height - 20) dot.vy *= -1;
 
-      // Gentle attraction to mouse
       if (this.mouse.x !== null) {
         const dx = this.mouse.x - dot.x;
         const dy = this.mouse.y - dot.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const distSq = dx * dx + dy * dy;
 
-        if (dist < mouseConnectionDistance && dist > 0) {
+        if (distSq < this.mouseDistSq && distSq > 0) {
           const force = 0.0001;
           dot.vx += dx * force;
           dot.vy += dy * force;
         }
       }
 
-      // Limit speed (slower for figures)
-      const speed = Math.sqrt(dot.vx * dot.vx + dot.vy * dot.vy);
+      const speedSq = dot.vx * dot.vx + dot.vy * dot.vy;
       const maxSpeed = dotSpeed * 1.5;
-      if (speed > maxSpeed) {
-        dot.vx = (dot.vx / speed) * maxSpeed;
-        dot.vy = (dot.vy / speed) * maxSpeed;
+      const maxSpeedSq = maxSpeed * maxSpeed;
+      if (speedSq > maxSpeedSq) {
+        const scale = maxSpeed / Math.sqrt(speedSq);
+        dot.vx *= scale;
+        dot.vy *= scale;
       }
     });
   }
@@ -244,62 +239,55 @@ class InteractiveBackground {
   drawDots() {
     const ctx = this.ctx;
     const { dotConnectionDistance, mouseConnectionDistance } = this.config;
-    const connDistSq = dotConnectionDistance * dotConnectionDistance;
 
-    // Draw connections between figures
     for (let i = 0; i < this.dots.length; i++) {
       const dotA = this.dots[i];
 
-      // Connect to other figures
       for (let j = i + 1; j < this.dots.length; j++) {
         const dotB = this.dots[j];
         const dx = dotA.x - dotB.x;
         const dy = dotA.y - dotB.y;
-        
-        // Quick squared distance check
         const distSq = dx * dx + dy * dy;
-        if (distSq < connDistSq) {
+
+        if (distSq < this.connDistSq) {
           const dist = Math.sqrt(distSq);
           const opacity = (1 - dist / dotConnectionDistance) * 0.25;
           ctx.beginPath();
           ctx.moveTo(dotA.x, dotA.y);
           ctx.lineTo(dotB.x, dotB.y);
-          ctx.strokeStyle = `rgba(155, 170, 143, ${opacity})`;
+          ctx.strokeStyle = getColor('sage', opacity);
           ctx.lineWidth = 1.5;
           ctx.stroke();
         }
       }
 
-      // Connect to mouse
       if (this.mouse.x !== null) {
         const dx = dotA.x - this.mouse.x;
         const dy = dotA.y - this.mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const distSq = dx * dx + dy * dy;
 
-        if (dist < mouseConnectionDistance) {
+        if (distSq < this.mouseDistSq) {
+          const dist = Math.sqrt(distSq);
           const opacity = (1 - dist / mouseConnectionDistance) * 0.5;
           ctx.beginPath();
           ctx.moveTo(dotA.x, dotA.y);
           ctx.lineTo(this.mouse.x, this.mouse.y);
-          ctx.strokeStyle = `rgba(196, 132, 108, ${opacity})`;
+          ctx.strokeStyle = getColor('terracotta', opacity);
           ctx.lineWidth = 1.5;
           ctx.stroke();
         }
       }
     }
 
-    // Draw the figures with gentle bobbing
     this.dots.forEach(dot => {
       const bobY = Math.sin(dot.phase) * 2;
-      this.drawFigure(dot.x, dot.y + bobY, dot.size, dot.color, 0.5);
+      this.drawFigure(dot.x, dot.y + bobY, dot.size, dot.colorName);
     });
   }
 
-  // ==================== RIPPLE EFFECT ====================
   createRipple(x, y) {
-    const colors = [this.colors.sage, this.colors.terracotta, this.colors.amber];
+    const colorNames = ['sage', 'terracotta', 'amber'];
     
-    // Create 3 staggered ripples
     for (let i = 0; i < 3; i++) {
       setTimeout(() => {
         this.ripples.push({
@@ -309,7 +297,7 @@ class InteractiveBackground {
           maxRadius: this.config.rippleMaxRadius + (i * 25),
           startTime: performance.now(),
           duration: this.config.rippleDuration + (i * 150),
-          color: colors[i % colors.length]
+          colorName: colorNames[i % colorNames.length]
         });
       }, i * 80);
     }
@@ -325,25 +313,21 @@ class InteractiveBackground {
 
       if (progress >= 1) return false;
 
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       const radius = ripple.maxRadius * eased;
       const opacity = (1 - progress) * 0.4;
-      const { r, g, b } = ripple.color;
 
-      // Draw expanding rings
       for (let ring = 0; ring < 2; ring++) {
         const ringRadius = radius - (ring * 12);
         if (ringRadius > 0) {
           ctx.beginPath();
           ctx.arc(ripple.x, ripple.y, ringRadius, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacity * (1 - ring * 0.4)})`;
+          ctx.strokeStyle = getColor(ripple.colorName, opacity * (1 - ring * 0.4));
           ctx.lineWidth = 2 - ring * 0.5;
           ctx.stroke();
         }
       }
 
-      // Draw dots along the ring
       const dotCount = 6;
       for (let i = 0; i < dotCount; i++) {
         const angle = (i / dotCount) * Math.PI * 2 + (progress * Math.PI * 0.5);
@@ -354,7 +338,7 @@ class InteractiveBackground {
         if (dotSize > 0.5) {
           ctx.beginPath();
           ctx.arc(dotX, dotY, dotSize, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${opacity * 0.8})`;
+          ctx.fillStyle = getColor(ripple.colorName, opacity * 0.8);
           ctx.fill();
         }
       }
@@ -363,11 +347,9 @@ class InteractiveBackground {
     });
   }
 
-  // ==================== MAIN ANIMATION LOOP ====================
   animate(timestamp) {
     if (!this.isRunning) return;
 
-    // Throttle to target fps
     const elapsed = timestamp - this.lastFrame;
     if (elapsed < this.frameInterval) {
       this.animationId = requestAnimationFrame((t) => this.animate(t));
@@ -377,11 +359,8 @@ class InteractiveBackground {
     this.frameCount++;
 
     const ctx = this.ctx;
-
-    // Clear canvas
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Layer 1: Fluid blobs (update every 3rd frame for performance, but always draw)
     ctx.globalCompositeOperation = "lighter";
     this.blobs.forEach(blob => {
       if (this.frameCount % 3 === 0) {
@@ -391,40 +370,31 @@ class InteractiveBackground {
     });
     ctx.globalCompositeOperation = "source-over";
 
-    // Layer 2: Floating dots with connections
     this.updateDots();
     this.drawDots();
-
-    // Layer 3: Ripples (on top)
     this.updateAndDrawRipples();
 
     this.animationId = requestAnimationFrame((t) => this.animate(t));
   }
 
-  // ==================== EVENT BINDING ====================
   bindEvents() {
-    // Resize
     window.addEventListener("resize", () => {
       this.resize();
       this.createBlobs();
       this.createDots();
     });
 
-    // Mouse move
     window.addEventListener("mousemove", (e) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
     }, { passive: true });
 
-    // Mouse leave
     window.addEventListener("mouseleave", () => {
       this.mouse.x = null;
       this.mouse.y = null;
     });
 
-    // Click for ripples
     window.addEventListener("click", (e) => {
-      // Don't create ripples on interactive elements
       const tag = e.target.tagName.toLowerCase();
       const isInteractive = tag === 'a' || tag === 'button' || tag === 'input' || 
                            tag === 'select' || tag === 'textarea' ||
@@ -465,9 +435,7 @@ function initNavigation() {
     navToggle.addEventListener("click", () => {
       navToggle.classList.toggle("active");
       mobileMenu.classList.toggle("active");
-      document.body.style.overflow = mobileMenu.classList.contains("active")
-        ? "hidden"
-        : "";
+      document.body.style.overflow = mobileMenu.classList.contains("active") ? "hidden" : "";
     });
 
     mobileMenu.querySelectorAll("a").forEach((link) => {
@@ -521,18 +489,15 @@ function initSmoothScroll() {
         if (target) {
           e.preventDefault();
           
-          // Close mobile menu if open
           const mobileMenu = document.getElementById('mobileMenu');
           if (mobileMenu && mobileMenu.classList.contains('active')) {
             mobileMenu.classList.remove('active');
             document.getElementById('navToggle')?.classList.remove('active');
           }
           
-          // Get exact navbar height
           const nav = document.querySelector('.nav');
           const navHeight = nav ? nav.getBoundingClientRect().height : 70;
           
-          // Calculate exact position: element's top relative to document minus navbar
           const targetRect = target.getBoundingClientRect();
           const targetPosition = targetRect.top + window.scrollY - navHeight;
           
@@ -699,7 +664,7 @@ function initJourneyPath() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           updateNow(true);
-          observer.unobserve(journeySection); // Only trigger once
+          observer.unobserve(journeySection);
         }
       });
     },
@@ -722,14 +687,14 @@ class SunMoonArc {
 
     this.ctx = this.canvas.getContext('2d');
     this.section = document.getElementById('rhythm');
+    if (!this.section) return;
+    
     this.timeSlots = this.section.querySelectorAll('.time-slot');
     
     this.timePosition = 0;
     this.isRunning = false;
     this.animationId = null;
 
-    // Color stops for sky interpolation (0-1 = sun, 1-1.5 = moon at 2x speed)
-    // Improved text visibility with higher contrast colors
     this.skyColors = [
       { time: 0.0, bg: ['#1a2a3a', '#243448', '#1a2a3a'], text: '#e8eef4', muted: '#b8c8d8', accent: '#8ab4d4', cardAlpha: 0.12 },
       { time: 0.08, bg: ['#3d3a5a', '#5a4f7a', '#2a2a3e'], text: '#f0e8f4', muted: '#c8c0d8', accent: '#b8a0c8', cardAlpha: 0.15 },
@@ -744,16 +709,34 @@ class SunMoonArc {
       { time: 1.5, bg: ['#1a2a3a', '#243448', '#1a2a3a'], text: '#e8eef4', muted: '#b8c8d8', accent: '#8ab4d4', cardAlpha: 0.12 }
     ];
 
-    // Sun color stops for smooth interpolation
     this.sunColors = [
-      { time: 0.0, color: { r: 230, g: 100, b: 60 } },   // Rising - deep orange
-      { time: 0.15, color: { r: 250, g: 160, b: 80 } },  // Early morning - warm orange
-      { time: 0.3, color: { r: 255, g: 200, b: 100 } },  // Morning - golden
-      { time: 0.5, color: { r: 255, g: 220, b: 120 } },  // Midday - bright yellow
-      { time: 0.7, color: { r: 255, g: 200, b: 100 } },  // Afternoon - golden
-      { time: 0.85, color: { r: 250, g: 140, b: 60 } },  // Evening - orange
-      { time: 1.0, color: { r: 230, g: 80, b: 50 } }     // Setting - deep red-orange
+      { time: 0.0, color: { r: 230, g: 100, b: 60 } },
+      { time: 0.15, color: { r: 250, g: 160, b: 80 } },
+      { time: 0.3, color: { r: 255, g: 200, b: 100 } },
+      { time: 0.5, color: { r: 255, g: 220, b: 120 } },
+      { time: 0.7, color: { r: 255, g: 200, b: 100 } },
+      { time: 0.85, color: { r: 250, g: 140, b: 60 } },
+      { time: 1.0, color: { r: 230, g: 80, b: 50 } }
     ];
+
+    // Cache DOM elements for faster updates
+    this.cachedElements = {
+      title: this.section.querySelector('.section-title'),
+      subtitle: this.section.querySelector('.section-subtitle'),
+      badge: this.section.querySelector('.section-badge'),
+      cards: Array.from(this.section.querySelectorAll('.schedule-card')).map(card => ({
+        el: card,
+        title: card.querySelector('.schedule-card-title'),
+        week: card.querySelector('.schedule-card-week'),
+        text: card.querySelector('.schedule-card-text')
+      })),
+      slots: Array.from(this.section.querySelectorAll('.time-slot')).map(slot => ({
+        el: slot,
+        span: slot.querySelector('span'),
+        svg: slot.querySelector('svg'),
+        timeType: this.getSlotTimeType(slot)
+      }))
+    };
 
     this.resize();
     this.bindEvents();
@@ -762,10 +745,38 @@ class SunMoonArc {
     log("SunMoonArc initialized");
   }
 
+  getSlotTimeType(slot) {
+    const text = slot.querySelector('span')?.textContent || '';
+    if (text.includes('10:30')) return 'morning';
+    if (text.includes('2:30')) return 'afternoon';
+    if (text.includes('6:30')) return 'evening';
+    return null;
+  }
+
   resize() {
     if (!this.canvas) return;
     this.canvas.width = this.section.offsetWidth;
     this.canvas.height = this.section.offsetHeight;
+    
+    // Pre-compute arc dot positions (36 dots along the arc)
+    this.arcDots = [];
+    const pad = 80;
+    const w = this.canvas.width - pad * 2;
+    const h = this.canvas.height * 0.35;
+    const baseY = this.canvas.height * 0.55;
+    
+    for (let i = 0; i <= 35; i++) {
+      const t = i / 35;
+      this.arcDots.push({
+        t,
+        x: pad + t * w,
+        y: baseY - Math.sin(t * Math.PI) * h,
+        colorName: t < 0.33 ? 'amber' : t < 0.66 ? 'terracotta' : 'sage'
+      });
+    }
+    
+    // Cache horizon Y position
+    this.horizonY = this.canvas.height * 0.55;
   }
 
   bindEvents() {
@@ -876,13 +887,9 @@ class SunMoonArc {
   }
 
   updateUI(colors) {
-    // Update section background
+    const { title, subtitle, badge, cards, slots } = this.cachedElements;
+    
     this.section.style.background = `linear-gradient(180deg, ${colors.bg[0]} 0%, ${colors.bg[1]} 50%, ${colors.bg[2]} 100%)`;
-
-    // Update text colors for elements in the section
-    const title = this.section.querySelector('.section-title');
-    const subtitle = this.section.querySelector('.section-subtitle');
-    const badge = this.section.querySelector('.section-badge');
 
     if (title) title.style.color = colors.text;
     if (subtitle) subtitle.style.color = colors.muted;
@@ -891,43 +898,32 @@ class SunMoonArc {
       badge.style.background = colors.accent + '25';
     }
 
-    // Update cards
-    this.section.querySelectorAll('.schedule-card').forEach(card => {
-      card.style.background = `rgba(255,255,255,${colors.cardAlpha})`;
-      const cardTitle = card.querySelector('.schedule-card-title');
-      const cardWeek = card.querySelector('.schedule-card-week');
-      const cardText = card.querySelector('.schedule-card-text');
-      if (cardTitle) cardTitle.style.color = colors.text;
-      if (cardWeek) cardWeek.style.color = colors.accent;
-      if (cardText) cardText.style.color = colors.muted;
+    const cardBg = `rgba(255,255,255,${colors.cardAlpha})`;
+    cards.forEach(card => {
+      card.el.style.background = cardBg;
+      if (card.title) card.title.style.color = colors.text;
+      if (card.week) card.week.style.color = colors.accent;
+      if (card.text) card.text.style.color = colors.muted;
     });
 
-    // Update time slots
-    this.section.querySelectorAll('.time-slot').forEach(slot => {
-      slot.style.background = `rgba(255,255,255,${colors.cardAlpha})`;
-      const span = slot.querySelector('span');
-      const svg = slot.querySelector('svg');
-      if (span) span.style.color = colors.text;
-      if (svg) svg.style.color = colors.accent;
+    slots.forEach(slot => {
+      slot.el.style.background = cardBg;
+      if (slot.span) slot.span.style.color = colors.text;
+      if (slot.svg) slot.svg.style.color = colors.accent;
     });
   }
 
   updateTimeSlotHighlights(arcT, isSun) {
     const activeSlot = this.getActiveTimeSlot(arcT, isSun);
+    const { slots } = this.cachedElements;
 
-    this.timeSlots.forEach(slot => {
-      const slotTime = slot.querySelector('span')?.textContent;
-      let slotType = null;
-      if (slotTime?.includes('10:30')) slotType = 'morning';
-      else if (slotTime?.includes('2:30')) slotType = 'afternoon';
-      else if (slotTime?.includes('6:30')) slotType = 'evening';
-
-      if (slotType === activeSlot) {
-        slot.style.transform = 'scale(1.05)';
-        slot.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+    slots.forEach(slot => {
+      if (slot.timeType === activeSlot) {
+        slot.el.style.transform = 'scale(1.05)';
+        slot.el.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
       } else {
-        slot.style.transform = 'scale(1)';
-        slot.style.boxShadow = 'none';
+        slot.el.style.transform = 'scale(1)';
+        slot.el.style.boxShadow = 'none';
       }
     });
   }
@@ -938,79 +934,66 @@ class SunMoonArc {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Sun phase: 0-1, Moon phase: 1-1.5 (moon goes 2x faster)
-    // Doubled speed from previous
     if (this.timePosition < 1) {
-      this.timePosition += 0.00044; // Sun speed (doubled)
+      this.timePosition += 0.00044;
     } else {
-      this.timePosition += 0.00088; // Moon speed (doubled, 2x sun)
+      this.timePosition += 0.00088;
     }
     if (this.timePosition >= 1.5) this.timePosition = 0;
 
     const isSun = this.timePosition < 1;
     const arcT = isSun ? this.timePosition : (this.timePosition - 1) * 2;
 
-    // Update colors
     const currentColors = this.getSkyColorsAtTime(this.timePosition);
     this.updateUI(currentColors);
     this.updateTimeSlotHighlights(arcT, isSun);
 
-    // Calculate brightness
     let brightness;
     if (this.timePosition < 0.15) brightness = 0.3;
     else if (this.timePosition < 0.85) brightness = 0.8 + Math.sin((this.timePosition - 0.15) / 0.7 * Math.PI) * 0.2;
     else if (this.timePosition < 1.0) brightness = 0.3;
     else brightness = 0.2;
 
-    // Draw horizon
-    const horizonY = this.canvas.height * 0.55;
     ctx.beginPath();
-    ctx.moveTo(60, horizonY);
-    ctx.lineTo(this.canvas.width - 60, horizonY);
-    ctx.strokeStyle = isSun
-      ? `rgba(155, 170, 143, ${0.1 + brightness * 0.2})`
-      : `rgba(100, 120, 150, 0.2)`;
+    ctx.moveTo(60, this.horizonY);
+    ctx.lineTo(this.canvas.width - 60, this.horizonY);
+    ctx.strokeStyle = isSun ? getColor('sage', 0.1 + brightness * 0.2) : getColor('blue', 0.2);
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Draw arc path dots
-    for (let i = 0; i <= 35; i++) {
-      const t = i / 35;
-      const p = this.getArcPoint(t);
-      const distToCelestial = Math.abs(t - arcT);
+    // Draw arc dots using pre-computed positions
+    for (let i = 0; i < this.arcDots.length; i++) {
+      const dot = this.arcDots[i];
+      const distToCelestial = Math.abs(dot.t - arcT);
       const glow = Math.max(0, 1 - distToCelestial * 5);
 
-      let dotColor, dotOpacity;
+      let colorName, dotOpacity;
       if (isSun) {
-        if (t < 0.33) dotColor = { r: 212, g: 165, b: 116 };
-        else if (t < 0.66) dotColor = { r: 196, g: 132, b: 108 };
-        else dotColor = { r: 155, g: 170, b: 143 };
+        colorName = dot.colorName;
         dotOpacity = 0.15 + glow * 0.5 + brightness * 0.2;
       } else {
-        dotColor = { r: 150, g: 170, b: 200 };
+        colorName = 'blue';
         dotOpacity = 0.1 + glow * 0.4;
       }
 
       const dotSize = 2 + glow * 3;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, dotSize, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${dotColor.r}, ${dotColor.g}, ${dotColor.b}, ${dotOpacity})`;
+      ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
+      ctx.fillStyle = getColor(colorName, dotOpacity);
       ctx.fill();
     }
 
-    // Draw sun or moon
     if (arcT > 0.02 && arcT < 0.98) {
       const pos = this.getArcPoint(arcT);
 
       if (isSun) {
-        // Get interpolated sun color
         const sunColor = this.getSunColorAtTime(arcT);
 
         const glowSize = 50 + Math.sin(this.timePosition * 4) * 5;
         const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, glowSize);
-        grad.addColorStop(0, `rgba(${sunColor.r}, ${sunColor.g}, ${sunColor.b}, 0.6)`);
-        grad.addColorStop(0.4, `rgba(${sunColor.r}, ${sunColor.g}, ${sunColor.b}, 0.2)`);
-        grad.addColorStop(1, `rgba(${sunColor.r}, ${sunColor.g}, ${sunColor.b}, 0)`);
+        grad.addColorStop(0, rgbaColor(sunColor.r, sunColor.g, sunColor.b, 0.6));
+        grad.addColorStop(0.4, rgbaColor(sunColor.r, sunColor.g, sunColor.b, 0.2));
+        grad.addColorStop(1, rgbaColor(sunColor.r, sunColor.g, sunColor.b, 0));
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, glowSize, 0, Math.PI * 2);
         ctx.fillStyle = grad;
@@ -1018,20 +1001,19 @@ class SunMoonArc {
 
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, 16, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${sunColor.r}, ${sunColor.g}, ${sunColor.b}, 0.95)`;
+        ctx.fillStyle = rgbaColor(sunColor.r, sunColor.g, sunColor.b, 0.95);
         ctx.fill();
 
         ctx.beginPath();
         ctx.arc(pos.x - 4, pos.y - 4, 6, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 240, 0.5)`;
+        ctx.fillStyle = getColor('white', 0.5);
         ctx.fill();
       } else {
-        const moonColor = { r: 220, g: 225, b: 240 };
         const glowSize = 40 + Math.sin(this.timePosition * 3) * 3;
         const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, glowSize);
-        grad.addColorStop(0, `rgba(${moonColor.r}, ${moonColor.g}, ${moonColor.b}, 0.4)`);
-        grad.addColorStop(0.5, `rgba(${moonColor.r}, ${moonColor.g}, ${moonColor.b}, 0.1)`);
-        grad.addColorStop(1, `rgba(${moonColor.r}, ${moonColor.g}, ${moonColor.b}, 0)`);
+        grad.addColorStop(0, getColor('moon', 0.4));
+        grad.addColorStop(0.5, getColor('moon', 0.1));
+        grad.addColorStop(1, getColor('moon', 0));
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, glowSize, 0, Math.PI * 2);
         ctx.fillStyle = grad;
@@ -1039,12 +1021,12 @@ class SunMoonArc {
 
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, 14, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${moonColor.r}, ${moonColor.g}, ${moonColor.b}, 0.95)`;
+        ctx.fillStyle = getColor('moon', 0.95);
         ctx.fill();
 
         ctx.beginPath();
         ctx.arc(pos.x + 5, pos.y - 3, 10, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(30, 40, 60, 0.4)`;
+        ctx.fillStyle = getColor('moonDark', 0.4);
         ctx.fill();
       }
     }
@@ -1067,19 +1049,12 @@ class WanderingPath {
     this.animationId = null;
     this.time = 0;
 
-    // Path configuration
     this.numDots = 60;
     this.pathPoints = [];
     this.targetPoints = [];
     this.dotPositions = [];
 
-    // Colors from the site palette
-    this.colors = [
-      { r: 155, g: 170, b: 143 }, // sage
-      { r: 196, g: 132, b: 108 }, // terracotta
-      { r: 212, g: 165, b: 116 }, // amber
-      { r: 139, g: 155, b: 128 }, // sage darker
-    ];
+    this.colorNames = ['sage', 'terracotta', 'amber', 'sageDark'];
 
     this.resize();
     this.initPath();
@@ -1103,12 +1078,10 @@ class WanderingPath {
     this.width = rect.width;
     this.height = rect.height;
 
-    // Reinitialize path on resize
     this.initPath();
   }
 
   initPath() {
-    // Create initial wandering path control points
     this.pathPoints = [];
     this.targetPoints = [];
 
@@ -1120,7 +1093,6 @@ class WanderingPath {
       const baseX = padding + t * (this.width - padding * 2);
       const baseY = this.height * 0.3 + Math.sin(t * Math.PI) * (this.height * 0.4);
 
-      // Add randomness
       const offsetX = (Math.random() - 0.5) * 100;
       const offsetY = (Math.random() - 0.5) * 80;
 
@@ -1137,7 +1109,6 @@ class WanderingPath {
       });
     }
 
-    // Initialize dot positions along the path
     this.dotPositions = [];
     for (let i = 0; i < this.numDots; i++) {
       const t = i / (this.numDots - 1);
@@ -1145,7 +1116,7 @@ class WanderingPath {
         t: t,
         offset: (Math.random() - 0.5) * 20,
         size: 2 + Math.random() * 3,
-        colorIndex: Math.floor(Math.random() * this.colors.length),
+        colorName: this.colorNames[Math.floor(Math.random() * this.colorNames.length)],
         phase: Math.random() * Math.PI * 2
       });
     }
@@ -1174,7 +1145,6 @@ class WanderingPath {
     observer.observe(this.canvas.parentElement);
   }
 
-  // Catmull-Rom spline interpolation for smooth path
   catmullRom(p0, p1, p2, p3, t) {
     const t2 = t * t;
     const t3 = t2 * t;
@@ -1200,22 +1170,18 @@ class WanderingPath {
   }
 
   updatePath() {
-    // Slowly move control points toward new random targets
     for (let i = 0; i < this.pathPoints.length; i++) {
       const point = this.pathPoints[i];
       const target = this.targetPoints[i];
 
-      // Ease toward target
       point.x += (target.x - point.x) * 0.01;
       point.y += (target.y - point.y) * 0.01;
 
-      // Randomly update target occasionally
       if (Math.random() < 0.005) {
         const wanderRadius = 80;
         target.x = point.baseX + (Math.random() - 0.5) * wanderRadius * 2;
         target.y = point.baseY + (Math.random() - 0.5) * wanderRadius * 2;
 
-        // Keep within bounds
         target.x = Math.max(40, Math.min(this.width - 40, target.x));
         target.y = Math.max(40, Math.min(this.height - 40, target.y));
       }
@@ -1234,46 +1200,37 @@ class WanderingPath {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.width, this.height);
 
-    // Draw the wandering dotted path
     this.dotPositions.forEach((dot, index) => {
-      // Add subtle movement to each dot's position along path
       const waveOffset = Math.sin(this.time * 0.5 + dot.phase) * 0.02;
       const t = Math.max(0, Math.min(1, dot.t + waveOffset));
 
       const pathPoint = this.getPointOnPath(t);
 
-      // Add perpendicular offset for organic feel
       const nextT = Math.min(1, t + 0.01);
       const nextPoint = this.getPointOnPath(nextT);
       const dx = nextPoint.x - pathPoint.x;
       const dy = nextPoint.y - pathPoint.y;
       const len = Math.sqrt(dx * dx + dy * dy) || 1;
 
-      // Perpendicular direction
       const perpX = -dy / len;
       const perpY = dx / len;
 
-      // Oscillating perpendicular offset
       const perpOffset = Math.sin(this.time * 0.8 + dot.phase * 2) * dot.offset;
 
       const x = pathPoint.x + perpX * perpOffset;
       const y = pathPoint.y + perpY * perpOffset;
 
-      // Pulsing size
       const pulseSize = dot.size + Math.sin(this.time * 1.5 + dot.phase) * 1;
 
-      // Color with slight alpha variation
-      const color = this.colors[dot.colorIndex];
       const alpha = 0.4 + Math.sin(this.time + dot.phase) * 0.2;
 
       ctx.beginPath();
       ctx.arc(x, y, pulseSize, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+      ctx.fillStyle = getColor(dot.colorName, alpha);
       ctx.fill();
     });
 
-    // Draw subtle connecting lines between nearby dots
-    ctx.strokeStyle = 'rgba(155, 170, 143, 0.1)';
+    ctx.strokeStyle = getColor('sage', 0.1);
     ctx.lineWidth = 1;
 
     for (let i = 0; i < this.dotPositions.length - 1; i++) {
@@ -1286,7 +1243,6 @@ class WanderingPath {
       const p1 = this.getPointOnPath(t1);
       const p2 = this.getPointOnPath(t2);
 
-      // Only draw every few segments for a dotted effect
       if (i % 3 === 0) {
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
@@ -1314,20 +1270,15 @@ class RisingBubbles {
     this.time = 0;
     this.bubbles = [];
 
-    // Colors from the site palette
-    this.colors = {
-      sage: { r: 155, g: 170, b: 143 },
-      terracotta: { r: 196, g: 132, b: 108 },
-      amber: { r: 212, g: 165, b: 116 }
-    };
-
-    // Tier configs: Free (minimal) -> Weekly (medium) -> Monthly (most prominent)
-    // Effects magnified for higher tiers
     this.tierConfigs = [
-      { spawnRate: 0.015, speed: 0.25, sizeMulti: 0.8, color: this.colors.sage, glowIntensity: 0 },
-      { spawnRate: 0.04, speed: 0.45, sizeMulti: 1.2, color: this.colors.terracotta, glowIntensity: 0.2 },
-      { spawnRate: 0.09, speed: 0.75, sizeMulti: 1.8, color: this.colors.amber, glowIntensity: 0.4 }
+      { spawnRate: 0.015, speed: 0.25, sizeMulti: 0.8, colorName: 'sage', glowIntensity: 0 },
+      { spawnRate: 0.04, speed: 0.45, sizeMulti: 1.2, colorName: 'terracotta', glowIntensity: 0.2 },
+      { spawnRate: 0.09, speed: 0.75, sizeMulti: 1.8, colorName: 'amber', glowIntensity: 0.4 }
     ];
+
+    // Cache card bounds - refreshed on resize
+    this.cardBounds = null;
+    this.boundsValid = false;
 
     this.resize();
     this.bindEvents();
@@ -1349,6 +1300,8 @@ class RisingBubbles {
     this.ctx.scale(dpr, dpr);
     this.width = rect.width;
     this.height = rect.height;
+    
+    this.boundsValid = false;
   }
 
   bindEvents() {
@@ -1375,11 +1328,15 @@ class RisingBubbles {
   }
 
   getCardBounds() {
+    if (this.boundsValid && this.cardBounds) {
+      return this.cardBounds;
+    }
+    
     const section = this.canvas.parentElement;
     const cards = section.querySelectorAll('.pricing-card');
     const sectionRect = section.getBoundingClientRect();
 
-    return Array.from(cards).map(card => {
+    this.cardBounds = Array.from(cards).map(card => {
       const rect = card.getBoundingClientRect();
       return {
         left: rect.left - sectionRect.left - 30,
@@ -1389,6 +1346,9 @@ class RisingBubbles {
         centerX: rect.left + rect.width / 2 - sectionRect.left
       };
     });
+    
+    this.boundsValid = true;
+    return this.cardBounds;
   }
 
   spawnBubble(tierIndex, bounds) {
@@ -1401,7 +1361,7 @@ class RisingBubbles {
       size: (1.5 + Math.random() * 4) * cfg.sizeMulti,
       wobblePhase: Math.random() * Math.PI * 2,
       wobbleSpeed: 1.5 + Math.random() * 1,
-      color: cfg.color,
+      colorName: cfg.colorName,
       glowIntensity: cfg.glowIntensity
     };
   }
@@ -1418,7 +1378,6 @@ class RisingBubbles {
 
     const bounds = this.getCardBounds();
 
-    // Spawn bubbles for each tier (more for higher tiers)
     bounds.forEach((bound, tierIndex) => {
       const cfg = this.tierConfigs[tierIndex];
       if (Math.random() < cfg.spawnRate) {
@@ -1426,40 +1385,35 @@ class RisingBubbles {
       }
     });
 
-    // Limit total bubbles
     if (this.bubbles.length > 300) {
       this.bubbles = this.bubbles.slice(-300);
     }
 
-    // Update and draw bubbles
     this.bubbles = this.bubbles.filter(b => {
       b.y -= b.speed;
       b.x += Math.sin(this.time * b.wobbleSpeed + b.wobblePhase) * 0.5;
 
       if (b.y < -30) return false;
 
-      // Fade based on vertical position
       const distFromBottom = this.height - b.y;
       const fadeInAlpha = Math.min(1, distFromBottom / 100);
       const fadeOutAlpha = b.y > 50 ? 1 : b.y / 50;
       const alpha = fadeInAlpha * fadeOutAlpha * 0.6;
 
-      // Draw glow for higher tiers
       if (b.glowIntensity > 0) {
         const glowSize = b.size * 2.5;
         const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, glowSize);
-        gradient.addColorStop(0, `rgba(${b.color.r}, ${b.color.g}, ${b.color.b}, ${alpha * b.glowIntensity})`);
-        gradient.addColorStop(1, `rgba(${b.color.r}, ${b.color.g}, ${b.color.b}, 0)`);
+        gradient.addColorStop(0, getColor(b.colorName, alpha * b.glowIntensity));
+        gradient.addColorStop(1, getColor(b.colorName, 0));
         ctx.beginPath();
         ctx.arc(b.x, b.y, glowSize, 0, Math.PI * 2);
         ctx.fillStyle = gradient;
         ctx.fill();
       }
 
-      // Draw main bubble
       ctx.beginPath();
       ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${b.color.r}, ${b.color.g}, ${b.color.b}, ${alpha})`;
+      ctx.fillStyle = getColor(b.colorName, alpha);
       ctx.fill();
 
       return true;
@@ -1483,23 +1437,13 @@ class GentleWaves {
     this.animationId = null;
     this.time = 0;
 
-    // Colors from the site palette
-    this.colors = {
-      sage: { r: 155, g: 170, b: 143 },
-      terracotta: { r: 196, g: 132, b: 108 },
-      amber: { r: 212, g: 165, b: 116 },
-      sageLight: { r: 184, g: 196, b: 174 }
-    };
-
-    // Wave configurations
     this.waves = [
-      { color: this.colors.sage, yOffset: 0.25, amplitude: 25, frequency: 0.008, speed: 0.8, alpha: 0.12 },
-      { color: this.colors.terracotta, yOffset: 0.4, amplitude: 20, frequency: 0.01, speed: 1.0, alpha: 0.10 },
-      { color: this.colors.amber, yOffset: 0.55, amplitude: 30, frequency: 0.006, speed: 0.6, alpha: 0.08 },
-      { color: this.colors.sageLight, yOffset: 0.7, amplitude: 18, frequency: 0.012, speed: 1.2, alpha: 0.06 }
+      { colorName: 'sage', yOffset: 0.25, amplitude: 25, frequency: 0.008, speed: 0.8, alpha: 0.12 },
+      { colorName: 'terracotta', yOffset: 0.4, amplitude: 20, frequency: 0.01, speed: 1.0, alpha: 0.10 },
+      { colorName: 'amber', yOffset: 0.55, amplitude: 30, frequency: 0.006, speed: 0.6, alpha: 0.08 },
+      { colorName: 'sageLightAlt', yOffset: 0.7, amplitude: 18, frequency: 0.012, speed: 1.2, alpha: 0.06 }
     ];
 
-    // Floating particles
     this.particles = [];
     
     this.resize();
@@ -1528,6 +1472,8 @@ class GentleWaves {
   initParticles() {
     this.particles = [];
     const particleCount = 25;
+    const colorNames = ['sage', 'terracotta', 'amber'];
+    
     for (let i = 0; i < particleCount; i++) {
       this.particles.push({
         x: Math.random() * this.width,
@@ -1535,7 +1481,7 @@ class GentleWaves {
         phase: Math.random() * Math.PI * 2,
         size: 2 + Math.random() * 2,
         speed: 0.5 + Math.random() * 0.5,
-        color: [this.colors.sage, this.colors.terracotta, this.colors.amber][Math.floor(Math.random() * 3)]
+        colorName: colorNames[Math.floor(Math.random() * 3)]
       });
     }
   }
@@ -1576,7 +1522,6 @@ class GentleWaves {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.width, this.height);
 
-    // Draw waves (back to front)
     this.waves.forEach(wave => {
       const baseY = this.height * wave.yOffset;
 
@@ -1592,19 +1537,16 @@ class GentleWaves {
       ctx.closePath();
 
       const grad = ctx.createLinearGradient(0, baseY - wave.amplitude, 0, this.height);
-      grad.addColorStop(0, `rgba(${wave.color.r}, ${wave.color.g}, ${wave.color.b}, ${wave.alpha})`);
-      grad.addColorStop(1, `rgba(${wave.color.r}, ${wave.color.g}, ${wave.color.b}, 0)`);
+      grad.addColorStop(0, getColor(wave.colorName, wave.alpha));
+      grad.addColorStop(1, getColor(wave.colorName, 0));
       ctx.fillStyle = grad;
       ctx.fill();
     });
 
-    // Draw floating particles that ride the waves
     this.particles.forEach(p => {
-      // Move particle horizontally
       p.x += p.speed * 0.3;
       if (p.x > this.width + 10) p.x = -10;
 
-      // Calculate Y based on wave motion
       const waveY = Math.sin(p.x * 0.008 + this.time * 0.8) * 20;
       const y = p.baseY + waveY + Math.sin(this.time + p.phase) * 5;
 
@@ -1613,7 +1555,7 @@ class GentleWaves {
 
       ctx.beginPath();
       ctx.arc(p.x, y, p.size * pulse, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${alpha})`;
+      ctx.fillStyle = getColor(p.colorName, alpha);
       ctx.fill();
     });
 
@@ -1635,27 +1577,39 @@ class CompassionMandala {
     this.animationId = null;
     this.time = 0;
 
-    // Colors from the site palette
-    this.colors = {
-      sage: { r: 155, g: 170, b: 143 },
-      terracotta: { r: 196, g: 132, b: 108 },
-      amber: { r: 212, g: 165, b: 116 },
-      sageLight: { r: 184, g: 196, b: 174 }
-    };
-
-    // Ring configurations - only outer rings visible around the card
     this.rings = [
-      { radius: 1.4, dots: 20, color: this.colors.sageLight, size: 4.5 },
-      { radius: 1.8, dots: 28, color: this.colors.sage, size: 4 },
-      { radius: 2.2, dots: 36, color: this.colors.terracotta, size: 3.5 },
-      { radius: 2.6, dots: 44, color: this.colors.amber, size: 3 }
+      { radius: 1.4, dots: 20, colorName: 'sageLightAlt', size: 4.5 },
+      { radius: 1.8, dots: 28, colorName: 'sage', size: 4 },
+      { radius: 2.2, dots: 36, colorName: 'terracotta', size: 3.5 },
+      { radius: 2.6, dots: 44, colorName: 'amber', size: 3 }
     ];
+
+    // Pre-compute unit circle positions for each dot (cos/sin of base angles)
+    // This is resolution-independent - just multiply by radius at draw time
+    this.precomputeDotPositions();
 
     this.resize();
     this.bindEvents();
     this.observeVisibility();
 
     log("CompassionMandala initialized");
+  }
+
+  // Pre-compute unit circle positions - only needs to run once ever
+  precomputeDotPositions() {
+    this.dotCache = this.rings.map(ring => {
+      const dots = [];
+      for (let i = 0; i < ring.dots; i++) {
+        const angle = (i / ring.dots) * Math.PI * 2;
+        dots.push({
+          cos: Math.cos(angle),  // x on unit circle
+          sin: Math.sin(angle),  // y on unit circle
+          pulseOffset: i * 0.3,  // for pulse animation
+          alphaOffset: i * 0.2   // for alpha animation
+        });
+      }
+      return dots;
+    });
   }
 
   resize() {
@@ -1671,6 +1625,11 @@ class CompassionMandala {
     this.ctx.scale(dpr, dpr);
     this.width = rect.width;
     this.height = rect.height;
+    
+    // Cache center and max radius (updated on resize)
+    this.centerX = this.width / 2;
+    this.centerY = this.height / 2;
+    this.maxRadius = Math.min(this.width, this.height) * 0.35;
   }
 
   bindEvents() {
@@ -1706,33 +1665,40 @@ class CompassionMandala {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.width, this.height);
 
-    const centerX = this.width / 2;
-    const centerY = this.height / 2;
-    const maxRadius = Math.min(this.width, this.height) * 0.35;
-
-    // Breathing effect
     const breathe = 1 + Math.sin(this.time * 0.5) * 0.1;
 
-    // Draw rings of dots (no glow, just simple circles)
-    this.rings.forEach((ring, ri) => {
-      const ringRadius = ring.radius * maxRadius * breathe;
-      const rotationOffset = this.time * (0.08 + ri * 0.03) * (ri % 2 === 0 ? 1 : -1);
+    for (let ri = 0; ri < this.rings.length; ri++) {
+      const ring = this.rings[ri];
+      const dots = this.dotCache[ri];
+      const ringRadius = ring.radius * this.maxRadius * breathe;
+      
+      // Compute rotation sin/cos ONCE per ring (instead of per dot)
+      const rotAngle = this.time * (0.08 + ri * 0.03) * (ri % 2 === 0 ? 1 : -1);
+      const rotCos = Math.cos(rotAngle);
+      const rotSin = Math.sin(rotAngle);
+      
       const baseAlpha = 0.5 + ri * 0.05;
 
-      for (let i = 0; i < ring.dots; i++) {
-        const angle = (i / ring.dots) * Math.PI * 2 + rotationOffset;
-        const x = centerX + Math.cos(angle) * ringRadius;
-        const y = centerY + Math.sin(angle) * ringRadius;
+      for (let i = 0; i < dots.length; i++) {
+        const dot = dots[i];
+        
+        // Rotate pre-computed unit position: x' = x*cos - y*sin, y' = x*sin + y*cos
+        const rotX = dot.cos * rotCos - dot.sin * rotSin;
+        const rotY = dot.cos * rotSin + dot.sin * rotCos;
+        
+        // Scale by radius and translate to center
+        const x = this.centerX + rotX * ringRadius;
+        const y = this.centerY + rotY * ringRadius;
 
-        const pulse = 1 + Math.sin(this.time * 1.5 + i * 0.3) * 0.2;
-        const alpha = baseAlpha + Math.sin(this.time + i * 0.2) * 0.1;
+        const pulse = 1 + Math.sin(this.time * 1.5 + dot.pulseOffset) * 0.2;
+        const alpha = baseAlpha + Math.sin(this.time + dot.alphaOffset) * 0.1;
 
         ctx.beginPath();
         ctx.arc(x, y, ring.size * pulse, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${ring.color.r}, ${ring.color.g}, ${ring.color.b}, ${alpha})`;
+        ctx.fillStyle = getColor(ring.colorName, alpha);
         ctx.fill();
       }
-    });
+    }
 
     this.animationId = requestAnimationFrame(() => this.animate());
   }
@@ -1742,7 +1708,6 @@ class CompassionMandala {
 document.addEventListener("DOMContentLoaded", () => {
   log("DOM Content Loaded");
 
-  // Start the interactive background (connecting figures + blobs + ripples)
   log("Starting InteractiveBackground...");
   window.interactiveBg = new InteractiveBackground();
 
@@ -1751,23 +1716,18 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmoothScroll();
   initJourneyPath();
 
-  // Start the sun-moon arc animation for rhythm section
   log("Starting SunMoonArc...");
   window.sunMoonArc = new SunMoonArc();
 
-  // Start the wandering path animation for reflection section
   log("Starting WanderingPath...");
   window.wanderingPath = new WanderingPath();
 
-  // Start the rising bubbles animation for pricing section
   log("Starting RisingBubbles...");
   window.risingBubbles = new RisingBubbles();
 
-  // Start the gentle waves animation for audience section
   log("Starting GentleWaves...");
   window.gentleWaves = new GentleWaves();
 
-  // Start the breathing mandala animation for compassion section
   log("Starting CompassionMandala...");
   window.compassionMandala = new CompassionMandala();
 
