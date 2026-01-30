@@ -351,6 +351,8 @@ section { padding: var(--space-3xl) 0; position: relative; }
     z-index: 1;
     text-align: center;
     max-width: 850px;
+    width: 100%;
+    margin: 0 auto;
     padding: var(--space-lg);
 }
 
@@ -366,6 +368,8 @@ section { padding: var(--space-3xl) 0; position: relative; }
     /* color: var(--color-terracotta); */
     color: #b84015;
     margin-bottom: var(--space-lg);
+    margin-left: auto;
+    margin-right: auto;
     animation: fadeUp 0.8s ease-out 0.1s forwards;
     opacity: 0;
 }
