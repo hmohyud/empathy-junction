@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join the Dots — Connecting Hearts. Celebrating Life.</title>
-    <meta name="description" content="A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M8 20c0-8 6-14 14-14' stroke='%239BAA8F' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 20c0 8-6 14-14 14' stroke='%23C4846C' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='20' cy='20' r='5' fill='%239BAA8F'/%3E%3C/svg%3E">
+    <meta name="description">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M8 20c0-8 6-14 14-14' stroke='%239BAA8F' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 20c0 8-6 14-14 14' stroke='%23C4846C' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='20' cy='20' r='5' fill='%239BAA8F'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Animated Background Canvas -->
     <canvas id="bgCanvas" class="bg-canvas"></canvas>
@@ -20,9 +25,10 @@
         <div class="container nav-inner">
             <a href="#" class="nav-logo">
                 <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none">
-                    <path d="M8 20c0-8 6-14 14-14" stroke="var(--color-sage)" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M32 20c0 8-6 14-14 14" stroke="var(--color-terracotta)" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="20" cy="20" r="5" fill="var(--color-sage)"/>
+                    <path d="M8 20c0-8 6-14 14-14" stroke="var(--color-sage)" stroke-width="3" stroke-linecap="round" />
+                    <path d="M32 20c0 8-6 14-14 14" stroke="var(--color-terracotta)" stroke-width="3"
+                        stroke-linecap="round" />
+                    <circle cx="20" cy="20" r="5" fill="var(--color-sage)" />
                 </svg>
                 <span class="nav-logo-text" data-i18n="brand">Join the Dots</span>
             </a>
@@ -73,23 +79,58 @@
         </div>
         <div class="hero-content">
             <h1 class="hero-title" data-i18n="hero.title">Join the Dots</h1>
-            <p class="hero-tagline" data-i18n="hero.tagline">Connecting Hearts. Celebrating Life..</p>
-            <p class="hero-description" data-i18n="hero.description">A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.</p>
+            <p class="hero-tagline" data-i18n="hero.tagline">Connecting Hearts. Celebrating Life.</p>
+            
+            <div class="hero-description">
+                <p class="journey-intro" data-i18n="hero.intro">Join the Dots offers a gentle, playful journey where we:</p>
+                
+                <div class="journey-flow">
+                    <div class="journey-flow-step step-1">Arrive</div>
+                    <span class="journey-flow-arrow arrow-down">↘</span>
+                    <div class="journey-flow-step step-2">Listen</div>
+                    <span class="journey-flow-arrow arrow-up">↗</span>
+                    <div class="journey-flow-step step-3">Lighten</div>
+                    <span class="journey-flow-arrow arrow-down">↘</span>
+                    <div class="journey-flow-step step-4">Renew</div>
+                    <span class="journey-flow-arrow arrow-up">↗</span>
+                    <div class="journey-flow-step step-5">Choose</div>
+                    <span class="journey-flow-arrow arrow-down">↘</span>
+                    <div class="journey-flow-step step-6">Belong</div>
+                    <span class="journey-flow-arrow arrow-up">↗</span>
+                    <div class="journey-flow-step step-7">Celebrate</div>
+                </div>
+                
+                <div class="journey-steps">
+                    <div class="journey-step-item step-1">
+                        <strong>Arrive</strong> as we are — with our tender imperfect humanity
+                    </div>
+                    <div class="journey-step-item step-2">
+                        <strong>Listen</strong> deeply — to our stories, not to fix them, but to understand and integrate them
+                    </div>
+                    <div class="journey-step-item step-3">
+                        <strong>Lay down</strong> the heavy bags — past patterns, old hurts, auto-pilot reactions
+                    </div>
+                    <div class="journey-step-item step-4">
+                        <strong>Pause</strong> and breathe — allowing ourselves to rest and re-energise
+                    </div>
+                    <div class="journey-step-item step-5">
+                        <strong>Make a choice</strong> — to soften, to open, to attune to life
+                    </div>
+                    <div class="journey-step-item step-6">
+                        <strong>Reconnect</strong> with our wholeness — both our broken places and our hidden potential
+                    </div>
+                    <div class="journey-step-item step-7">
+                        <strong>Return</strong> to aliveness — to dance with life, to love, and to blossom
+                    </div>
+                </div>
+            </div>
+            
             <div class="hero-buttons">
-                <a href="#cta" class="btn btn-primary">
+                <a href="#journey" class="btn btn-primary">
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-                        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                        <circle cx="9" cy="10" r="1" fill="currentColor"/>
-                        <circle cx="15" cy="10" r="1" fill="currentColor"/>
-                    </svg>
-                    <span data-i18n="hero.cta1">Join the Free Listening Lounge</span>
-                </a>
-                <a href="#journey" class="btn btn-secondary">
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 2a10 10 0 0 1 0 20"/>
-                        <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 2a10 10 0 0 1 0 20" />
+                        <circle cx="12" cy="12" r="3" fill="currentColor" />
                     </svg>
                     <span data-i18n="hero.cta2">Explore the Journey</span>
                 </a>
@@ -97,23 +138,23 @@
             <div class="hero-meta">
                 <span class="hero-meta-item">
                     <svg class="hero-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2"/>
-                        <path d="M16 2v4M8 2v4M3 10h18"/>
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <path d="M16 2v4M8 2v4M3 10h18" />
                     </svg>
                     <span data-i18n="hero.meta1">Weekend Sessions</span>
                 </span>
                 <span class="hero-meta-item">
                     <svg class="hero-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
-                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                        <path d="M12 19v3"/>
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                        <path d="M12 19v3" />
                     </svg>
                     <span data-i18n="hero.meta2">Hindi & English</span>
                 </span>
                 <span class="hero-meta-item">
                     <svg class="hero-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="3" width="20" height="14" rx="2"/>
-                        <path d="M8 21h8M12 17v4"/>
+                        <rect x="2" y="3" width="20" height="14" rx="2" />
+                        <path d="M8 21h8M12 17v4" />
                     </svg>
                     <span data-i18n="hero.meta3">Online / Hybrid</span>
                 </span>
@@ -127,14 +168,15 @@
             <div class="section-header animate-on-scroll">
                 <span class="section-badge">
                     <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
                     </svg>
                     <span data-i18n="journey.badge">The Journey</span>
                 </span>
                 <h2 class="section-title" data-i18n="journey.title">Your Path to Connection</h2>
-                <p class="section-subtitle" data-i18n="journey.subtitle">Each step is an invitation—not a requirement. Move at your own pace.</p>
+                <p class="section-subtitle" data-i18n="journey.subtitle">Each step is an invitation—not a requirement.
+                    Move at your own pace.</p>
             </div>
 
             <div class="journey-wrapper">
@@ -156,40 +198,52 @@
                         <div class="journey-card-header">
                             <div class="journey-card-icon">
                                 <svg viewBox="0 0 40 40" fill="none">
-                                    <rect x="4" y="20" width="32" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-                                    <path d="M8 20V12a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v8" stroke="currentColor" stroke-width="2"/>
-                                    <circle cx="20" cy="28" r="4" fill="currentColor" opacity="0.3"/>
+                                    <rect x="4" y="20" width="32" height="16" rx="2" stroke="currentColor"
+                                        stroke-width="2" />
+                                    <path d="M8 20V12a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v8" stroke="currentColor"
+                                        stroke-width="2" />
+                                    <circle cx="20" cy="28" r="4" fill="currentColor" opacity="0.3" />
                                 </svg>
                             </div>
                             <div>
                                 <span class="journey-card-badge" data-i18n="journey.card1.badge">Free</span>
-                                <h3 class="journey-card-title" data-i18n="journey.card1.title">The Listening Lounge</h3>
-                                <p class="journey-card-subtitle" data-i18n="journey.card1.subtitle">Cultivating Awareness</p>
+                                <h3 class="journey-card-title" data-i18n="journey.card1.title">The Listening Circle</h3>
+                                <p class="journey-card-subtitle" data-i18n="journey.card1.subtitle">Cultivating
+                                    Awareness</p>
                             </div>
                         </div>
-                        <p class="journey-card-text" data-i18n="journey.card1.text">A calm, reflective space where you practice deep listening without judgment. This is where empathy begins—listening before responding. Here, awareness is cultivated as the foundation for all that follows.</p>
-                        <p class="journey-card-theme" data-i18n="journey.card1.theme">Theme: Deep listening and presence</p>
+                        <p class="journey-card-text" data-i18n="journey.card1.text">A calm, reflective space where you
+                            practice deep listening without judgment. This is where empathy begins—listening before
+                            responding. Here, awareness is cultivated as the foundation for all that follows.</p>
+                        <p class="journey-card-theme" data-i18n="journey.card1.theme">Theme: Deep listening and presence
+                        </p>
                         <span class="journey-card-number">01</span>
                     </div>
+
 
                     <div class="journey-card animate-on-scroll" data-step="2">
                         <div class="journey-card-glow"></div>
                         <div class="journey-card-header">
                             <div class="journey-card-icon">
                                 <svg viewBox="0 0 40 40" fill="none">
-                                    <path d="M8 36V20L20 8l12 12v16H8z" stroke="currentColor" stroke-width="2"/>
-                                    <rect x="14" y="24" width="12" height="12" fill="currentColor" opacity="0.3"/>
-                                    <path d="M20 8v8" stroke="currentColor" stroke-width="2"/>
+                                    <ellipse cx="20" cy="32" rx="14" ry="4" stroke="currentColor" stroke-width="2" />
+                                    <path d="M10 32V18c0-6 4-10 10-10s10 4 10 10v14" stroke="currentColor"
+                                        stroke-width="2" />
+                                    <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.3" />
                                 </svg>
                             </div>
                             <div>
-                                <span class="journey-card-badge" data-i18n="journey.card2.badge">Deep Practice</span>
-                                <h3 class="journey-card-title" data-i18n="journey.card2.title">The Compassion Course</h3>
-                                <p class="journey-card-subtitle" data-i18n="journey.card2.subtitle">Awareness into Action</p>
+                                <span class="journey-card-badge" data-i18n="journey.card3.badge">Community</span>
+                                <h3 class="journey-card-title" data-i18n="journey.card3.title">The Empathy Café</h3>
+                                <p class="journey-card-subtitle" data-i18n="journey.card3.subtitle">Compassion into
+                                    Community</p>
                             </div>
                         </div>
-                        <p class="journey-card-text" data-i18n="journey.card2.text">Building on listening, learn how to translate empathy into compassionate behavior. A 52-week immersion where understanding becomes caring action—not just something you know, but something you embody.</p>
-                        <p class="journey-card-theme" data-i18n="journey.card2.theme">Theme: Understanding and responding with care</p>
+                        <p class="journey-card-text" data-i18n="journey.card3.text">A social, conversational setting
+                            where empathy is practiced through dialogue and storytelling. Extend the skills you've
+                            learned into real-world interactions and bring compassion into community.</p>
+                        <p class="journey-card-theme" data-i18n="journey.card3.theme">Theme: Shared stories and
+                            emotional connection</p>
                         <span class="journey-card-number">02</span>
                     </div>
 
@@ -198,46 +252,56 @@
                         <div class="journey-card-header">
                             <div class="journey-card-icon">
                                 <svg viewBox="0 0 40 40" fill="none">
-                                    <ellipse cx="20" cy="32" rx="14" ry="4" stroke="currentColor" stroke-width="2"/>
-                                    <path d="M10 32V18c0-6 4-10 10-10s10 4 10 10v14" stroke="currentColor" stroke-width="2"/>
-                                    <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.3"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <span class="journey-card-badge" data-i18n="journey.card3.badge">Community</span>
-                                <h3 class="journey-card-title" data-i18n="journey.card3.title">The Empathy Café</h3>
-                                <p class="journey-card-subtitle" data-i18n="journey.card3.subtitle">Compassion into Community</p>
-                            </div>
-                        </div>
-                        <p class="journey-card-text" data-i18n="journey.card3.text">A social, conversational setting where empathy is practiced through dialogue and storytelling. Extend the skills you've learned into real-world interactions and bring compassion into community.</p>
-                        <p class="journey-card-theme" data-i18n="journey.card3.theme">Theme: Shared stories and emotional connection</p>
-                        <span class="journey-card-number">03</span>
-                    </div>
-
-                    <div class="journey-card animate-on-scroll" data-step="4">
-                        <div class="journey-card-glow"></div>
-                        <div class="journey-card-header">
-                            <div class="journey-card-icon">
-                                <svg viewBox="0 0 40 40" fill="none">
-                                    <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="2"/>
-                                    <circle cx="20" cy="20" r="6" fill="currentColor" opacity="0.3"/>
-                                    <path d="M20 4v6M20 30v6M4 20h6M30 20h6" stroke="currentColor" stroke-width="2"/>
-                                    <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.5"/>
-                                    <circle cx="30" cy="10" r="3" fill="currentColor" opacity="0.5"/>
-                                    <circle cx="10" cy="30" r="3" fill="currentColor" opacity="0.5"/>
-                                    <circle cx="30" cy="30" r="3" fill="currentColor" opacity="0.5"/>
+                                    <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="20" cy="20" r="6" fill="currentColor" opacity="0.3" />
+                                    <path d="M20 4v6M20 30v6M4 20h6M30 20h6" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.5" />
+                                    <circle cx="30" cy="10" r="3" fill="currentColor" opacity="0.5" />
+                                    <circle cx="10" cy="30" r="3" fill="currentColor" opacity="0.5" />
+                                    <circle cx="30" cy="30" r="3" fill="currentColor" opacity="0.5" />
                                 </svg>
                             </div>
                             <div>
                                 <span class="journey-card-badge" data-i18n="journey.card4.badge">Integration</span>
                                 <h3 class="journey-card-title" data-i18n="journey.card4.title">Join the Dots</h3>
-                                <p class="journey-card-subtitle" data-i18n="journey.card4.subtitle">The Complete Picture</p>
+                                <p class="journey-card-subtitle" data-i18n="journey.card4.subtitle">The Complete Picture
+                                </p>
                             </div>
                         </div>
-                        <p class="journey-card-text" data-i18n="journey.card4.text">The meta-space that connects insights from all experiences—listening, compassion, and empathy—into a cohesive framework. Here, isolated practices become a connected ecosystem of emotional intelligence.</p>
-                        <p class="journey-card-theme" data-i18n="journey.card4.theme">Theme: Integration and synthesis</p>
+                        <p class="journey-card-text" data-i18n="journey.card4.text">The meta-space that connects
+                            insights from all experiences—listening, compassion, and empathy—into a cohesive framework.
+                            Here, isolated practices become a connected ecosystem of emotional intelligence.</p>
+                        <p class="journey-card-theme" data-i18n="journey.card4.theme">Theme: Integration and synthesis
+                        </p>
+                        <span class="journey-card-number">03</span>
+                    </div>
+                    <div class="journey-card animate-on-scroll" data-step="4">
+                        <div class="journey-card-glow"></div>
+                        <div class="journey-card-header">
+                            <div class="journey-card-icon">
+                                <svg viewBox="0 0 40 40" fill="none">
+                                    <path d="M8 36V20L20 8l12 12v16H8z" stroke="currentColor" stroke-width="2" />
+                                    <rect x="14" y="24" width="12" height="12" fill="currentColor" opacity="0.3" />
+                                    <path d="M20 8v8" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="journey-card-badge" data-i18n="journey.card2.badge">Deep Practice</span>
+                                <h3 class="journey-card-title" data-i18n="journey.card2.title">The Compassion Course
+                                </h3>
+                                <p class="journey-card-subtitle" data-i18n="journey.card2.subtitle">Awareness into
+                                    Action</p>
+                            </div>
+                        </div>
+                        <p class="journey-card-text" data-i18n="journey.card2.text">Building on listening, learn how to
+                            translate empathy into compassionate behavior. A 52-week immersion where understanding
+                            becomes caring action—not just something you know, but something you embody.</p>
+                        <p class="journey-card-theme" data-i18n="journey.card2.theme">Theme: Understanding and
+                            responding with care</p>
                         <span class="journey-card-number">04</span>
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -250,8 +314,8 @@
             <div class="section-header animate-on-scroll">
                 <span class="section-badge">
                     <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2"/>
-                        <path d="M16 2v4M8 2v4M3 10h18"/>
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <path d="M16 2v4M8 2v4M3 10h18" />
                     </svg>
                     <span data-i18n="rhythm.badge">Our Monthly Rhythm</span>
                 </span>
@@ -263,25 +327,13 @@
                 <div class="time-slots-label" data-i18n="rhythm.timeSlotsLabel">Choose Your Time</div>
                 <div class="time-slots">
                     <div class="time-slot">
-                        <svg class="time-slot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.3"/>
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                        <svg class="time-slot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"
+                                opacity="0.2" />
+                            <circle cx="12" cy="12" r="9" />
                         </svg>
-                        <span>10:30 – 12:00</span>
-                    </div>
-                    <div class="time-slot">
-                        <svg class="time-slot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="5" fill="currentColor" opacity="0.3"/>
-                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                        </svg>
-                        <span>2:30 – 4:00</span>
-                    </div>
-                    <div class="time-slot">
-                        <svg class="time-slot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" opacity="0.2"/>
-                            <circle cx="12" cy="12" r="9"/>
-                        </svg>
-                        <span>6:30 – 9:00</span>
+                        <span>6:00 – 8:00</span>
                     </div>
                 </div>
             </div>
@@ -290,65 +342,75 @@
                 <div class="schedule-card animate-on-scroll">
                     <div class="schedule-card-icon-wrapper">
                         <svg viewBox="0 0 48 48" fill="none">
-                            <rect x="6" y="24" width="36" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 24V14a6 6 0 0 1 6-6h12a6 6 0 0 1 6 6v10" stroke="currentColor" stroke-width="2"/>
+                            <rect x="6" y="24" width="36" height="18" rx="2" stroke="currentColor" stroke-width="2" />
+                            <path d="M12 24V14a6 6 0 0 1 6-6h12a6 6 0 0 1 6 6v10" stroke="currentColor"
+                                stroke-width="2" />
                         </svg>
                     </div>
                     <div class="schedule-card-week" data-i18n="rhythm.week1">Week 1</div>
-                    <h3 class="schedule-card-title" data-i18n="rhythm.card1.title">Listening Lounge</h3>
+                    <h3 class="schedule-card-title" data-i18n="rhythm.card1.title">Listening Circle</h3>
                     <span class="schedule-card-badge" data-i18n="rhythm.card1.badge">FREE</span>
-                    <p class="schedule-card-text" data-i18n="rhythm.card1.text">Topic-based monthly sessions in Hindi & English. Open to everyone.</p>
+                    <p class="schedule-card-text" data-i18n="rhythm.card1.text">Topic-based monthly sessions in Hindi &
+                        English. Open to everyone.</p>
                 </div>
+
+
 
                 <div class="schedule-card animate-on-scroll">
                     <div class="schedule-card-icon-wrapper">
                         <svg viewBox="0 0 48 48" fill="none">
-                            <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="24" cy="24" r="6" fill="currentColor" opacity="0.3"/>
-                            <path d="M24 6v6M24 36v6M6 24h6M36 24h6" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div class="schedule-card-week" data-i18n="rhythm.weeks24">Weeks 2–4</div>
-                    <h3 class="schedule-card-title" data-i18n="rhythm.card2.title">Join the Dots</h3>
-                    <p class="schedule-card-text" data-i18n="rhythm.card2.text">6 sessions (2 per weekend). Experiential, reflective, practice-based workshops.</p>
-                </div>
-
-                <div class="schedule-card animate-on-scroll">
-                    <div class="schedule-card-icon-wrapper">
-                        <svg viewBox="0 0 48 48" fill="none">
-                            <ellipse cx="24" cy="38" rx="16" ry="4" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 38V22c0-8 5-14 12-14s12 6 12 14v16" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.3"/>
+                            <ellipse cx="24" cy="38" rx="16" ry="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M12 38V22c0-8 5-14 12-14s12 6 12 14v16" stroke="currentColor" stroke-width="2" />
+                            <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.3" />
                         </svg>
                     </div>
                     <div class="schedule-card-week" data-i18n="rhythm.lastWeek">Last Week</div>
                     <h3 class="schedule-card-title" data-i18n="rhythm.card3.title">Empathy Café</h3>
-                    <p class="schedule-card-text" data-i18n="rhythm.card3.text">30-minute community integration circle. A moment to pause and connect.</p>
+                    <span class="schedule-card-badge" data-i18n="rhythm.card1.badge">FREE</span>
+
+                    <p class="schedule-card-text" data-i18n="rhythm.card3.text">30-minute community integration circle.
+                        A moment to pause and connect.</p>
+                </div>
+
+                <div class="schedule-card animate-on-scroll">
+                    <div class="schedule-card-icon-wrapper">
+                        <svg viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2" />
+                            <circle cx="24" cy="24" r="6" fill="currentColor" opacity="0.3" />
+                            <path d="M24 6v6M24 36v6M6 24h6M36 24h6" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="schedule-card-week" data-i18n="rhythm.weeks24">Weeks 2–4</div>
+                    <h3 class="schedule-card-title" data-i18n="rhythm.card2.title">Monthly Themed Exploration</h3>
+                    <span class="schedule-card-badge" data-i18n="rhythm.card1.badge">PAID</span>
+
+                    <p class="schedule-card-text" data-i18n="rhythm.card2.text">6 sessions (2 per weekend).
+                        Experiential, reflective, practice-based workshops.</p>
                 </div>
             </div>
 
             <div class="upcoming-topics animate-on-scroll">
-                <h4 data-i18n="rhythm.topicsTitle">Upcoming Listening Lounge Topics</h4>
+                <h4 data-i18n="rhythm.topicsTitle">Upcoming Listening Circle Topics</h4>
                 <div class="topics-list">
                     <div class="topic-tag">
                         <span class="topic-tag-month" data-i18n="rhythm.feb">Feb</span>
                         <span class="topic-tag-text" data-i18n="rhythm.topic1">Understanding Love & Breakups</span>
                         <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                            <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </div>
                     <div class="topic-tag">
                         <span class="topic-tag-month" data-i18n="rhythm.mar">Mar</span>
                         <span class="topic-tag-text" data-i18n="rhythm.topic2">Handling Power Struggles</span>
                         <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                            <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </div>
                     <div class="topic-tag">
                         <span class="topic-tag-month" data-i18n="rhythm.apr">Apr</span>
                         <span class="topic-tag-text" data-i18n="rhythm.topic3">Anger and Its Pain</span>
                         <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                            <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </div>
                 </div>
@@ -363,9 +425,9 @@
             <div class="section-header animate-on-scroll">
                 <span class="section-badge">
                     <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
                     </svg>
                     <span data-i18n="pricing.badge">Ways to Join</span>
                 </span>
@@ -378,18 +440,18 @@
                     <div class="pricing-card-inner">
                         <div class="pricing-icon-wrapper">
                             <svg viewBox="0 0 48 48" fill="none">
-                                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2"/>
-                                <path d="M24 14v20M14 24h20" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2" />
+                                <path d="M24 14v20M14 24h20" stroke="currentColor" stroke-width="2" />
                             </svg>
                         </div>
-                        <h3 class="pricing-name" data-i18n="pricing.free.name">Listening Lounge</h3>
+                        <h3 class="pricing-name" data-i18n="pricing.free.name">Listening Circle</h3>
                         <div class="pricing-amount free" data-i18n="pricing.free.amount">Free</div>
                         <div class="pricing-period" data-i18n="pricing.free.period">Always open, always free</div>
                         <div class="pricing-divider"></div>
                         <ul class="pricing-features">
                             <li data-i18n="pricing.free.f1">Monthly listening circles</li>
+                            <li data-i18n="pricing.free.f2">Empathy Café access</li>
                             <li data-i18n="pricing.free.f2">Topic-based sessions</li>
-                            <li data-i18n="pricing.free.f3">Hindi & English available</li>
                             <li data-i18n="pricing.free.f4">No commitment required</li>
                         </ul>
                         <a href="#cta" class="btn btn-secondary" data-i18n="pricing.free.cta">Join Free</a>
@@ -400,19 +462,19 @@
                     <div class="pricing-card-inner">
                         <div class="pricing-icon-wrapper">
                             <svg viewBox="0 0 48 48" fill="none">
-                                <path d="M24 4v8M24 36v8M4 24h8M36 24h8" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.3"/>
+                                <path d="M24 4v8M24 36v8M4 24h8M36 24h8" stroke="currentColor" stroke-width="2" />
+                                <circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="2" />
+                                <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.3" />
                             </svg>
                         </div>
                         <h3 class="pricing-name" data-i18n="pricing.weekly.name">Weekly Pass</h3>
                         <div class="pricing-amount">₹600</div>
-                        <div class="pricing-period" data-i18n="pricing.weekly.period">per week</div>
+                        <div class="pricing-period" data-i18n="pricing.weekly.period">2 sessions per week</div>
                         <div class="pricing-divider"></div>
                         <ul class="pricing-features">
-                            <li data-i18n="pricing.weekly.f1">Join the Dots workshops</li>
+                            <li data-i18n="pricing.weekly.f1">Thematic Monthly exploration track</li>
                             <li data-i18n="pricing.weekly.f2">Empathy Café access</li>
-                            <li data-i18n="pricing.weekly.f3">Listening Lounge included</li>
+                            <li data-i18n="pricing.weekly.f3">Listening Circle included</li>
                             <li data-i18n="pricing.weekly.f4">Flexible weekly commitment</li>
                         </ul>
                         <a href="#cta" class="btn btn-primary" data-i18n="pricing.weekly.cta">Get Started</a>
@@ -424,18 +486,20 @@
                     <div class="pricing-card-inner">
                         <div class="pricing-icon-wrapper">
                             <svg viewBox="0 0 48 48" fill="none">
-                                <path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                                <path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z"
+                                    stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1" />
                             </svg>
                         </div>
                         <h3 class="pricing-name" data-i18n="pricing.monthly.name">Monthly Pass</h3>
-                        <div class="pricing-amount">₹1800</div>
-                        <div class="pricing-period" data-i18n="pricing.monthly.period">per month (Save ₹600)</div>
+                        <div class="pricing-amount">₹1200</div>
+                        <div class="pricing-period" data-i18n="pricing.monthly.period">6 sessions per month <br>(Save ₹600)</div>
                         <div class="pricing-divider"></div>
                         <ul class="pricing-features">
                             <li data-i18n="pricing.monthly.f1">All 6 workshop sessions</li>
                             <li data-i18n="pricing.monthly.f2">All community circles</li>
                             <li data-i18n="pricing.monthly.f3">Full month access</li>
                             <li data-i18n="pricing.monthly.f4">Best for committed learners</li>
+                            <li data-i18n="pricing.monthly.f5">50% off on 52-weeks Compassion Course</li>
                         </ul>
                         <a href="#cta" class="btn btn-warm" data-i18n="pricing.monthly.cta">Choose This</a>
                     </div>
@@ -452,22 +516,26 @@
                 <div class="compassion-card-bg"></div>
                 <span class="compassion-badge">
                     <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M2 12h20"/>
-                        <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M2 12h20" />
+                        <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20" />
                     </svg>
                     <span data-i18n="compassion.badge">Deeper Journey (Optional Path)</span>
                 </span>
                 <h2 class="compassion-title" data-i18n="compassion.title">The Compassion Course</h2>
-                <p class="compassion-duration" data-i18n="compassion.duration">52 Weeks with Thom Bond (International NVC Trainer)</p>
-                <p class="compassion-text" data-i18n="compassion.text">A year-long transformational journey where empathy becomes not just something you practice, but who you are. Special rate exclusively for Join the Dots participants.</p>
+                <p class="compassion-duration" data-i18n="compassion.duration">52 Weeks with Thom Bond (International
+                    NVC Trainer)</p>
+                <p class="compassion-text" data-i18n="compassion.text">A year-long transformational journey where
+                    empathy becomes not just something you practice, but who you are. Special rate exclusively for Join
+                    the Dots participants.</p>
                 <div class="compassion-pricing">
                     <span class="compassion-original">₹12,000</span>
-                    <svg class="compassion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    <svg class="compassion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
-                    <span class="compassion-special">₹7,000</span>
-                    <span class="compassion-savings" data-i18n="compassion.savings">Save ₹5,000</span>
+                    <span class="compassion-special">₹6,000</span>
+                    <span class="compassion-savings" data-i18n="compassion.savings">Save ₹6,000</span>
                 </div>
                 <a href="#cta" class="btn btn-warm" data-i18n="compassion.cta">Explore the Compassion Course</a>
             </div>
@@ -481,9 +549,9 @@
             <div class="reflection-content animate-on-scroll">
                 <span class="section-badge">
                     <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="3" fill="currentColor"/>
-                        <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="3" fill="currentColor" />
+                        <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
                     </svg>
                     <span data-i18n="reflection.badge">Reflection Compass</span>
                 </span>
@@ -496,8 +564,9 @@
                         <div class="reflection-stage">
                             <div class="reflection-stage-icon-wrapper">
                                 <svg viewBox="0 0 32 32" fill="none">
-                                    <rect x="8" y="4" width="16" height="24" rx="2" stroke="currentColor" stroke-width="2"/>
-                                    <path d="M12 14h8M12 18h8" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+                                    <rect x="8" y="4" width="16" height="24" rx="2" stroke="currentColor"
+                                        stroke-width="2" />
+                                    <path d="M12 14h8M12 18h8" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
                                 </svg>
                             </div>
                             <div class="reflection-stage-name" data-i18n="reflection.stage1">At the Threshold</div>
@@ -505,8 +574,8 @@
                         <div class="reflection-stage">
                             <div class="reflection-stage-icon-wrapper">
                                 <svg viewBox="0 0 32 32" fill="none">
-                                    <path d="M4 28L16 4l12 24H4z" stroke="currentColor" stroke-width="2"/>
-                                    <circle cx="16" cy="18" r="3" fill="currentColor" opacity="0.3"/>
+                                    <path d="M4 28L16 4l12 24H4z" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="16" cy="18" r="3" fill="currentColor" opacity="0.3" />
                                 </svg>
                             </div>
                             <div class="reflection-stage-name" data-i18n="reflection.stage2">On the Path</div>
@@ -514,9 +583,9 @@
                         <div class="reflection-stage">
                             <div class="reflection-stage-icon-wrapper">
                                 <svg viewBox="0 0 32 32" fill="none">
-                                    <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
-                                    <circle cx="16" cy="16" r="4" fill="currentColor"/>
-                                    <path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2" />
+                                    <circle cx="16" cy="16" r="4" fill="currentColor" />
+                                    <path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="currentColor" stroke-width="1.5" />
                                 </svg>
                             </div>
                             <div class="reflection-stage-name" data-i18n="reflection.stage3">Finding My Way</div>
@@ -524,8 +593,8 @@
                         <div class="reflection-stage">
                             <div class="reflection-stage-icon-wrapper">
                                 <svg viewBox="0 0 32 32" fill="none">
-                                    <path d="M6 28V16L16 6l10 10v12H6z" stroke="currentColor" stroke-width="2"/>
-                                    <rect x="12" y="18" width="8" height="10" fill="currentColor" opacity="0.3"/>
+                                    <path d="M6 28V16L16 6l10 10v12H6z" stroke="currentColor" stroke-width="2" />
+                                    <rect x="12" y="18" width="8" height="10" fill="currentColor" opacity="0.3" />
                                 </svg>
                             </div>
                             <div class="reflection-stage-name" data-i18n="reflection.stage4">At Home</div>
@@ -545,10 +614,10 @@
             <div class="section-header animate-on-scroll">
                 <span class="section-badge">
                     <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>
                     <span data-i18n="audience.badge">Who Is This For?</span>
                 </span>
@@ -559,29 +628,32 @@
                 <div class="audience-item animate-on-scroll">
                     <div class="audience-icon">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <path d="M16 6c-4 0-8 4-8 10s4 10 8 10 8-4 8-10-4-10-8-10z" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 16l4 4 4-4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 6c-4 0-8 4-8 10s4 10 8 10 8-4 8-10-4-10-8-10z" stroke="currentColor"
+                                stroke-width="2" />
+                            <path d="M12 16l4 4 4-4" stroke="currentColor" stroke-width="2" />
                         </svg>
                     </div>
-                    <span class="audience-text" data-i18n="audience.item1">Navigating love, conflict, or transitions</span>
+                    <span class="audience-text" data-i18n="audience.item1">Navigating love, conflict, or
+                        transitions</span>
                 </div>
                 <div class="audience-item animate-on-scroll">
                     <div class="audience-icon">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="22" cy="10" r="4" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="16" cy="22" r="4" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 13l2 6M20 13l-2 6" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+                            <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2" />
+                            <circle cx="22" cy="10" r="4" stroke="currentColor" stroke-width="2" />
+                            <circle cx="16" cy="22" r="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M12 13l2 6M20 13l-2 6" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
                         </svg>
                     </div>
-                    <span class="audience-text" data-i18n="audience.item2">Couples & families seeking deeper connection</span>
+                    <span class="audience-text" data-i18n="audience.item2">Couples & families seeking deeper
+                        connection</span>
                 </div>
                 <div class="audience-item animate-on-scroll">
                     <div class="audience-icon">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <circle cx="16" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
-                            <path d="M8 28v-6a8 8 0 0 1 16 0v6" stroke="currentColor" stroke-width="2"/>
-                            <path d="M16 16v6" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="16" cy="8" r="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M8 28v-6a8 8 0 0 1 16 0v6" stroke="currentColor" stroke-width="2" />
+                            <path d="M16 16v6" stroke="currentColor" stroke-width="2" />
                         </svg>
                     </div>
                     <span class="audience-text" data-i18n="audience.item3">Caregivers, teachers, and leaders</span>
@@ -589,7 +661,8 @@
                 <div class="audience-item animate-on-scroll">
                     <div class="audience-icon">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <path d="M16 4l4 8h8l-6 6 2 10-8-4-8 4 2-10-6-6h8l4-8z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M16 4l4 8h8l-6 6 2 10-8-4-8 4 2-10-6-6h8l4-8z" stroke="currentColor"
+                                stroke-width="2" />
                         </svg>
                     </div>
                     <span class="audience-text" data-i18n="audience.item4">Army families & community workers</span>
@@ -597,9 +670,9 @@
                 <div class="audience-item animate-on-scroll">
                     <div class="audience-icon">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="16" cy="16" r="4" fill="currentColor" opacity="0.3"/>
-                            <path d="M16 6v4M16 22v4" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2" />
+                            <circle cx="16" cy="16" r="4" fill="currentColor" opacity="0.3" />
+                            <path d="M16 6v4M16 22v4" stroke="currentColor" stroke-width="1.5" />
                         </svg>
                     </div>
                     <span class="audience-text" data-i18n="audience.item5">Anyone longing to be heard</span>
@@ -607,10 +680,10 @@
                 <div class="audience-item animate-on-scroll">
                     <div class="audience-icon">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <path d="M6 16a10 10 0 0 1 10-10" stroke="currentColor" stroke-width="2"/>
-                            <path d="M6 16a10 10 0 0 0 10 10" stroke="currentColor" stroke-width="2"/>
-                            <circle cx="22" cy="16" r="4" stroke="currentColor" stroke-width="2"/>
-                            <path d="M16 12v8" stroke="currentColor" stroke-width="2"/>
+                            <path d="M6 16a10 10 0 0 1 10-10" stroke="currentColor" stroke-width="2" />
+                            <path d="M6 16a10 10 0 0 0 10 10" stroke="currentColor" stroke-width="2" />
+                            <circle cx="22" cy="16" r="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M16 12v8" stroke="currentColor" stroke-width="2" />
                         </svg>
                     </div>
                     <span class="audience-text" data-i18n="audience.item6">Those learning to listen with empathy</span>
@@ -630,7 +703,7 @@
                 <h2 data-i18n="cta.title">Come Home to Yourself</h2>
                 <div class="cta-text">
                     <p data-i18n="cta.line1">Come to Join the Dots.</p>
-                    <p data-i18n="cta.line2">Sit in the Listening Lounge.</p>
+                    <p data-i18n="cta.line2">Sit in the Listening Circle.</p>
                     <p data-i18n="cta.line3">Find your map in Join the Dots.</p>
                     <p data-i18n="cta.line4">Warm yourself in the Empathy Café.</p>
                     <p data-i18n="cta.line5">And slowly, come home to yourself.</p>
@@ -638,12 +711,13 @@
                 <div class="cta-buttons">
                     <a href="https://wa.me/your-number" class="btn btn-primary" target="_blank" rel="noopener">
                         <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                         </svg>
                         <span data-i18n="cta.whatsapp">Talk to Us on WhatsApp</span>
                     </a>
                     <a href="#" class="btn btn-secondary" data-i18n="cta.register">Register for This Month</a>
-                    <a href="#" class="btn btn-warm" data-i18n="cta.joinFree">Join the Free Listening Lounge</a>
+                    <a href="#" class="btn btn-warm" data-i18n="cta.joinFree">Join the Free Listening Circle</a>
                 </div>
             </div>
         </div>
@@ -652,7 +726,7 @@
     <!-- Subtle Contact Button -->
     <a href="https://wa.me/your-number" class="contact-float" target="_blank" rel="noopener" aria-label="Contact us">
         <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
         </svg>
     </a>
 
@@ -663,9 +737,11 @@
                 <div class="footer-brand">
                     <h3>
                         <svg class="footer-logo-icon" viewBox="0 0 40 40" fill="none">
-                            <path d="M8 20c0-8 6-14 14-14" stroke="var(--color-sage-light)" stroke-width="3" stroke-linecap="round"/>
-                            <path d="M32 20c0 8-6 14-14 14" stroke="var(--color-terracotta-light)" stroke-width="3" stroke-linecap="round"/>
-                            <circle cx="20" cy="20" r="5" fill="var(--color-sage-light)"/>
+                            <path d="M8 20c0-8 6-14 14-14" stroke="var(--color-sage-light)" stroke-width="3"
+                                stroke-linecap="round" />
+                            <path d="M32 20c0 8-6 14-14 14" stroke="var(--color-terracotta-light)" stroke-width="3"
+                                stroke-linecap="round" />
+                            <circle cx="20" cy="20" r="5" fill="var(--color-sage-light)" />
                         </svg>
                         <span data-i18n="brand">Join the Dots</span>
                     </h3>
@@ -674,7 +750,7 @@
                 <div class="footer-links">
                     <h4 data-i18n="footer.journey">Journey</h4>
                     <ul>
-                        <li><a href="#journey" data-i18n="footer.listeningLounge">Listening Lounge</a></li>
+                        <li><a href="#journey" data-i18n="footer.listeningLounge">Listening Circle</a></li>
                         <li><a href="#journey" data-i18n="footer.joinTheDots">Join the Dots</a></li>
                         <li><a href="#compassion" data-i18n="footer.compassionCourse">Compassion Course</a></li>
                         <li><a href="#journey" data-i18n="footer.empathyCafe">Empathy Café</a></li>
@@ -693,18 +769,21 @@
                     <h4 data-i18n="footer.connect">Connect</h4>
                     <ul>
                         <li><a href="https://wa.me/your-number" target="_blank" rel="noopener">WhatsApp</a></li>
-                        <li><a href="mailto:hello@jointhedots.com">Email</a></li>
+                        <li><a href="/cdn-cgi/l/email-protection#ff979a939390bf959096918b979a9b908b8cd19c9092">Email</a></li>
                         <li><a href="#cta" data-i18n="footer.registerNow">Register Now</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Join the Dots. <span data-i18n="footer.madeWith">Made with</span> care <span data-i18n="footer.forThose">for those seeking connection.</span></p>
+                <p>© 2025 Join the Dots. <span data-i18n="footer.madeWith">Made with</span> care <span
+                        data-i18n="footer.forThose">for those seeking connection.</span></p>
             </div>
         </div>
     </footer>
 
-    <script src="animations.js"></script>
+
+  <script src="animations.js"></script>
     <script src="translations.js"></script>
 </body>
+
 </html>
