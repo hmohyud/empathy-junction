@@ -45,7 +45,7 @@
                     <li><a href="#rhythm" class="nav-link" data-i18n="nav.schedule">Schedule</a></li>
                     <li><a href="#pricing" class="nav-link" data-i18n="nav.pricing">Pricing</a></li>
                     <li><a href="about.html" class="nav-link" data-i18n="nav.about">About Us</a></li>
-                    <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+                    <li><a href="register.html" class="nav-link" data-i18n="nav.register">Register</a></li>
                 </ul>
             </div>
             <div class="nav-right">
@@ -54,7 +54,7 @@
                     <button class="lang-btn" data-lang="hi">हि</button>
                     <button class="lang-btn" data-lang="ur">اردو</button>
                 </div>
-                <a href="#cta" class="nav-cta" data-i18n="nav.join">Join Now</a>
+                <a href="register.html" class="nav-cta" data-i18n="nav.join">Register</a>
             </div>
             <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
@@ -68,8 +68,8 @@
         <a href="#rhythm" data-i18n="nav.schedule">Schedule</a>
         <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
         <a href="about.html" data-i18n="nav.about">About Us</a>
-        <a href="contact.html" data-i18n="nav.contact">Contact</a>
-        <a href="#cta" class="btn btn-primary" data-i18n="nav.join">Join Now</a>
+        <a href="register.html" data-i18n="nav.register">Register</a>
+        <a href="register.html" class="btn btn-primary" data-i18n="nav.join">Register</a>
         <div class="lang-toggle mobile-lang-toggle">
             <button class="lang-btn active" data-lang="en">EN</button>
             <button class="lang-btn" data-lang="hi">हि</button>
@@ -87,7 +87,10 @@
 
         <!-- Events at-a-glance card -->
         <div class="events-glance" id="eventsTab" role="button" tabindex="0" aria-label="Open events panel">
-            <div class="events-glance-label">Events</div>
+            <div class="events-glance-header">
+                <span class="events-glance-label">Events</span>
+                <svg class="events-glance-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
             <div class="events-glance-list" id="eventsGlanceList"></div>
         </div>
 
@@ -215,7 +218,6 @@
                     <span data-i18n="rhythm.badge">Our Monthly Rhythm</span>
                 </span>
                 <h2 class="section-title" data-i18n="rhythm.title">Weekends Made Meaningful</h2>
-                <p class="section-subtitle" data-i18n="rhythm.subtitle">Three time slots, flexible for your schedule</p>
             </div>
 
             <div class="time-slots-wrapper animate-on-scroll">
@@ -467,7 +469,7 @@
                             <li data-i18n="pricing.free.f2">Topic-based sessions</li>
                             <li data-i18n="pricing.free.f4">No commitment required</li>
                         </ul>
-                        <a href="#cta" class="btn btn-secondary" data-i18n="pricing.free.cta">Join Free</a>
+                        <a href="register.html" class="btn btn-secondary" data-i18n="pricing.free.cta">Join Free</a>
                     </div>
                 </div>
 
@@ -490,7 +492,7 @@
                             <li data-i18n="pricing.weekly.f3">Listening Circle included</li>
                             <li data-i18n="pricing.weekly.f4">Flexible weekly commitment</li>
                         </ul>
-                        <a href="#cta" class="btn btn-primary" data-i18n="pricing.weekly.cta">Get Started</a>
+                        <a href="register.html" class="btn btn-primary" data-i18n="pricing.weekly.cta">Get Started</a>
                     </div>
                 </div>
 
@@ -515,7 +517,7 @@
                             <li data-i18n="pricing.monthly.f4">Best for committed learners</li>
                             <li data-i18n="pricing.monthly.f5">Unlocks 50% off the Compassion Course</li>
                         </ul>
-                        <a href="#cta" class="btn btn-warm" data-i18n="pricing.monthly.cta">Choose This</a>
+                        <a href="register.html" class="btn btn-warm" data-i18n="pricing.monthly.cta">Choose This</a>
                     </div>
                 </div>
             </div>
@@ -551,7 +553,7 @@
                     <span class="compassion-savings" data-i18n="compassion.savings">Save ₹6,000</span>
                 </div>
                 <p class="compassion-discount-note" data-i18n="compassion.discountNote">₹6,000 rate is exclusive to Monthly Pass holders. Buy any single Monthly Pass to unlock this 50% discount permanently.</p>
-                <a href="#cta" class="btn btn-warm" data-i18n="compassion.cta">Explore the Compassion Course</a>
+                <a href="register.html" class="btn btn-warm" data-i18n="compassion.cta">Explore the Compassion Course</a>
             </div>
         </div>
     </section>
@@ -730,8 +732,8 @@
                         </svg>
                         <span data-i18n="cta.whatsapp">Talk to Us on WhatsApp</span>
                     </a>
-                    <a href="#" class="btn btn-secondary" data-i18n="cta.register">Register for This Month</a>
-                    <a href="#" class="btn btn-warm" data-i18n="cta.joinFree">Join the Free Listening Circle</a>
+                    <a href="register.html" class="btn btn-secondary" data-i18n="cta.register">Register for This Month</a>
+                    <a href="register.html" class="btn btn-warm" data-i18n="cta.joinFree">Join the Free Listening Circle</a>
                 </div>
             </div>
         </div>
@@ -783,7 +785,7 @@
                         <li><a href="#rhythm" data-i18n="footer.schedule">Schedule</a></li>
                         <li><a href="#pricing" data-i18n="footer.pricing">Pricing</a></li>
                         <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
-                        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+                        <li><a href="register.html" data-i18n="nav.register">Register</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -792,7 +794,7 @@
                         <li><a href="https://wa.me/your-number" target="_blank" rel="noopener">WhatsApp</a></li>
                         <li><a href="/cdn-cgi/l/email-protection#ff979a939390bf959096918b979a9b908b8cd19c9092">Email</a>
                         </li>
-                        <li><a href="#cta" data-i18n="footer.registerNow">Register Now</a></li>
+                        <li><a href="register.html" data-i18n="footer.registerNow">Register Now</a></li>
                     </ul>
                 </div>
             </div>

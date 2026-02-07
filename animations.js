@@ -2189,7 +2189,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return MONTHS_SHORT[d.getMonth()].toUpperCase() + ' ' + d.getDate();
     }
 
-    // ── Open / Close (no scroll lock) ──
     function openDrawer(e) {
         if (e) e.preventDefault();
         drawer.classList.add('open');
@@ -2212,7 +2211,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
     });
 
-    // ── Renderers ──
     function renderUpcoming(events) {
         var now = new Date();
         now.setHours(0,0,0,0);
@@ -2220,7 +2218,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!ev.date) return true;
             return new Date(ev.date + 'T23:59:59') >= now;
         });
-
         if (future.length === 0) {
             upcomingEl.innerHTML = '<div class="event-card" style="justify-content:center;align-items:center;min-height:60px;"><p class="event-desc" style="text-align:center;opacity:0.6;">No upcoming events — check back soon!</p></div>';
             return;
@@ -2229,12 +2226,7 @@ document.addEventListener("DOMContentLoaded", () => {
             var hasTag = ev.tag && ev.tag.trim();
             return '<div class="event-card' + (hasTag ? '' : ' no-tag') + '">'
                 + (hasTag ? '<span class="event-tag">' + ev.tag + '</span>' : '')
-                + (ev.date
-                    ? '<div class="event-date">'
-                    +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
-                    +     formatDate(ev.date)
-                    + '</div>'
-                    : '')
+                + (ev.date ? '<div class="event-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>' + formatDate(ev.date) + '</div>' : '')
                 + (ev.time ? '<div class="event-time">' + ev.time + '</div>' : '')
                 + (ev.title ? '<div class="event-title">' + ev.title + '</div>' : '')
                 + (ev.subtitle ? '<div class="event-subtitle">' + ev.subtitle + '</div>' : '')
@@ -2252,51 +2244,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 + (ev.title ? '<div class="event-title">' + ev.title + '</div>' : '')
                 + (ev.subtitle ? '<div class="event-subtitle">' + ev.subtitle + '</div>' : '')
                 + (ev.description ? '<div class="event-desc">' + ev.description + '</div>' : '')
-                + (ev.link
-                    ? '<a href="' + ev.link + '" class="event-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>'
-                    : '')
+                + (ev.link ? '<a href="' + ev.link + '" class="event-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>' : '')
                 + '</div>';
         }).join('');
     }
 
-    // ── Glance card (date columns) ──
     function renderGlance(data) {
         if (!glanceList) return;
         var now = new Date();
         now.setHours(0,0,0,0);
         var rows = [];
-
         (data.upcoming || []).forEach(function(ev) {
             if (ev.date && new Date(ev.date + 'T23:59:59') < now) return;
-            var tagClass = '';
-            var tagText = '';
+            var tagClass = '', tagText = '';
             if (ev.tag) {
                 tagClass = ev.tag.toLowerCase() === 'free' ? 'free' : 'paid';
                 tagText = ev.tag;
             }
-            rows.push(
-                '<div class="events-glance-row">'
-                + '<span class="events-glance-date">' + (ev.date ? shortDate(ev.date) : '') + '</span>'
-                + '<span class="events-glance-name">' + (ev.title || '') + '</span>'
-                + (tagText ? '<span class="events-glance-tag ' + tagClass + '">' + tagText + '</span>' : '')
-                + '</div>'
-            );
+            rows.push('<div class="events-glance-row"><span class="events-glance-date">' + (ev.date ? shortDate(ev.date) : '') + '</span><span class="events-glance-name">' + (ev.title || '') + '</span>' + (tagText ? '<span class="events-glance-tag ' + tagClass + '">' + tagText + '</span>' : '') + '</div>');
         });
-
         (data.persistent || []).forEach(function(ev) {
-            rows.push(
-                '<div class="events-glance-row">'
-                + '<span class="events-glance-date ongoing">Ongoing</span>'
-                + '<span class="events-glance-name">' + (ev.title || '') + '</span>'
-                + (ev.tag ? '<span class="events-glance-tag paid">' + ev.tag + '</span>' : '')
-                + '</div>'
-            );
+            rows.push('<div class="events-glance-row"><span class="events-glance-date ongoing">Ongoing</span><span class="events-glance-name">' + (ev.title || '') + '</span>' + (ev.tag ? '<span class="events-glance-tag paid">' + ev.tag + '</span>' : '') + '</div>');
         });
-
         glanceList.innerHTML = rows.join('');
     }
 
-    // ── Load ──
     var data = window.EVENTS_DATA || {};
     renderUpcoming(data.upcoming || []);
     renderPersistent(data.persistent || []);

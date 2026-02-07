@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register — Join the Dots</title>
+    <meta name="description" content="Register for Join the Dots events, workshops, and programs. Begin your journey into compassionate communication.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M8 20c0-8 6-14 14-14' stroke='%239BAA8F' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 20c0 8-6 14-14 14' stroke='%23C4846C' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='20' cy='20' r='5' fill='%239BAA8F'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="bgCanvas" class="bg-canvas"></canvas>
+
+    <nav class="nav" id="nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-logo" aria-label="Join the Dots">
+                <div class="logo-grid logo-grid--small">
+                    <span class="logo-letter">J</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">I</span>
+                    <span class="logo-letter">N</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">T</span>
+                    <span class="logo-letter">H</span>
+                    <span class="logo-letter">E</span>
+                    <span class="logo-letter">D</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">T</span>
+                    <span class="logo-letter">S</span>
+                </div>
+            </a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html#journey" class="nav-link" data-i18n="nav.journey">The Journey</a></li>
+                    <li><a href="index.html#rhythm" class="nav-link" data-i18n="nav.schedule">Schedule</a></li>
+                    <li><a href="index.html#pricing" class="nav-link" data-i18n="nav.pricing">Pricing</a></li>
+                    <li><a href="about.html" class="nav-link" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="register.html" class="nav-link active" data-i18n="nav.register">Register</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div class="lang-toggle">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="hi">हि</button>
+                    <button class="lang-btn" data-lang="ur">اردو</button>
+                </div>
+                <a href="register.html" class="nav-cta nav-cta--active">Register</a>
+            </div>
+            <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html#journey" data-i18n="nav.journey">The Journey</a>
+        <a href="index.html#rhythm" data-i18n="nav.schedule">Schedule</a>
+        <a href="index.html#pricing" data-i18n="nav.pricing">Pricing</a>
+        <a href="about.html" data-i18n="nav.about">About Us</a>
+        <a href="register.html" data-i18n="nav.register">Register</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+        <div class="lang-toggle mobile-lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="hi">हि</button>
+            <button class="lang-btn" data-lang="ur">اردو</button>
+        </div>
+    </div>
+
+    <section class="page-hero">
+        <div class="hero-bg">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="page-hero-content animate-on-scroll">
+                <span class="section-badge">
+                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span>Register</span>
+                </span>
+                <h1>Join the Journey</h1>
+                <p class="page-hero-subtitle">Reserve your spot or let us know you're interested — we'll be in touch.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="register-section">
+        <div class="container">
+            <div class="register-grid">
+
+                <div class="register-form-wrap animate-on-scroll">
+                    <iframe
+                        id="gformEmbed"
+                        src="https://docs.google.com/forms/d/e/1FAIpQLSfNXpznJF90FoT3UyUdgNX7QX0vmnH7mFI6OXqi7ZOHSaJ2ag/viewform?embedded=true"
+                        class="gform-embed"
+                        frameborder="0"
+                        marginheight="0"
+                        marginwidth="0"
+                        title="Registration Form"
+                    >Loading…</iframe>
+                </div>
+
+                <div class="register-info animate-on-scroll">
+                    <div class="register-info-card">
+                        <h3>What to expect</h3>
+                        <ul class="register-checklist">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span>A confirmation within 24 hours</span></li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span>Session link sent before the event</span></li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span>No pressure — join when you feel ready</span></li>
+                        </ul>
+                    </div>
+                    <div class="register-info-card register-info-card--warm">
+                        <h3>Questions?</h3>
+                        <p>Reach out on <a href="https://wa.me/your-number" target="_blank" rel="noopener">WhatsApp</a> or <a href="contact.html">send us a message</a>. We're happy to help.</p>
+                    </div>
+                    <div class="register-info-card">
+                        <h3>Pricing reminder</h3>
+                        <p>Listening Circles are <strong>free</strong>. Workshops and Empathy Cafés are <strong>₹600</strong> each, or grab the <strong>Monthly Pass for ₹1,200</strong> (all 6 sessions).</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>
+                        <div class="logo-grid logo-grid--footer" aria-label="Join the Dots">
+                            <span class="logo-letter">J</span><div class="logo-dot"></div><span class="logo-letter">I</span><span class="logo-letter">N</span><div class="logo-dot"></div><span class="logo-letter">T</span><span class="logo-letter">H</span><span class="logo-letter">E</span><span class="logo-letter">D</span><div class="logo-dot"></div><span class="logo-letter">T</span><span class="logo-letter">S</span>
+                        </div>
+                    </h3>
+                    <p data-i18n="footer.description">A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.</p>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.journey">Journey</h4>
+                    <ul>
+                        <li><a href="index.html#journey" data-i18n="footer.listeningLounge">Listening Lounge</a></li>
+                        <li><a href="index.html#journey" data-i18n="footer.joinTheDots">Join the Dots</a></li>
+                        <li><a href="index.html#compassion" data-i18n="footer.compassionCourse">Compassion Course</a></li>
+                        <li><a href="index.html#journey" data-i18n="footer.empathyCafe">Empathy Café</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.info">Information</h4>
+                    <ul>
+                        <li><a href="index.html#rhythm" data-i18n="footer.schedule">Schedule</a></li>
+                        <li><a href="index.html#pricing" data-i18n="footer.pricing">Pricing</a></li>
+                        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+                        <li><a href="register.html" data-i18n="nav.register">Register</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.connect">Connect</h4>
+                    <ul>
+                        <li><a href="https://wa.me/your-number" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><a href="contact.html">Email</a></li>
+                        <li><a href="register.html">Register Now</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Join the Dots. <span data-i18n="footer.madeWith">Made with</span> care <span data-i18n="footer.forThose">for those seeking connection.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="animations.js"></script>
+    <script src="translations.js"></script>
+</body>
+</html>
