@@ -84,6 +84,13 @@
             <div class="hero-orb hero-orb-2"></div>
             <div class="hero-orb hero-orb-3"></div>
         </div>
+
+        <!-- Events at-a-glance card -->
+        <div class="events-glance" id="eventsTab" role="button" tabindex="0" aria-label="Open events panel">
+            <div class="events-glance-label">Events</div>
+            <div class="events-glance-list" id="eventsGlanceList"></div>
+        </div>
+
         <div class="hero-content">
             <div class="logo-grid logo-grid--hero hero-title" aria-label="Join the Dots">
                 <span class="logo-letter">J</span>
@@ -175,31 +182,25 @@
         </div>
     </section>
 
-    <!-- Events Strip — between hero and content -->
-    <div class="events-strip" id="eventsBoard">
-        <div class="events-strip-inner">
-            <button class="events-strip-toggle" id="eventsToggle" aria-expanded="false">
-                <span class="events-strip-heading">
-                    <svg class="events-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                    What's Coming Up
-                </span>
-                <span class="events-strip-tags" id="eventsCompact"></span>
-                <span class="events-strip-action" id="eventsToggleLabel">See all</span>
+    <!-- Events Drawer -->
+    <aside class="events-drawer" id="eventsDrawer">
+        <div class="events-drawer-header">
+            <h3 class="events-drawer-title">What's Coming Up</h3>
+            <button class="events-drawer-close" id="eventsClose" aria-label="Close events">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
             </button>
-            <div class="events-strip-panel" id="eventsExpanded">
-                <div class="events-strip-cards">
-                    <div class="events-upcoming" id="eventsUpcoming"></div>
-                    <div class="events-section-divider" id="eventsSectionDivider">
-                        <span>Always Available</span>
-                    </div>
-                    <div class="events-persistent" id="eventsPersistent"></div>
-                </div>
-            </div>
         </div>
-    </div>
+        <div class="events-drawer-body">
+            <div class="events-upcoming" id="eventsUpcoming"></div>
+            <div class="events-section-divider" id="eventsSectionDivider">
+                <span>Always Available</span>
+            </div>
+            <div class="events-persistent" id="eventsPersistent"></div>
+        </div>
+    </aside>
+    <div class="events-drawer-overlay" id="eventsOverlay"></div>
 
     <!-- Monthly Rhythm Section -->
     <section class="rhythm" id="rhythm">
@@ -737,11 +738,11 @@
     </section>
 
     <!-- Subtle Contact Button -->
-    <a href="https://wa.me/your-number" class="contact-float" target="_blank" rel="noopener" aria-label="Contact us">
+    <!-- <a href="https://wa.me/your-number" class="contact-float" target="_blank" rel="noopener" aria-label="Contact us">
         <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
         </svg>
-    </a>
+    </a> -->
 
     <!-- Footer -->
     <footer class="footer">

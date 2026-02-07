@@ -2165,17 +2165,17 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('resize', function() { resize(); buildWaypoints(); });
 })();
 
-/* ==================== EVENTS SIDEBAR (loads from events.js) ==================== */
+/* ==================== EVENTS DRAWER (loads from events.js) ==================== */
 (function() {
-    var board = document.getElementById('eventsBoard');
-    var toggle = document.getElementById('eventsToggle');
-    var toggleLabel = document.getElementById('eventsToggleLabel');
-    var compactEl = document.getElementById('eventsCompact');
-    var expandedEl = document.getElementById('eventsExpanded');
+    var tab = document.getElementById('eventsTab');
+    var glanceList = document.getElementById('eventsGlanceList');
+    var drawer = document.getElementById('eventsDrawer');
+    var overlay = document.getElementById('eventsOverlay');
+    var closeBtn = document.getElementById('eventsClose');
     var upcomingEl = document.getElementById('eventsUpcoming');
     var persistentEl = document.getElementById('eventsPersistent');
     var sectionDivider = document.getElementById('eventsSectionDivider');
-    if (!board || !upcomingEl) return;
+    if (!drawer) return;
 
     var MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -2184,51 +2184,35 @@ document.addEventListener("DOMContentLoaded", () => {
         var d = new Date(iso + 'T00:00:00');
         return DAYS_SHORT[d.getDay()] + ', ' + d.getDate() + ' ' + MONTHS_SHORT[d.getMonth()];
     }
-
     function shortDate(iso) {
         var d = new Date(iso + 'T00:00:00');
-        return MONTHS_SHORT[d.getMonth()] + ' ' + d.getDate();
+        return MONTHS_SHORT[d.getMonth()].toUpperCase() + ' ' + d.getDate();
     }
 
-    // ── Toggle expand / collapse ──
-    toggle.addEventListener('click', function() {
-        var isExpanded = board.classList.toggle('expanded');
-        toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-        if (toggleLabel) toggleLabel.textContent = isExpanded ? 'Collapse' : 'Expand';
+    // ── Open / Close (no scroll lock) ──
+    function openDrawer(e) {
+        if (e) e.preventDefault();
+        drawer.classList.add('open');
+        overlay.classList.add('visible');
+    }
+    function closeDrawer() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('visible');
+    }
+
+    if (tab) {
+        tab.addEventListener('click', openDrawer);
+        tab.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDrawer(); }
+        });
+    }
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (overlay) overlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
     });
 
-    // ── Compact summary tags ──
-    function renderCompact(upcoming, persistent) {
-        var tags = [];
-        var now = new Date();
-        now.setHours(0,0,0,0);
-
-        (upcoming || []).forEach(function(ev) {
-            if (ev.date && new Date(ev.date + 'T23:59:59') < now) return;
-            var dateStr = ev.date ? shortDate(ev.date) : '';
-            tags.push(
-                '<span class="event-summary-tag">'
-                + '<span class="summary-dot"></span>'
-                + (dateStr ? '<span class="summary-date">' + dateStr + '</span>' : '')
-                + (ev.title || '')
-                + '</span>'
-            );
-        });
-
-        (persistent || []).forEach(function(ev) {
-            tags.push(
-                '<span class="event-summary-tag event-summary-tag--persistent">'
-                + '<span class="summary-dot"></span>'
-                + (ev.title || '')
-                + (ev.tag ? ' · ' + ev.tag : '')
-                + '</span>'
-            );
-        });
-
-        compactEl.innerHTML = tags.join('');
-    }
-
-    // ── Expanded card renderers ──
+    // ── Renderers ──
     function renderUpcoming(events) {
         var now = new Date();
         now.setHours(0,0,0,0);
@@ -2236,6 +2220,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!ev.date) return true;
             return new Date(ev.date + 'T23:59:59') >= now;
         });
+
         if (future.length === 0) {
             upcomingEl.innerHTML = '<div class="event-card" style="justify-content:center;align-items:center;min-height:60px;"><p class="event-desc" style="text-align:center;opacity:0.6;">No upcoming events — check back soon!</p></div>';
             return;
@@ -2274,13 +2259,49 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join('');
     }
 
-    // ── Load from global (set by events.js) ──
+    // ── Glance card (date columns) ──
+    function renderGlance(data) {
+        if (!glanceList) return;
+        var now = new Date();
+        now.setHours(0,0,0,0);
+        var rows = [];
+
+        (data.upcoming || []).forEach(function(ev) {
+            if (ev.date && new Date(ev.date + 'T23:59:59') < now) return;
+            var tagClass = '';
+            var tagText = '';
+            if (ev.tag) {
+                tagClass = ev.tag.toLowerCase() === 'free' ? 'free' : 'paid';
+                tagText = ev.tag;
+            }
+            rows.push(
+                '<div class="events-glance-row">'
+                + '<span class="events-glance-date">' + (ev.date ? shortDate(ev.date) : '') + '</span>'
+                + '<span class="events-glance-name">' + (ev.title || '') + '</span>'
+                + (tagText ? '<span class="events-glance-tag ' + tagClass + '">' + tagText + '</span>' : '')
+                + '</div>'
+            );
+        });
+
+        (data.persistent || []).forEach(function(ev) {
+            rows.push(
+                '<div class="events-glance-row">'
+                + '<span class="events-glance-date ongoing">Ongoing</span>'
+                + '<span class="events-glance-name">' + (ev.title || '') + '</span>'
+                + (ev.tag ? '<span class="events-glance-tag paid">' + ev.tag + '</span>' : '')
+                + '</div>'
+            );
+        });
+
+        glanceList.innerHTML = rows.join('');
+    }
+
+    // ── Load ──
     var data = window.EVENTS_DATA || {};
-    renderCompact(data.upcoming, data.persistent);
     renderUpcoming(data.upcoming || []);
     renderPersistent(data.persistent || []);
+    renderGlance(data);
 
-    // Show "Always Available" divider if both sections have content
     var hasUpcoming = upcomingEl && upcomingEl.children.length > 0;
     var hasPersistent = persistentEl && persistentEl.children.length > 0;
     if (hasUpcoming && hasPersistent && sectionDivider) {
