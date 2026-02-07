@@ -1733,3 +1733,434 @@ document.addEventListener("DOMContentLoaded", () => {
 
   log("All initializations complete");
 });
+
+/* ==================== VOYAGE OCEAN (Hero Journey Interactive) ==================== */
+(() => {
+    const STEPS = [
+        { title: 'Arrive',    desc: 'as we are \u2014 with our tender imperfect humanity' },
+        { title: 'Listen',    desc: 'deeply \u2014 to our stories, not to fix them, but to understand and integrate them' },
+        { title: 'Lighten',   desc: 'the heavy bags \u2014 past patterns, old hurts, auto-pilot reactions' },
+        { title: 'Renew',     desc: 'and breathe \u2014 allowing ourselves to rest and re-energise' },
+        { title: 'Choose',    desc: 'to soften, to open, to attune to life' },
+        { title: 'Belong',    desc: 'reconnect with our wholeness \u2014 both our broken places and our hidden potential' },
+        { title: 'Celebrate', desc: 'return to aliveness \u2014 to dance with life, to love, and to blossom' },
+    ];
+
+    const PAD = 0.07;
+
+    const ocean = document.getElementById('voyageOcean');
+    if (!ocean) return;
+
+    const canvas = document.getElementById('voyageCanvas');
+    const ctx = canvas.getContext('2d');
+    const waypointsEl = document.getElementById('voyageWaypoints');
+    const textEl = document.getElementById('voyageText');
+    const titleEl = document.getElementById('voyageTitle');
+    const descEl = document.getElementById('voyageDesc');
+    const progressEl = document.getElementById('voyageProgress');
+    const hintEl = document.getElementById('voyageHint');
+
+    let W, H, dpr;
+    let shipX = PAD;
+    let currentStep = 0;
+    let dragging = false;
+    let dragStartPointerX = 0;
+    let dragStartShipX = 0;
+    let time = 0;
+    let hintDismissed = false;
+
+    const particles = [];
+    for (let i = 0; i < 35; i++) {
+        particles.push({
+            x: Math.random(), y: 0.52 + Math.random() * 0.44,
+            r: 0.8 + Math.random() * 2,
+            speed: 0.00015 + Math.random() * 0.0003,
+            phase: Math.random() * Math.PI * 2,
+            alpha: 0.06 + Math.random() * 0.12,
+        });
+    }
+
+    const skyDots = [];
+    for (let i = 0; i < 12; i++) {
+        skyDots.push({
+            x: Math.random(), y: 0.05 + Math.random() * 0.28,
+            r: 0.6 + Math.random() * 1,
+            phase: Math.random() * Math.PI * 2,
+            alpha: 0.04 + Math.random() * 0.08,
+        });
+    }
+
+    function resize() {
+        dpr = window.devicePixelRatio || 1;
+        W = ocean.clientWidth;
+        H = ocean.clientHeight;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function waveY(x, t, amp, freq, speed, phase) {
+        return Math.sin(x * freq + t * speed + phase) * amp;
+    }
+    function waterlineY(xPx) {
+        return H * 0.48
+            + waveY(xPx, time, 9, 0.014, 1.4, 0)
+            + waveY(xPx, time, 5, 0.028, 2.1, 2.2)
+            + waveY(xPx, time, 3, 0.045, 3.0, 4.5);
+    }
+
+    function waypointFrac(i) { return PAD + (i / (STEPS.length - 1)) * (1 - 2 * PAD); }
+
+    function buildWaypoints() {
+        waypointsEl.innerHTML = '';
+        STEPS.forEach(function(step, i) {
+            var el = document.createElement('div');
+            el.className = 'voyage-waypoint';
+            el.style.left = (waypointFrac(i) * 100) + '%';
+            el.style.bottom = '60px';
+            el.innerHTML = '<div class="waypoint-beacon"></div><div class="waypoint-label">' + step.title + '</div>';
+            waypointsEl.appendChild(el);
+        });
+    }
+
+    function buildProgress() {
+        progressEl.innerHTML = '';
+        STEPS.forEach(function(_, i) {
+            var pip = document.createElement('div');
+            pip.className = 'voyage-pip';
+            pip.addEventListener('click', function() { animateShipTo(waypointFrac(i)); });
+            progressEl.appendChild(pip);
+        });
+    }
+
+    function nearestStep() {
+        var norm = (shipX - PAD) / (1 - 2 * PAD);
+        return Math.max(0, Math.min(STEPS.length - 1, Math.round(norm * (STEPS.length - 1))));
+    }
+
+    function updateUI() {
+        var idx = nearestStep();
+        if (idx !== currentStep) {
+            textEl.classList.add('fading');
+            setTimeout(function() {
+                currentStep = idx;
+                titleEl.textContent = STEPS[idx].title;
+                descEl.textContent = STEPS[idx].desc;
+                textEl.classList.remove('fading');
+            }, 200);
+        }
+        document.querySelectorAll('.voyage-waypoint').forEach(function(el, i) {
+            el.classList.toggle('active', i === idx);
+            el.classList.toggle('passed', i < idx);
+        });
+        document.querySelectorAll('.voyage-pip').forEach(function(el, i) {
+            el.classList.toggle('active', i === idx);
+            el.classList.toggle('passed', i < idx);
+        });
+    }
+
+    function drawSky() {
+        var grad = ctx.createLinearGradient(0, 0, 0, H);
+        grad.addColorStop(0, '#E8DDD4');
+        grad.addColorStop(0.3, '#D6E0E8');
+        grad.addColorStop(0.45, '#C4D8E4');
+        grad.addColorStop(0.55, '#A8C8DA');
+        grad.addColorStop(0.75, '#8BB4CA');
+        grad.addColorStop(1.0, '#6E9DB5');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
+
+        skyDots.forEach(function(s) {
+            var twinkle = 0.5 + 0.5 * Math.sin(time * 1.2 + s.phase);
+            ctx.beginPath();
+            ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,' + (s.alpha * twinkle) + ')';
+            ctx.fill();
+        });
+    }
+
+    function drawWaves() {
+        var layers = [
+            { yBase: 0.60, amp: 7,  freq: 0.011, speed: 1.0, phase: 1.0, color: 'rgba(110,157,181,0.2)' },
+            { yBase: 0.55, amp: 8,  freq: 0.016, speed: 1.5, phase: 0.0, color: 'rgba(139,180,202,0.2)' },
+            { yBase: 0.48, amp: 10, freq: 0.014, speed: 1.4, phase: 0.0, color: 'rgba(168,200,218,0.15)' },
+        ];
+        layers.forEach(function(l) {
+            ctx.beginPath();
+            ctx.moveTo(0, H);
+            for (var x = 0; x <= W; x += 2)
+                ctx.lineTo(x, H * l.yBase + waveY(x, time, l.amp, l.freq, l.speed, l.phase));
+            ctx.lineTo(W, H);
+            ctx.closePath();
+            ctx.fillStyle = l.color;
+            ctx.fill();
+        });
+        for (var x = 10; x < W; x += 50) {
+            var fx = x + Math.sin(time * 0.7 + x * 0.04) * 10;
+            var fy = waterlineY(fx) - 1;
+            ctx.beginPath();
+            ctx.ellipse(fx, fy, 12 + Math.sin(time + x * 0.07) * 6, 1.5, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,0.1)';
+            ctx.fill();
+        }
+    }
+
+    function drawFgWaves() {
+        var layers = [
+            { yBase: 0.68, amp: 5, freq: 0.02, speed: 2.4, phase: 3.5, color: 'rgba(90,140,165,0.18)' },
+            { yBase: 0.75, amp: 4, freq: 0.025, speed: 2.8, phase: 5.0, color: 'rgba(80,125,150,0.15)' },
+        ];
+        layers.forEach(function(l) {
+            ctx.beginPath();
+            ctx.moveTo(0, H);
+            for (var x = 0; x <= W; x += 2)
+                ctx.lineTo(x, H * l.yBase + waveY(x, time, l.amp, l.freq, l.speed, l.phase));
+            ctx.lineTo(W, H);
+            ctx.closePath();
+            ctx.fillStyle = l.color;
+            ctx.fill();
+        });
+    }
+
+    function drawParticles() {
+        particles.forEach(function(p) {
+            ctx.beginPath();
+            ctx.arc(p.x * W, p.y * H + Math.sin(time * 1.3 + p.phase) * 5, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
+            ctx.fill();
+            p.x += p.speed;
+            if (p.x > 1.06) p.x = -0.06;
+        });
+    }
+
+    function drawWaypointBeams() {
+        var idx = nearestStep();
+        var shipPx = shipX * W;
+
+        // ── Connect-the-dots line along waterline from first waypoint to ship ──
+        var firstX = waypointFrac(0) * W;
+        if (shipPx > firstX + 2) {
+            // Glow behind the line
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(firstX, waterlineY(firstX));
+            for (var px = firstX; px <= shipPx; px += 3) {
+                ctx.lineTo(px, waterlineY(px));
+            }
+            ctx.lineTo(shipPx, waterlineY(shipPx));
+            ctx.strokeStyle = 'rgba(196,132,108,0.12)';
+            ctx.lineWidth = 6;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+            ctx.restore();
+
+            // Main line
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(firstX, waterlineY(firstX));
+            for (var px = firstX; px <= shipPx; px += 3) {
+                ctx.lineTo(px, waterlineY(px));
+            }
+            ctx.lineTo(shipPx, waterlineY(shipPx));
+            ctx.strokeStyle = 'rgba(196,132,108,0.45)';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        // ── Dotted path ahead of ship (upcoming route) ──
+        var lastX = waypointFrac(STEPS.length - 1) * W;
+        if (shipPx < lastX - 2) {
+            ctx.save();
+            ctx.setLineDash([3, 8]);
+            ctx.beginPath();
+            ctx.moveTo(shipPx, waterlineY(shipPx));
+            for (var px = shipPx; px <= lastX; px += 3) {
+                ctx.lineTo(px, waterlineY(px));
+            }
+            ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+            ctx.lineWidth = 1.5;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.restore();
+        }
+
+        // ── Waypoint dots ──
+        STEPS.forEach(function(_, i) {
+            var x = waypointFrac(i) * W;
+            var wy = waterlineY(x);
+
+            if (i === idx) {
+                // Active: glowing ring + filled dot
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x, wy, 16, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(196,132,108,0.1)';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x, wy, 6, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(196,132,108,0.85)';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x, wy, 6, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            } else if (i < idx) {
+                // Passed: filled sage dot
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x, wy, 5, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(155,170,143,0.75)';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x, wy, 5, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                ctx.restore();
+            } else {
+                // Upcoming: hollow dot
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x, wy, 4, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,0.15)';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x, wy, 4, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                ctx.restore();
+            }
+        });
+    }
+
+    function drawShip() {
+        var sx = shipX * W;
+        var sy = waterlineY(sx);
+        var dx = 4;
+        var slope = (waterlineY(sx + dx) - waterlineY(sx - dx)) / (dx * 2);
+        var angle = Math.atan(slope) * 0.6;
+        var bob = Math.sin(time * 2.2) * 2;
+
+        ctx.save();
+        ctx.translate(sx, sy - 4 + bob);
+        ctx.rotate(angle);
+
+        // Hull
+        ctx.beginPath();
+        ctx.moveTo(-16, 0);
+        ctx.lineTo(-12, 6);
+        ctx.quadraticCurveTo(0, 9, 12, 6);
+        ctx.lineTo(18, 0);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(166,107,84,0.9)';
+        ctx.fill();
+
+        // Mast
+        ctx.beginPath();
+        ctx.moveTo(0, -1);
+        ctx.lineTo(0, -30);
+        ctx.strokeStyle = 'rgba(80,70,62,0.8)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Sail
+        ctx.beginPath();
+        ctx.moveTo(1, -28);
+        ctx.lineTo(14, -10);
+        ctx.lineTo(1, -6);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(253,248,243,0.9)';
+        ctx.fill();
+
+        // Flag
+        ctx.beginPath();
+        ctx.moveTo(0, -30);
+        ctx.lineTo(-7, -33);
+        ctx.lineTo(0, -36);
+        ctx.fillStyle = 'rgba(196,132,108,0.9)';
+        ctx.fill();
+
+        ctx.restore();
+
+        // Wake
+        for (var i = 1; i <= 25; i++) {
+            var wx = sx - i * 5;
+            if (wx < 0) break;
+            var r = 1.8 * (1 - i / 28);
+            if (r <= 0) break;
+            ctx.beginPath();
+            ctx.arc(wx, waterlineY(wx) + 3 + i * 0.4, r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,' + (0.16 * (1 - i / 25)) + ')';
+            ctx.fill();
+        }
+    }
+
+    function frame() {
+        time += 0.016;
+        ctx.clearRect(0, 0, W, H);
+        drawSky();
+        drawWaves();
+        drawParticles();
+        drawWaypointBeams();
+        drawShip();
+        drawFgWaves();
+        requestAnimationFrame(frame);
+    }
+
+    function ptrFrac(e) {
+        var ev = e.touches ? e.touches[0] : e;
+        return (ev.clientX - ocean.getBoundingClientRect().left) / ocean.clientWidth;
+    }
+
+    function onStart(e) {
+        e.preventDefault();
+        dragging = true;
+        dragStartPointerX = ptrFrac(e);
+        dragStartShipX = shipX;
+        if (!hintDismissed) { hintDismissed = true; hintEl.classList.add('hidden'); }
+    }
+    function onMove(e) {
+        if (!dragging) return;
+        e.preventDefault();
+        shipX = Math.max(0.03, Math.min(0.97, dragStartShipX + ptrFrac(e) - dragStartPointerX));
+        updateUI();
+    }
+    function onEnd() {
+        if (!dragging) return;
+        dragging = false;
+        animateShipTo(waypointFrac(nearestStep()));
+    }
+
+    ocean.addEventListener('mousedown', onStart);
+    ocean.addEventListener('touchstart', onStart, { passive: false });
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, { passive: false });
+    window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchend', onEnd);
+
+    var snapRaf = null;
+    function animateShipTo(target) {
+        if (snapRaf) cancelAnimationFrame(snapRaf);
+        var start = shipX, t0 = performance.now();
+        function tick(now) {
+            var p = Math.min(1, (now - t0) / 350);
+            shipX = start + (target - start) * (1 - Math.pow(1 - p, 3));
+            updateUI();
+            if (p < 1) snapRaf = requestAnimationFrame(tick);
+        }
+        snapRaf = requestAnimationFrame(tick);
+    }
+
+    resize();
+    buildWaypoints();
+    buildProgress();
+    updateUI();
+    frame();
+    window.addEventListener('resize', function() { resize(); buildWaypoints(); });
+})();

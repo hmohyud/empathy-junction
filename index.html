@@ -117,49 +117,25 @@
             <p class="hero-tagline" data-i18n="hero.tagline">Connecting Hearts. Celebrating Life.</p>
 
             <div class="hero-description">
-                <p class="journey-intro" data-i18n="hero.intro">Join the Dots offers a gentle, playful journey where we:
-                </p>
+                <p class="journey-intro" data-i18n="hero.intro">Join the Dots offers a gentle, playful journey where we:</p>
 
-                <div class="journey-flow">
-                    <div class="journey-flow-step step-1">Arrive</div>
-                    <span class="journey-flow-arrow arrow-down">↘</span>
-                    <div class="journey-flow-step step-2">Listen</div>
-                    <span class="journey-flow-arrow arrow-up">↗</span>
-                    <div class="journey-flow-step step-3">Lighten</div>
-                    <span class="journey-flow-arrow arrow-down">↘</span>
-                    <div class="journey-flow-step step-4">Renew</div>
-                    <span class="journey-flow-arrow arrow-up">↗</span>
-                    <div class="journey-flow-step step-5">Choose</div>
-                    <span class="journey-flow-arrow arrow-down">↘</span>
-                    <div class="journey-flow-step step-6">Belong</div>
-                    <span class="journey-flow-arrow arrow-up">↗</span>
-                    <div class="journey-flow-step step-7">Celebrate</div>
+                <div class="voyage-ocean" id="voyageOcean">
+                    <canvas id="voyageCanvas"></canvas>
+                    <div class="voyage-waypoints" id="voyageWaypoints"></div>
+                    <div class="voyage-hint" id="voyageHint">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                        drag to sail
+                    </div>
                 </div>
 
-                <div class="journey-steps">
-                    <div class="journey-step-item step-1">
-                        <strong>Arrive</strong> as we are — with our tender imperfect humanity
-                    </div>
-                    <div class="journey-step-item step-2">
-                        <strong>Listen</strong> deeply — to our stories, not to fix them, but to understand and
-                        integrate them
-                    </div>
-                    <div class="journey-step-item step-3">
-                        <strong>Lay down</strong> the heavy bags — past patterns, old hurts, auto-pilot reactions
-                    </div>
-                    <div class="journey-step-item step-4">
-                        <strong>Pause</strong> and breathe — allowing ourselves to rest and re-energise
-                    </div>
-                    <div class="journey-step-item step-5">
-                        <strong>Make a choice</strong> — to soften, to open, to attune to life
-                    </div>
-                    <div class="journey-step-item step-6">
-                        <strong>Reconnect</strong> with our wholeness — both our broken places and our hidden potential
-                    </div>
-                    <div class="journey-step-item step-7">
-                        <strong>Return</strong> to aliveness — to dance with life, to love, and to blossom
-                    </div>
+                <div class="voyage-text" id="voyageText">
+                    <div class="voyage-step-title" id="voyageTitle">Arrive</div>
+                    <div class="voyage-step-desc" id="voyageDesc">as we are — with our tender imperfect humanity</div>
                 </div>
+
+                <div class="voyage-progress" id="voyageProgress"></div>
             </div>
 
             <div class="hero-buttons">
