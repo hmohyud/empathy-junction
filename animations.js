@@ -2164,3 +2164,126 @@ document.addEventListener("DOMContentLoaded", () => {
     frame();
     window.addEventListener('resize', function() { resize(); buildWaypoints(); });
 })();
+
+/* ==================== EVENTS SIDEBAR (loads from events.js) ==================== */
+(function() {
+    var board = document.getElementById('eventsBoard');
+    var toggle = document.getElementById('eventsToggle');
+    var toggleLabel = document.getElementById('eventsToggleLabel');
+    var compactEl = document.getElementById('eventsCompact');
+    var expandedEl = document.getElementById('eventsExpanded');
+    var upcomingEl = document.getElementById('eventsUpcoming');
+    var persistentEl = document.getElementById('eventsPersistent');
+    var sectionDivider = document.getElementById('eventsSectionDivider');
+    if (!board || !upcomingEl) return;
+
+    var MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+    function formatDate(iso) {
+        var d = new Date(iso + 'T00:00:00');
+        return DAYS_SHORT[d.getDay()] + ', ' + d.getDate() + ' ' + MONTHS_SHORT[d.getMonth()];
+    }
+
+    function shortDate(iso) {
+        var d = new Date(iso + 'T00:00:00');
+        return MONTHS_SHORT[d.getMonth()] + ' ' + d.getDate();
+    }
+
+    // ── Toggle expand / collapse ──
+    toggle.addEventListener('click', function() {
+        var isExpanded = board.classList.toggle('expanded');
+        toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        if (toggleLabel) toggleLabel.textContent = isExpanded ? 'Collapse' : 'Expand';
+    });
+
+    // ── Compact summary tags ──
+    function renderCompact(upcoming, persistent) {
+        var tags = [];
+        var now = new Date();
+        now.setHours(0,0,0,0);
+
+        (upcoming || []).forEach(function(ev) {
+            if (ev.date && new Date(ev.date + 'T23:59:59') < now) return;
+            var dateStr = ev.date ? shortDate(ev.date) : '';
+            tags.push(
+                '<span class="event-summary-tag">'
+                + '<span class="summary-dot"></span>'
+                + (dateStr ? '<span class="summary-date">' + dateStr + '</span>' : '')
+                + (ev.title || '')
+                + '</span>'
+            );
+        });
+
+        (persistent || []).forEach(function(ev) {
+            tags.push(
+                '<span class="event-summary-tag event-summary-tag--persistent">'
+                + '<span class="summary-dot"></span>'
+                + (ev.title || '')
+                + (ev.tag ? ' · ' + ev.tag : '')
+                + '</span>'
+            );
+        });
+
+        compactEl.innerHTML = tags.join('');
+    }
+
+    // ── Expanded card renderers ──
+    function renderUpcoming(events) {
+        var now = new Date();
+        now.setHours(0,0,0,0);
+        var future = (events || []).filter(function(ev) {
+            if (!ev.date) return true;
+            return new Date(ev.date + 'T23:59:59') >= now;
+        });
+        if (future.length === 0) {
+            upcomingEl.innerHTML = '<div class="event-card" style="justify-content:center;align-items:center;min-height:60px;"><p class="event-desc" style="text-align:center;opacity:0.6;">No upcoming events — check back soon!</p></div>';
+            return;
+        }
+        upcomingEl.innerHTML = future.map(function(ev) {
+            var hasTag = ev.tag && ev.tag.trim();
+            return '<div class="event-card' + (hasTag ? '' : ' no-tag') + '">'
+                + (hasTag ? '<span class="event-tag">' + ev.tag + '</span>' : '')
+                + (ev.date
+                    ? '<div class="event-date">'
+                    +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
+                    +     formatDate(ev.date)
+                    + '</div>'
+                    : '')
+                + (ev.time ? '<div class="event-time">' + ev.time + '</div>' : '')
+                + (ev.title ? '<div class="event-title">' + ev.title + '</div>' : '')
+                + (ev.subtitle ? '<div class="event-subtitle">' + ev.subtitle + '</div>' : '')
+                + (ev.description ? '<div class="event-desc">' + ev.description + '</div>' : '')
+                + '</div>';
+        }).join('');
+    }
+
+    function renderPersistent(events) {
+        if (!events || events.length === 0) return;
+        persistentEl.innerHTML = events.map(function(ev) {
+            var hasTag = ev.tag && ev.tag.trim();
+            return '<div class="event-card event-card--persistent' + (hasTag ? '' : ' no-tag') + '">'
+                + (hasTag ? '<span class="event-tag">' + ev.tag + '</span>' : '')
+                + (ev.title ? '<div class="event-title">' + ev.title + '</div>' : '')
+                + (ev.subtitle ? '<div class="event-subtitle">' + ev.subtitle + '</div>' : '')
+                + (ev.description ? '<div class="event-desc">' + ev.description + '</div>' : '')
+                + (ev.link
+                    ? '<a href="' + ev.link + '" class="event-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>'
+                    : '')
+                + '</div>';
+        }).join('');
+    }
+
+    // ── Load from global (set by events.js) ──
+    var data = window.EVENTS_DATA || {};
+    renderCompact(data.upcoming, data.persistent);
+    renderUpcoming(data.upcoming || []);
+    renderPersistent(data.persistent || []);
+
+    // Show "Always Available" divider if both sections have content
+    var hasUpcoming = upcomingEl && upcomingEl.children.length > 0;
+    var hasPersistent = persistentEl && persistentEl.children.length > 0;
+    if (hasUpcoming && hasPersistent && sectionDivider) {
+        sectionDivider.classList.add('visible');
+    }
+})();

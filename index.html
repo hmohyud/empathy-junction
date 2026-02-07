@@ -175,6 +175,32 @@
         </div>
     </section>
 
+    <!-- Events Strip — between hero and content -->
+    <div class="events-strip" id="eventsBoard">
+        <div class="events-strip-inner">
+            <button class="events-strip-toggle" id="eventsToggle" aria-expanded="false">
+                <span class="events-strip-heading">
+                    <svg class="events-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    What's Coming Up
+                </span>
+                <span class="events-strip-tags" id="eventsCompact"></span>
+                <span class="events-strip-action" id="eventsToggleLabel">See all</span>
+            </button>
+            <div class="events-strip-panel" id="eventsExpanded">
+                <div class="events-strip-cards">
+                    <div class="events-upcoming" id="eventsUpcoming"></div>
+                    <div class="events-section-divider" id="eventsSectionDivider">
+                        <span>Always Available</span>
+                    </div>
+                    <div class="events-persistent" id="eventsPersistent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Monthly Rhythm Section -->
     <section class="rhythm" id="rhythm">
         <canvas id="rhythmCanvas" class="rhythm-canvas"></canvas>
@@ -254,33 +280,6 @@
 
                     <p class="schedule-card-text" data-i18n="rhythm.card2.text">6 sessions (2 per weekend).
                         Experiential, reflective, practice-based workshops.</p>
-                </div>
-            </div>
-
-            <div class="upcoming-topics animate-on-scroll">
-                <h4 data-i18n="rhythm.topicsTitle">Upcoming Listening Circle Topics</h4>
-                <div class="topics-list">
-                    <div class="topic-tag">
-                        <span class="topic-tag-month" data-i18n="rhythm.feb">Feb</span>
-                        <span class="topic-tag-text" data-i18n="rhythm.topic1">Understanding Love & Breakups</span>
-                        <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </div>
-                    <div class="topic-tag">
-                        <span class="topic-tag-month" data-i18n="rhythm.mar">Mar</span>
-                        <span class="topic-tag-text" data-i18n="rhythm.topic2">Handling Power Struggles</span>
-                        <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </div>
-                    <div class="topic-tag">
-                        <span class="topic-tag-month" data-i18n="rhythm.apr">Apr</span>
-                        <span class="topic-tag-text" data-i18n="rhythm.topic3">Anger and Its Pain</span>
-                        <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </div>
                 </div>
             </div>
         </div>
@@ -804,6 +803,7 @@
     </footer>
 
 
+    <script src="events.js"></script>
     <script src="animations.js"></script>
     <script src="translations.js"></script>
 </body>
