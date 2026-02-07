@@ -1373,6 +1373,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
 .pricing {
     position: relative;
     overflow: hidden;
+    background: var(--color-sand);
 }
 
 .pricing-canvas {
