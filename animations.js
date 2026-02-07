@@ -1742,8 +1742,8 @@ document.addEventListener("DOMContentLoaded", () => {
         { title: 'Lighten',   desc: 'the heavy bags \u2014 past patterns, old hurts, auto-pilot reactions' },
         { title: 'Renew',     desc: 'and breathe \u2014 allowing ourselves to rest and re-energise' },
         { title: 'Choose',    desc: 'to soften, to open, to attune to life' },
-        { title: 'Belong',    desc: 'reconnect with our wholeness \u2014 both our broken places and our hidden potential' },
-        { title: 'Celebrate', desc: 'return to aliveness \u2014 to dance with life, to love, and to blossom' },
+        { title: 'Belong',    desc: 'and reconnect with our wholeness \u2014 both our broken places and our hidden potential' },
+        { title: 'Celebrate', desc: 'our return to aliveness \u2014 dance with life, love, and blossom' },
     ];
 
     const PAD = 0.07;
@@ -1755,7 +1755,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvas.getContext('2d');
     const waypointsEl = document.getElementById('voyageWaypoints');
     const textEl = document.getElementById('voyageText');
-    const titleEl = document.getElementById('voyageTitle');
+    const wordEl = document.getElementById('voyageWord');
     const descEl = document.getElementById('voyageDesc');
     const progressEl = document.getElementById('voyageProgress');
     const hintEl = document.getElementById('voyageHint');
@@ -1824,6 +1824,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function buildProgress() {
+        if (!progressEl) return;
         progressEl.innerHTML = '';
         STEPS.forEach(function(_, i) {
             var pip = document.createElement('div');
@@ -1844,16 +1845,13 @@ document.addEventListener("DOMContentLoaded", () => {
             textEl.classList.add('fading');
             setTimeout(function() {
                 currentStep = idx;
-                titleEl.textContent = STEPS[idx].title;
-                descEl.textContent = STEPS[idx].desc;
+                if (wordEl) wordEl.textContent = STEPS[idx].title;
+                descEl.textContent = ' ' + STEPS[idx].desc;
+                if (wordEl) descEl.prepend(wordEl);
                 textEl.classList.remove('fading');
             }, 200);
         }
         document.querySelectorAll('.voyage-waypoint').forEach(function(el, i) {
-            el.classList.toggle('active', i === idx);
-            el.classList.toggle('passed', i < idx);
-        });
-        document.querySelectorAll('.voyage-pip').forEach(function(el, i) {
             el.classList.toggle('active', i === idx);
             el.classList.toggle('passed', i < idx);
         });
