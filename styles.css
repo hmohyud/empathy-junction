@@ -1290,6 +1290,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     font-style: italic;
     color: var(--color-terracotta);
     margin-bottom: var(--space-md);
+    justify-self: center;
 }
 
 .compassion-text {
@@ -1305,7 +1306,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     align-items: center;
     justify-content: center;
     gap: var(--space-md);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xs);
     flex-wrap: wrap;
     padding: var(--space-md);
     background: var(--color-cream);
@@ -1334,6 +1335,20 @@ section { padding: var(--space-3xl) 0; position: relative; }
     border-radius: var(--radius-full);
     font-size: 0.9rem;
     font-weight: 700;
+}
+
+.compassion-discount-note {
+    font-size: 0.85rem;
+    color: var(--color-hearth);
+    font-weight: 600;
+    font-style: normal;
+    margin: var(--space-sm) auto var(--space-lg);
+    max-width: 480px;
+    line-height: 1.6;
+    text-align: center;
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(184, 92, 56, 0.08);
+    border-radius: var(--radius-sm);
 }
 
 /* ==================== REFLECTION SECTION ==================== */
