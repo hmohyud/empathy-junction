@@ -2238,6 +2238,150 @@ a:focus-visible, button:focus-visible {
     font-family: 'Noto Sans Arabic', 'Noto Nastaliq Urdu', var(--font-body);
 }
 
+/* ==================== LOGO GRID ==================== */
+.logo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    align-items: center;
+    justify-items: center;
+    line-height: 1;
+}
+
+.logo-grid .logo-letter {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    color: var(--color-text);
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.logo-grid .logo-dot {
+    border-radius: 50%;
+    border: 2px solid var(--color-sage);
+    background: transparent;
+    aspect-ratio: 1;
+    position: relative;
+}
+
+/* --- HERO (large) logo grid --- */
+.logo-grid--hero {
+    gap: 8px 6px;
+    justify-content: center;
+    margin: 0 auto var(--space-sm);
+}
+
+.logo-grid--hero .logo-letter {
+    font-size: clamp(3rem, 7vw, 5rem);
+    letter-spacing: 0.02em;
+    font-weight: 600;
+}
+
+.logo-grid--hero .logo-dot {
+    width: clamp(2.6rem, 6vw, 4.3rem);
+    height: clamp(2.6rem, 6vw, 4.3rem);
+    border-width: 2.5px;
+}
+
+.logo-grid--hero .logo-dot:nth-of-type(1) { border-color: var(--color-sage); }
+.logo-grid--hero .logo-dot:nth-of-type(3) { border-color: var(--color-terracotta); }
+.logo-grid--hero .logo-dot:nth-of-type(2) { border-color: var(--color-amber); }
+
+/* Rotating circle text — inside the dot, hugging inner circumference (hero only) */
+.logo-dot .circle-text-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: rotateCircleText 22s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.logo-dot .circle-text-svg text {
+    font-family: 'Raleway', sans-serif;
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: 7px;
+    text-transform: lowercase;
+}
+
+.logo-grid--hero .logo-dot:nth-of-type(1) .circle-text-svg text { fill: var(--color-sage-dark); }
+.logo-grid--hero .logo-dot:nth-of-type(3) .circle-text-svg text { fill: var(--color-terracotta-dark); }
+.logo-grid--hero .logo-dot:nth-of-type(2) .circle-text-svg text { fill: var(--color-amber); }
+
+/* Stagger the rotation start for visual interest */
+.logo-grid--hero .logo-dot:nth-of-type(2) .circle-text-svg {
+    animation-direction: reverse;
+}
+.logo-grid--hero .logo-dot:nth-of-type(3) .circle-text-svg {
+    animation-delay: -7s;
+}
+
+@keyframes rotateCircleText {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* --- NAV (small) logo grid --- */
+.logo-grid--small {
+    gap: 1px 1px;
+}
+
+.logo-grid--small .logo-letter {
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.02em;
+}
+
+.logo-grid--small .logo-dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-width: 1.5px;
+}
+
+.logo-grid--small .logo-dot:nth-of-type(1) { border-color: var(--color-sage); background: var(--color-sage-pale); }
+.logo-grid--small .logo-dot:nth-of-type(3) { border-color: var(--color-terracotta); background: var(--color-terracotta-pale); }
+.logo-grid--small .logo-dot:nth-of-type(2) { border-color: var(--color-amber); background: var(--color-amber-light); }
+
+/* Hide rotating text in small logo */
+.logo-grid--small .circle-text-svg { display: none; }
+
+/* --- FOOTER logo grid --- */
+.logo-grid--footer {
+    gap: 2px 2px;
+}
+
+.logo-grid--footer .logo-letter {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.02em;
+}
+
+.logo-grid--footer .logo-dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-width: 1.5px;
+}
+
+.logo-grid--footer .logo-dot:nth-of-type(1) { border-color: var(--color-sage-light); background: rgba(155, 170, 143, 0.25); }
+.logo-grid--footer .logo-dot:nth-of-type(3) { border-color: var(--color-terracotta-light); background: rgba(196, 132, 108, 0.25); }
+.logo-grid--footer .logo-dot:nth-of-type(2) { border-color: var(--color-amber-light); background: rgba(212, 165, 116, 0.25); }
+
+.logo-grid--footer .circle-text-svg { display: none; }
+
+/* Responsive adjustments for hero logo */
+@media (max-width: 480px) {
+    .logo-grid--hero {
+        gap: 5px 3px;
+    }
+    .logo-dot .circle-text-svg text {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+}
+
 [data-lang="ur"] h1, [data-lang="ur"] h2, [data-lang="ur"] h3, [data-lang="ur"] h4,
 [data-lang="ur"] .hero-tagline, [data-lang="ur"] .reflection-note {
     font-family: 'Noto Sans Arabic', 'Noto Nastaliq Urdu', var(--font-display);

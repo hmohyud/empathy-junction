@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -23,14 +23,21 @@
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="container nav-inner">
-            <a href="#" class="nav-logo">
-                <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none">
-                    <path d="M8 20c0-8 6-14 14-14" stroke="var(--color-sage)" stroke-width="3" stroke-linecap="round" />
-                    <path d="M32 20c0 8-6 14-14 14" stroke="var(--color-terracotta)" stroke-width="3"
-                        stroke-linecap="round" />
-                    <circle cx="20" cy="20" r="5" fill="var(--color-sage)" />
-                </svg>
-                <span class="nav-logo-text" data-i18n="brand">Join the Dots</span>
+            <a href="#" class="nav-logo" aria-label="Join the Dots">
+                <div class="logo-grid logo-grid--small">
+                    <span class="logo-letter">J</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">I</span>
+                    <span class="logo-letter">N</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">T</span>
+                    <span class="logo-letter">H</span>
+                    <span class="logo-letter">E</span>
+                    <span class="logo-letter">D</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">T</span>
+                    <span class="logo-letter">S</span>
+                </div>
             </a>
             <div class="nav-center">
                 <ul class="nav-links">
@@ -78,12 +85,41 @@
             <div class="hero-orb hero-orb-3"></div>
         </div>
         <div class="hero-content">
-            <h1 class="hero-title" data-i18n="hero.title">Join the Dots</h1>
+            <div class="logo-grid logo-grid--hero hero-title" aria-label="Join the Dots">
+                <span class="logo-letter">J</span>
+                <div class="logo-dot">
+                    <svg class="circle-text-svg" viewBox="0 0 140 140">
+                        <defs><path id="hero-cp1" d="M70,7 a63,63 0 1,0 0,126 a63,63 0 1,0 0,-126"/></defs>
+                        <text><textPath href="#hero-cp1">realign</textPath></text>
+                    </svg>
+                </div>
+                <span class="logo-letter">I</span>
+                <span class="logo-letter">N</span>
+                <div class="logo-dot">
+                    <svg class="circle-text-svg" viewBox="0 0 140 140">
+                        <defs><path id="hero-cp2" d="M70,7 a63,63 0 1,0 0,126 a63,63 0 1,0 0,-126"/></defs>
+                        <text><textPath href="#hero-cp2">reconnect</textPath></text>
+                    </svg>
+                </div>
+                <span class="logo-letter">T</span>
+                <span class="logo-letter">H</span>
+                <span class="logo-letter">E</span>
+                <span class="logo-letter">D</span>
+                <div class="logo-dot">
+                    <svg class="circle-text-svg" viewBox="0 0 140 140">
+                        <defs><path id="hero-cp3" d="M70,7 a63,63 0 1,0 0,126 a63,63 0 1,0 0,-126"/></defs>
+                        <text><textPath href="#hero-cp3">rejoice</textPath></text>
+                    </svg>
+                </div>
+                <span class="logo-letter">T</span>
+                <span class="logo-letter">S</span>
+            </div>
             <p class="hero-tagline" data-i18n="hero.tagline">Connecting Hearts. Celebrating Life.</p>
-            
+
             <div class="hero-description">
-                <p class="journey-intro" data-i18n="hero.intro">Join the Dots offers a gentle, playful journey where we:</p>
-                
+                <p class="journey-intro" data-i18n="hero.intro">Join the Dots offers a gentle, playful journey where we:
+                </p>
+
                 <div class="journey-flow">
                     <div class="journey-flow-step step-1">Arrive</div>
                     <span class="journey-flow-arrow arrow-down">↘</span>
@@ -99,13 +135,14 @@
                     <span class="journey-flow-arrow arrow-up">↗</span>
                     <div class="journey-flow-step step-7">Celebrate</div>
                 </div>
-                
+
                 <div class="journey-steps">
                     <div class="journey-step-item step-1">
                         <strong>Arrive</strong> as we are — with our tender imperfect humanity
                     </div>
                     <div class="journey-step-item step-2">
-                        <strong>Listen</strong> deeply — to our stories, not to fix them, but to understand and integrate them
+                        <strong>Listen</strong> deeply — to our stories, not to fix them, but to understand and
+                        integrate them
                     </div>
                     <div class="journey-step-item step-3">
                         <strong>Lay down</strong> the heavy bags — past patterns, old hurts, auto-pilot reactions
@@ -124,7 +161,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="hero-buttons">
                 <a href="#journey" class="btn btn-primary">
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -492,7 +529,8 @@
                         </div>
                         <h3 class="pricing-name" data-i18n="pricing.monthly.name">Monthly Pass</h3>
                         <div class="pricing-amount">₹1200</div>
-                        <div class="pricing-period" data-i18n="pricing.monthly.period">6 sessions per month <br>(Save ₹600)</div>
+                        <div class="pricing-period" data-i18n="pricing.monthly.period">6 sessions per month <br>(Save
+                            ₹600)</div>
                         <div class="pricing-divider"></div>
                         <ul class="pricing-features">
                             <li data-i18n="pricing.monthly.f1">All 6 workshop sessions</li>
@@ -736,16 +774,23 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>
-                        <svg class="footer-logo-icon" viewBox="0 0 40 40" fill="none">
-                            <path d="M8 20c0-8 6-14 14-14" stroke="var(--color-sage-light)" stroke-width="3"
-                                stroke-linecap="round" />
-                            <path d="M32 20c0 8-6 14-14 14" stroke="var(--color-terracotta-light)" stroke-width="3"
-                                stroke-linecap="round" />
-                            <circle cx="20" cy="20" r="5" fill="var(--color-sage-light)" />
-                        </svg>
-                        <span data-i18n="brand">Join the Dots</span>
+                        <div class="logo-grid logo-grid--footer" aria-label="Join the Dots">
+                            <span class="logo-letter">J</span>
+                            <div class="logo-dot"></div>
+                            <span class="logo-letter">I</span>
+                            <span class="logo-letter">N</span>
+                            <div class="logo-dot"></div>
+                            <span class="logo-letter">T</span>
+                            <span class="logo-letter">H</span>
+                            <span class="logo-letter">E</span>
+                            <span class="logo-letter">D</span>
+                            <div class="logo-dot"></div>
+                            <span class="logo-letter">T</span>
+                            <span class="logo-letter">S</span>
+                        </div>
                     </h3>
-                    <p data-i18n="footer.description">A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.</p>
+                    <p data-i18n="footer.description">A listening-based wellbeing space where emotions are understood,
+                        relationships are gently healed, and awareness slowly becomes a way of living.</p>
                 </div>
                 <div class="footer-links">
                     <h4 data-i18n="footer.journey">Journey</h4>
@@ -769,7 +814,8 @@
                     <h4 data-i18n="footer.connect">Connect</h4>
                     <ul>
                         <li><a href="https://wa.me/your-number" target="_blank" rel="noopener">WhatsApp</a></li>
-                        <li><a href="/cdn-cgi/l/email-protection#ff979a939390bf959096918b979a9b908b8cd19c9092">Email</a></li>
+                        <li><a href="/cdn-cgi/l/email-protection#ff979a939390bf959096918b979a9b908b8cd19c9092">Email</a>
+                        </li>
                         <li><a href="#cta" data-i18n="footer.registerNow">Register Now</a></li>
                     </ul>
                 </div>
@@ -782,7 +828,7 @@
     </footer>
 
 
-  <script src="animations.js"></script>
+    <script src="animations.js"></script>
     <script src="translations.js"></script>
 </body>
 
