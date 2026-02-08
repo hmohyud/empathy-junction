@@ -2221,6 +2221,7 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
     font-size: 0.9rem;
 }
 
+
 /* ==================== MOBILE MENU ==================== */
 .mobile-menu {
     display: none;
@@ -2551,6 +2552,10 @@ a:focus-visible, button:focus-visible {
     .contact-simple {
         grid-template-columns: 1fr;
     }
+    .footer-description{
+        justify-self: center;
+    }
+
 }
 
 .contact-grid {
