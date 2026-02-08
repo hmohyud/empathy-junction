@@ -2089,7 +2089,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.lineTo(14, -10);
         ctx.lineTo(1, -6);
         ctx.closePath();
-        ctx.fillStyle = 'rgba(253,248,243,0.9)';
+        ctx.fillStyle = 'rgba(255,255,255,1)';
         ctx.fill();
 
         // Flag
