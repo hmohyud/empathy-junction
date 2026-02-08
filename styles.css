@@ -126,6 +126,7 @@ section { padding: var(--space-3xl) 0; position: relative; }
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid transparent;
     transition: all 0.3s ease;
+    font-family: var(--font-body);
 }
 
 .nav.scrolled {
@@ -2232,6 +2233,7 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
     align-items: center;
     justify-content: center;
     gap: var(--space-md);
+    font-family: var(--font-body);
 }
 
 .mobile-menu.active { display: flex; }
