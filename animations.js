@@ -386,15 +386,17 @@ class InteractiveBackground {
       this.createDots();
     });
 
-    window.addEventListener("mousemove", (e) => {
-      this.mouse.x = e.clientX;
-      this.mouse.y = e.clientY;
-    }, { passive: true });
+    if (window.innerWidth > 500) {
+      window.addEventListener("mousemove", (e) => {
+        this.mouse.x = e.clientX;
+        this.mouse.y = e.clientY;
+      }, { passive: true });
 
-    window.addEventListener("mouseleave", () => {
-      this.mouse.x = null;
-      this.mouse.y = null;
-    });
+      window.addEventListener("mouseleave", () => {
+        this.mouse.x = null;
+        this.mouse.y = null;
+      });
+    }
 
     window.addEventListener("click", (e) => {
       const tag = e.target.tagName.toLowerCase();
@@ -1748,7 +1750,7 @@ document.addEventListener("DOMContentLoaded", () => {
         { title: 'Celebrate', desc: 'our return to aliveness \u2014 dance with life, love, and blossom' },
     ];
 
-    const PAD = 0.07;
+    var PAD = (window.innerWidth <= 500) ? 0.13 : 0.07;
 
     const ocean = document.getElementById('voyageOcean');
     if (!ocean) return;
@@ -1815,11 +1817,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function buildWaypoints() {
         waypointsEl.innerHTML = '';
+        var narrow = window.innerWidth <= 500;
         STEPS.forEach(function(step, i) {
             var el = document.createElement('div');
             el.className = 'voyage-waypoint';
             el.style.left = (waypointFrac(i) * 100) + '%';
-            el.style.bottom = '60px';
+            el.style.bottom = narrow ? (i % 2 === 0 ? '68px' : '46px') : '60px';
             el.innerHTML = '<div class="waypoint-beacon"></div><div class="waypoint-label">' + step.title + '</div>';
             waypointsEl.appendChild(el);
         });
@@ -2176,7 +2179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buildProgress();
     updateUI();
     frame();
-    window.addEventListener('resize', function() { resize(); buildWaypoints(); });
+    window.addEventListener('resize', function() { PAD = (window.innerWidth <= 500) ? 0.13 : 0.07; resize(); buildWaypoints(); });
 })();
 
 /* ==================== EVENTS DRAWER (loads from events.js) ==================== */

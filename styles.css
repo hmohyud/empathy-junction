@@ -2294,6 +2294,134 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
     .footer-links li { margin-bottom: 4px; }
 }
 
+/* ── Narrow mobile (≤500px) — compact everything ── */
+@media (max-width: 500px) {
+    .hero {
+        padding-top: 80px;
+        padding-bottom: var(--space-lg);
+        min-height: auto;
+    }
+    .hero-content {
+        padding: var(--space-md) var(--space-sm);
+    }
+    .hero-tagline {
+        font-size: 1rem;
+        margin-bottom: var(--space-md);
+    }
+    .hero-description {
+        font-size: 0.9rem;
+        margin-bottom: var(--space-md);
+        line-height: 1.6;
+    }
+    .journey-intro {
+        font-size: 0.92rem;
+    }
+    .hero-buttons {
+        margin-bottom: var(--space-md);
+    }
+    .hero-meta {
+        gap: 4px 8px;
+    }
+    .hero-meta-item {
+        padding: 3px 6px;
+        font-size: 0.65rem;
+        gap: 3px;
+    }
+    .hero-meta-icon {
+        width: 12px;
+        height: 12px;
+    }
+
+    /* Events card — collapse to tiny pill */
+    .events-glance {
+        top: 89px;
+        right: 8px;
+        width: auto;
+        max-width: none;
+        padding: 4px 10px;
+        border-radius: 20px;
+    }
+    .events-glance-header { margin-bottom: 0; }
+    .events-glance-list { display: none; }
+    .events-glance-label { font-size: 0.5rem; }
+    .events-glance-arrow { width: 9px; height: 9px; }
+
+    /* Voyage — compact ocean + staggered readable labels */
+    .voyage-ocean { height: 160px; }
+    .voyage-text { padding: 6px 10px; }
+    .voyage-step-desc { font-size: 0.7rem; max-width: 220px; }
+    .waypoint-label {
+        font-size: 0.5rem;
+        letter-spacing: 0.04em;
+    }
+
+    /* Monthly Rhythm — compact */
+    .time-slots-label { font-size: 0.85rem; margin-bottom: var(--space-sm); }
+    .time-slot { padding: var(--space-xs) var(--space-md); font-size: 0.82rem; }
+    .time-slot-icon { width: 18px; height: 18px; }
+    .time-slots-wrapper { margin-bottom: var(--space-lg); }
+    .schedule-card { padding: var(--space-md); }
+    .schedule-card-icon-wrapper { width: 42px; height: 42px; margin-bottom: var(--space-xs); }
+    .schedule-card-week { font-size: 0.72rem; }
+    .schedule-card-title { font-size: 1rem; }
+    .schedule-card-badge { font-size: 0.65rem; padding: 3px 8px; }
+    .schedule-card-text { font-size: 0.82rem; line-height: 1.5; }
+    .schedule-grid { gap: var(--space-sm); margin-bottom: var(--space-lg); }
+
+    /* Logo tighten */
+    .logo-grid--hero { gap: 3px 2px; }
+
+    /* Nav — hide Register CTA, ensure hamburger visible */
+    .nav-cta { display: none; }
+    .nav-mobile-toggle { display: flex; }
+    .nav-right { gap: 6px; }
+
+    /* Sections */
+    section { padding: var(--space-xl) 0; }
+    .section-header h2 { font-size: 1.5rem; }
+    .section-header p { font-size: 0.88rem; }
+
+    /* Journey cards — compact */
+    .journey-card {
+        padding: var(--space-md);
+    }
+    .journey-card-header {
+        gap: var(--space-sm);
+        margin-bottom: var(--space-sm);
+    }
+    .journey-card-icon {
+        width: 42px;
+        height: 42px;
+    }
+    .journey-card-icon svg { width: 24px; height: 24px; }
+    .journey-card-badge { font-size: 0.65rem; padding: 3px 8px; }
+    .journey-card-title { font-size: 1.15rem; }
+    .journey-card-subtitle { font-size: 0.88rem; }
+    .journey-card-text { font-size: 0.85rem; line-height: 1.55; }
+    .journey-card-theme { font-size: 0.78rem; margin-top: var(--space-xs); padding-top: var(--space-xs); }
+    .journey-card-number { font-size: 2.5rem; }
+
+    /* Pricing cards — compact */
+    .pricing-card-inner { padding: var(--space-md); }
+    .pricing-icon-wrapper { width: 44px; height: 44px; margin-bottom: var(--space-sm); }
+    .pricing-name { font-size: 1.15rem; }
+    .pricing-amount { font-size: 2.2rem; }
+    .pricing-period { font-size: 0.8rem; margin-bottom: var(--space-sm); }
+    .pricing-features li { font-size: 0.82rem; padding: 3px 0; }
+    .pricing-features li::before { width: 16px; height: 16px; background-size: 10px; }
+
+    /* Compassion card — compact */
+    .compassion-card { padding: var(--space-lg) var(--space-md); }
+    .compassion-badge { font-size: 0.78rem; padding: 5px var(--space-sm); }
+    .compassion-title { font-size: 1.3rem; }
+    .compassion-duration { font-size: 1rem; margin-bottom: var(--space-sm); }
+    .compassion-text { font-size: 0.88rem; line-height: 1.6; margin-bottom: var(--space-md); }
+    .compassion-special { font-size: 2.2rem; }
+    .compassion-original { font-size: 1.2rem; }
+    .compassion-pricing { padding: var(--space-sm); gap: var(--space-sm); }
+    .compassion-savings { font-size: 0.7rem; padding: 3px 8px; }
+}
+
 /* ==================== UTILITIES ==================== */
 section[id] { scroll-margin-top: 200px; }
 .page-hero { scroll-margin-top: 200px; }
@@ -3158,9 +3286,9 @@ a:focus-visible, button:focus-visible {
 
 .logo-dot .circle-text-svg text {
     font-family: 'Raleway', sans-serif;
-    font-size: 27px;
+    font-size: 32px;
     font-weight: 600;
-    letter-spacing: 7px;
+    letter-spacing: 5px;
     text-transform: lowercase;
 }
 
@@ -3234,10 +3362,6 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 480px) {
     .logo-grid--hero {
         gap: 5px 3px;
-    }
-    .logo-dot .circle-text-svg text {
-        font-size: 12px;
-        letter-spacing: 3px;
     }
 }
 
