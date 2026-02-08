@@ -83,8 +83,9 @@ class InteractiveBackground {
     const pageHero = document.querySelector('.page-hero');
     const ctaSection = document.querySelector('.cta');
     const footer = document.querySelector('.footer');
+    const pageBody = document.querySelector('.cc-page-body');
     
-    if (!hero && !pageHero && !ctaSection && !footer) return;
+    if (!hero && !pageHero && !ctaSection && !footer && !pageBody) return;
 
     this.visibleSections = new Set();
 
@@ -114,6 +115,7 @@ class InteractiveBackground {
     if (pageHero) observer.observe(pageHero);
     if (ctaSection) observer.observe(ctaSection);
     if (footer) observer.observe(footer);
+    if (pageBody) observer.observe(pageBody);
   }
 
   resize() {
@@ -1859,12 +1861,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function drawSky() {
         var grad = ctx.createLinearGradient(0, 0, 0, H);
-        grad.addColorStop(0, '#E8DDD4');
-        grad.addColorStop(0.3, '#D6E0E8');
-        grad.addColorStop(0.45, '#C4D8E4');
-        grad.addColorStop(0.55, '#A8C8DA');
-        grad.addColorStop(0.75, '#8BB4CA');
-        grad.addColorStop(1.0, '#6E9DB5');
+        grad.addColorStop(0, '#F0D4A8');
+        grad.addColorStop(0.15, '#F4E0BF');
+        grad.addColorStop(0.30, '#F8EDE0');
+        grad.addColorStop(0.42, '#FDF8F3');
+        grad.addColorStop(0.50, '#E8E0D4');
+        grad.addColorStop(0.58, '#9AB8A8');
+        grad.addColorStop(0.72, '#78B0A6');
+        grad.addColorStop(1.0, '#4F8F85');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, W, H);
 
@@ -1879,9 +1883,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function drawWaves() {
         var layers = [
-            { yBase: 0.60, amp: 7,  freq: 0.011, speed: 1.0, phase: 1.0, color: 'rgba(110,157,181,0.2)' },
-            { yBase: 0.55, amp: 8,  freq: 0.016, speed: 1.5, phase: 0.0, color: 'rgba(139,180,202,0.2)' },
-            { yBase: 0.48, amp: 10, freq: 0.014, speed: 1.4, phase: 0.0, color: 'rgba(168,200,218,0.15)' },
+            { yBase: 0.60, amp: 7,  freq: 0.011, speed: 1.0, phase: 1.0, color: 'rgba(65,130,120,0.18)' },
+            { yBase: 0.55, amp: 8,  freq: 0.016, speed: 1.5, phase: 0.0, color: 'rgba(80,145,132,0.15)' },
+            { yBase: 0.48, amp: 10, freq: 0.014, speed: 1.4, phase: 0.0, color: 'rgba(100,165,150,0.12)' },
         ];
         layers.forEach(function(l) {
             ctx.beginPath();
@@ -1901,12 +1905,24 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.fillStyle = 'rgba(255,255,255,0.1)';
             ctx.fill();
         }
+        // Light sparkles on water surface
+        for (var x = 30; x < W; x += 80) {
+            var shimmer = Math.sin(time * 1.8 + x * 0.05);
+            if (shimmer > 0.3) {
+                var sx = x + Math.sin(time * 0.5 + x * 0.03) * 15;
+                var sy = waterlineY(sx) - 2;
+                ctx.beginPath();
+                ctx.ellipse(sx, sy, 8 + shimmer * 6, 1, 0, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,' + (shimmer * 0.12) + ')';
+                ctx.fill();
+            }
+        }
     }
 
     function drawFgWaves() {
         var layers = [
-            { yBase: 0.68, amp: 5, freq: 0.02, speed: 2.4, phase: 3.5, color: 'rgba(90,140,165,0.18)' },
-            { yBase: 0.75, amp: 4, freq: 0.025, speed: 2.8, phase: 5.0, color: 'rgba(80,125,150,0.15)' },
+            { yBase: 0.68, amp: 5, freq: 0.02, speed: 2.4, phase: 3.5, color: 'rgba(55,115,105,0.14)' },
+            { yBase: 0.75, amp: 4, freq: 0.025, speed: 2.8, phase: 5.0, color: 'rgba(45,100,92,0.11)' },
         ];
         layers.forEach(function(l) {
             ctx.beginPath();
