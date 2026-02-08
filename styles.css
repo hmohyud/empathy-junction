@@ -3098,8 +3098,7 @@ a:focus-visible, button:focus-visible {
 
 .logo-grid .logo-dot {
     border-radius: 50%;
-    border: 2px solid var(--color-sage);
-    background: transparent;
+    border: none;
     aspect-ratio: 1;
     position: relative;
 }
@@ -3120,12 +3119,12 @@ a:focus-visible, button:focus-visible {
 .logo-grid--hero .logo-dot {
     width: clamp(2.6rem, 6vw, 4.3rem);
     height: clamp(2.6rem, 6vw, 4.3rem);
-    border-width: 2.5px;
+    border: none;
 }
 
-.logo-grid--hero .logo-dot:nth-of-type(1) { border-color: var(--color-sage); }
-.logo-grid--hero .logo-dot:nth-of-type(3) { border-color: var(--color-terracotta); }
-.logo-grid--hero .logo-dot:nth-of-type(2) { border-color: var(--color-amber); }
+.logo-grid--hero .logo-dot:nth-of-type(1) { background: var(--color-sage); }
+.logo-grid--hero .logo-dot:nth-of-type(3) { background: var(--color-terracotta); }
+.logo-grid--hero .logo-dot:nth-of-type(2) { background: var(--color-amber); }
 
 /* Rotating circle text — inside the dot, hugging inner circumference (hero only) */
 .logo-dot .circle-text-svg {
@@ -3146,9 +3145,9 @@ a:focus-visible, button:focus-visible {
     text-transform: lowercase;
 }
 
-.logo-grid--hero .logo-dot:nth-of-type(1) .circle-text-svg text { fill: var(--color-sage-dark); }
-.logo-grid--hero .logo-dot:nth-of-type(3) .circle-text-svg text { fill: var(--color-terracotta-dark); }
-.logo-grid--hero .logo-dot:nth-of-type(2) .circle-text-svg text { fill: var(--color-amber); }
+.logo-grid--hero .logo-dot:nth-of-type(1) .circle-text-svg text { fill: #fff; }
+.logo-grid--hero .logo-dot:nth-of-type(3) .circle-text-svg text { fill: #fff; }
+.logo-grid--hero .logo-dot:nth-of-type(2) .circle-text-svg text { fill: #fff; }
 
 /* Stagger the rotation start for visual interest */
 .logo-grid--hero .logo-dot:nth-of-type(2) .circle-text-svg {
@@ -3178,12 +3177,12 @@ a:focus-visible, button:focus-visible {
 .logo-grid--small .logo-dot {
     width: 0.7rem;
     height: 0.7rem;
-    border-width: 1.5px;
+    border: none;
 }
 
-.logo-grid--small .logo-dot:nth-of-type(1) { border-color: var(--color-sage); background: var(--color-sage-pale); }
-.logo-grid--small .logo-dot:nth-of-type(3) { border-color: var(--color-terracotta); background: var(--color-terracotta-pale); }
-.logo-grid--small .logo-dot:nth-of-type(2) { border-color: var(--color-amber); background: var(--color-amber-light); }
+.logo-grid--small .logo-dot:nth-of-type(1) { background: var(--color-sage); }
+.logo-grid--small .logo-dot:nth-of-type(3) { background: var(--color-terracotta); }
+.logo-grid--small .logo-dot:nth-of-type(2) { background: var(--color-amber); }
 
 /* Hide rotating text in small logo */
 .logo-grid--small .circle-text-svg { display: none; }
@@ -3203,12 +3202,12 @@ a:focus-visible, button:focus-visible {
 .logo-grid--footer .logo-dot {
     width: 0.8rem;
     height: 0.8rem;
-    border-width: 1.5px;
+    border: none;
 }
 
-.logo-grid--footer .logo-dot:nth-of-type(1) { border-color: var(--color-sage-light); background: rgba(155, 170, 143, 0.25); }
-.logo-grid--footer .logo-dot:nth-of-type(3) { border-color: var(--color-terracotta-light); background: rgba(196, 132, 108, 0.25); }
-.logo-grid--footer .logo-dot:nth-of-type(2) { border-color: var(--color-amber-light); background: rgba(212, 165, 116, 0.25); }
+.logo-grid--footer .logo-dot:nth-of-type(1) { background: var(--color-sage); }
+.logo-grid--footer .logo-dot:nth-of-type(3) { background: var(--color-terracotta); }
+.logo-grid--footer .logo-dot:nth-of-type(2) { background: var(--color-amber); }
 
 .logo-grid--footer .circle-text-svg { display: none; }
 
