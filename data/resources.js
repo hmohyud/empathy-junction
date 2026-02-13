@@ -4,7 +4,7 @@
 //  No HTML knowledge needed — just follow the examples below.
 //
 //  CARD TYPES:
-//    "video"   — YouTube video (needs videoId)
+//    "video"   — YouTube video 
 //    "audio"   — Audio file with visualizer (needs audioSrc)
 //    "article" — Expandable long-form text (needs body)
 //    "list"    — Reference list with categories (needs items)

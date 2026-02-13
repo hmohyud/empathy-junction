@@ -3312,6 +3312,7 @@ a:focus-visible, button:focus-visible {
 /* --- NAV (small) logo grid --- */
 .logo-grid--small {
     gap: 1px 1px;
+    position: relative;
 }
 
 .logo-grid--small .logo-letter {
@@ -3325,6 +3326,7 @@ a:focus-visible, button:focus-visible {
     width: 0.7rem;
     height: 0.7rem;
     border: none;
+    z-index: 1;
 }
 
 .logo-grid--small .logo-dot:nth-of-type(1) { background: var(--color-sage); }
@@ -3333,6 +3335,42 @@ a:focus-visible, button:focus-visible {
 
 /* Hide rotating text in small logo */
 .logo-grid--small .circle-text-svg { display: none; }
+
+/* --- Nav logo dot-connecting lines on hover --- */
+.logo-grid--small .logo-connect-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.logo-grid--small .logo-connect-lines line {
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    transition: stroke-dashoffset 0s;
+}
+
+.logo-grid--small .logo-connect-lines .line-1 { stroke: var(--color-sage); }
+.logo-grid--small .logo-connect-lines .line-2 { stroke: var(--color-amber); }
+.logo-grid--small .logo-connect-lines .line-3 { display: none; }
+
+.nav-logo:hover .logo-connect-lines line {
+    animation: logoLineTrace 2s ease-in-out infinite;
+}
+
+.nav-logo:hover .logo-connect-lines .line-2 {
+    animation-delay: 0.3s;
+}
+
+@keyframes logoLineTrace {
+    0%   { stroke-dashoffset: 50; opacity: 0; }
+    15%  { opacity: 1; }
+    50%  { stroke-dashoffset: 0; opacity: 1; }
+    85%  { opacity: 1; }
+    100% { stroke-dashoffset: -50; opacity: 0; }
+}
 
 /* --- FOOTER logo grid --- */
 .logo-grid--footer {

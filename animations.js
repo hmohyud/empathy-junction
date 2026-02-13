@@ -1709,12 +1709,58 @@ class CompassionMandala {
 }
 
 // ==================== INITIALIZE ====================
+// ==================== LOGO DOT CONNECTOR ====================
+function initLogoConnectLines() {
+  document.querySelectorAll('.logo-grid--small').forEach(function (grid) {
+    if (grid.querySelector('.logo-connect-lines')) return;
+    var dots = grid.querySelectorAll('.logo-dot');
+    if (dots.length < 3) return;
+
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'logo-connect-lines');
+    svg.setAttribute('preserveAspectRatio', 'none');
+
+    function positionLines() {
+      var gRect = grid.getBoundingClientRect();
+      svg.setAttribute('viewBox', '0 0 ' + gRect.width + ' ' + gRect.height);
+      var centers = [];
+      for (var i = 0; i < dots.length; i++) {
+        var dRect = dots[i].getBoundingClientRect();
+        centers.push({
+          x: (dRect.left - gRect.left + dRect.width / 2),
+          y: (dRect.top - gRect.top + dRect.height / 2)
+        });
+      }
+      var lines = svg.querySelectorAll('line');
+      // line-1: dot1 → dot2, line-2: dot2 → dot3, line-3: dot3 → dot1
+      var pairs = [[0,1],[1,2],[2,0]];
+      for (var j = 0; j < pairs.length; j++) {
+        var ln = lines[j];
+        if (!ln) {
+          ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          ln.setAttribute('class', 'line-' + (j + 1));
+          svg.appendChild(ln);
+        }
+        ln.setAttribute('x1', centers[pairs[j][0]].x);
+        ln.setAttribute('y1', centers[pairs[j][0]].y);
+        ln.setAttribute('x2', centers[pairs[j][1]].x);
+        ln.setAttribute('y2', centers[pairs[j][1]].y);
+      }
+    }
+
+    grid.appendChild(svg);
+    positionLines();
+    window.addEventListener('resize', positionLines);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   log("DOM Content Loaded");
 
   log("Starting InteractiveBackground...");
   window.interactiveBg = new InteractiveBackground();
 
+  initLogoConnectLines();
   initNavigation();
   initScrollAnimations();
   initSmoothScroll();
