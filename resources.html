@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources — Join the Dots</title>
+    <meta name="description" content="Videos, guided meditations, audio, and articles to deepen your empathy practice — from Join the Dots.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M8 20c0-8 6-14 14-14' stroke='%239BAA8F' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 20c0 8-6 14-14 14' stroke='%23C4846C' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='20' cy='20' r='5' fill='%239BAA8F'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="bgCanvas" class="bg-canvas"></canvas>
+
+    <nav class="nav" id="nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-logo" aria-label="Join the Dots">
+                <div class="logo-grid logo-grid--small">
+                    <span class="logo-letter">J</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">I</span>
+                    <span class="logo-letter">N</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">T</span>
+                    <span class="logo-letter">H</span>
+                    <span class="logo-letter">E</span>
+                    <span class="logo-letter">D</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">T</span>
+                    <span class="logo-letter">S</span>
+                </div>
+            </a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html#journey" class="nav-link" data-i18n="nav.journey">The Journey</a></li>
+                    <li><a href="index.html#rhythm" class="nav-link" data-i18n="nav.schedule">Schedule</a></li>
+                    <li><a href="index.html#pricing" class="nav-link" data-i18n="nav.pricing">Pricing</a></li>
+                    <li class="nav-dropdown-wrap">
+                        <a href="compassion-course.html" class="nav-link nav-link--dropdown">Compassion Course <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+                        <div class="nav-dropdown">
+                            <a href="compassion-course.html" class="nav-dropdown-item">हिंदी — Hindi</a>
+                            <span class="nav-dropdown-item nav-dropdown-item--soon">English — Coming Soon</span>
+                        </div>
+                    </li>
+                    <li><a href="about.html" class="nav-link" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="resources.html" class="nav-link active" data-i18n="nav.resources">Resources</a></li>
+                    <li><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div class="lang-toggle">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="hi">हि</button>
+                    <button class="lang-btn" data-lang="ur">اردو</button>
+                </div>
+                <a href="register.html" class="nav-cta" data-i18n="nav.join">Register</a>
+            </div>
+            <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html#journey" data-i18n="nav.journey">The Journey</a>
+        <a href="index.html#rhythm" data-i18n="nav.schedule">Schedule</a>
+        <a href="index.html#pricing" data-i18n="nav.pricing">Pricing</a>
+        <a href="compassion-course.html">Compassion Course (Hindi)</a>
+        <a href="about.html" data-i18n="nav.about">About Us</a>
+        <a href="resources.html" data-i18n="nav.resources">Resources</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="register.html" class="btn btn-primary" data-i18n="nav.join">Register</a>
+        <div class="lang-toggle mobile-lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="hi">हि</button>
+            <button class="lang-btn" data-lang="ur">اردو</button>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero page-hero--compact">
+        <div class="hero-bg">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="page-hero-content animate-on-scroll">
+                <span class="section-badge">
+                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                    <span data-i18n="resources.badge">Resources</span>
+                </span>
+                <h1 data-i18n="resources.title">Nourish Your Journey</h1>
+                <p class="page-hero-subtitle" data-i18n="resources.subtitle">Videos, audio, and articles to deepen your practice</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section">
+        <div class="container">
+
+            <!-- Filter Buttons -->
+            <div class="resources-filters animate-on-scroll">
+                <button class="resource-filter-btn active" data-filter="all" data-i18n="resources.filterAll">All</button>
+                <button class="resource-filter-btn" data-filter="video" data-i18n="resources.filterVideo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5,3 19,12 5,21"/></svg>
+                    Video
+                </button>
+                <button class="resource-filter-btn" data-filter="audio" data-i18n="resources.filterAudio">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                    Audio
+                </button>
+                <button class="resource-filter-btn" data-filter="list" data-i18n="resources.filterList">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                    Lists
+                </button>
+                <button class="resource-filter-btn" data-filter="link" data-i18n="resources.filterLink">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    Links
+                </button>
+                <button class="resource-filter-btn" data-filter="article" data-i18n="resources.filterArticle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+                    Articles
+                </button>
+            </div>
+
+            <!-- Resources Grid (cards rendered automatically from data/resources.js) -->
+            <div class="resources-grid" id="resourcesGrid"></div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="cta-bg">
+            <div class="cta-orb cta-orb-1"></div>
+            <div class="cta-orb cta-orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content animate-on-scroll">
+                <h2 data-i18n="resources.cta.title">Continue Your Journey</h2>
+                <p data-i18n="resources.cta.text">Explore our programs and deepen your practice.</p>
+                <div class="cta-buttons">
+                    <a href="index.html#journey" class="btn btn-primary" data-i18n="resources.cta.button">View Programs</a>
+                    <a href="contact.html" class="btn btn-secondary" data-i18n="about.cta.contact">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>
+                        <div class="logo-grid logo-grid--footer" aria-label="Join the Dots">
+                            <span class="logo-letter">J</span>
+                            <div class="logo-dot"></div>
+                            <span class="logo-letter">I</span>
+                            <span class="logo-letter">N</span>
+                            <div class="logo-dot"></div>
+                            <span class="logo-letter">T</span>
+                            <span class="logo-letter">H</span>
+                            <span class="logo-letter">E</span>
+                            <span class="logo-letter">D</span>
+                            <div class="logo-dot"></div>
+                            <span class="logo-letter">T</span>
+                            <span class="logo-letter">S</span>
+                        </div>
+                    </h3>
+                    <p data-i18n="footer.description">A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.</p>
+                </div>
+                <div class="footer-links-row">
+                <div class="footer-links">
+                    <h4 data-i18n="footer.journey">Journey</h4>
+                    <ul>
+                        <li><a href="index.html#journey">Your Path to Connection</a></li>
+                        <li><a href="compassion-course.html" data-i18n="footer.compassionCourse">Compassion Course</a></li>
+                        <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.info">Information</h4>
+                    <ul>
+                        <li><a href="index.html#rhythm" data-i18n="footer.schedule">Schedule</a></li>
+                        <li><a href="index.html#pricing" data-i18n="footer.pricing">Pricing</a></li>
+                        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.connect">Connect</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+                        <li><a href="register.html" data-i18n="footer.registerNow">Register Now</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Join the Dots. <span data-i18n="footer.madeWith">Made with</span> care <span data-i18n="footer.forThose">for those seeking connection.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data/resources.js"></script>
+    <script src="render-resources.js"></script>
+    <script src="animations.js"></script>
+    <script src="resources.js"></script>
+    <script src="translations.js"></script>
+</body>
+</html>

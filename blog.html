@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — Join the Dots</title>
+    <meta name="description" content="Articles, reflections, and stories from the Join the Dots community — exploring empathy, compassion, and connection.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M8 20c0-8 6-14 14-14' stroke='%239BAA8F' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 20c0 8-6 14-14 14' stroke='%23C4846C' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='20' cy='20' r='5' fill='%239BAA8F'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="bgCanvas" class="bg-canvas"></canvas>
+
+    <nav class="nav" id="nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-logo" aria-label="Join the Dots">
+                <div class="logo-grid logo-grid--small">
+                    <span class="logo-letter">J</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">I</span>
+                    <span class="logo-letter">N</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">T</span>
+                    <span class="logo-letter">H</span>
+                    <span class="logo-letter">E</span>
+                    <span class="logo-letter">D</span>
+                    <div class="logo-dot"></div>
+                    <span class="logo-letter">T</span>
+                    <span class="logo-letter">S</span>
+                </div>
+            </a>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html#journey" class="nav-link" data-i18n="nav.journey">The Journey</a></li>
+                    <li><a href="index.html#rhythm" class="nav-link" data-i18n="nav.schedule">Schedule</a></li>
+                    <li><a href="index.html#pricing" class="nav-link" data-i18n="nav.pricing">Pricing</a></li>
+                    <li class="nav-dropdown-wrap">
+                        <a href="compassion-course.html" class="nav-link nav-link--dropdown">Compassion Course <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+                        <div class="nav-dropdown">
+                            <a href="compassion-course.html" class="nav-dropdown-item">हिंदी — Hindi</a>
+                            <span class="nav-dropdown-item nav-dropdown-item--soon">English — Coming Soon</span>
+                        </div>
+                    </li>
+                    <li><a href="about.html" class="nav-link" data-i18n="nav.about">About Us</a></li>
+                    <li><a href="resources.html" class="nav-link" data-i18n="nav.resources">Resources</a></li>
+                    <li><a href="blog.html" class="nav-link active" data-i18n="nav.blog">Blog</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div class="lang-toggle">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="hi">हि</button>
+                    <button class="lang-btn" data-lang="ur">اردو</button>
+                </div>
+                <a href="register.html" class="nav-cta" data-i18n="nav.join">Register</a>
+            </div>
+            <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html#journey" data-i18n="nav.journey">The Journey</a>
+        <a href="index.html#rhythm" data-i18n="nav.schedule">Schedule</a>
+        <a href="index.html#pricing" data-i18n="nav.pricing">Pricing</a>
+        <a href="compassion-course.html">Compassion Course (Hindi)</a>
+        <a href="about.html" data-i18n="nav.about">About Us</a>
+        <a href="resources.html" data-i18n="nav.resources">Resources</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="register.html" class="btn btn-primary" data-i18n="nav.join">Register</a>
+        <div class="lang-toggle mobile-lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="hi">हि</button>
+            <button class="lang-btn" data-lang="ur">اردو</button>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero page-hero--compact">
+        <div class="hero-bg">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="page-hero-content animate-on-scroll">
+                <span class="section-badge">
+                    <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                        <path d="M2 2l7.586 7.586"/>
+                        <circle cx="11" cy="11" r="2"/>
+                    </svg>
+                    <span data-i18n="blog.badge">Blog</span>
+                </span>
+                <h1 data-i18n="blog.title">Reflections &amp; Stories</h1>
+                <p class="page-hero-subtitle" data-i18n="blog.subtitle">Thoughts on empathy, compassion, and the art of listening</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="blog-section">
+        <div class="container">
+            <!-- Blog posts rendered automatically from data/blog.js -->
+            <div class="blog-feed"></div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="cta-bg">
+            <div class="cta-orb cta-orb-1"></div>
+            <div class="cta-orb cta-orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content animate-on-scroll">
+                <h2 data-i18n="blog.cta.title">Share Your Voice</h2>
+                <p data-i18n="blog.cta.text">Have a story or reflection to share? We'd love to hear from you.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary" data-i18n="blog.cta.button">Get in Touch</a>
+                    <a href="resources.html" class="btn btn-secondary" data-i18n="nav.resources">Resources</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>
+                        <div class="logo-grid logo-grid--footer" aria-label="Join the Dots">
+                            <span class="logo-letter">J</span>
+                            <div class="logo-dot"></div>
+                            <span class="logo-letter">I</span>
+                            <span class="logo-letter">N</span>
+                            <div class="logo-dot"></div>
+                            <span class="logo-letter">T</span>
+                            <span class="logo-letter">H</span>
+                            <span class="logo-letter">E</span>
+                            <span class="logo-letter">D</span>
+                            <div class="logo-dot"></div>
+                            <span class="logo-letter">T</span>
+                            <span class="logo-letter">S</span>
+                        </div>
+                    </h3>
+                    <p data-i18n="footer.description">A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.</p>
+                </div>
+                <div class="footer-links-row">
+                <div class="footer-links">
+                    <h4 data-i18n="footer.journey">Journey</h4>
+                    <ul>
+                        <li><a href="index.html#journey">Your Path to Connection</a></li>
+                        <li><a href="compassion-course.html" data-i18n="footer.compassionCourse">Compassion Course</a></li>
+                        <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.info">Information</h4>
+                    <ul>
+                        <li><a href="index.html#rhythm" data-i18n="footer.schedule">Schedule</a></li>
+                        <li><a href="index.html#pricing" data-i18n="footer.pricing">Pricing</a></li>
+                        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.connect">Connect</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+                        <li><a href="register.html" data-i18n="footer.registerNow">Register Now</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Join the Dots. <span data-i18n="footer.madeWith">Made with</span> care <span data-i18n="footer.forThose">for those seeking connection.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data/blog.js"></script>
+    <script src="render-blog.js"></script>
+    <script src="animations.js"></script>
+    <script src="translations.js"></script>
+</body>
+</html>
