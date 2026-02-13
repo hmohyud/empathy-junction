@@ -1,27 +1,104 @@
 // ============================================================
-//  RESOURCES DATA
-//  Edit this file to add, remove, or reorder resources.
-//  No HTML knowledge needed — just follow the examples below.
+//  RESOURCES PAGE — CONTENT FILE
 //
-//  CARD TYPES:
-//    "video"   — YouTube video 
-//    "audio"   — Audio file with visualizer (needs audioSrc)
-//    "article" — Expandable long-form text (needs body)
-//    "list"    — Reference list with categories (needs items)
-//    "link"    — External link / book recommendation (needs url)
+//  This file controls what appears on the Resources page.
+//  You don't need to know how to code — just copy one of
+//  the examples below, paste it in the right section,
+//  and change the text inside the "quotes".
 //
-//  TIPS:
-//    - Newest items should go at the TOP of the list
-//    - Wrap every value in "quotes"
-//    - Separate each item with a comma
-//    - For body text, use an array of paragraphs:
-//        ["First paragraph.", "Second paragraph."]
-//    - For list items, use:
-//        { category: "Name", values: "comma, separated, values" }
-//    - For videoId, paste the full YouTube URL or just the ID:
-//        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"  (full URL)
-//        "dQw4w9WgXcQ"                                   (just the ID)
-//      Both formats work — the ID is extracted automatically.
+//
+//  HOW TO ADD A NEW RESOURCE:
+//  ─────────────────────────
+//    1. Scroll down to the right section (Videos, Audio, etc.)
+//    2. Copy an existing block (everything from { to },)
+//    3. Paste it RIGHT ABOVE the one you copied
+//       (new items should always go at the top of each section)
+//    4. Change the text between the "quotes" to your own content
+//    5. Save the file and refresh the website to see your changes
+//
+//
+//  IMPORTANT — COMMON MISTAKES TO AVOID:
+//  ──────────────────────────────────────
+//    - Every piece of text MUST be wrapped in "quotes"
+//    - Every block MUST end with },  (closing brace + comma)
+//    - Don't delete the lines that say // ---- VIDEOS ---- etc.
+//    - Don't change the lines that say  type: "video"  etc.
+//      (those tell the website what kind of card to show)
+//
+//
+//  COPY-PASTE TEMPLATES:
+//  ─────────────────────
+//  Below are ready-to-copy templates for each type of resource.
+//  Just copy the one you need, paste it in the right section,
+//  and replace the placeholder text with your own.
+//
+//
+//  YOUTUBE VIDEO:
+//  (paste the full YouTube link — or just the video ID)
+//
+//    {
+//        type: "video",
+//        title: "Name of the video",
+//        excerpt: "A short description of what this video is about.",
+//        date: "February 2026",
+//        videoId: "https://www.youtube.com/watch?v=XXXXXXXXXXX"
+//    },
+//
+//
+//  AUDIO RECORDING:
+//  (put the audio file in the "public" folder first,
+//   then type the file name below — e.g. "public/my-track.mp3")
+//
+//    {
+//        type: "audio",
+//        title: "Name of the audio",
+//        excerpt: "A short description of what this audio is about.",
+//        date: "February 2026",
+//        audioSrc: "public/my-file-name.mp3"
+//    },
+//
+//
+//  WRITTEN ARTICLE:
+//  (readers see the excerpt first, then click to expand and
+//   read the full paragraphs)
+//
+//    {
+//        type: "article",
+//        title: "Title of the article",
+//        excerpt: "A short preview shown before the reader expands.",
+//        date: "February 2026",
+//        body: [
+//            "First paragraph goes here.",
+//            "Second paragraph goes here.",
+//            "Add as many paragraphs as you like — one per line."
+//        ]
+//    },
+//
+//
+//  REFERENCE LIST:
+//  (for grouped lists like needs, feelings, sensations, etc.)
+//
+//    {
+//        type: "list",
+//        title: "Name of the list",
+//        excerpt: "A short description of what this list is for.",
+//        items: [
+//            { category: "Group Name", values: "item one, item two, item three" },
+//            { category: "Another Group", values: "item one, item two" }
+//        ]
+//    },
+//
+//
+//  EXTERNAL LINK:
+//  (for book recommendations, websites, or other external pages)
+//
+//    {
+//        type: "link",
+//        title: "Name of the book or website",
+//        excerpt: "A short description of why this is worth visiting.",
+//        url: "https://www.example.com/"
+//    },
+//
 // ============================================================
 
 window.RESOURCES_DATA = [

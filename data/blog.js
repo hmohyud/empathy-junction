@@ -1,21 +1,59 @@
 // ============================================================
-//  BLOG POSTS DATA
-//  Edit this file to add, remove, or reorder blog posts.
-//  No HTML knowledge needed — just follow the examples below.
+//  BLOG PAGE — CONTENT FILE
 //
-//  FIELDS:
-//    date   — Display date, e.g. "13 February 2026"
-//    author — Author name, e.g. "Join the Dots Team"
-//    role   — Author role, e.g. "Trainer" or "Participant"
-//    title  — Post title
-//    body   — Array of paragraphs:
-//             ["First paragraph.", "Second paragraph."]
+//  This file controls what appears on the Blog page.
+//  You don't need to know how to code — just copy the
+//  template below, paste it at the top of the list,
+//  and change the text inside the "quotes".
 //
-//  TIPS:
-//    - Newest posts go at the TOP of the list
-//    - Wrap every value in "quotes"
-//    - Separate each post with a comma
-//    - You can have as many paragraphs as you like
+//
+//  HOW TO ADD A NEW BLOG POST:
+//  ───────────────────────────
+//    1. Copy everything between the --- lines below
+//    2. Paste it RIGHT BELOW the line that says
+//       window.BLOG_DATA = [
+//       (new posts always go at the TOP so they appear first)
+//    3. Change the text between the "quotes" to your own content
+//    4. Save the file and refresh the website to see your post
+//
+//
+//  COPY-PASTE TEMPLATE:
+//  ────────────────────
+//  --- copy from here ---
+//
+//    {
+//        date: "14 February 2026",
+//        author: "Your Name",
+//        role: "Trainer",
+//        title: "Title of Your Blog Post",
+//        body: [
+//            "First paragraph goes here.",
+//            "Second paragraph goes here.",
+//            "Add as many paragraphs as you like — one per line."
+//        ]
+//    },
+//
+//  --- copy to here ---
+//
+//
+//  WHAT EACH LINE MEANS:
+//  ─────────────────────
+//    date   — The date shown on the post (e.g. "14 February 2026")
+//    author — The writer's name (e.g. "Join the Dots Team")
+//    role   — Shows as a small label next to the name.
+//             Use "Trainer" or "Participant" (or any role you like)
+//    title  — The headline of the blog post
+//    body   — The paragraphs of the post. Each paragraph is on
+//             its own line, wrapped in "quotes", separated by commas.
+//
+//
+//  IMPORTANT — COMMON MISTAKES TO AVOID:
+//  ──────────────────────────────────────
+//    - Every piece of text MUST be wrapped in "quotes"
+//    - Every post block MUST end with },  (closing brace + comma)
+//    - Each paragraph inside body must be in "quotes" with a
+//      comma after it (except the very last one)
+//
 // ============================================================
 
 window.BLOG_DATA = [

@@ -2098,6 +2098,7 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
 .cta-bg { position: absolute; inset: 0; opacity: 0; }
 
 .cta-content { position: relative; max-width: 750px; margin: 0 auto; }
+.cta-content p { margin-left: auto; margin-right: auto; }
 
 .cta h2 { color: white; margin-bottom: var(--space-md); }
 

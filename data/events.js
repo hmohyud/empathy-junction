@@ -1,5 +1,71 @@
-// Events data — edit this file to add/remove events
-// No server required, works on file:// protocol
+// ============================================================
+//  SCHEDULE / EVENTS — CONTENT FILE
+//
+//  This file controls the events shown on the homepage
+//  (the Schedule section). You don't need to know how to
+//  code — just copy the template below, paste it in the
+//  right section, and change the text inside the "quotes".
+//
+//
+//  THERE ARE TWO SECTIONS:
+//  ───────────────────────
+//    "upcoming"   — Events with a specific date and time.
+//                   These appear as the main event cards.
+//
+//    "persistent" — Ongoing programs with no specific date
+//                   (e.g. Compassion Course, Monthly Pass).
+//                   These appear as smaller highlight cards.
+//
+//
+//  HOW TO ADD A NEW UPCOMING EVENT:
+//  ────────────────────────────────
+//    1. Find the "upcoming" section below
+//    2. Copy an existing event block (everything from { to },)
+//    3. Paste it where you want it to appear in the list
+//    4. Change the text between the "quotes"
+//    5. Save the file and refresh the website
+//
+//
+//  COPY-PASTE TEMPLATE — UPCOMING EVENT:
+//
+//        {
+//            "title": "Name of the Event",
+//            "subtitle": "A short label like 'Monthly Gathering'",
+//            "date": "2026-03-15",
+//            "time": "10:00 AM – 12:00 PM IST",
+//            "description": "A sentence or two about what this event is.",
+//            "tag": "Free"
+//        },
+//
+//  WHAT EACH LINE MEANS:
+//    title       — The event name
+//    subtitle    — A short label shown below the title
+//    date        — The date in YYYY-MM-DD format (e.g. "2026-03-15"
+//                  for 15 March 2026). This MUST use this format.
+//    time        — The time shown to attendees (any text you like)
+//    description — A short description of the event
+//    tag         — The label on the card (e.g. "Free", "₹600")
+//
+//
+//  COPY-PASTE TEMPLATE — PERSISTENT PROGRAM:
+//
+//        {
+//            "title": "Name of the Program",
+//            "subtitle": "A short label",
+//            "description": "A sentence about this program.",
+//            "link": "#pricing",
+//            "tag": "Ongoing"
+//        },
+//
+//
+//  IMPORTANT — COMMON MISTAKES TO AVOID:
+//  ──────────────────────────────────────
+//    - Every piece of text MUST be wrapped in "quotes"
+//    - Every block MUST end with },  (closing brace + comma)
+//    - Dates MUST be in YYYY-MM-DD format (e.g. "2026-03-15")
+//    - Don't delete the lines that say "upcoming" or "persistent"
+//
+// ============================================================
 window.EVENTS_DATA = {
     "upcoming": [
         {
