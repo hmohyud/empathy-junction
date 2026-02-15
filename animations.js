@@ -392,9 +392,18 @@ class InteractiveBackground {
         this.mouse.y = e.clientY;
       }, { passive: true });
 
-      window.addEventListener("mouseleave", () => {
+      // Clear mouse position when cursor leaves the page
+      document.addEventListener("mouseleave", () => {
         this.mouse.x = null;
         this.mouse.y = null;
+      });
+
+      // Also clear on visibility change (e.g. alt-tab away)
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          this.mouse.x = null;
+          this.mouse.y = null;
+        }
       });
     }
 
