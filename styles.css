@@ -1422,7 +1422,7 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
     font-size: 1rem;
     font-weight: 500;
     border: 1px solid rgba(255, 255, 255, 0.8);
-    cursor: pointer;
+    /* cursor: pointer; */
     transition: box-shadow 0.3s ease, border-color 0.3s ease, background 1s ease, transform 0.3s ease;
 }
 
@@ -4361,4 +4361,144 @@ a:focus-visible, button:focus-visible {
         align-items: flex-start;
         gap: var(--space-2xs);
     }
+}
+
+
+/* ==================== RTL / URDU SUPPORT ==================== */
+
+/* Global RTL text and font changes */
+[dir="rtl"] {
+    font-family: 'Noto Sans Arabic', 'Nunito Sans', sans-serif;
+}
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] .page-hero-subtitle,
+[dir="rtl"] .section-badge,
+[dir="rtl"] .about-lead,
+[dir="rtl"] .about-tagline,
+[dir="rtl"] .about-why-emphasis {
+    font-family: 'Noto Sans Arabic', 'Cormorant Garamond', serif;
+}
+
+/* Hindi font overrides */
+[data-lang="hi"] {
+    font-family: 'Noto Sans Devanagari', 'Nunito Sans', sans-serif;
+}
+[data-lang="hi"] h1,
+[data-lang="hi"] h2,
+[data-lang="hi"] h3,
+[data-lang="hi"] h4,
+[data-lang="hi"] .page-hero-subtitle,
+[data-lang="hi"] .section-badge,
+[data-lang="hi"] .about-lead,
+[data-lang="hi"] .about-tagline,
+[data-lang="hi"] .about-why-emphasis {
+    font-family: 'Tiro Devanagari Hindi', 'Cormorant Garamond', serif;
+}
+
+/* Nav stays in original LTR order (logo left, links center, register right)
+   even in RTL mode — only text inside flows RTL */
+[dir="rtl"] .footer-links-row {
+    direction: rtl;
+}
+
+/* Text alignment overrides for RTL — only non-centered elements */
+[dir="rtl"] .about-intro,
+[dir="rtl"] .story-content {
+    text-align: right;
+}
+/* Hero, CTA, and section headers stay centered */
+[dir="rtl"] .page-hero-content,
+[dir="rtl"] .cta-content,
+[dir="rtl"] .section-header {
+    text-align: center;
+}
+
+/* Flip specific border positions */
+[dir="rtl"] .about-why-quotes {
+    border-left: none;
+    border-right: 3px solid var(--color-terracotta-light);
+    padding-left: 0;
+    padding-right: var(--space-md);
+}
+
+/* About founder grid flip */
+[dir="rtl"] .about-founder {
+    direction: rtl;
+}
+
+/* Blog post header */
+[dir="rtl"] .blog-post-header {
+    direction: rtl;
+}
+[dir="rtl"] .blog-post-title,
+[dir="rtl"] .blog-post-body {
+    text-align: right;
+}
+
+/* Resource cards */
+[dir="rtl"] .resource-card-body {
+    text-align: right;
+}
+[dir="rtl"] .resource-list {
+    padding-left: 0;
+    padding-right: 1.2em;
+}
+
+/* Contact cards */
+[dir="rtl"] .contact-card {
+    text-align: right;
+}
+
+/* Register info */
+[dir="rtl"] .register-checklist li {
+    direction: rtl;
+}
+[dir="rtl"] .register-info-card {
+    text-align: right;
+}
+
+/* Footer RTL */
+[dir="rtl"] .footer-brand,
+[dir="rtl"] .footer-links {
+    text-align: right;
+}
+[dir="rtl"] .footer-links ul {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Mobile menu RTL */
+[dir="rtl"] .mobile-menu {
+    text-align: right;
+}
+
+/* About spaces list */
+[dir="rtl"] .about-spaces-list {
+    padding-left: 0;
+    padding-right: 1.5em;
+}
+
+/* VM cards */
+[dir="rtl"] .about-vm-card {
+    text-align: right;
+}
+
+/* Value cards (offerings) */
+[dir="rtl"] .value-card {
+    text-align: right;
+}
+
+/* Nav dropdowns stay in LTR default position */
+
+/* CTA buttons keep centered */
+[dir="rtl"] .cta-buttons {
+    justify-content: center;
+}
+
+/* Keep the logo LTR always */
+[dir="rtl"] .logo-grid {
+    direction: ltr;
 }

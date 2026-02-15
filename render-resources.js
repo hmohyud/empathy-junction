@@ -1,5 +1,5 @@
 // ============================================================
-//  RESOURCE CARD RENDERER
+//  RESOURCE CARD RENDERER (with i18n support)
 //  Reads window.RESOURCES_DATA and builds the card grid.
 //  This script must load BEFORE animations.js and resources.js
 //  so the DOM is populated before those scripts initialize.
@@ -21,7 +21,42 @@
         volume: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>'
     };
 
-    var TYPE_LABELS = { video: 'Video', audio: 'Audio', article: 'Article', list: 'List', link: 'Link' };
+    var TYPE_LABELS = {
+        en: { video: 'Video', audio: 'Audio', article: 'Article', list: 'List', link: 'Link' },
+        hi: { video: 'वीडियो', audio: 'ऑडियो', article: 'लेख', list: 'सूची', link: 'लिंक' },
+        ur: { video: 'ویڈیو', audio: 'آڈیو', article: 'مضمون', list: 'فہرست', link: 'لنک' }
+    };
+
+    function getLang() {
+        return window.currentLang || localStorage.getItem('jtd-lang') || 'en';
+    }
+
+    // Get translated field from item's i18n object, fallback to English
+    function t(item, field) {
+        var lang = getLang();
+        if (lang !== 'en' && item.i18n && item.i18n[lang] && item.i18n[lang][field] !== undefined) {
+            return item.i18n[lang][field];
+        }
+        return item[field];
+    }
+
+    // Get translated body array
+    function tBody(item) {
+        var lang = getLang();
+        if (lang !== 'en' && item.i18n && item.i18n[lang] && item.i18n[lang].body) {
+            return item.i18n[lang].body;
+        }
+        return item.body || [];
+    }
+
+    // Get translated list items
+    function tItems(item) {
+        var lang = getLang();
+        if (lang !== 'en' && item.i18n && item.i18n[lang] && item.i18n[lang].items) {
+            return item.i18n[lang].items;
+        }
+        return item.items || [];
+    }
 
     function esc(str) {
         if (!str) return '';
@@ -29,15 +64,28 @@
     }
 
     function badge(type) {
+        var lang = getLang();
+        var labels = TYPE_LABELS[lang] || TYPE_LABELS.en;
         return '<span class="resource-type-badge resource-type-badge--' + type + '">'
-            + (ICONS[type] || '') + ' ' + (TYPE_LABELS[type] || type) + '</span>';
+            + (ICONS[type] || '') + ' ' + (labels[type] || type) + '</span>';
+    }
+
+    // Get translated "Read More" / "Read Less" / "Visit Resource" labels
+    function getLabel(key) {
+        var lang = getLang();
+        var labels = {
+            en: { readMore: 'Read More', readLess: 'Read Less', visitResource: 'Visit Resource' },
+            hi: { readMore: 'और पढ़ें', readLess: 'कम पढ़ें', visitResource: 'संसाधन देखें' },
+            ur: { readMore: 'مزید پڑھیں', readLess: 'کم پڑھیں', visitResource: 'وسیلہ دیکھیں' }
+        };
+        return (labels[lang] || labels.en)[key] || key;
     }
 
     // Extract YouTube video ID from full URL or bare ID
     function extractVideoId(input) {
         if (!input) return '';
         var m = input.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?.*v=|embed\/|v\/|shorts\/))([A-Za-z0-9_-]{11})/);
-        return m ? m[1] : input; // return as-is if already a bare ID
+        return m ? m[1] : input;
     }
 
     function renderVideo(item) {
@@ -50,9 +98,9 @@
             +   '</div>'
             + '</div>'
             + '<div class="resource-card-body">' + badge('video')
-            +   '<h3 class="resource-card-title">' + esc(item.title) + '</h3>'
-            +   '<p class="resource-card-excerpt">' + esc(item.excerpt) + '</p>'
-            +   '<span class="resource-card-date">' + esc(item.date) + '</span>'
+            +   '<h3 class="resource-card-title">' + esc(t(item, 'title')) + '</h3>'
+            +   '<p class="resource-card-excerpt">' + esc(t(item, 'excerpt')) + '</p>'
+            +   '<span class="resource-card-date">' + esc(t(item, 'date') || item.date) + '</span>'
             + '</div></div>';
     }
 
@@ -72,32 +120,32 @@
             +   '</div>'
             + '</div>'
             + '<div class="resource-card-body">' + badge('audio')
-            +   '<h3 class="resource-card-title">' + esc(item.title) + '</h3>'
-            +   '<p class="resource-card-excerpt">' + esc(item.excerpt) + '</p>'
-            +   '<span class="resource-card-date">' + esc(item.date) + '</span>'
+            +   '<h3 class="resource-card-title">' + esc(t(item, 'title')) + '</h3>'
+            +   '<p class="resource-card-excerpt">' + esc(t(item, 'excerpt')) + '</p>'
+            +   '<span class="resource-card-date">' + esc(t(item, 'date') || item.date) + '</span>'
             + '</div></div>';
     }
 
     function renderArticle(item) {
-        var bodyHtml = (item.body || []).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
+        var bodyHtml = tBody(item).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
         return '<div class="resource-card resource-card--article animate-on-scroll" data-type="article">'
             + '<div class="resource-card-body">' + badge('article')
-            +   '<h3 class="resource-card-title">' + esc(item.title) + '</h3>'
-            +   '<p class="resource-card-excerpt">' + esc(item.excerpt) + '</p>'
-            +   '<span class="resource-card-date">' + esc(item.date) + '</span>'
-            +   '<button class="resource-read-more" aria-expanded="false" data-i18n="resources.readMore">Read More</button>'
+            +   '<h3 class="resource-card-title">' + esc(t(item, 'title')) + '</h3>'
+            +   '<p class="resource-card-excerpt">' + esc(t(item, 'excerpt')) + '</p>'
+            +   '<span class="resource-card-date">' + esc(t(item, 'date') || item.date) + '</span>'
+            +   '<button class="resource-read-more" aria-expanded="false">' + getLabel('readMore') + '</button>'
             +   '<div class="resource-article-content" hidden>' + bodyHtml + '</div>'
             + '</div></div>';
     }
 
     function renderList(item) {
-        var listHtml = (item.items || []).map(function (li) {
+        var listHtml = tItems(item).map(function (li) {
             return '<li><strong>' + esc(li.category) + '</strong> \u2014 ' + esc(li.values) + '</li>';
         }).join('');
         return '<div class="resource-card resource-card--list animate-on-scroll" data-type="list">'
             + '<div class="resource-card-body">' + badge('list')
-            +   '<h3 class="resource-card-title">' + esc(item.title) + '</h3>'
-            +   '<p class="resource-card-excerpt">' + esc(item.excerpt) + '</p>'
+            +   '<h3 class="resource-card-title">' + esc(t(item, 'title')) + '</h3>'
+            +   '<p class="resource-card-excerpt">' + esc(t(item, 'excerpt')) + '</p>'
             +   '<ul class="resource-list">' + listHtml + '</ul>'
             + '</div></div>';
     }
@@ -105,16 +153,16 @@
     function renderLink(item) {
         return '<div class="resource-card resource-card--link animate-on-scroll" data-type="link">'
             + '<div class="resource-card-body">' + badge('link')
-            +   '<h3 class="resource-card-title">' + esc(item.title) + '</h3>'
-            +   '<p class="resource-card-excerpt">' + esc(item.excerpt) + '</p>'
+            +   '<h3 class="resource-card-title">' + esc(t(item, 'title')) + '</h3>'
+            +   '<p class="resource-card-excerpt">' + esc(t(item, 'excerpt')) + '</p>'
             +   '<a href="' + esc(item.url) + '" target="_blank" rel="noopener" class="resource-external-link">'
-            +     'Visit Resource ' + ICONS.externalArrow + '</a>'
+            +     getLabel('visitResource') + ' ' + ICONS.externalArrow + '</a>'
             + '</div></div>';
     }
 
     var RENDERERS = { video: renderVideo, audio: renderAudio, article: renderArticle, list: renderList, link: renderLink };
 
-    document.addEventListener('DOMContentLoaded', function () {
+    function renderAll() {
         var grid = document.getElementById('resourcesGrid');
         if (!grid) return;
         var data = window.RESOURCES_DATA;
@@ -125,5 +173,20 @@
             if (fn) html += fn(data[i]);
         }
         grid.innerHTML = html;
+    }
+
+    document.addEventListener('DOMContentLoaded', renderAll);
+
+    // Re-render when language changes (dispatched by translations.js)
+    document.addEventListener('languageChanged', function () {
+        renderAll();
+        // Re-initialize scroll animations for newly rendered elements
+        if (typeof window.initScrollAnimations === 'function') {
+            window.initScrollAnimations();
+        }
+        // Re-initialize resource filters and interactions after re-render
+        if (typeof window.initResourcesPage === 'function') {
+            window.initResourcesPage();
+        }
     });
 })();

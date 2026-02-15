@@ -531,21 +531,21 @@
             <div class="nav-center">
                 <ul class="nav-links">
                     <li class="nav-dropdown-wrap nav-explore-wrap">
-                        <a href="index.html" class="nav-link nav-link--dropdown nav-explore-trigger" data-i18n="nav.home">Home <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+                        <a href="index.html" class="nav-link nav-link--dropdown nav-explore-trigger"><span data-i18n="nav.home">Home</span> <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
                         <div class="nav-dropdown nav-explore-dropdown">
                             <a href="index.html" class="nav-dropdown-item" data-i18n="nav.home">Home</a>
                             <a href="index.html#rhythm" class="nav-dropdown-item" data-i18n="nav.schedule">Schedule</a>
                             <a href="index.html#journey" class="nav-dropdown-item" data-i18n="nav.journey">The Journey</a>
                             <a href="index.html#pricing" class="nav-dropdown-item" data-i18n="nav.pricing">Pricing</a>
-                            <a href="index.html#compassion" class="nav-dropdown-item">Compassion Course</a>
-                            <a href="index.html#audience" class="nav-dropdown-item">Who Is This For</a>
+                            <a href="index.html#compassion" class="nav-dropdown-item" data-i18n="nav.compassionCourse">Compassion Course</a>
+                            <a href="index.html#audience" class="nav-dropdown-item" data-i18n="nav.whoIsThisFor">Who Is This For</a>
                         </div>
                     </li>
                     <li class="nav-dropdown-wrap">
-                        <a href="compassion-course.html" class="nav-link nav-link--dropdown active">Compassion Course <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+                        <a href="compassion-course.html" class="nav-link nav-link--dropdown active"><span data-i18n="nav.compassionCourseLabel">Compassion Course</span> <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
                         <div class="nav-dropdown">
-                            <a href="compassion-course.html" class="nav-dropdown-item">हिंदी — Hindi</a>
-                            <span class="nav-dropdown-item nav-dropdown-item--soon">English — Coming Soon</span>
+                            <a href="compassion-course.html" class="nav-dropdown-item" data-i18n="nav.ccHindi">हिंदी — Hindi</a>
+                            <span class="nav-dropdown-item nav-dropdown-item--soon" data-i18n="nav.ccEnglishSoon">English — Coming Soon</span>
                         </div>
                     </li>
                     <li><a href="about.html" class="nav-link" data-i18n="nav.about">About Us</a></li>
@@ -568,15 +568,15 @@
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
-        <span class="mobile-menu-label">Home</span>
+        <span class="mobile-menu-label" data-i18n="nav.home">Home</span>
         <div class="mobile-explore-group">
             <a href="index.html#rhythm" data-i18n="nav.schedule">Schedule</a>
             <a href="index.html#journey" data-i18n="nav.journey">The Journey</a>
             <a href="index.html#pricing" data-i18n="nav.pricing">Pricing</a>
-            <a href="index.html#compassion">Compassion Course</a>
-            <a href="index.html#audience">Who Is This For</a>
+            <a href="index.html#compassion" data-i18n="nav.compassionCourse">Compassion Course</a>
+            <a href="index.html#audience" data-i18n="nav.whoIsThisFor">Who Is This For</a>
         </div>
-        <a href="compassion-course.html">Compassion Course</a>
+        <a href="compassion-course.html" data-i18n="nav.compassionCourse">Compassion Course</a>
         <a href="about.html" data-i18n="nav.about">About Us</a>
         <a href="resources.html" data-i18n="nav.resources">Resources</a>
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
@@ -615,8 +615,8 @@
             <!-- Intro -->
             <div class="animate-on-scroll">
                 <div class="cc-intro-questions">
-                    <p data-i18n="cc.intro.p1"><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Do you wish your communication with loved ones could be better?</p>
-                    <p data-i18n="cc.intro.p2"><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg> Do you want to resolve differences peacefully?</p>
+                    <p><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> <span data-i18n="cc.intro.q1">Do you wish your communication with loved ones could be better?</span></p>
+                    <p><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg> <span data-i18n="cc.intro.q2">Do you want to resolve differences peacefully?</span></p>
                 </div>
                 <div class="cc-intro-body">
                     <p data-i18n="cc.intro.p3">The two most common communication roadblocks in personal and professional life are our inability to listen effectively and express ourselves adequately. These challenges lead to misunderstandings, hurt feelings, and fear — which often escalate into conflict.</p>
@@ -625,22 +625,22 @@
             </div>
 
             <div class="cc-highlight animate-on-scroll">
-                <p data-i18n="cc.highlight"><strong>We are launching Batch 3 of the 52-week Practice Group from 15th July 2025,</strong> where we will learn and practise these skills together as a community.</p>
+                <p data-i18n-html="cc.highlight"><strong>We are launching Batch 3 of the 52-week Practice Group from 15th July 2025,</strong> where we will learn and practise these skills together as a community.</p>
             </div>
 
             <!-- Course details -->
             <div class="cc-details animate-on-scroll">
                 <div class="cc-detail-card">
                     <span class="cc-detail-icon"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
-                    <div><strong data-i18n="cc.detail.starts">Starts</strong><span>15 July 2025</span></div>
+                    <div><strong data-i18n="cc.detail.starts">Starts</strong><span data-i18n="cc.detail.startsVal">15 July 2025</span></div>
                 </div>
                 <div class="cc-detail-card">
                     <span class="cc-detail-icon"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 3h14M5 21h14M7 3v3a5 5 0 005 5 5 5 0 005-5V3M7 21v-3a5 5 0 015-5 5 5 0 015 5v3"/></svg></span>
-                    <div><strong data-i18n="cc.detail.ends">Ends</strong><span>22 June 2026 (52 weeks)</span></div>
+                    <div><strong data-i18n="cc.detail.ends">Ends</strong><span data-i18n="cc.detail.endsVal">22 June 2026 (52 weeks)</span></div>
                 </div>
                 <div class="cc-detail-card">
                     <span class="cc-detail-icon"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-                    <div><strong data-i18n="cc.detail.day">Every Tuesday</strong><span>7:30 – 9:30 PM IST</span></div>
+                    <div><strong data-i18n="cc.detail.day">Every Tuesday</strong><span data-i18n="cc.detail.dayVal">7:30 – 9:30 PM IST</span></div>
                 </div>
                 <div class="cc-detail-card">
                     <span class="cc-detail-icon"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
@@ -658,7 +658,7 @@
 
             <!-- CTA -->
             <div class="cc-cta-banner animate-on-scroll">
-                <p><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> <span data-i18n="cc.cta.deadline">Registration deadline: <strong>1st July 2025</strong></span></p>
+                <p><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> <span data-i18n-html="cc.cta.deadline">Registration deadline: <strong>1st July 2025</strong></span></p>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0W5WgXjMlb4cH_I30S7yjDZyZQLUTyX3F-8XrnFozM_Lulw/viewform" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="cc.cta.apply">Apply Now</a>
             </div>
 
@@ -690,45 +690,45 @@
 
             <div class="cc-testimonials">
                 <div class="cc-testimonial animate-on-scroll">
-                    <blockquote>I learnt how to express myself without blame or criticism. Where small things used to lead to conflict, I now first understand myself and then the other person. The connection in my family relationships has deepened.</blockquote>
-                    <cite>— Swami Saran, 42, Lucknow</cite>
+                    <blockquote data-i18n="cc.testimonial.1.quote">I learnt how to express myself without blame or criticism. Where small things used to lead to conflict, I now first understand myself and then the other person. The connection in my family relationships has deepened.</blockquote>
+                    <cite data-i18n="cc.testimonial.1.cite">— Swami Saran, 42, Lucknow</cite>
                 </div>
                 <div class="cc-testimonial animate-on-scroll">
-                    <blockquote>My daughter told me I have become a better listener. I am able to connect better with my children. I can now see the knots in family dynamics that I was tangled in for years. It feels empowering.</blockquote>
-                    <cite>— Sunita, 56, Jaipur</cite>
+                    <blockquote data-i18n="cc.testimonial.2.quote">My daughter told me I have become a better listener. I am able to connect better with my children. I can now see the knots in family dynamics that I was tangled in for years. It feels empowering.</blockquote>
+                    <cite data-i18n="cc.testimonial.2.cite">— Sunita, 56, Jaipur</cite>
                 </div>
                 <div class="cc-testimonial animate-on-scroll">
-                    <blockquote>This course was a life-changing journey for me. I am able to understand and identify my feelings and needs. My relationship with myself and others have improved. Joining this course is one of the best things that happened to me.</blockquote>
-                    <cite>— Shalaka, 33, Bangalore</cite>
+                    <blockquote data-i18n="cc.testimonial.3.quote">This course was a life-changing journey for me. I am able to understand and identify my feelings and needs. My relationship with myself and others have improved. Joining this course is one of the best things that happened to me.</blockquote>
+                    <cite data-i18n="cc.testimonial.3.cite">— Shalaka, 33, Bangalore</cite>
                 </div>
                 <div class="cc-testimonial animate-on-scroll">
-                    <blockquote>I have learnt to understand my feelings and underlying needs in various contexts of life. I have experienced more closeness and warmth in relations. I am more aware of self-talk and can direct it towards peace.</blockquote>
-                    <cite>— Shikha, 33, Raipur</cite>
+                    <blockquote data-i18n="cc.testimonial.4.quote">I have learnt to understand my feelings and underlying needs in various contexts of life. I have experienced more closeness and warmth in relations. I am more aware of self-talk and can direct it towards peace.</blockquote>
+                    <cite data-i18n="cc.testimonial.4.cite">— Shikha, 33, Raipur</cite>
                 </div>
                 <div class="cc-testimonial animate-on-scroll">
-                    <blockquote>I have started seeing people in my life with compassion. Feelings and needs have become my guiding principles. The way I communicate with others has changed. I feel happiness and peace.</blockquote>
-                    <cite>— Pushpa, 61, Bhopal</cite>
+                    <blockquote data-i18n="cc.testimonial.5.quote">I have started seeing people in my life with compassion. Feelings and needs have become my guiding principles. The way I communicate with others has changed. I feel happiness and peace.</blockquote>
+                    <cite data-i18n="cc.testimonial.5.cite">— Pushpa, 61, Bhopal</cite>
                 </div>
                 <div class="cc-testimonial animate-on-scroll">
-                    <blockquote>We did this course together as sisters. Doing it together has empowered us to support each other in a much better way. The trust and love between us has grown.</blockquote>
-                    <cite>— Shikha &amp; Shalaka</cite>
+                    <blockquote data-i18n="cc.testimonial.6.quote">We did this course together as sisters. Doing it together has empowered us to support each other in a much better way. The trust and love between us has grown.</blockquote>
+                    <cite data-i18n="cc.testimonial.6.cite">— Shikha &amp; Shalaka</cite>
                 </div>
                 <div class="cc-testimonial animate-on-scroll">
-                    <blockquote>Both the course design and facilitation were excellent. Every participant was listened to equally, and there was always space to understand their feelings. The connection between each session was wonderful.</blockquote>
-                    <cite>— Vijaya, 44, Jaipur</cite>
+                    <blockquote data-i18n="cc.testimonial.7.quote">Both the course design and facilitation were excellent. Every participant was listened to equally, and there was always space to understand their feelings. The connection between each session was wonderful.</blockquote>
+                    <cite data-i18n="cc.testimonial.7.cite">— Vijaya, 44, Jaipur</cite>
                 </div>
                 <div class="cc-testimonial animate-on-scroll">
-                    <blockquote>The facilitator's warmth, clarity, skill, and patience were admirable. Our challenges were addressed through examples, music, poetry, and images in an engaging way that I can still visualise.</blockquote>
-                    <cite>— Kamal, 72, Meerut</cite>
+                    <blockquote data-i18n="cc.testimonial.8.quote">The facilitator's warmth, clarity, skill, and patience were admirable. Our challenges were addressed through examples, music, poetry, and images in an engaging way that I can still visualise.</blockquote>
+                    <cite data-i18n="cc.testimonial.8.cite">— Kamal, 72, Meerut</cite>
                 </div>
             </div>
 
             <!-- Contribution -->
             <div class="cc-contribution animate-on-scroll">
                 <h3><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> <span data-i18n="cc.contribution.title">Monthly Contribution</span></h3>
-                <p data-i18n="cc.contribution.p1"><strong>The requested annual contribution ranges from ₹6,500 to ₹12,000</strong> (approx. ₹500–1,000/month, or ₹125–250/session). This sliding scale ensures you can pay according to your capacity, willingness, and generosity.</p>
+                <p data-i18n-html="cc.contribution.p1"><strong>The requested annual contribution ranges from ₹6,500 to ₹12,000</strong> (approx. ₹500–1,000/month, or ₹125–250/session). This sliding scale ensures you can pay according to your capacity, willingness, and generosity.</p>
                 <p data-i18n="cc.contribution.p2">Our team of 6 facilitators are offering their services from the heart — 52 live sessions over 12 months. They do not consider this their livelihood, nor does this contribution compensate for their time and effort. Your contribution inspires us to expand this work across India.</p>
-                <p data-i18n="cc.contribution.p3">We offer <strong>partial scholarships</strong> for those from socially and economically marginalized backgrounds. We rely on the generosity of this community — the more you contribute, the more our collective resource pool grows to support others. Please pay as much as you can.</p>
+                <p data-i18n-html="cc.contribution.p3">We offer <strong>partial scholarships</strong> for those from socially and economically marginalized backgrounds. We rely on the generosity of this community — the more you contribute, the more our collective resource pool grows to support others. Please pay as much as you can.</p>
             </div>
 
             <!-- CTA -->
@@ -793,7 +793,7 @@
                 <div class="cc-faq-item">
                     <button class="cc-faq-q" data-i18n="cc.faq.q7">How do we start?</button>
                     <div class="cc-faq-a"><div class="cc-faq-a-inner">
-                        <p>Fill the <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0W5WgXjMlb4cH_I30S7yjDZyZQLUTyX3F-8XrnFozM_Lulw/viewform" target="_blank" rel="noopener">registration form</a>. You'll receive a link to the WhatsApp group.</p>
+                        <p data-i18n-html="cc.faq.a7">Fill the <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0W5WgXjMlb4cH_I30S7yjDZyZQLUTyX3F-8XrnFozM_Lulw/viewform" target="_blank" rel="noopener">registration form</a>. You'll receive a link to the WhatsApp group.</p>
                     </div></div>
                 </div>
 
@@ -814,7 +814,7 @@
                 <div class="cc-faq-item">
                     <button class="cc-faq-q" data-i18n="cc.faq.q10">Do I also need to register on the Compassion Course website?</button>
                     <div class="cc-faq-a"><div class="cc-faq-a-inner">
-                        <p>No. Our form is sufficient for group participants. However, if you'd also like to receive lessons in English, you can additionally register on the <a href="https://nycnvc.wufoo.com/forms/p196y1790eej77b/" target="_blank" rel="noopener">Compassion Course website</a>.</p>
+                        <p data-i18n-html="cc.faq.a10">No. Our form is sufficient for group participants. However, if you'd also like to receive lessons in English, you can additionally register on the <a href="https://nycnvc.wufoo.com/forms/p196y1790eej77b/" target="_blank" rel="noopener">Compassion Course website</a>.</p>
                     </div></div>
                 </div>
 
@@ -844,7 +844,7 @@
                 <div class="cc-faq-item">
                     <button class="cc-faq-q" data-i18n="cc.faq.q14">I want to know more. Who do I contact?</button>
                     <div class="cc-faq-a"><div class="cc-faq-a-inner">
-                        <p><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Call <strong>8860661717</strong> for any questions.</p>
+                        <p data-i18n-html="cc.faq.a14"><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Call <strong>8860661717</strong> for any questions.</p>
                     </div></div>
                 </div>
 
@@ -861,58 +861,58 @@
                 <button class="cc-syllabus-toggle" id="syllabusToggle"><svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> <span data-i18n="cc.syllabus.title">Full Syllabus (52 weeks)</span></button>
                 <div class="cc-syllabus-body" id="syllabusBody">
                     <ol class="cc-syllabus-list">
-                        <li><strong>1.</strong> Everything We Do, We Do to Meet a Need</li>
-                        <li><strong>2.</strong> Most of Us Were Taught Something Else</li>
-                        <li><strong>3.</strong> We Are All Equipped with Onboard Need Radar</li>
-                        <li><strong>4.</strong> What's the Big Deal with Needs?</li>
-                        <li><strong>5.</strong> Empathy, the Breath of Compassion</li>
-                        <li><strong>6.</strong> Hidden Judgments</li>
-                        <li><strong>7.</strong> More About Feelings</li>
-                        <li><strong>8.</strong> The Wisdom Inside the Judgment</li>
-                        <li><strong>9.</strong> Why Is This So Bleeping Hard?</li>
-                        <li><strong>10.</strong> What Empathy Is... and What It's Not</li>
-                        <li><strong>11.</strong> Creating Your Life of Compassion</li>
-                        <li><strong>12.</strong> Slowing Down</li>
-                        <li><strong>13.</strong> Making Life More Wonderful with Requests</li>
-                        <li><strong>14.</strong> More about Self-Empathy</li>
-                        <li><strong>15.</strong> More About Requests</li>
-                        <li><strong>16.</strong> Saying 'No' with Compassion</li>
-                        <li><strong>17.</strong> Compassionate Use of Force</li>
-                        <li><strong>18.</strong> Beliefs and Needs: Habitual Thoughts</li>
-                        <li><strong>19.</strong> The Art of Observation</li>
-                        <li><strong>20.</strong> Scary Honesty</li>
-                        <li><strong>21.</strong> Giving Thanks — Appreciation from the Heart</li>
-                        <li><strong>22.</strong> The Power of Thanks</li>
-                        <li><strong>23.</strong> Apologies Versus Restoration</li>
-                        <li><strong>24.</strong> Hearing 'NO' with Compassion</li>
-                        <li><strong>25.</strong> Living a Life of Compassion</li>
-                        <li><strong>26.</strong> Clarity About Judgments</li>
-                        <li><strong>27.</strong> Connecting to Life Energy</li>
-                        <li><strong>28.</strong> The Layering of Needs</li>
-                        <li><strong>29.</strong> Self-Connection</li>
-                        <li><strong>30.</strong> Enjoying Pain</li>
-                        <li><strong>31.</strong> Shift versus Compromise</li>
-                        <li><strong>32.</strong> Stimulus Vs Cause</li>
-                        <li><strong>33.</strong> Understanding Anger</li>
-                        <li><strong>34.</strong> Being Responsive vs Being Responsible</li>
-                        <li><strong>35.</strong> Acting Angry vs Consciously Feeling Anger</li>
-                        <li><strong>36.</strong> Surfing Intensity</li>
-                        <li><strong>37.</strong> Compassionate Intensity</li>
-                        <li><strong>38.</strong> Words That Fuel Anger and Deny Choice</li>
-                        <li><strong>39.</strong> Agreements versus Rules</li>
-                        <li><strong>40.</strong> The Art of Mourning</li>
-                        <li><strong>41.</strong> Enemy Images</li>
-                        <li><strong>42.</strong> Power With Vs Power Over</li>
-                        <li><strong>43.</strong> Compassionate Self-Discipline</li>
-                        <li><strong>44.</strong> Habitual vs Life-Connected Authority</li>
-                        <li><strong>45.</strong> Compassion and Vulnerability</li>
-                        <li><strong>46.</strong> Demanding versus Persisting</li>
-                        <li><strong>47.</strong> A Compassionate View of Triggers</li>
-                        <li><strong>48.</strong> Pervasive Feelings</li>
-                        <li><strong>49.</strong> Campaigns</li>
-                        <li><strong>50.</strong> Speaking Your Compassion</li>
-                        <li><strong>51.</strong> Compassion As a Spiritual Practice</li>
-                        <li><strong>52.</strong> Living With Compassion</li>
+                        <li data-i18n-html="cc.syllabus.w1"><strong>1.</strong> Everything We Do, We Do to Meet a Need</li>
+                        <li data-i18n-html="cc.syllabus.w2"><strong>2.</strong> Most of Us Were Taught Something Else</li>
+                        <li data-i18n-html="cc.syllabus.w3"><strong>3.</strong> We Are All Equipped with Onboard Need Radar</li>
+                        <li data-i18n-html="cc.syllabus.w4"><strong>4.</strong> What's the Big Deal with Needs?</li>
+                        <li data-i18n-html="cc.syllabus.w5"><strong>5.</strong> Empathy, the Breath of Compassion</li>
+                        <li data-i18n-html="cc.syllabus.w6"><strong>6.</strong> Hidden Judgments</li>
+                        <li data-i18n-html="cc.syllabus.w7"><strong>7.</strong> More About Feelings</li>
+                        <li data-i18n-html="cc.syllabus.w8"><strong>8.</strong> The Wisdom Inside the Judgment</li>
+                        <li data-i18n-html="cc.syllabus.w9"><strong>9.</strong> Why Is This So Bleeping Hard?</li>
+                        <li data-i18n-html="cc.syllabus.w10"><strong>10.</strong> What Empathy Is... and What It's Not</li>
+                        <li data-i18n-html="cc.syllabus.w11"><strong>11.</strong> Creating Your Life of Compassion</li>
+                        <li data-i18n-html="cc.syllabus.w12"><strong>12.</strong> Slowing Down</li>
+                        <li data-i18n-html="cc.syllabus.w13"><strong>13.</strong> Making Life More Wonderful with Requests</li>
+                        <li data-i18n-html="cc.syllabus.w14"><strong>14.</strong> More about Self-Empathy</li>
+                        <li data-i18n-html="cc.syllabus.w15"><strong>15.</strong> More About Requests</li>
+                        <li data-i18n-html="cc.syllabus.w16"><strong>16.</strong> Saying 'No' with Compassion</li>
+                        <li data-i18n-html="cc.syllabus.w17"><strong>17.</strong> Compassionate Use of Force</li>
+                        <li data-i18n-html="cc.syllabus.w18"><strong>18.</strong> Beliefs and Needs: Habitual Thoughts</li>
+                        <li data-i18n-html="cc.syllabus.w19"><strong>19.</strong> The Art of Observation</li>
+                        <li data-i18n-html="cc.syllabus.w20"><strong>20.</strong> Scary Honesty</li>
+                        <li data-i18n-html="cc.syllabus.w21"><strong>21.</strong> Giving Thanks — Appreciation from the Heart</li>
+                        <li data-i18n-html="cc.syllabus.w22"><strong>22.</strong> The Power of Thanks</li>
+                        <li data-i18n-html="cc.syllabus.w23"><strong>23.</strong> Apologies Versus Restoration</li>
+                        <li data-i18n-html="cc.syllabus.w24"><strong>24.</strong> Hearing 'NO' with Compassion</li>
+                        <li data-i18n-html="cc.syllabus.w25"><strong>25.</strong> Living a Life of Compassion</li>
+                        <li data-i18n-html="cc.syllabus.w26"><strong>26.</strong> Clarity About Judgments</li>
+                        <li data-i18n-html="cc.syllabus.w27"><strong>27.</strong> Connecting to Life Energy</li>
+                        <li data-i18n-html="cc.syllabus.w28"><strong>28.</strong> The Layering of Needs</li>
+                        <li data-i18n-html="cc.syllabus.w29"><strong>29.</strong> Self-Connection</li>
+                        <li data-i18n-html="cc.syllabus.w30"><strong>30.</strong> Enjoying Pain</li>
+                        <li data-i18n-html="cc.syllabus.w31"><strong>31.</strong> Shift versus Compromise</li>
+                        <li data-i18n-html="cc.syllabus.w32"><strong>32.</strong> Stimulus Vs Cause</li>
+                        <li data-i18n-html="cc.syllabus.w33"><strong>33.</strong> Understanding Anger</li>
+                        <li data-i18n-html="cc.syllabus.w34"><strong>34.</strong> Being Responsive vs Being Responsible</li>
+                        <li data-i18n-html="cc.syllabus.w35"><strong>35.</strong> Acting Angry vs Consciously Feeling Anger</li>
+                        <li data-i18n-html="cc.syllabus.w36"><strong>36.</strong> Surfing Intensity</li>
+                        <li data-i18n-html="cc.syllabus.w37"><strong>37.</strong> Compassionate Intensity</li>
+                        <li data-i18n-html="cc.syllabus.w38"><strong>38.</strong> Words That Fuel Anger and Deny Choice</li>
+                        <li data-i18n-html="cc.syllabus.w39"><strong>39.</strong> Agreements versus Rules</li>
+                        <li data-i18n-html="cc.syllabus.w40"><strong>40.</strong> The Art of Mourning</li>
+                        <li data-i18n-html="cc.syllabus.w41"><strong>41.</strong> Enemy Images</li>
+                        <li data-i18n-html="cc.syllabus.w42"><strong>42.</strong> Power With Vs Power Over</li>
+                        <li data-i18n-html="cc.syllabus.w43"><strong>43.</strong> Compassionate Self-Discipline</li>
+                        <li data-i18n-html="cc.syllabus.w44"><strong>44.</strong> Habitual vs Life-Connected Authority</li>
+                        <li data-i18n-html="cc.syllabus.w45"><strong>45.</strong> Compassion and Vulnerability</li>
+                        <li data-i18n-html="cc.syllabus.w46"><strong>46.</strong> Demanding versus Persisting</li>
+                        <li data-i18n-html="cc.syllabus.w47"><strong>47.</strong> A Compassionate View of Triggers</li>
+                        <li data-i18n-html="cc.syllabus.w48"><strong>48.</strong> Pervasive Feelings</li>
+                        <li data-i18n-html="cc.syllabus.w49"><strong>49.</strong> Campaigns</li>
+                        <li data-i18n-html="cc.syllabus.w50"><strong>50.</strong> Speaking Your Compassion</li>
+                        <li data-i18n-html="cc.syllabus.w51"><strong>51.</strong> Compassion As a Spiritual Practice</li>
+                        <li data-i18n-html="cc.syllabus.w52"><strong>52.</strong> Living With Compassion</li>
                     </ol>
                 </div>
             </div>
@@ -927,50 +927,50 @@
                 <div class="cc-person animate-on-scroll">
                     <img class="cc-person-photo" src="public/Jaya.jpg" alt="Jayalakshmi Sengupta" loading="lazy">
                     <div>
-                        <div class="cc-person-name">Jayalakshmi Sengupta</div>
-                        <div class="cc-person-bio">Retired senior editor &amp; journalist. Laadli Media Awardee 2011. NVC Certification Candidate. Facilitator, Compassion Course (English &amp; Hindi). Founder, Empathy Junction.</div>
+                        <div class="cc-person-name" data-i18n="cc.facilitator.1.name">Jayalakshmi Sengupta</div>
+                        <div class="cc-person-bio" data-i18n="cc.facilitator.1.bio">Retired senior editor &amp; journalist. Laadli Media Awardee 2011. NVC Certification Candidate. Facilitator, Compassion Course (English &amp; Hindi). Founder, Empathy Junction.</div>
                     </div>
                 </div>
                 <div class="cc-person animate-on-scroll">
                     <img class="cc-person-photo" src="public/Nancy.jpg" alt="Nancy Katyal" loading="lazy">
                     <div>
-                        <div class="cc-person-name">Nancy Katyal</div>
-                        <div class="cc-person-bio">Executive Presence &amp; Communication Coach. International Speaker &amp; Author. NVC Certification Candidate. Visiting faculty IIM &amp; MIT University. REX Karamveer Chakra Award.</div>
+                        <div class="cc-person-name" data-i18n="cc.facilitator.2.name">Nancy Katyal</div>
+                        <div class="cc-person-bio" data-i18n="cc.facilitator.2.bio">Executive Presence &amp; Communication Coach. International Speaker &amp; Author. NVC Certification Candidate. Visiting faculty IIM &amp; MIT University. REX Karamveer Chakra Award.</div>
                     </div>
                 </div>
                 <div class="cc-person animate-on-scroll">
                     <img class="cc-person-photo" src="public/Muzaffar.jpg" alt="Muzaffar Sheikh" loading="lazy">
                     <div>
-                        <div class="cc-person-name">Muzaffar Sheikh</div>
-                        <div class="cc-person-bio">Facilitator, Author &amp; Consultant. Focused on emotional wellbeing, conflict mediation &amp; peacebuilding. NVC practitioner for 10+ years.</div>
+                        <div class="cc-person-name" data-i18n="cc.facilitator.3.name">Muzaffar Sheikh</div>
+                        <div class="cc-person-bio" data-i18n="cc.facilitator.3.bio">Facilitator, Author &amp; Consultant. Focused on emotional wellbeing, conflict mediation &amp; peacebuilding. NVC practitioner for 10+ years.</div>
                     </div>
                 </div>
                 <div class="cc-person animate-on-scroll">
                     <img class="cc-person-photo" src="public/Priti.jpg" alt="Priti Surekha" loading="lazy">
                     <div>
-                        <div class="cc-person-name">Priti Surekha</div>
-                        <div class="cc-person-bio">Executive, Parenting &amp; Life Coach. NVC Certification Candidate. Facilitator, Compassion Course (English &amp; Hindi). HR Professional.</div>
+                        <div class="cc-person-name" data-i18n="cc.facilitator.4.name">Priti Surekha</div>
+                        <div class="cc-person-bio" data-i18n="cc.facilitator.4.bio">Executive, Parenting &amp; Life Coach. NVC Certification Candidate. Facilitator, Compassion Course (English &amp; Hindi). HR Professional.</div>
                     </div>
                 </div>
                 <div class="cc-person animate-on-scroll">
                     <img class="cc-person-photo" src="public/Astha.jpg" alt="Astha Agrawal" loading="lazy">
                     <div>
-                        <div class="cc-person-name">Astha Agrawal</div>
-                        <div class="cc-person-bio">Family &amp; Dialogue Coach. Founder, The Homecoming Project. NVC Certification Candidate. Mindfulness-Based Listener. Social Impact Professional.</div>
+                        <div class="cc-person-name" data-i18n="cc.facilitator.5.name">Astha Agrawal</div>
+                        <div class="cc-person-bio" data-i18n="cc.facilitator.5.bio">Family &amp; Dialogue Coach. Founder, The Homecoming Project. NVC Certification Candidate. Mindfulness-Based Listener. Social Impact Professional.</div>
                     </div>
                 </div>
                 <div class="cc-person animate-on-scroll">
                     <img class="cc-person-photo" src="public/Abhishek.jpg" alt="Abhishek Dass" loading="lazy">
                     <div>
-                        <div class="cc-person-name">Abhishek Dass</div>
-                        <div class="cc-person-bio">Communication Coach. Creator of "Zaban Sambhal Ke". 300+ workshops nationwide. Author, Power of Classroom Conversations. Study Lab YouTube (43k+ subs).</div>
+                        <div class="cc-person-name" data-i18n="cc.facilitator.6.name">Abhishek Dass</div>
+                        <div class="cc-person-bio" data-i18n="cc.facilitator.6.bio">Communication Coach. Creator of "Zaban Sambhal Ke". 300+ workshops nationwide. Author, Power of Classroom Conversations. Study Lab YouTube (43k+ subs).</div>
                     </div>
                 </div>
                 <div class="cc-person animate-on-scroll">
                     <img class="cc-person-photo" src="public/Rajiv.jpg" alt="Rajiv Thanawala" loading="lazy">
                     <div>
-                        <div class="cc-person-name">Rajiv Thanawala</div>
-                        <div class="cc-person-bio">Facilitator. NVC Practitioner &amp; Certification Candidate. Software Engineer.</div>
+                        <div class="cc-person-name" data-i18n="cc.facilitator.7.name">Rajiv Thanawala</div>
+                        <div class="cc-person-bio" data-i18n="cc.facilitator.7.bio">Facilitator. NVC Practitioner &amp; Certification Candidate. Software Engineer.</div>
                     </div>
                 </div>
             </div>
@@ -1000,7 +1000,7 @@
                 <div class="footer-links">
                     <h4 data-i18n="footer.journey">Journey</h4>
                     <ul>
-                        <li><a href="index.html#journey">Your Path to Connection</a></li>
+                        <li><a href="index.html#journey" data-i18n="footer.yourPath">Your Path to Connection</a></li>
                         <li><a href="compassion-course.html" data-i18n="footer.compassionCourse">Compassion Course</a></li>
                         <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
                     </ul>
@@ -1016,7 +1016,7 @@
                 <div class="footer-links">
                     <h4 data-i18n="footer.connect">Connect</h4>
                     <ul>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
                         <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
                         <li><a href="register.html" data-i18n="footer.registerNow">Register Now</a></li>
                     </ul>
@@ -1024,7 +1024,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Join the Dots. <span data-i18n="footer.madeWith">Made with</span> care <span data-i18n="footer.forThose">for those seeking connection.</span></p>
+                <p>&copy; 2025 Join the Dots. <span data-i18n="footer.madeWith">Made with care</span> <span data-i18n="footer.forThose">for those seeking connection.</span></p>
             </div>
         </div>
     </footer>

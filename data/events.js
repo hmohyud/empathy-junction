@@ -134,14 +134,42 @@ window.EVENTS_DATA = {
             "subtitle": "52 Weeks with Thom Bond",
             "description": "A year-long transformational journey into compassionate communication. 50% off for Monthly Pass holders.",
             "link": "#compassion",
-            "tag": "Ongoing"
+            "tag": "Ongoing",
+            "i18n": {
+                "hi": {
+                    "title": "कम्पैशन कोर्स",
+                    "subtitle": "Thom Bond के साथ 52 सप्ताह",
+                    "description": "करुणामय संवाद में एक साल की परिवर्तनकारी यात्रा। Monthly Pass धारकों के लिए 50% छूट।",
+                    "tag": "चालू"
+                },
+                "ur": {
+                    "title": "کمپیشن کورس",
+                    "subtitle": "Thom Bond کے ساتھ 52 ہفتے",
+                    "description": "شفقت آمیز رابطے میں ایک سال کا تبدیلی کا سفر۔ Monthly Pass رکھنے والوں کے لیے 50% چھوٹ۔",
+                    "tag": "جاری"
+                }
+            }
         },
         {
             "title": "Monthly Pass",
             "subtitle": "Best Value for Regulars",
             "description": "All 6 weekend sessions, community circles, and full month access for just ₹1,200.",
             "link": "#pricing",
-            "tag": "Save ₹600"
+            "tag": "Save ₹600",
+            "i18n": {
+                "hi": {
+                    "title": "मासिक पास",
+                    "subtitle": "नियमित प्रतिभागियों के लिए सर्वोत्तम मूल्य",
+                    "description": "सभी 6 वीकेंड सत्र, सामुदायिक सर्कल और पूरे महीने की एक्सेस — केवल ₹1,200।",
+                    "tag": "₹600 बचाएं"
+                },
+                "ur": {
+                    "title": "ماہانہ پاس",
+                    "subtitle": "باقاعدہ شرکاء کے لیے بہترین قیمت",
+                    "description": "تمام 6 ویک اینڈ سیشن، کمیونٹی حلقے اور پورے مہینے کی رسائی — صرف ₹1,200۔",
+                    "tag": "₹600 بچائیں"
+                }
+            }
         }
     ]
 };

@@ -465,11 +465,22 @@ function initExploreSectionTracker() {
     return;
   }
 
-  // Keep a reference to the SVG chevron so we can preserve it when swapping text
+  // Keep references to the SVG chevron and the translatable text span
   const chevronSvg = trigger.querySelector(".nav-dropdown-chevron");
+  const triggerSpan = trigger.querySelector("[data-i18n]");
 
-  // Map of section IDs → display names
-  const SECTION_NAMES = {
+  // Map of section IDs → translation keys (from translations.js)
+  const SECTION_I18N_KEYS = {
+    home:       "nav.home",
+    rhythm:     "nav.schedule",
+    journey:    "nav.journey",
+    pricing:    "nav.pricing",
+    compassion: "nav.compassionCourse",
+    audience:   "nav.whoIsThisFor"
+  };
+
+  // Fallback English names (used if translations unavailable)
+  const SECTION_NAMES_EN = {
     home:       "Home",
     rhythm:     "Schedule",
     journey:    "The Journey",
@@ -478,9 +489,20 @@ function initExploreSectionTracker() {
     audience:   "Who Is This For"
   };
 
-  const DEFAULT_LABEL = "Home";
+  function getSectionName(sectionId) {
+    var key = SECTION_I18N_KEYS[sectionId];
+    if (!key) return SECTION_NAMES_EN[sectionId] || "Home";
+    var lang = window.currentLang || 'en';
+    // Try to read from the global translations if available
+    if (window.setLanguage && typeof translations !== 'undefined' && translations[lang] && translations[lang][key]) {
+      return translations[lang][key];
+    }
+    return SECTION_NAMES_EN[sectionId] || "Home";
+  }
 
-  const sectionIds = Object.keys(SECTION_NAMES);
+  function getDefaultLabel() { return getSectionName("home"); }
+
+  const sectionIds = Object.keys(SECTION_I18N_KEYS);
   const sections = [];
   sectionIds.forEach(function(id) {
     const el = document.getElementById(id);
@@ -492,42 +514,42 @@ function initExploreSectionTracker() {
     return;
   }
 
-  // Lock the trigger width to the average label width so the nav stays stable
-  (function lockTriggerWidth() {
-    var allLabels = Object.values(SECTION_NAMES);
-    var origText = trigger.textContent;
-    var totalW = 0;
-    allLabels.forEach(function(label) {
-      trigger.textContent = "";
-      trigger.appendChild(document.createTextNode(label + " "));
-      if (chevronSvg) trigger.appendChild(chevronSvg);
-      totalW += trigger.scrollWidth;
-    });
-    var avgW = Math.ceil(totalW / allLabels.length);
-    // Set fixed width to average and right-align the content
-    trigger.style.width = avgW + "px";
-    trigger.style.justifyContent = "flex-end";
-    trigger.style.textAlign = "right";
-    // Restore original text
-    trigger.textContent = "";
-    trigger.appendChild(document.createTextNode(origText));
-    if (chevronSvg) trigger.appendChild(chevronSvg);
-  })();
-
   // Dropdown items (for highlighting the active one)
   const dropdownItems = document.querySelectorAll(".nav-explore-dropdown .nav-dropdown-item[data-section]");
 
-  let currentSection = "";
+  let currentSection = "home";
+
+  // Lock the trigger width to the average label width so the nav stays stable
+  function lockTriggerWidth() {
+    var allLabels = sectionIds.map(getSectionName);
+    var totalW = 0;
+    allLabels.forEach(function(label) {
+      if (triggerSpan) { triggerSpan.textContent = label; } else { trigger.childNodes[0].textContent = label + " "; }
+      totalW += trigger.scrollWidth;
+    });
+    var avgW = Math.ceil(totalW / allLabels.length);
+    trigger.style.width = avgW + "px";
+    trigger.style.justifyContent = "flex-end";
+    trigger.style.textAlign = "right";
+    // Restore current section label
+    var label = (currentSection && getSectionName(currentSection)) || getDefaultLabel();
+    if (triggerSpan) { triggerSpan.textContent = label; } else { trigger.childNodes[0].textContent = label + " "; }
+  }
+  lockTriggerWidth();
 
   function updateActiveSection(sectionId) {
     if (sectionId === currentSection) return;
     currentSection = sectionId;
 
-    // Swap the trigger's text content (keep the SVG chevron)
-    var label = (sectionId && SECTION_NAMES[sectionId]) ? SECTION_NAMES[sectionId] : DEFAULT_LABEL;
-    trigger.textContent = "";
-    trigger.appendChild(document.createTextNode(label + " "));
-    if (chevronSvg) trigger.appendChild(chevronSvg);
+    // Update the span text (preserves SVG chevron)
+    var label = getSectionName(sectionId) || getDefaultLabel();
+    if (triggerSpan) {
+      triggerSpan.textContent = label;
+    } else {
+      trigger.textContent = "";
+      trigger.appendChild(document.createTextNode(label + " "));
+      if (chevronSvg) trigger.appendChild(chevronSvg);
+    }
 
     // Highlight the active dropdown item
     dropdownItems.forEach(function(item) {
@@ -572,6 +594,15 @@ function initExploreSectionTracker() {
   // Initial check
   onScroll();
 
+  // Re-lock width and update label when language changes
+  document.addEventListener("languageChanged", function() {
+    lockTriggerWidth();
+    // Force label update for current section
+    var saved = currentSection;
+    currentSection = "";
+    updateActiveSection(saved);
+  });
+
   log("Explore section tracker initialized");
 }
 
@@ -579,8 +610,8 @@ function initExploreSectionTracker() {
 function initScrollAnimations() {
   log("initScrollAnimations called");
 
-  const elements = document.querySelectorAll(".animate-on-scroll");
-  log("Found", elements.length, "elements to animate");
+  const elements = document.querySelectorAll(".animate-on-scroll:not(.scroll-observed)");
+  log("Found", elements.length, "new elements to animate");
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -593,9 +624,14 @@ function initScrollAnimations() {
     { threshold: 0.1 }
   );
 
-  elements.forEach((el) => observer.observe(el));
+  elements.forEach((el) => {
+    el.classList.add("scroll-observed");
+    observer.observe(el);
+  });
   log("Scroll animations initialized");
 }
+// Expose globally so renderers can re-init after re-rendering
+window.initScrollAnimations = initScrollAnimations;
 
 // ==================== SMOOTH SCROLL ====================
 function initSmoothScroll() {
@@ -1918,6 +1954,33 @@ document.addEventListener("DOMContentLoaded", () => {
         { title: 'Celebrate', desc: 'our return to aliveness \u2014 dance with life, love, and blossom' },
     ];
 
+    const STEPS_I18N = {
+        hi: [
+            { title: 'पहुँचना',  desc: 'जैसे हम हैं — अपनी कोमल अपूर्ण मानवता के साथ' },
+            { title: 'सुनना',    desc: 'गहराई से — अपनी कहानियों को, उन्हें ठीक करने के लिए नहीं, बल्कि समझने और आत्मसात करने के लिए' },
+            { title: 'हल्का',    desc: 'भारी बोझ — पुरानी आदतें, पुराने ज़ख्म, स्वचालित प्रतिक्रियाएँ' },
+            { title: 'नवीनता',   desc: 'और साँस लेना — खुद को आराम और पुनः ऊर्जा देना' },
+            { title: 'चुनना',    desc: 'नरम होना, खुलना, जीवन के साथ तालमेल बिठाना' },
+            { title: 'जुड़ना',   desc: 'और अपनी संपूर्णता से फिर से जुड़ना — हमारे टूटे हुए स्थान और हमारी छिपी क्षमता दोनों' },
+            { title: 'जश्न',    desc: 'जीवंतता की ओर लौटना — जीवन, प्रेम और खिलने के साथ नृत्य करना' },
+        ],
+        ur: [
+            { title: 'پہنچنا',   desc: 'جیسے ہم ہیں — اپنی نازک نامکمل انسانیت کے ساتھ' },
+            { title: 'سننا',     desc: 'گہرائی سے — اپنی کہانیوں کو، انہیں ٹھیک کرنے کے لیے نہیں، بلکہ سمجھنے اور جذب کرنے کے لیے' },
+            { title: 'ہلکا',     desc: 'بھاری بوجھ — پرانے نمونے، پرانے زخم، خودکار ردعمل' },
+            { title: 'تجدید',    desc: 'اور سانس لینا — خود کو آرام اور توانائی دینا' },
+            { title: 'چننا',     desc: 'نرم ہونا، کھلنا، زندگی سے ہم آہنگ ہونا' },
+            { title: 'تعلق',     desc: 'اور اپنی مکمل ذات سے دوبارہ جڑنا — ہماری ٹوٹی جگہیں اور ہماری چھپی صلاحیت دونوں' },
+            { title: 'جشن',      desc: 'زندگی کی طرف واپسی — زندگی، محبت اور کھلنے کے ساتھ رقص' },
+        ]
+    };
+
+    function getStep(i) {
+        var lang = window.currentLang || 'en';
+        if (STEPS_I18N[lang] && STEPS_I18N[lang][i]) return STEPS_I18N[lang][i];
+        return STEPS[i];
+    }
+
     var PAD = (window.innerWidth <= 500) ? 0.13 : 0.07;
 
     const ocean = document.getElementById('voyageOcean');
@@ -1991,7 +2054,7 @@ document.addEventListener("DOMContentLoaded", () => {
             el.className = 'voyage-waypoint';
             el.style.left = (waypointFrac(i) * 100) + '%';
             el.style.bottom = narrow ? (i % 2 === 0 ? '68px' : '46px') : '60px';
-            el.innerHTML = '<div class="waypoint-beacon"></div><div class="waypoint-label">' + step.title + '</div>';
+            el.innerHTML = '<div class="waypoint-beacon"></div><div class="waypoint-label">' + getStep(i).title + '</div>';
             waypointsEl.appendChild(el);
         });
     }
@@ -2018,8 +2081,8 @@ document.addEventListener("DOMContentLoaded", () => {
             textEl.classList.add('fading');
             setTimeout(function() {
                 currentStep = idx;
-                if (wordEl) wordEl.textContent = STEPS[idx].title;
-                descEl.textContent = ' ' + STEPS[idx].desc;
+                if (wordEl) wordEl.textContent = getStep(idx).title;
+                descEl.textContent = ' ' + getStep(idx).desc;
                 if (wordEl) descEl.prepend(wordEl);
                 textEl.classList.remove('fading');
             }, 200);
@@ -2348,6 +2411,16 @@ document.addEventListener("DOMContentLoaded", () => {
     updateUI();
     frame();
     window.addEventListener('resize', function() { PAD = (window.innerWidth <= 500) ? 0.13 : 0.07; resize(); buildWaypoints(); });
+
+    // Re-render voyage text when language changes
+    document.addEventListener('languageChanged', function() {
+        buildWaypoints();
+        // Force text update
+        var idx = nearestStep();
+        if (wordEl) wordEl.textContent = getStep(idx).title;
+        descEl.textContent = ' ' + getStep(idx).desc;
+        if (wordEl) descEl.prepend(wordEl);
+    });
 })();
 
 /* ==================== EVENTS DRAWER (loads from events.js) ==================== */
@@ -2362,16 +2435,42 @@ document.addEventListener("DOMContentLoaded", () => {
     var sectionDivider = document.getElementById('eventsSectionDivider');
     if (!drawer) return;
 
-    var MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var MONTHS_SHORT = {
+        en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        hi: ['जन','फ़र','मार्च','अप्रै','मई','जून','जुल','अग','सित','अक्टू','नव','दिस'],
+        ur: ['جنو','فرو','مارچ','اپری','مئی','جون','جول','اگس','ستم','اکتو','نوم','دسم']
+    };
+    var DAYS_SHORT = {
+        en: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+        hi: ['रवि','सोम','मंगल','बुध','गुरु','शुक्र','शनि'],
+        ur: ['اتوار','پیر','منگل','بدھ','جمعرات','جمعہ','ہفتہ']
+    };
+    var EVENTS_STRINGS = {
+        en: { ongoing: 'Ongoing', noEvents: 'No upcoming events — check back soon!', learnMore: 'Learn more' },
+        hi: { ongoing: 'चालू', noEvents: 'कोई आगामी कार्यक्रम नहीं — जल्द वापस आएं!', learnMore: 'और जानें' },
+        ur: { ongoing: 'جاری', noEvents: 'کوئی آنے والے پروگرام نہیں — جلد واپس آئیں!', learnMore: 'مزید جانیں' }
+    };
+
+    function getLang() { return window.currentLang || 'en'; }
+    function months() { return MONTHS_SHORT[getLang()] || MONTHS_SHORT.en; }
+    function days() { return DAYS_SHORT[getLang()] || DAYS_SHORT.en; }
+    function str() { return EVENTS_STRINGS[getLang()] || EVENTS_STRINGS.en; }
+
+    function evField(ev, field) {
+        var lang = getLang();
+        if (lang !== 'en' && ev.i18n && ev.i18n[lang] && ev.i18n[lang][field]) {
+            return ev.i18n[lang][field];
+        }
+        return ev[field] || '';
+    }
 
     function formatDate(iso) {
         var d = new Date(iso + 'T00:00:00');
-        return DAYS_SHORT[d.getDay()] + ', ' + d.getDate() + ' ' + MONTHS_SHORT[d.getMonth()];
+        return days()[d.getDay()] + ', ' + d.getDate() + ' ' + months()[d.getMonth()];
     }
     function shortDate(iso) {
         var d = new Date(iso + 'T00:00:00');
-        return MONTHS_SHORT[d.getMonth()].toUpperCase() + ' ' + d.getDate();
+        return months()[d.getMonth()].toUpperCase() + ' ' + d.getDate();
     }
 
     function openDrawer(e) {
@@ -2404,18 +2503,19 @@ document.addEventListener("DOMContentLoaded", () => {
             return new Date(ev.date + 'T23:59:59') >= now;
         });
         if (future.length === 0) {
-            upcomingEl.innerHTML = '<div class="event-card" style="justify-content:center;align-items:center;min-height:60px;"><p class="event-desc" style="text-align:center;opacity:0.6;">No upcoming events — check back soon!</p></div>';
+            upcomingEl.innerHTML = '<div class="event-card" style="justify-content:center;align-items:center;min-height:60px;"><p class="event-desc" style="text-align:center;opacity:0.6;">' + str().noEvents + '</p></div>';
             return;
         }
         upcomingEl.innerHTML = future.map(function(ev) {
-            var hasTag = ev.tag && ev.tag.trim();
+            var tag = evField(ev, 'tag');
+            var hasTag = tag && tag.trim();
             return '<div class="event-card' + (hasTag ? '' : ' no-tag') + '">'
-                + (hasTag ? '<span class="event-tag">' + ev.tag + '</span>' : '')
+                + (hasTag ? '<span class="event-tag">' + tag + '</span>' : '')
                 + (ev.date ? '<div class="event-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>' + formatDate(ev.date) + '</div>' : '')
-                + (ev.time ? '<div class="event-time">' + ev.time + '</div>' : '')
-                + (ev.title ? '<div class="event-title">' + ev.title + '</div>' : '')
-                + (ev.subtitle ? '<div class="event-subtitle">' + ev.subtitle + '</div>' : '')
-                + (ev.description ? '<div class="event-desc">' + ev.description + '</div>' : '')
+                + (evField(ev, 'time') ? '<div class="event-time">' + evField(ev, 'time') + '</div>' : '')
+                + (evField(ev, 'title') ? '<div class="event-title">' + evField(ev, 'title') + '</div>' : '')
+                + (evField(ev, 'subtitle') ? '<div class="event-subtitle">' + evField(ev, 'subtitle') + '</div>' : '')
+                + (evField(ev, 'description') ? '<div class="event-desc">' + evField(ev, 'description') + '</div>' : '')
                 + '</div>';
         }).join('');
     }
@@ -2423,13 +2523,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderPersistent(events) {
         if (!events || events.length === 0) return;
         persistentEl.innerHTML = events.map(function(ev) {
-            var hasTag = ev.tag && ev.tag.trim();
+            var tag = evField(ev, 'tag');
+            var hasTag = tag && tag.trim();
             return '<div class="event-card event-card--persistent' + (hasTag ? '' : ' no-tag') + '">'
-                + (hasTag ? '<span class="event-tag">' + ev.tag + '</span>' : '')
-                + (ev.title ? '<div class="event-title">' + ev.title + '</div>' : '')
-                + (ev.subtitle ? '<div class="event-subtitle">' + ev.subtitle + '</div>' : '')
-                + (ev.description ? '<div class="event-desc">' + ev.description + '</div>' : '')
-                + (ev.link ? '<a href="' + ev.link + '" class="event-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>' : '')
+                + (hasTag ? '<span class="event-tag">' + tag + '</span>' : '')
+                + (evField(ev, 'title') ? '<div class="event-title">' + evField(ev, 'title') + '</div>' : '')
+                + (evField(ev, 'subtitle') ? '<div class="event-subtitle">' + evField(ev, 'subtitle') + '</div>' : '')
+                + (evField(ev, 'description') ? '<div class="event-desc">' + evField(ev, 'description') + '</div>' : '')
+                + (ev.link ? '<a href="' + ev.link + '" class="event-link">' + str().learnMore + ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>' : '')
                 + '</div>';
         }).join('');
     }
@@ -2441,27 +2542,36 @@ document.addEventListener("DOMContentLoaded", () => {
         var rows = [];
         (data.upcoming || []).forEach(function(ev) {
             if (ev.date && new Date(ev.date + 'T23:59:59') < now) return;
+            var tag = evField(ev, 'tag');
             var tagClass = '', tagText = '';
-            if (ev.tag) {
-                tagClass = ev.tag.toLowerCase() === 'free' ? 'free' : 'paid';
-                tagText = ev.tag;
+            if (tag) {
+                tagClass = (ev.tag || '').toLowerCase() === 'free' ? 'free' : 'paid';
+                tagText = tag;
             }
-            rows.push('<div class="events-glance-row"><span class="events-glance-date">' + (ev.date ? shortDate(ev.date) : '') + '</span><span class="events-glance-name">' + (ev.title || '') + '</span>' + (tagText ? '<span class="events-glance-tag ' + tagClass + '">' + tagText + '</span>' : '') + '</div>');
+            rows.push('<div class="events-glance-row"><span class="events-glance-date">' + (ev.date ? shortDate(ev.date) : '') + '</span><span class="events-glance-name">' + evField(ev, 'title') + '</span>' + (tagText ? '<span class="events-glance-tag ' + tagClass + '">' + tagText + '</span>' : '') + '</div>');
         });
         (data.persistent || []).forEach(function(ev) {
-            rows.push('<div class="events-glance-row"><span class="events-glance-date ongoing">Ongoing</span><span class="events-glance-name">' + (ev.title || '') + '</span>' + (ev.tag ? '<span class="events-glance-tag paid">' + ev.tag + '</span>' : '') + '</div>');
+            var tag = evField(ev, 'tag');
+            rows.push('<div class="events-glance-row"><span class="events-glance-date ongoing">' + str().ongoing + '</span><span class="events-glance-name">' + evField(ev, 'title') + '</span>' + (tag ? '<span class="events-glance-tag paid">' + tag + '</span>' : '') + '</div>');
         });
         glanceList.innerHTML = rows.join('');
     }
 
-    var data = window.EVENTS_DATA || {};
-    renderUpcoming(data.upcoming || []);
-    renderPersistent(data.persistent || []);
-    renderGlance(data);
+    function renderAll() {
+        var data = window.EVENTS_DATA || {};
+        renderUpcoming(data.upcoming || []);
+        renderPersistent(data.persistent || []);
+        renderGlance(data);
 
-    var hasUpcoming = upcomingEl && upcomingEl.children.length > 0;
-    var hasPersistent = persistentEl && persistentEl.children.length > 0;
-    if (hasUpcoming && hasPersistent && sectionDivider) {
-        sectionDivider.classList.add('visible');
+        var hasUpcoming = upcomingEl && upcomingEl.children.length > 0;
+        var hasPersistent = persistentEl && persistentEl.children.length > 0;
+        if (hasUpcoming && hasPersistent && sectionDivider) {
+            sectionDivider.classList.add('visible');
+        }
     }
+
+    renderAll();
+
+    // Re-render events when language changes
+    document.addEventListener('languageChanged', renderAll);
 })();
