@@ -492,21 +492,20 @@ function initExploreSectionTracker() {
     return;
   }
 
-  // Lock the trigger width to the widest label so it never shifts the nav
+  // Lock the trigger width to the average label width so the nav stays stable
   (function lockTriggerWidth() {
     var allLabels = Object.values(SECTION_NAMES);
-    // Temporarily render each label to measure the widest one
     var origText = trigger.textContent;
-    var maxW = 0;
+    var totalW = 0;
     allLabels.forEach(function(label) {
       trigger.textContent = "";
       trigger.appendChild(document.createTextNode(label + " "));
       if (chevronSvg) trigger.appendChild(chevronSvg);
-      var w = trigger.scrollWidth;
-      if (w > maxW) maxW = w;
+      totalW += trigger.scrollWidth;
     });
-    // Set the fixed width and right-align the content
-    trigger.style.minWidth = maxW + "px";
+    var avgW = Math.ceil(totalW / allLabels.length);
+    // Set fixed width to average and right-align the content
+    trigger.style.width = avgW + "px";
     trigger.style.justifyContent = "flex-end";
     trigger.style.textAlign = "right";
     // Restore original text
