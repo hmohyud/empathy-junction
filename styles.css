@@ -2700,6 +2700,7 @@ a:focus-visible, button:focus-visible {
     max-width: 720px;
     margin: 0 auto;
     text-align: center;
+    justify-self: center;
 }
 .about-intro p {
     color: var(--color-text-muted);
