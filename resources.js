@@ -401,6 +401,26 @@
 
     // ==================== INIT ====================
 
+    var visibilityObserver = null;
+
+    function cleanupPlayers() {
+        // Stop and clean up all existing audio players before re-init
+        allPlayers.forEach(function (p) {
+            if (p.isPlaying) p.pause();
+            if (p.visualizer) p.visualizer.stop();
+            if (p.idleViz) p.idleViz.stop();
+            p.audio.pause();
+            p.audio.src = '';
+        });
+        allPlayers.length = 0;
+
+        // Disconnect previous visibility observer
+        if (visibilityObserver) {
+            visibilityObserver.disconnect();
+            visibilityObserver = null;
+        }
+    }
+
     function initAudioPlayers() {
         document.querySelectorAll('.audio-player').forEach(function (el) {
             allPlayers.push(new AudioPlayer(el));
@@ -409,7 +429,7 @@
 
     function initVisibilityObserver() {
         if (!('IntersectionObserver' in window)) return;
-        var observer = new IntersectionObserver(function (entries) {
+        visibilityObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 var player = allPlayers.find(function (p) {
                     return p.el === entry.target || p.el.contains(entry.target);
@@ -425,15 +445,21 @@
             });
         }, { threshold: 0.1 });
 
-        allPlayers.forEach(function (p) { observer.observe(p.canvas); });
+        allPlayers.forEach(function (p) { visibilityObserver.observe(p.canvas); });
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
+    function initResourcesPage() {
+        cleanupPlayers();
         initFilters();
         initArticleExpanders();
         initVideoFacades();
         initAudioPlayers();
         initVisibilityObserver();
-    });
+    }
+
+    // Export for re-init on language change (called by render-resources.js)
+    window.initResourcesPage = initResourcesPage;
+
+    document.addEventListener('DOMContentLoaded', initResourcesPage);
 
 })();
