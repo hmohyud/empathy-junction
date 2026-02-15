@@ -41,9 +41,17 @@
             </a>
             <div class="nav-center">
                 <ul class="nav-links">
-                    <li><a href="#journey" class="nav-link" data-i18n="nav.journey">The Journey</a></li>
-                    <li><a href="#rhythm" class="nav-link" data-i18n="nav.schedule">Schedule</a></li>
-                    <li><a href="#pricing" class="nav-link" data-i18n="nav.pricing">Pricing</a></li>
+                    <li class="nav-dropdown-wrap nav-explore-wrap">
+                        <button class="nav-link nav-link--dropdown nav-explore-trigger" id="navExploreTrigger" type="button">Home <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></button>
+                        <div class="nav-dropdown nav-explore-dropdown">
+                            <a href="#home" class="nav-dropdown-item" data-section="home" data-i18n="nav.home">Home</a>
+                            <a href="#rhythm" class="nav-dropdown-item" data-section="rhythm" data-i18n="nav.schedule">Schedule</a>
+                            <a href="#journey" class="nav-dropdown-item" data-section="journey" data-i18n="nav.journey">The Journey</a>
+                            <a href="#pricing" class="nav-dropdown-item" data-section="pricing" data-i18n="nav.pricing">Pricing</a>
+                            <a href="#compassion" class="nav-dropdown-item" data-section="compassion">Compassion Course</a>
+                            <a href="#audience" class="nav-dropdown-item" data-section="audience">Who Is This For</a>
+                        </div>
+                    </li>
                     <li class="nav-dropdown-wrap">
                         <a href="compassion-course.html" class="nav-link nav-link--dropdown">Compassion Course <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
                         <div class="nav-dropdown">
@@ -72,10 +80,15 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#journey" data-i18n="nav.journey">The Journey</a>
-        <a href="#rhythm" data-i18n="nav.schedule">Schedule</a>
-        <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
-        <a href="compassion-course.html">Compassion Course (Hindi)</a>
+        <span class="mobile-menu-label">Home</span>
+        <div class="mobile-explore-group">
+            <a href="#rhythm" data-i18n="nav.schedule">Schedule</a>
+            <a href="#journey" data-i18n="nav.journey">The Journey</a>
+            <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+            <a href="#compassion">Compassion Course</a>
+            <a href="#audience">Who Is This For</a>
+        </div>
+        <a href="compassion-course.html">Compassion Course</a>
         <a href="about.html" data-i18n="nav.about">About Us</a>
         <a href="resources.html" data-i18n="nav.resources">Resources</a>
         <a href="blog.html" data-i18n="nav.blog">Blog</a>

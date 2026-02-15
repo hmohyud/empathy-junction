@@ -454,6 +454,128 @@ function initNavigation() {
   log("Navigation initialized");
 }
 
+// ==================== NAV DROPDOWN — ACTIVE SECTION TRACKER ====================
+function initExploreSectionTracker() {
+  log("initExploreSectionTracker called");
+
+  // Only run on the landing page (index.html or /) — identified by the trigger having an id
+  const trigger = document.getElementById("navExploreTrigger");
+  if (!trigger) {
+    log("Not on index page — skipping section tracker");
+    return;
+  }
+
+  // Keep a reference to the SVG chevron so we can preserve it when swapping text
+  const chevronSvg = trigger.querySelector(".nav-dropdown-chevron");
+
+  // Map of section IDs → display names
+  const SECTION_NAMES = {
+    home:       "Home",
+    rhythm:     "Schedule",
+    journey:    "The Journey",
+    pricing:    "Pricing",
+    compassion: "Compassion Course",
+    audience:   "Who Is This For"
+  };
+
+  const DEFAULT_LABEL = "Home";
+
+  const sectionIds = Object.keys(SECTION_NAMES);
+  const sections = [];
+  sectionIds.forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) sections.push({ id: id, el: el });
+  });
+
+  if (!sections.length) {
+    log("No sections found for tracker");
+    return;
+  }
+
+  // Lock the trigger width to the widest label so it never shifts the nav
+  (function lockTriggerWidth() {
+    var allLabels = Object.values(SECTION_NAMES);
+    // Temporarily render each label to measure the widest one
+    var origText = trigger.textContent;
+    var maxW = 0;
+    allLabels.forEach(function(label) {
+      trigger.textContent = "";
+      trigger.appendChild(document.createTextNode(label + " "));
+      if (chevronSvg) trigger.appendChild(chevronSvg);
+      var w = trigger.scrollWidth;
+      if (w > maxW) maxW = w;
+    });
+    // Set the fixed width and right-align the content
+    trigger.style.minWidth = maxW + "px";
+    trigger.style.justifyContent = "flex-end";
+    trigger.style.textAlign = "right";
+    // Restore original text
+    trigger.textContent = "";
+    trigger.appendChild(document.createTextNode(origText));
+    if (chevronSvg) trigger.appendChild(chevronSvg);
+  })();
+
+  // Dropdown items (for highlighting the active one)
+  const dropdownItems = document.querySelectorAll(".nav-explore-dropdown .nav-dropdown-item[data-section]");
+
+  let currentSection = "";
+
+  function updateActiveSection(sectionId) {
+    if (sectionId === currentSection) return;
+    currentSection = sectionId;
+
+    // Swap the trigger's text content (keep the SVG chevron)
+    var label = (sectionId && SECTION_NAMES[sectionId]) ? SECTION_NAMES[sectionId] : DEFAULT_LABEL;
+    trigger.textContent = "";
+    trigger.appendChild(document.createTextNode(label + " "));
+    if (chevronSvg) trigger.appendChild(chevronSvg);
+
+    // Highlight the active dropdown item
+    dropdownItems.forEach(function(item) {
+      item.classList.toggle("is-active", item.getAttribute("data-section") === sectionId);
+    });
+  }
+
+  // Scroll-based detection — find which section the user is currently viewing
+  function onScroll() {
+    const navH = 80;
+    let active = "";
+
+    // Walk through sections top-to-bottom; last one whose top is above navH + buffer wins
+    for (let i = 0; i < sections.length; i++) {
+      const rect = sections[i].el.getBoundingClientRect();
+      if (rect.top <= navH + 100) {
+        active = sections[i].id;
+      }
+    }
+
+    // If we've scrolled past all sections (at the CTA/footer), keep the last one
+    // If we're at the very top (hero), show nothing
+    if (window.scrollY < 200) {
+      active = "home";
+    }
+
+    updateActiveSection(active);
+  }
+
+  // Throttle scroll handler
+  let ticking = false;
+  window.addEventListener("scroll", function() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+    }
+  });
+
+  // Initial check
+  onScroll();
+
+  log("Explore section tracker initialized");
+}
+
 // ==================== SCROLL ANIMATIONS ====================
 function initScrollAnimations() {
   log("initScrollAnimations called");
@@ -1762,6 +1884,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initLogoConnectLines();
   initNavigation();
+  initExploreSectionTracker();
   initScrollAnimations();
   initSmoothScroll();
   initJourneyPath();
