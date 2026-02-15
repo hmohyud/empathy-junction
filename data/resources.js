@@ -99,6 +99,39 @@
 //        url: "https://www.example.com/"
 //    },
 //
+//
+//  TRANSLATIONS (OPTIONAL):
+//  ─────────────────────────
+//  You can add Hindi or Urdu versions of the title and excerpt.
+//  If you don't add translations, the English text will be shown
+//  regardless of which language the visitor picks.
+//
+//  To add translations, add an "i18n" section to any resource:
+//
+//    {
+//        type: "video",
+//        title: "English title here",
+//        excerpt: "English description here.",
+//        date: "February 2026",
+//        videoId: "XXXXXXXXXXX",
+//        i18n: {
+//            hi: { title: "हिंदी शीर्षक", excerpt: "हिंदी विवरण।" },
+//            ur: { title: "اردو عنوان", excerpt: "اردو تفصیل۔" }
+//        }
+//    },
+//
+//  You can translate just one language (e.g. only "hi") — you
+//  don't have to do both. Fields you don't translate will stay
+//  in English. For articles, you can also translate the "body":
+//
+//        i18n: {
+//            hi: {
+//                title: "हिंदी शीर्षक",
+//                excerpt: "हिंदी विवरण।",
+//                body: ["पहला पैराग्राफ।", "दूसरा पैराग्राफ।"]
+//            }
+//        }
+//
 // ============================================================
 
 window.RESOURCES_DATA = [

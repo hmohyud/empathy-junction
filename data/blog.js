@@ -54,6 +54,40 @@
 //    - Each paragraph inside body must be in "quotes" with a
 //      comma after it (except the very last one)
 //
+//
+//  TRANSLATIONS (OPTIONAL):
+//  ─────────────────────────
+//  You can add Hindi or Urdu versions of the title and body.
+//  If you don't add translations, the English text will be shown
+//  regardless of which language the visitor picks.
+//
+//  To add translations, add an "i18n" section to any post:
+//
+//    {
+//        date: "14 February 2026",
+//        author: "Your Name",
+//        role: "Trainer",
+//        title: "English Title Here",
+//        body: [
+//            "English paragraph one.",
+//            "English paragraph two."
+//        ],
+//        i18n: {
+//            hi: {
+//                title: "हिंदी शीर्षक",
+//                body: ["पहला पैराग्राफ।", "दूसरा पैराग्राफ।"]
+//            },
+//            ur: {
+//                title: "اردو عنوان",
+//                body: ["پہلا پیراگراف۔", "دوسرا پیراگراف۔"]
+//            }
+//        }
+//    },
+//
+//  You can translate just one language (e.g. only "hi") — you
+//  don't have to do both. Fields you don't translate will stay
+//  in English.
+//
 // ============================================================
 
 window.BLOG_DATA = [
