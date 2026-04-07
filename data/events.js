@@ -102,74 +102,109 @@
 //
 // ============================================================
 window.EVENTS_DATA = {
-    "upcoming": [
-        // {
-        //     "title": "Listening Circle",
-        //     "subtitle": "Monthly Community Gathering",
-        //     "date": "2026-02-15",
-        //     "time": "10:00 AM – 12:00 PM IST",
-        //     "description": "An open, gentle space where we practise deep listening — no advice, no fixing, just presence.",
-        //     "tag": "Free"
-        // },
-        // {
-        //     "title": "Join the Dots Workshop",
-        //     "subtitle": "Thematic Exploration: Boundaries",
-        //     "date": "2026-02-22",
-        //     "time": "10:00 AM – 12:00 PM IST",
-        //     "description": "This month we explore boundaries — learning to say yes and no from a place of self-connection.",
-        //     "tag": "₹600"
-        // },
-        // {
-        //     "title": "Empathy Café",
-        //     "subtitle": "Guided Practice Session",
-        //     "date": "2026-03-01",
-        //     "time": "5:00 PM – 7:00 PM IST",
-        //     "description": "Practise empathic listening in pairs and small groups, with gentle facilitation and real-life scenarios.",
-        //     "tag": "₹600"
-        // }
-    ],
-    "persistent": [
-        {
-            "title": "The Compassion Course",
-            "subtitle": "52 Weeks with Thom Bond",
-            "description": "A year-long transformational journey into compassionate communication. 50% off for Monthly Pass holders.",
-            "link": "#compassion",
-            "tag": "Ongoing",
-            "i18n": {
-                "hi": {
-                    "title": "कम्पैशन कोर्स",
-                    "subtitle": "Thom Bond के साथ 52 सप्ताह",
-                    "description": "करुणामय संवाद में एक साल की परिवर्तनकारी यात्रा। Monthly Pass धारकों के लिए 50% छूट।",
-                    "tag": "चालू"
-                },
-                "ur": {
-                    "title": "کمپیشن کورس",
-                    "subtitle": "Thom Bond کے ساتھ 52 ہفتے",
-                    "description": "شفقت آمیز رابطے میں ایک سال کا تبدیلی کا سفر۔ Monthly Pass رکھنے والوں کے لیے 50% چھوٹ۔",
-                    "tag": "جاری"
-                }
-            }
+  upcoming: [
+    // {
+    //     "title": "Listening Circle",
+    //     "subtitle": "Monthly Community Gathering",
+    //     "date": "2026-02-15",
+    //     "time": "10:00 AM – 12:00 PM IST",
+    //     "description": "An open, gentle space where we practise deep listening — no advice, no fixing, just presence.",
+    //     "tag": "Free"
+    // },
+    // {
+    //     "title": "Join the Dots Workshop",
+    //     "subtitle": "Thematic Exploration: Boundaries",
+    //     "date": "2026-02-22",
+    //     "time": "10:00 AM – 12:00 PM IST",
+    //     "description": "This month we explore boundaries — learning to say yes and no from a place of self-connection.",
+    //     "tag": "₹600"
+    // },
+    // {
+    //     "title": "Empathy Café",
+    //     "subtitle": "Guided Practice Session",
+    //     "date": "2026-03-01",
+    //     "time": "5:00 PM – 7:00 PM IST",
+    //     "description": "Practise empathic listening in pairs and small groups, with gentle facilitation and real-life scenarios.",
+    //     "tag": "₹600"
+    // }
+
+   
+    
+  ],
+  persistent: [
+     {
+      title: "Sangam Retreat",
+      subtitle: "Bilingual NVC Residential Retreat",
+      date: "2026-06-02",
+      time: "4:00 PM Arrival – 2:00 PM Departure (7 June)",
+      description:
+        "A 5-day immersive residential retreat in Panchgani focused on Nonviolent Communication (NVC) in both Hindi and English. Participants will practise deep listening, honest expression, and compassionate connection in a serene environment.",
+        link: "sangam.html",
+      tag: "₹8,000 – ₹15,500",
+      i18n: {
+        hi: {
+          title: "संगम रिट्रीट",
+          subtitle: "द्विभाषी NVC आवासीय शिविर",
+          description:
+            "पंचगनी में 5-दिवसीय आवासीय रिट्रीट, जहाँ प्रतिभागी हिंदी और अंग्रेज़ी में नॉनवायलेंट कम्युनिकेशन (NVC) का अभ्यास करते हुए गहराई से सुनना, ईमानदारी से अभिव्यक्ति और करुणामय जुड़ाव सीखेंगे।",
+          tag: "₹8,000 – ₹15,500",
         },
-        {
-            "title": "Monthly Pass",
-            "subtitle": "Best Value for Regulars",
-            "description": "All 6 weekend sessions, community circles, and full month access for just ₹1,200.",
-            "link": "#pricing",
-            "tag": "Save ₹600",
-            "i18n": {
-                "hi": {
-                    "title": "मासिक पास",
-                    "subtitle": "नियमित प्रतिभागियों के लिए सर्वोत्तम मूल्य",
-                    "description": "सभी 6 वीकेंड सत्र, सामुदायिक सर्कल और पूरे महीने की एक्सेस — केवल ₹1,200।",
-                    "tag": "₹600 बचाएं"
-                },
-                "ur": {
-                    "title": "ماہانہ پاس",
-                    "subtitle": "باقاعدہ شرکاء کے لیے بہترین قیمت",
-                    "description": "تمام 6 ویک اینڈ سیشن، کمیونٹی حلقے اور پورے مہینے کی رسائی — صرف ₹1,200۔",
-                    "tag": "₹600 بچائیں"
-                }
-            }
-        }
-    ]
+        ur: {
+          title: "سنگم ریٹریٹ",
+          subtitle: "دو لسانی NVC رہائشی پروگرام",
+          description:
+            "پنچگنی میں 5 روزہ رہائشی ریٹریٹ جہاں شرکاء ہندی اور انگریزی میں نان وائلنٹ کمیونیکیشن (NVC) کی مشق کرتے ہوئے گہری سننے، ایماندار اظہار اور ہمدردی پر مبنی تعلقات سیکھتے ہیں۔",
+          tag: "₹8,000 – ₹15,500",
+        },
+      },
+    },
+    {
+      title: "The Compassion Course",
+      subtitle: "52 Weeks with Thom Bond",
+      description:
+        "A year-long transformational journey into compassionate communication. 50% off for Monthly Pass holders.",
+      link: "#compassion",
+      tag: "Ongoing",
+      i18n: {
+        hi: {
+          title: "कम्पैशन कोर्स",
+          subtitle: "Thom Bond के साथ 52 सप्ताह",
+          description:
+            "करुणामय संवाद में एक साल की परिवर्तनकारी यात्रा। Monthly Pass धारकों के लिए 50% छूट।",
+          tag: "चालू",
+        },
+        ur: {
+          title: "کمپیشن کورس",
+          subtitle: "Thom Bond کے ساتھ 52 ہفتے",
+          description:
+            "شفقت آمیز رابطے میں ایک سال کا تبدیلی کا سفر۔ Monthly Pass رکھنے والوں کے لیے 50% چھوٹ۔",
+          tag: "جاری",
+        },
+      },
+    },
+    {
+      title: "Monthly Pass",
+      subtitle: "Best Value for Regulars",
+      description:
+        "All 6 weekend sessions, community circles, and full month access for just ₹1,200.",
+      link: "#pricing",
+      tag: "Save ₹600",
+      i18n: {
+        hi: {
+          title: "मासिक पास",
+          subtitle: "नियमित प्रतिभागियों के लिए सर्वोत्तम मूल्य",
+          description:
+            "सभी 6 वीकेंड सत्र, सामुदायिक सर्कल और पूरे महीने की एक्सेस — केवल ₹1,200।",
+          tag: "₹600 बचाएं",
+        },
+        ur: {
+          title: "ماہانہ پاس",
+          subtitle: "باقاعدہ شرکاء کے لیے بہترین قیمت",
+          description:
+            "تمام 6 ویک اینڈ سیشن، کمیونٹی حلقے اور پورے مہینے کی رسائی — صرف ₹1,200۔",
+          tag: "₹600 بچائیں",
+        },
+      },
+    },
+  ],
 };
