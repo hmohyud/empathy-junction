@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sangam - Retreat</title>
+    <title>Sangam - Retreat | NVC Residential Program in Panchgani</title>
     <meta
       name="description"
-      content="Join the Sangam Retreat — a bilingual Nonviolent Communication (NVC) residential experience in Panchgani. Deepen empathy, honest expression, and meaningful connection through immersive practice in Hindi and English."
+      content="Join the Sangam Retreat — a bilingual Nonviolent Communication (NVC) residential experience in Panchgani. Deepen empathy, honest expression, and meaningful connection through immersive practice."
     />
     <link
       rel="icon"
@@ -19,6 +19,218 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <style>
+      /* Additional CSS for new sections - preserves all original styling while adding enhancements */
+      .objective-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.8rem;
+        margin: 2rem 0 1rem;
+      }
+      .objective-card {
+        background: rgba(255, 255, 245, 0.75);
+        backdrop-filter: blur(4px);
+        padding: 1.6rem 1.4rem;
+        border-radius: 36px;
+        border: 1px solid rgba(155, 170, 143, 0.25);
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      }
+      .objective-card:hover {
+        transform: translateY(-4px);
+        background: rgba(255, 255, 245, 0.9);
+        border-color: #c4846c40;
+      }
+      .objective-card h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #4b5e3b;
+        margin-bottom: 0.6rem;
+        font-family: 'Cormorant Garamond', serif;
+      }
+      .objective-card p {
+        font-size: 0.95rem;
+        color: #2d3a2a;
+        line-height: 1.4;
+      }
+      .bilingual-support {
+        background: linear-gradient(135deg, #f5efe6 0%, #ede5d8 100%);
+        border-radius: 48px;
+        padding: 2rem 2rem;
+        margin: 2rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .bilingual-text {
+        flex: 2;
+      }
+      .bilingual-text h3 {
+        font-size: 1.7rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #6a4e3a;
+      }
+      .bilingual-badge {
+        background: #9baa8f20;
+        padding: 0.5rem 1rem;
+        border-radius: 60px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        backdrop-filter: blur(2px);
+      }
+      .assistant-list {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+      }
+      .assistant-item {
+        background: white;
+        border-radius: 40px;
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      }
+      .team-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        margin: 2rem 0;
+      }
+      .team-card {
+        background: #ffffffcc;
+        backdrop-filter: blur(8px);
+        border-radius: 48px;
+        padding: 1.5rem;
+        flex: 1;
+        min-width: 220px;
+        text-align: center;
+        border: 1px solid #e2dcd0;
+        transition: all 0.2s;
+      }
+      .team-card h4 {
+        font-size: 1.3rem;
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+      }
+      .team-role {
+        color: #c4846c;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.75rem;
+      }
+      .scholarship-note {
+        background: #c4846c10;
+        border-left: 6px solid #c4846c;
+        padding: 1.2rem 1.8rem;
+        border-radius: 32px;
+        margin: 2rem 0;
+      }
+      .process-steps {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: space-between;
+        margin: 1.8rem 0;
+      }
+      .step {
+        flex: 1;
+        background: white;
+        border-radius: 28px;
+        padding: 1rem 1rem;
+        text-align: center;
+        font-weight: 500;
+        box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+      }
+      .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin: 1.5rem 0;
+      }
+      .contact-chip {
+        background: #f1ede5;
+        border-radius: 60px;
+        padding: 0.5rem 1.2rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .image-mock-icon {
+        background: #cbc3b2;
+        border-radius: 32px;
+        padding: 0.8rem 1.2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #2c2a24;
+      }
+      .image-decoration {
+        background: #e7dfd1;
+        border-radius: 40px;
+        padding: 0.6rem 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .photo-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 3rem;
+        margin: 2rem 0;
+      }
+      /* Profile image styles */
+      .profile-img {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1rem;
+        display: block;
+        box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        border: 3px solid #fff;
+        background: #e9e2d4;
+      }
+      .team-profile-img {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1rem;
+        display: block;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+        border: 2px solid #f0ebe0;
+      }
+      .facilitator-card {
+        text-align: center;
+        flex: 1;
+        min-width: 220px;
+        background: rgba(255, 250, 240, 0.7);
+        backdrop-filter: blur(4px);
+        border-radius: 48px;
+        padding: 1.8rem 1.2rem;
+        transition: all 0.2s;
+      }
+      .facilitator-card h3 {
+        margin: 0.5rem 0 0.2rem;
+        font-size: 1.4rem;
+      }
+      @media (max-width: 680px) {
+        .objective-grid { gap: 1rem; }
+        .bilingual-support { flex-direction: column; }
+        .profile-img { width: 110px; height: 110px; }
+      }
+    </style>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -117,7 +329,7 @@
                   href="compassion-course.html"
                   class="nav-dropdown-item"
                   data-i18n="nav.ccHindi"
-                  >हिंदी — Hindi</a
+                  >Hindi</a
                 >
                 <span
                   class="nav-dropdown-item nav-dropdown-item--soon"
@@ -203,9 +415,7 @@
       <div class="container">
         <div class="page-hero-content animate-on-scroll">
           <span class="section-badge"> 🌿 Retreat </span>
-
-          <h1>संगम — Sangam Retreat</h1>
-
+          <h1>Sangam — Sangam Retreat</h1>
           <p class="page-hero-subtitle">
             A Bilingual NVC Residential Retreat in Panchgani
           </p>
@@ -221,13 +431,11 @@
             Come home to deeper listening, honest expression, and compassionate
             connection — in the language of your heart.
           </p>
-
           <p>
-            संगम is a residential retreat where participants practise Nonviolent
+            Sangam is a residential retreat where participants practise Nonviolent
             Communication (NVC) in both Hindi and English — speaking,
             reflecting, and connecting in the language that feels most natural.
           </p>
-
           <p>
             This retreat brings together learning and lived experience, making
             communication more natural, inclusive, and rooted in our everyday
@@ -237,102 +445,194 @@
       </div>
     </section>
 
-    <!-- WHO IS IT FOR -->
-    <section class="about-spaces-section">
+    <!-- OBJECTIVES: ENHANCED from PDF -->
+    <section class="content-section">
       <div class="container">
-        <div class="about-spaces-card animate-on-scroll">
-          <h2>Who is this retreat for?</h2>
-
-          <ul class="about-spaces-list">
-            <li>Learners, facilitators, and educators</li>
-            <li>Parents, leaders, and community builders</li>
-            <li>Helping professionals and couples</li>
-            <li>Beginners and experienced practitioners</li>
-            <li>Anyone seeking deeper connection and awareness</li>
-          </ul>
-
-          <p class="about-tagline">
-            If you feel a quiet “yes” while reading this, this space is for you.
-          </p>
+        <div class="animate-on-scroll">
+          <h2 style="text-align:center; margin-bottom: 1rem;">✨ Objectives — By the end of the retreat</h2>
+          <div class="objective-grid">
+            <div class="objective-card"><h3>Understand motivation</h3><p>What inspires human behaviour beneath the surface</p></div>
+            <div class="objective-card"><h3>Deep listening & empathy</h3><p>Listen beyond words and connect empathically</p></div>
+            <div class="objective-card"><h3>Honest expression</h3><p>Speak your truth with care and clarity</p></div>
+            <div class="objective-card"><h3>Navigate conflict</h3><p>Transform friction into understanding</p></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- DETAILS -->
+    <!-- WHO IS IT FOR (enhanced) -->
+    <section class="about-spaces-section">
+      <div class="container">
+        <div class="about-spaces-card animate-on-scroll">
+          <h2>Who can join? Sangam is for you if...</h2>
+          <ul class="about-spaces-list">
+            <li>Learners, facilitators, educators & helping professionals</li>
+            <li>Parents, community builders & leaders</li>
+            <li>Anyone longing for more compassion, awareness and authentic connection</li>
+            <li>Those curious to explore NVC in a shared learning space (open to beginners & experienced practitioners)</li>
+          </ul>
+          <p class="about-tagline" style="margin-top: 1rem;">✨ We invite you to participate with curiosity, openness and a willingness to practice.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RETREAT DETAILS + PHOTO EMBELLISHMENT (PDF details enriched) -->
     <section class="about-vm-section">
       <div class="container">
         <div class="about-vm-grid">
           <div class="about-vm-card animate-on-scroll">
             <h2>Retreat Details</h2>
-            <p><strong>Location:</strong> Panchgani</p>
-            <p><strong>Dates:</strong> 2–7 June 2026</p>
-            <p><strong>Arrival:</strong> 2 June by 4 PM</p>
-            <p><strong>Departure:</strong> 7 June by 2 PM</p>
-            <p><strong>Languages:</strong> Hindi & English</p>
-            <p><strong>Format:</strong> Residential Retreat</p>
+            <p><strong>Location:</strong> Panchgani, Maharashtra</p>
+            <p><strong>Dates:</strong> 2–7 June 2026 (5 days residential)</p>
+            <p><strong>Arrival:</strong> 2 June by 4 PM | <strong>Departure:</strong> 7 June by 2 PM</p>
+            <p><strong>Workshop Timing:</strong> 10:00 am – 6:00 pm</p>
+            <p><strong>Participants:</strong> 20–24 (intimate group)</p>
+            <p><strong>Languages:</strong> Bilingual with assistants</p>
+            <div class="image-mock-icon" style="margin-top: 1rem;"> retreat views · shared silence · empathy circles</div>
           </div>
-
           <div class="about-vm-card animate-on-scroll">
             <h2>Contribution</h2>
-
             <p><strong>Tuition:</strong></p>
             <p>Self-sponsored / NGO-sponsored — ₹8,000 (+ GST for NGOs)</p>
             <p>Corporate / Organisation-sponsored — ₹15,500 + GST</p>
-
-            <br />
-
+            <hr style="margin: 0.8rem 0; opacity:0.3" />
             <p><strong>Accommodation & Food:</strong></p>
-            <p>Quad — ₹9,500</p>
-            <p>Triple — ₹11,500</p>
-            <p>Twin — ₹14,500</p>
-
-            <br />
-
-            <p>
-              Participants who can willingly and joyfully contribute more are
-              warmly invited to do so and help improve accessibility for those
-              seeking scholarships.
-            </p>
+            <p>Quad sharing: ₹9,500 &nbsp;|&nbsp; Triple: ₹11,500 &nbsp;|&nbsp; Twin: ₹14,500</p>
+            <div class="scholarship-note" style="margin: 1rem 0 0 0; padding: 0.8rem 1rem;">
+              🌿 <strong>Accessibility:</strong> Limited scholarship spots available. Participants who can contribute more are invited to do so — helping others join.
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FACILITATORS -->
+    <!-- BILINGUAL SUPPORT (from PDF) -->
+    <div class="container">
+      <div class="bilingual-support animate-on-scroll">
+        <div class="bilingual-text">
+          <h3>Bilingual Support</h3>
+          <div class="bilingual-badge">Hindi | English | Accessible</div>
+          <p style="margin-top: 1rem;">Sangam takes this step to make NVC more accessible and rooted in the Indian context. Hindi-speaking assistants will provide live support. Worksheets and written material available in both Hindi and English.</p>
+          <div class="assistant-list">
+            <span class="assistant-item">Hindi-speaking empathy partners</span>
+            <span class="assistant-item">Bilingual worksheets & handouts</span>
+          </div>
+        </div>
+        <div class="image-decoration">✨ Support in your heart language</div>
+      </div>
+    </div>
+
+    <!-- FACILITATORS + PROFILE IMAGES (added real placeholder images with elegant avatars) -->
     <section class="content-section">
       <div class="container">
-        <div class="about-intro animate-on-scroll">
-          <h2>Facilitators</h2>
-
-          <p>
-            <strong>Sudha Shankar</strong> — Certified Trainer with CNVC,
-            practising NVC since 2009 and nurturing a weekly community in New
-            Delhi.
-          </p>
-
-          <p>
-            <strong>Deepankar Roy</strong> — Certified Trainer with over a
-            decade of experience in NVC and group facilitation.
-          </p>
+        <div class="animate-on-scroll" style="text-align: center; margin-bottom: 1rem;">
+          <h2>Facilitators & Organising Team</h2>
+          <p style="max-width: 700px; margin: 0 auto;">Certified trainers with decades of NVC practice, creating a safe container for transformation.</p>
+        </div>
+        
+        <!-- Facilitators with profile images -->
+        <div class="photo-row">
+          <div class="facilitator-card">
+            <img 
+              class="profile-img" 
+              src="public/sudha.png" 
+              alt="Sudha Shankar portrait"
+              onerror="this.src='https://ui-avatars.com/api/?background=c4846c&color=fff&name=Sudha&size=120';"
+            />
+            <h3>Sudha Shankar</h3>
+            <p style="font-size:0.85rem; color:#6a4e3a;">CNVC Certified Trainer & Assessor</p>
+            <p style="font-size:0.85rem">Practising NVC since 2009 · Executive Director, NVC Trust</p>
+          </div>
+          <div class="facilitator-card">
+            <img 
+              class="profile-img" 
+              src="public/depender.png" 
+              alt="Deepankar Roy portrait"
+              onerror="this.src='https://ui-avatars.com/api/?background=9baa8f&color=fff&name=Deepankar&size=120';"
+            />
+            <h3>Deepankar Roy</h3>
+            <p style="font-size:0.85rem; color:#6a4e3a;">CNVC Certified Trainer, PhD</p>
+            <p style="font-size:0.85rem">Group facilitation specialist · Trustee, NVC Trust</p>
+          </div>
+        </div>
+        
+        <!-- Organizing team with profile images -->
+        <div class="team-grid">
+          <div class="team-card">
+            <img 
+              class="team-profile-img" 
+              src="public/Vinita.png" 
+              alt="Vinita Chandrika Prasad"
+              onerror="this.src='https://ui-avatars.com/api/?background=b0a28a&color=fff&name=Vinita&size=100';"
+            />
+            <h4>Vinita Chandrika Prasad</h4>
+            <div class="team-role">NVC Practitioner, Certification Candidate</div>
+            <p>Translations & coordination support</p>
+          </div>
+          <div class="team-card">
+            <img 
+              class="team-profile-img" 
+              src="public/jayaji.png" 
+              alt="Jaya Sengupta"
+              onerror="this.src='https://ui-avatars.com/api/?background=b0a28a&color=fff&name=Jaya&size=100';"
+            />
+            <h4>Jaya Sengupta</h4>
+            <div class="team-role">NVC Practitioner, Certification Candidate</div>
+            <p>Over a decade of experience, supporting translations & retreat flow</p>
+          </div>
+        </div>
+        <div style="background:#faf7f0; border-radius: 32px; padding: 0.8rem 1.5rem; margin-top: 1rem; text-align:center">
+          🤝 "A shared learning space where dialogue, reflection and empathy create the basis for growth."
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- Application Process & Registration enhanced (PDF extract) -->
     <section class="content-section">
       <div class="container">
         <div class="about-intro animate-on-scroll" style="text-align: center">
-          <h2>Join the Retreat</h2>
+          <h2>Registration & Process</h2>
+          <div class="process-steps">
+            <div class="step">1. Fill registration form</div>
+            <div class="step">2. First-come, first-served basis</div>
+            <div class="step">3. Early contribution confirms seat</div>
+            <div class="step">4. Receive travel details after confirmation</div>
+          </div>
+          <p><strong>Limited seats (20–24 participants). Registrations close when retreat reaches capacity.</strong></p>
+          <div class="contact-row">
+            <span class="contact-chip">✉️ vinitaoutbound@gmail.com</span>
+            <span class="contact-chip">📞 WhatsApp: +91 7774878482</span>
+            <span class="contact-chip">📄 Brochure: <a href="https://tinyurl.com/2p5dt62a" target="_blank" style="color:#6a4e3a;">tinyurl.com/2p5dt62a</a></span>
+          </div>
+          <a href="https://tinyurl.com/bdcumv5e" target="_blank" class="btn btn-primary" style="margin-top: 0.5rem;">🔗 Register here & RESERVE NOW →</a>
+          <p style="margin-top: 1.2rem; font-size:0.85rem;">🌟 Scholarships available — contact us to express interest.</p>
+        </div>
+      </div>
+    </section>
 
-          <p>Limited seats available. Applications may close early.</p>
+    <!-- What makes Sangam special: added from brochure essence -->
+    <section class="content-section">
+      <div class="container">
+        <div class="animate-on-scroll" style="background: #f8f3ea; border-radius: 48px; padding: 2rem 1.8rem;">
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center;">
+            <div><span style="font-size:2rem;">💬</span><br /><strong>NVC: A Language of Life</strong><br />Learn to listen deeply, express honestly</div>
+            <div><span style="font-size:2rem;">🏔️</span><br /><strong>Panchgani hills</strong><br />Rejuvenating residential setting</div>
+            <div><span style="font-size:2rem;">🤝</span><br /><strong>Shared learning</strong><br />Dialogue, reflection & empathy</div>
+          </div>
+          <hr style="margin: 1.5rem 0 0.5rem; opacity:0.2" />
+          <p style="text-align: center; margin-top: 1rem;">✨ This retreat supports the emergence of a vibrant culture of NVC practice. ✨</p>
+        </div>
+      </div>
+    </section>
 
-          <a
-            href="https://tinyurl.com/bdcumv5e"
-            target="_blank"
-            class="btn btn-primary"
-          >
-            Register & Reserve Now
-          </a>
+    <!-- CTA final -->
+    <section class="content-section">
+      <div class="container">
+        <div class="about-intro animate-on-scroll" style="text-align: center">
+          <h2>Join the Sangam Retreat</h2>
+          <p>Early registration recommended — spaces fill quickly. Reserve your spot today.</p>
+          <a href="https://tinyurl.com/bdcumv5e" target="_blank" class="btn btn-primary">Register & Secure your Place</a>
+          <div style="margin-top: 1rem;"><small>📌 Bilingual worksheets, Hindi assistants, and a warm, inclusive container.</small></div>
         </div>
       </div>
     </section>

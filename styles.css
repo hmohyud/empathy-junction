@@ -1,6 +1,6 @@
 /* ==================== VARIABLES ==================== */
 :root {
-    --color-cream: #FDF8F3;
+    --color-cream: #ffffff;
     /* --color-cream: black; */
     --color-warm-white: #FEFCFA;
     --color-sand: #F5EDE4;
@@ -72,10 +72,10 @@ h1, h2, h3, h4 {
 }
 
 h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; letter-spacing: -0.02em; }
-h2 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 400; }
-h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 500; }
-h4 { font-size: 1.25rem; font-weight: 600; }
-p { font-size: 1.05rem; max-width: 65ch; }
+h2 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 400; }
+h3 { font-size: clamp(1.75rem, 3.5vw, 2.25rem); font-weight: 500; }
+h4 { font-size: 1.4rem; font-weight: 600; }
+p  { font-size: 1.15rem; max-width: 65ch; }
 
 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--space-md); }
 section { padding: var(--space-3xl) 0; position: relative; }
