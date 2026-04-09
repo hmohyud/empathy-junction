@@ -140,7 +140,7 @@ window.EVENTS_DATA = {
       description:
         "A 5-day immersive residential retreat in Panchgani focused on Nonviolent Communication (NVC) in both Hindi and English. Participants will practise deep listening, honest expression, and compassionate connection in a serene environment.",
         link: "sangam.html",
-      tag: "₹8,000 – ₹15,500",
+      tag: "₹6,500 – ₹8,000",
       i18n: {
         hi: {
           title: "संगम रिट्रीट",

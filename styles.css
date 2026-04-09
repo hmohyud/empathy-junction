@@ -471,6 +471,9 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
     margin-bottom: var(--space-md);
     text-align: center;
 }
+.journery-intro-color{
+    color: red;
+}
 
 .voyage-ocean {
     position: relative;
