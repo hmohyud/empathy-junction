@@ -677,6 +677,106 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
     color: var(--color-sage);
 }
 
+/* Hero Poster - Full Image Fixed */
+.hero-poster {
+  position: relative;
+  margin: var(--space-xl) 0;
+  max-width: 800px; /* Increased from 720px */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.poster-link {
+  display: block;
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.poster-image {
+  width: 100%;
+  height: auto; /* Changed from fixed height */
+  min-height: 450px; /* Minimum height for consistency */
+  max-height: 600px; /* Maximum height */
+  object-fit: contain; /* Shows FULL image - no cropping! */
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.poster-link:hover .poster-image {
+  transform: scale(1.02); /* Gentle scale */
+}
+
+.poster-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  padding: var(--space-lg) var(--space-xl);
+  transform: translateY(100%);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.poster-link:hover .poster-overlay {
+  transform: translateY(0);
+}
+
+.poster-icon {
+  width: 24px;
+  height: 24px;
+  stroke: rgba(255, 255, 255, 0.9);
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.poster-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+/* Responsive - Full Image */
+@media (max-width: 768px) {
+  .hero-poster {
+    max-width: 100%;
+    margin: var(--space-lg) 0;
+  }
+
+  .poster-image {
+    min-height: 350px;
+    max-height: 450px;
+  }
+
+  .poster-overlay {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .poster-text {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-poster {
+    max-width: 95vw;
+  }
+
+  .poster-image {
+    min-height: 300px;
+    max-height: 400px;
+  }
+  
+  .poster-overlay {
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
 /* ==================== EVENTS DRAWER ==================== */
 
 /* ── Events at-a-glance card (inside hero, top-right) ── */

@@ -225,6 +225,104 @@
         margin: 0.5rem 0 0.2rem;
         font-size: 1.4rem;
       }
+      .hero-video-section {
+  padding: var(--space-2xl) 0;
+  background: linear-gradient(
+    135deg,
+    rgba(155, 170, 143, 0.03) 0%,
+    rgba(196, 132, 108, 0.03) 100%
+  );
+}
+
+.hero-video-section {
+  padding: var(--space-2xl) 0;
+}
+
+.video-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.video-container {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+  background: #000;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.video-player {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.video-container:hover .video-overlay {
+  opacity: 0.7;
+}
+
+.video-play-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(196, 132, 108, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(196, 132, 108, 0.4);
+  pointer-events: auto;
+}
+
+.video-container:hover .video-play-btn {
+  transform: scale(1.1);
+  background: var(--color-terracotta);
+}
+
+.video-play-btn svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+  stroke-width: 2;
+  margin-left: 3px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .video-player {
+    height: 350px;
+  }
+  
+  .video-play-btn {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-player {
+    height: 280px;
+  }
+}
       @media (max-width: 680px) {
         .objective-grid { gap: 1rem; }
         .bilingual-support { flex-direction: column; }
@@ -422,6 +520,30 @@
         </div>
       </div>
     </section>
+
+   <!-- VIDEO SECTION - Video Only -->
+<section class="hero-video-section">
+  <div class="container">
+    <div class="video-wrapper animate-on-scroll">
+      <div class="video-container">
+        <video 
+          class="video-player" 
+          src="/public/MOTION_FINAL_V23 (1).mp4"
+          poster="/images/sangam-poster.jpg"
+          preload="metadata"
+          muted
+          loop
+          autoplay
+          playsinline
+          webkit-playsinline
+          x5-playsinline>
+        </video>
+        
+        
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- INTRO -->
     <section class="content-section">

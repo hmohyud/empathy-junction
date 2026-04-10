@@ -25,8 +25,8 @@ var en = {
     "nav.ccEnglishSoon": "English — Coming Soon",
 
     // ── Hero (index) ──
-    "hero.tagline": "Connecting Hearts with Nonviolent Communication",
-    "hero.intro": " A Language for Life.A supportive community space to arrive as you are, connect the dots, and grow in compassion — through playful and joyful practices that bring you home to yourself",
+    "hero.tagline": "Connecting hearts with Nonviolent Communication - A Language for Life.",
+    "hero.intro": "A supportive community space to arrive as you are, connect the dots, and grow in compassion — through playful and joyful practices that bring you home to yourself",
     "hero.cta1": "Join the Free Listening Circle",
     "hero.cta2": "Explore the Journey",
     "hero.meta1": "Workshop and practice",
@@ -71,7 +71,7 @@ var en = {
     "rhythm.title": "Fridays made meaningful",
     "rhythm.subtitle": "Three time slots, flexible for your schedule",
     "rhythm.timeSlotsLabel": "Choose Your Time",
-    "rhythm.timeSlot": "6:00 – 7:30",
+    "rhythm.timeSlot": "6:00 – 7:30 PM",
     "rhythm.week1": "Week 1",
     "rhythm.weeks24": "Weeks 3–4",
     "rhythm.lastWeek": "week 2",
@@ -107,8 +107,8 @@ var en = {
     "pricing.weekly.cta": "Get Started",
     "pricing.monthly.popular": "Best Value",
     "pricing.monthly.name": "Quarterly Pass",
-    "pricing.monthly.amount": "₹1500(not) ₹1200",
-    "pricing.monthly.period": "Six workshops any three months of choice. Save ₹600/- ",
+    "pricing.monthly.amount": "₹1200",
+    "pricing.monthly.period": "Six workshops. Any three months of choice. Save ₹300/- every quarter.",
     "pricing.monthly.f1": "All Fridays for three months ",
     "pricing.monthly.f2": "Six Basic NVC/ thematic workshops of 1.5 hours each",
     "pricing.monthly.f3": "All Listening Circles ( 1st Fridays) of 1 hour each",
@@ -301,10 +301,21 @@ var en = {
     "cc.outcomes.4": "Resolve conflicts peacefully",
     "cc.outcomes.5": "Experience more joy in life and relationships",
     "cc.testimonials.title": "What past participants say",
-    "cc.contribution.title": "Monthly Contribution",
-    "cc.contribution.p1": "<strong>The annual contribution for the Compassion Course is on a sliding scale of ₹12,000 to ₹24,000 (Rs ₹250–₹500 per session).</strong> This flexible range invites you to contribute in alignment with your capacity, willingness, and generosity — supporting both your own learning and the larger community.",
-    "cc.contribution.p2": "Our team of facilitators offers this course as a labour of care and commitment — holding 52 live sessions across the year. While this is not their primary livelihood, your contribution plays a vital role in sustaining and growing this work.",
-    "cc.contribution.p3": "We also offer <strong>partial scholarships</strong> for students and individuals from socially and economically marginalised backgrounds. This is made possible through the spirit of shared contribution within the community.The more you are able to contribute, the more we can extend access, deepen inclusion, and support others on this journey.We warmly invite you to offer what feels both generous and sustainable for you.",
+    "cc.contribution.title": "Payment Options",
+    "cc.contribution.p1": "1. Early-bird one-time payment option: ₹6500/- during July registration (59% off).",
+    "cc.contribution.p2": "2. Two part payment options: ₹4000  during July registration & ₹4000 in Oct (50% off).",
+    "cc.contribution.p3": "3. Returning participants and Students pay ₹4000/- only (75% discount). For part payment support, call 8860661717.",
+
+    
+  "monthly.title": "Monthly Contribution",
+  "monthly.courseInfo": "🌿 14 जुलाई 2026 से शुरू\nThom Bond का Hindi Compassion Course (52 Weeks)\n✨ 4th Batch\nमूल शुल्क: ₹16,000/-\nअब केवल ₹6500/- to ₹8,000/-",
+  "monthly.paymentPlans": "🌿 Early bird One-Time: ₹6,500 (~59% off)\n🌱 Two-Part payment: ₹4,000 (July) + ₹4,000 (Oct) (~50% off)\n🌼 Students & Alumni: ₹4,000 (~75% off)\n🌍 International: Indian rates + sponsorship support",
+  "monthly.registerCta": "👉 Register here:",
+  "monthly.registerLink": "यहाँ रजिस्टर करें",
+  "monthly.whatYouGet": "आपको क्या मिलेगा:\n• 52 साप्ताहिक लाइव सत्र\n• 12 पुनरावृत्ति (revision) सत्र\n• सुव्यवस्थित पाठ्य सामग्री\n• सभी सत्रों की रिकॉर्डिंग\n• एक सुरक्षित, संवेदनशील समुदाय जहाँ आप खुलकर साझा कर सकें\n• रोज़मर्रा की ज़िंदगी में NVC को जीने का अवसर",
+  "monthly.invitation": "जैसे हैं, वैसे ही आइए\nदिल से जो सही लगे, उतना ही दीजिए\nऔर देखें ज़िंदगी कैसे खिलती है 💛",
+
+
     "cc.faq.title": "Frequently Asked Questions",
     "cc.faq.sub": "Questions that will help you better understand this process.",
     "cc.faq.group1": "About the Course",
@@ -346,7 +357,10 @@ var en = {
     // ── CC Detail Values ──
     "cc.detail.startsVal": "14 July 2026",
     "cc.detail.endsVal": "22 June 2027 (52 weeks)",
-    "cc.detail.dayVal": "8:30 \u2013 10:00 PM IST(English Batch) 7:00 \u2013 9:30 PM IST(Hindi Batch)",
+    "cc.detail.time1": "8:30 – 10:00 PM",
+  "cc.detail.english": "(English Batch)",
+  "cc.detail.time2": "7:00 - 9:30 PM",
+  "cc.detail.hindi": "(Hindi Batch)",
 
     // ── CC FAQ Answers with HTML ──
     "cc.faq.a7": "Fill the <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSe0W5WgXjMlb4cH_I30S7yjDZyZQLUTyX3F-8XrnFozM_Lulw/viewform\" target=\"_blank\" rel=\"noopener\">registration form</a>. You\u2019ll receive a link to the WhatsApp group.",
