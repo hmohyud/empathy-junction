@@ -515,6 +515,172 @@
         margin-bottom: 0;
       }
 
+     /* Monthly Contribution - Theme Matched */
+.cc-monthly-contribution {
+  padding: var(--space-xl);
+  background: linear-gradient(
+    135deg,
+    rgba(196, 132, 108, 0.04),
+    rgba(196, 132, 108, 0.08)
+  );
+  border: 1px solid rgba(196, 132, 108, 0.1);
+  border-radius: var(--radius-xl);
+  margin: var(--space-2xl) 0;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.03);
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Course Details */
+  .cc-course-details {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-lg);
+    background: #fff;
+    border: 1px solid rgba(155, 170, 143, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+    white-space: pre-line;
+  }
+
+  /* Divider - Uses your existing .cc-divider */
+  .cc-divider {
+    border-bottom: 1px solid rgba(155, 170, 143, 0.06);
+    margin: var(--space-lg) 0;
+  }
+
+  /* Payment Options */
+  .cc-payment-options {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-lg);
+    background: #fff;
+    border: 1px solid rgba(155, 170, 143, 0.08);
+    border-left: 3px solid var(--color-terracotta);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+    white-space: pre-line;
+  }
+
+  /* Register CTA */
+  .cc-register-cta {
+    text-align: center;
+    padding: var(--space-xl) var(--space-lg);
+    background: linear-gradient(
+      135deg,
+      rgba(155, 170, 143, 0.06),
+      rgba(196, 132, 108, 0.06)
+    );
+    border: 1px solid rgba(155, 170, 143, 0.08);
+    border-radius: var(--radius-xl);
+    margin: var(--space-lg) 0;
+
+    .cc-register-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-terracotta);
+      text-decoration: none;
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid rgba(196, 132, 108, 0.2);
+      border-radius: var(--radius-md);
+      transition: all 0.2s;
+      background: rgba(196, 132, 108, 0.04);
+
+      &:hover {
+        background: rgba(196, 132, 108, 0.08);
+        box-shadow: 0 4px 16px rgba(196, 132, 108, 0.15);
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  /* Benefits */
+  .cc-benefits {
+    padding: var(--space-xl) var(--space-lg);
+    background: #fff;
+    border: 1px solid rgba(155, 170, 143, 0.08);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.03);
+    margin: var(--space-lg) 0;
+    white-space: pre-line;
+
+    strong {
+      color: var(--color-terracotta);
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: var(--space-sm);
+      font-family: "Raleway", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  /* Closing Message */
+  .cc-closing-message {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    margin-top: var(--space-lg);
+    padding: var(--space-lg);
+    background: rgba(155, 170, 143, 0.04);
+    border: 1px solid rgba(155, 170, 143, 0.06);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    font-style: italic;
+    font-weight: 500;
+    white-space: pre-line;
+  }
+
+  /* Icon */
+  .cc-icon-inline {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    color: var(--color-terracotta);
+  }
+}
+
+/* Hover Animation */
+.cc-monthly-contribution:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+  transition: all 0.2s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cc-monthly-contribution {
+    padding: var(--space-lg);
+    margin: var(--space-xl) 0;
+
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    .cc-course-details,
+    .cc-payment-options,
+    .cc-benefits {
+      padding: var(--space-md);
+      font-size: 0.95rem;
+    }
+  }
+}
       /* Section headings */
       .cc-outcomes {
         list-style-type: disc;
@@ -945,11 +1111,12 @@
                 <path d="M12 6v6l4 2" /></svg
             ></span>
             <div>
-              <strong data-i18n="cc.detail.day">Every Tuesday</strong
-              ><span data-i18n="cc.detail.dayVal"
-                >8:30 – 10:00 PM IST(English Batch) 7:00 - 9:30 PM IST (Hindi
-                Batch)</span
-              >
+              <strong data-i18n="cc.detail.day">Every Tuesday</strong>
+              <span data-i18n="cc.detail.time1">8:30 – 10:00 PM </span>
+              <span data-i18n="cc.detail.english">(English Batch)</span>
+              <br />
+              <span data-i18n="cc.detail.time2">7:00 - 9:30 PM</span>
+              <span data-i18n="cc.detail.hindi">(Hindi Batch)</span>
             </div>
           </div>
           <div class="cc-detail-card">
@@ -1095,30 +1262,95 @@
                 d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
               />
             </svg>
-            <span data-i18n="cc.contribution.title">Monthly Contribution</span>
+            <span data-i18n="cc.contribution.title">Payment Options</span>
           </h3>
           <p data-i18n-html="cc.contribution.p1">
-            <strong
+            <!-- <strong
               >The requested annual contribution ranges from ₹6,500 to
               ₹12,000</strong
-            >
-            (approx. ₹500–1,000/month, or ₹125–250/session). This sliding scale
-            ensures you can pay according to your capacity, willingness, and
-            generosity.
+            > -->
+            Early-bird one-time payment option: ₹6500/- during July registration
+            (59% off).
           </p>
           <p data-i18n="cc.contribution.p2">
-            Our team of 6 facilitators are offering their services from the
-            heart — 52 live sessions over 12 months. They do not consider this
-            their livelihood, nor does this contribution compensate for their
-            time and effort. Your contribution inspires us to expand this work
-            across India.
+            Two part payment options: ₹4000 during July registration & ₹4000 in
+            Oct (50% off).
           </p>
           <p data-i18n-html="cc.contribution.p3">
-            We offer <strong>partial scholarships</strong> for those from
-            socially and economically marginalized backgrounds. We rely on the
-            generosity of this community — the more you contribute, the more our
-            collective resource pool grows to support others. Please pay as much
-            as you can.
+            Returning participants and Students pay ₹4000/- only (75% discount).
+            For part payment support, call 8860661717.
+          </p>
+        </div>
+
+        <!-- Monthly Contribution -->
+        <div class="cc-monthly-contribution animate-on-scroll">
+          <h3>
+            <svg
+              class="cc-icon-inline"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+              />
+            </svg>
+            <span data-i18n="monthly.title">Monthly Contribution</span>
+          </h3>
+
+          <!-- Course Details -->
+          <div data-i18n="monthly.courseInfo" class="cc-course-details">
+            🌿 14 जुलाई 2026 से शुरू<br />
+            Thom Bond का Hindi Compassion Course (52 Weeks)<br />
+            ✨ 4th Batch<br />
+            मूल शुल्क: ₹16,000/-<br />
+            अब केवल ₹6500/- to ₹8,000/-
+          </div>
+
+          <div class="cc-divider"></div>
+
+          <!-- Payment Options -->
+          <div data-i18n="monthly.paymentPlans" class="cc-payment-options">
+            🌿 Early bird One-Time: ₹6,500 (~59% off)<br />
+            🌱 Two-Part payment: ₹4,000 (July) + ₹4,000 (Oct) (~50% off)<br />
+            🌼 Students & Alumni: ₹4,000 (~75% off)<br />
+            🌍 International: Indian rates + sponsorship support
+          </div>
+
+          <div class="cc-divider"></div>
+
+          <!-- Register CTA -->
+          <div data-i18n="monthly.registerCta" class="cc-register-cta">
+            👉
+            <a
+              href="#"
+              data-i18n="monthly.registerLink"
+              class="cc-register-link"
+              >Register here</a
+            >
+          </div>
+
+          <div class="cc-divider"></div>
+
+          <!-- Benefits -->
+          <div data-i18n="monthly.whatYouGet" class="cc-benefits">
+            आपको क्या मिलेगा:<br />
+            - 52 साप्ताहिक लाइव सत्र<br />
+            - 12 पुनरावृत्ति (revision) सत्र<br />
+            - सुव्यवस्थित पाठ्य सामग्री<br />
+            - सभी सत्रों की रिकॉर्डिंग<br />
+            - एक सुरक्षित, संवेदनशील समुदाय जहाँ आप खुलकर साझा कर सकें<br />
+            - रोज़मर्रा की ज़िंदगी में NVC को जीने का अवसर
+          </div>
+
+          <div class="cc-divider"></div>
+
+          <!-- Closing Message -->
+          <p data-i18n="monthly.invitation" class="cc-closing-message">
+            जैसे हैं, वैसे ही आइए<br />
+            दिल से जो सही लगे, उतना ही दीजिए<br />
+            और देखें ज़िंदगी कैसे खिलती है 💛
           </p>
         </div>
 
