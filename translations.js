@@ -25,7 +25,7 @@ var en = {
     "nav.ccEnglishSoon": "English — Coming Soon",
 
     // ── Hero (index) ──
-    "hero.tagline": "Connecting hearts with Nonviolent Communication - A Language for Life.",
+    "hero.tagline": "Connecting hearts with Nonviolent Communication",
     "hero.intro": "A supportive community space to arrive as you are, connect the dots, and grow in compassion — through playful and joyful practices that bring you home to yourself",
     "hero.cta1": "Join the Free Listening Circle",
     "hero.cta2": "Explore the Journey",
@@ -281,7 +281,7 @@ var en = {
     "cc.detail.format": "Online",
     "cc.detail.formatDesc": "Live Zoom sessions",
     "cc.detail.contribution": "Contribution",
-    "cc.detail.contributionDesc": "Original course fee Rs16000/- ~ Now Rs 6500-8000",
+    "cc.detail.contributionDesc": "Original course fee ₹16000/- Now ₹8000/- only",
     "cc.detail.alumni": "Alumni & Students",
     "cc.detail.alumniDesc": "\u20b94,000 (previous CC batches)",
     "cc.cta.deadline": "Registration deadline: <strong>1st July 2026</strong>",
@@ -349,7 +349,7 @@ var en = {
     "cc.faq.q15": "What if I can\u2019t attend the Zoom meetings \u2014 can I just get the material?",
     "cc.faq.a15": "In our experience, learning is much deeper when you join live. However, you can participate as much or as little as you like, according to your convenience. Recordings and written material are available for all sessions.",
     "cc.syllabus.title": "Full Syllabus (52 weeks)",
-    "cc.team.title": "Meet the Facilitators",
+    "cc.team.title": "Meet the Hindi Facilitators",
     "cc.team.sub": "Our facilitators have been learning and teaching NVC for 3\u20134 years. We are all driven by the need to spread compassion in the world. Additionally, 3\u20134 assistants will be available for support during live sessions.",
     "cc.trans.title": "Meet the Translators",
     "cc.trans.sub" : "Our facilitators have been learning and teaching NVC for 3\u20134 years. We are all driven by the need to spread compassion in the world. Additionally, 3\u20134 assistants will be available for support during live sessions.",
