@@ -322,7 +322,7 @@ var en = {
     "cc.faq.q1": "What is the Compassion Course?",
     "cc.faq.a1": "Created by internationally renowned trainer Thom Bond, the Compassion Course has been running for over 14 years, reaching more than 50,000 participants across over 120 countries and in 20+ languages worldwide.",
     "cc.faq.q2": "Who is this group for?",
-    "cc.faq.a2": "This group is for anyone interested in learning the basics of NVC and building more authentic, loving relationships. We work in close partnership with Thom Bond and follow the exact syllabus from the Compassion Course.",
+    "cc.faq.a2": "This group is for anyone interested in learning the basics of NVC and building more authentic, loving relationships. We work in close partnership with Thom Bond and follow the exact syllabus from the Compassion Course &lt;a href=\"https://docs.google.com/forms/d/e/1FAIpQLSe0W5WgXjMlb4cH_I30S7yjDZyZQLUTyX3F-8XrnFozM_Lulw/viewform\" target=\"_blank\" rel=\"noopener\"&gt;registration form&lt;/a&gt;",
     "cc.faq.q3": "What do I need to know before joining?",
     "cc.faq.a3": "This course is designed for beginners. You just need to be open and curious about forming authentic, loving relationships. No prior NVC knowledge is required.",
     "cc.faq.q4": "What is Nonviolent Communication?",
@@ -334,7 +334,7 @@ var en = {
     "cc.faq.group2": "Registration & Contribution",
     "cc.faq.q7": "How do we start?",
     "cc.faq.q8": "How much do I pay?",
-    "cc.faq.a8": "Course fee is ₹16000 only ₹6500/- to ₹8000/- for the year 2026-27, based on your capacity and generosity. We prefer a one-time payment.",
+    "cc.faq.a8": "Early bird One-Time: ₹6,500 (~59% off). Two-Part payment: ₹4,000 (July) + ₹4,000 (Oct) (~50% off). Students & Alumni: ₹4,000 (~75% off). International: Indian rates + sponsorship support",
     "cc.faq.q9": "Monthly or annual payment?",
     "cc.faq.a9": "Early-bird one-time payment: ₹6500/- during July registration. (59% discount) or Two part payments ₹4000 in July during registration and ₹4000 in Oct ( 50% discount). Alumni and Students pay ₹4000/- only ( 75% discount). For part payment support, call 8860661717.",
     "cc.faq.q10": "Do I also need to register on the Compassion Course website?",
@@ -344,7 +344,7 @@ var en = {
     "cc.faq.q12": "How many sessions?",
     "cc.faq.a12": "There will be 52 sessions in a year. We meet every Tuesday.",
     "cc.faq.q13": "52 weeks is long. What if I miss some sessions?",
-    "cc.faq.a13": "Yes, you can still join. You can catch up with recordings and written material. However, we strongly recommend attending most sessions in the first 3 months \u2014 that\u2019s when foundational principles are covered.",
+    "cc.faq.a13": "Yes, you can still join. You can catch up with written material. However, we strongly recommend attending most sessions in the first 3 months \u2014 that\u2019s when foundational principles are covered.",
     "cc.faq.q14": "I want to know more. Who do I contact?",
     "cc.faq.q15": "What if I can\u2019t attend the Zoom meetings \u2014 can I just get the material?",
     "cc.faq.a15": "In our experience, learning is much deeper when you join live. However, you can participate as much or as little as you like, according to your convenience. Recordings and written material are available for all sessions.",
@@ -364,7 +364,7 @@ var en = {
 
     // ── CC FAQ Answers with HTML ──
     "cc.faq.a7": "Fill the <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSe0W5WgXjMlb4cH_I30S7yjDZyZQLUTyX3F-8XrnFozM_Lulw/viewform\" target=\"_blank\" rel=\"noopener\">registration form</a>. You\u2019ll receive a link to the WhatsApp group.",
-    "cc.faq.a10": "No. Our form is sufficient for group participants. However, if you\u2019d also like to receive lessons in English, you can additionally register on the <a href=\"https://nycnvc.wufoo.com/forms/p196y1790eej77b/\" target=\"_blank\" rel=\"noopener\">Compassion Course website</a>.",
+    "cc.faq.a10": "Our form is sufficient for Hindi participants. For English participants to receive the content in English directly with Thom Bond, pls register with  <a href=\"https://nycnvc.wufoo.com/forms/p196y1790eej77b/\" target=\"_blank\" rel=\"noopener\">compassioncourse.org</a>.",
     "cc.faq.a14": "<svg class=\"cc-icon-inline\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z\"/></svg> Call <strong>8860661717</strong> for any questions.",
 
     // ── CC Testimonials ──
