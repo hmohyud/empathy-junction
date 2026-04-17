@@ -1379,17 +1379,32 @@ function updateURLLang(lang) {
 
 // ==================== LANGUAGE SWITCHING ====================
 var urlLang = getLangFromURL();
-// Per-page default language: pages can set <html data-default-lang="hi"> to opt-in to a non-English default
+// Per-page default language: pages can set <html data-default-lang="hi"> to opt-in to a non-English default.
+// Rule: on the first visit (no manual toggle recorded), the page default overrides everything else.
+// Once the user has manually toggled the language (on any page), their choice is respected from then on.
 var pageDefaultLang = document.documentElement.getAttribute('data-default-lang');
-window.currentLang = urlLang || localStorage.getItem('jtd-lang') || pageDefaultLang || DEFAULT_LANGUAGE;
+var hasManualChoice = localStorage.getItem('jtd-lang-manual') === 'true';
+var savedLang = localStorage.getItem('jtd-lang');
+if (hasManualChoice) {
+    // User has explicitly picked a language before — honor it.
+    window.currentLang = urlLang || savedLang || DEFAULT_LANGUAGE;
+} else {
+    // No manual choice yet — page default wins on first visit.
+    window.currentLang = urlLang || pageDefaultLang || savedLang || DEFAULT_LANGUAGE;
+}
 
-function setLanguage(lang) {
+function setLanguage(lang, persist) {
     if (SUPPORTED_LANGUAGES.indexOf(lang) === -1) {
         lang = DEFAULT_LANGUAGE;
     }
 
     window.currentLang = lang;
-    localStorage.setItem('jtd-lang', lang);
+    // Only persist — and mark the choice as "manual" — when the user has actually clicked a toggle.
+    // Auto-defaulted page visits must not overwrite the manual-choice flag.
+    if (persist) {
+        localStorage.setItem('jtd-lang', lang);
+        localStorage.setItem('jtd-lang-manual', 'true');
+    }
     document.documentElement.setAttribute('data-lang', lang);
 
     // Update URL to reflect current language
@@ -1444,11 +1459,13 @@ window.setLanguage = setLanguage;
 
 // ==================== INITIALIZE ====================
 document.addEventListener('DOMContentLoaded', function () {
-    setLanguage(window.currentLang);
+    // Initial load: don't persist — this is an auto-default, not a manual choice.
+    setLanguage(window.currentLang, false);
 
     document.querySelectorAll('.lang-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
-            setLanguage(btn.getAttribute('data-lang'));
+            // User clicked a toggle: persist and mark as manual.
+            setLanguage(btn.getAttribute('data-lang'), true);
         });
     });
 });
