@@ -1379,7 +1379,9 @@ function updateURLLang(lang) {
 
 // ==================== LANGUAGE SWITCHING ====================
 var urlLang = getLangFromURL();
-window.currentLang = urlLang || localStorage.getItem('jtd-lang') || DEFAULT_LANGUAGE;
+// Per-page default language: pages can set <html data-default-lang="hi"> to opt-in to a non-English default
+var pageDefaultLang = document.documentElement.getAttribute('data-default-lang');
+window.currentLang = urlLang || localStorage.getItem('jtd-lang') || pageDefaultLang || DEFAULT_LANGUAGE;
 
 function setLanguage(lang) {
     if (SUPPORTED_LANGUAGES.indexOf(lang) === -1) {
