@@ -43,9 +43,14 @@
   <body>
   <div class="lang-loader" id="langLoader" aria-hidden="true" translate="no">
     <div class="lang-loader-dots" aria-hidden="true">
-      <div class="lang-loader-dot"></div>
-      <div class="lang-loader-dot"></div>
-      <div class="lang-loader-dot"></div>
+      <svg class="lang-loader-svg" viewBox="0 0 60 84" preserveAspectRatio="none">
+        <line class="line-1" x1="51" y1="9"  x2="9"  y2="42" />
+        <line class="line-2" x1="9"  y1="42" x2="51" y2="75" />
+        <line class="line-3" x1="51" y1="75" x2="51" y2="9"  />
+      </svg>
+      <div class="lang-loader-dot lang-loader-dot--top"></div>
+      <div class="lang-loader-dot lang-loader-dot--left"></div>
+      <div class="lang-loader-dot lang-loader-dot--right"></div>
     </div>
     <div class="lang-loader-label notranslate" translate="no">Loading…</div>
   </div>
@@ -288,8 +293,7 @@
       </div>
 
       <div class="hero-content">
-        <div
-          class="logo-grid logo-grid--hero hero-title"
+        <div class="logo-grid logo-grid--hero hero-title"
           aria-label="Join the Dots"
         >
           <span class="logo-letter">J</span>
@@ -1442,8 +1446,7 @@
         <div class="footer-content">
           <div class="footer-brand">
             <h3>
-              <div
-                class="logo-grid logo-grid--footer"
+              <div class="logo-grid logo-grid--footer"
                 aria-label="Join the Dots"
               >
                 <span class="logo-letter">J</span>
@@ -1531,7 +1534,7 @@
     </footer>
 
     <script src="data/events.js"></script>
-    <script src="animations.js?v=3"></script>
+    <script src="animations.js?v=4"></script>
     <!-- Google Translate Widget -->
     <script>
       // Google Translate requires this callback to exist even though we're using

@@ -1877,6 +1877,10 @@ class CompassionMandala {
 // ==================== INITIALIZE ====================
 // ==================== LOGO DOT CONNECTOR ====================
 function initLogoConnectLines() {
+  // Remember every grid's repositioner so we can re-fire them all when Google
+  // Translate rewrites the logo letters (which shifts dot positions).
+  var allRepositioners = [];
+
   document.querySelectorAll('.logo-grid--small').forEach(function (grid) {
     if (grid.querySelector('.logo-connect-lines')) return;
     var dots = grid.querySelectorAll('.logo-dot');
@@ -1888,6 +1892,7 @@ function initLogoConnectLines() {
 
     function positionLines() {
       var gRect = grid.getBoundingClientRect();
+      if (!gRect.width || !gRect.height) return; // grid not laid out yet
       svg.setAttribute('viewBox', '0 0 ' + gRect.width + ' ' + gRect.height);
       var centers = [];
       for (var i = 0; i < dots.length; i++) {
@@ -1917,7 +1922,40 @@ function initLogoConnectLines() {
     grid.appendChild(svg);
     positionLines();
     window.addEventListener('resize', positionLines);
+
+    // Per-grid ResizeObserver: when Google Translate swaps "J I N T H E D T S"
+    // for translated letters, the grid's intrinsic width changes and dots shift.
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(function () { positionLines(); });
+      ro.observe(grid);
+      // Also observe each letter/dot child — per-cell width changes don't
+      // always bubble up to the grid's own size.
+      Array.prototype.forEach.call(grid.children, function (child) { ro.observe(child); });
+    }
+
+    allRepositioners.push(positionLines);
   });
+
+  // Global hook: whenever Google Translate adds/removes .translated-ltr or
+  // .translated-rtl on <html>, fire every repositioner on a short delay so the
+  // translated letters have finished laying out.
+  if (allRepositioners.length && window.MutationObserver) {
+    var bump = function () {
+      setTimeout(function () {
+        allRepositioners.forEach(function (fn) { fn(); });
+      }, 50);
+      setTimeout(function () {
+        allRepositioners.forEach(function (fn) { fn(); });
+      }, 500);
+    };
+    new MutationObserver(bump).observe(document.documentElement, {
+      attributes: true, attributeFilter: ['class', 'lang']
+    });
+    // Also bump on web-fonts finishing loading (metrics can shift after).
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(bump);
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
