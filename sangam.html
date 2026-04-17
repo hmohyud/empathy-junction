@@ -967,6 +967,8 @@
           document.cookie = 'googtrans=' + value + '; path=/';
           document.cookie = 'googtrans=' + value + '; path=/; domain=.' + location.hostname;
           sessionStorage.setItem('lang-switching', '1');
+          // Mark this as a manual choice so the Compassion page stops auto-forcing Hindi.
+          localStorage.setItem('lang-manual-pick', '1');
         } catch (e) { /* storage disabled */ }
         // Add the class so CSS forces the loader to full-opacity *instantly*
         // (no fade), hiding the current page before reload tears down the DOM.
@@ -978,32 +980,39 @@
           requestAnimationFrame(function () { location.reload(); });
         });
       };
-      // Dynamic nav overflow: measure the visual gap between the three flex
-      // children of .nav-inner (logo / center / right). Since the nav uses
-      // justify-content: space-between, "free" space collapses to the gaps
-      // between items — that's what we need to measure, not the sum of widths.
+      // Dynamic nav overflow: measure the gap between the right edge of the
+      // center-nav content and the left edge of the ACTUAL visible right-side
+      // content (the first child of .nav-right — typically the language select),
+      // because .nav-right has flex:1 and its wrapper extends leftward into
+      // empty space. Comparing against its visible child gives an honest gap.
       (function setupNavOverflow() {
         var html = document.documentElement;
-        var MIN_GAP = 40; // px of visible space we require between adjacent nav groups
+        var MIN_GAP = 20; // px of visible space we want between center text and right buttons
         function check() {
           html.classList.remove('nav-force-hamburger');
           requestAnimationFrame(function () {
             var nav = document.querySelector('.nav-inner');
-            var logo = document.querySelector('.nav-logo');
             var center = document.querySelector('.nav-center');
             var right = document.querySelector('.nav-right');
             if (!nav || !center || !right) return;
             // If the existing media query already hides .nav-center, skip.
             if (getComputedStyle(center).display === 'none') return;
+            // Find the leftmost visible child of nav-right (its wrapper may extend
+            // left via flex:1 into empty space — we want the actual UI boundary).
+            var rightChildren = Array.from(right.children).filter(function (el) {
+              return el.offsetWidth > 0 && getComputedStyle(el).display !== 'none';
+            });
+            if (!rightChildren.length) return;
+            var leftmostRightChild = rightChildren.reduce(function (a, b) {
+              return a.getBoundingClientRect().left < b.getBoundingClientRect().left ? a : b;
+            });
             var centerRect = center.getBoundingClientRect();
-            var rightRect = right.getBoundingClientRect();
-            var logoRect = logo ? logo.getBoundingClientRect() : null;
-            var gapLeft = logoRect ? (centerRect.left - logoRect.right) : Infinity;
-            var gapRight = rightRect.left - centerRect.right;
-            var minGap = Math.min(gapLeft, gapRight);
-            // If the center overflows horizontally within its own box, also trigger.
-            var centerOverflows = center.scrollWidth > center.clientWidth + 1;
-            if (minGap < MIN_GAP || centerOverflows) {
+            var rightContentLeft = leftmostRightChild.getBoundingClientRect().left;
+            var gap = rightContentLeft - centerRect.right;
+            // Also detect actual overflow within the center (nav-links overflowing).
+            var navLinks = center.querySelector('.nav-links');
+            var linksOverflow = navLinks && navLinks.scrollWidth > navLinks.clientWidth + 1;
+            if (gap < MIN_GAP || linksOverflow) {
               html.classList.add('nav-force-hamburger');
             }
           });

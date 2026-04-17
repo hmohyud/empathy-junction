@@ -4895,25 +4895,32 @@ html.lang-switching .lang-loader {
     max-width: 140px;
 }
 
-/* Hide the desktop select on viewports where the mobile nav takes over.
-   The nav collapses to a hamburger at 1200px (see .nav-mobile-toggle). */
+/* Keep the desktop language <select> visible at every width — users should be
+   able to change language without opening the hamburger menu. It shrinks a
+   little on narrow viewports so it fits beside the hamburger button. */
 @media (max-width: 1200px) {
     .lang-select-desktop {
-        display: none;
+        font-size: 0.8rem;
+        padding: 5px 8px;
+        max-width: 110px;
+    }
+}
+@media (max-width: 600px) {
+    .lang-select-desktop {
+        font-size: 0.75rem;
+        padding: 4px 6px;
+        max-width: 95px;
     }
 }
 
 /* Dynamic nav overflow: if the translated nav links would collide with the right-side
    buttons, JS adds .nav-force-hamburger to <html> and we fall back to the mobile nav
-   regardless of viewport width. */
+   regardless of viewport width. The language select stays visible. */
 html.nav-force-hamburger .nav-center {
     display: none !important;
 }
 html.nav-force-hamburger .nav-mobile-toggle {
     display: flex !important;
-}
-html.nav-force-hamburger .lang-select-desktop {
-    display: none !important;
 }
 
 /* Mobile variant: larger tap target. */
