@@ -4704,3 +4704,236 @@ a:focus-visible, button:focus-visible {
     text-align: right;
     direction: rtl;
 }
+
+/* ──────────────────────────────────────────────────────────
+   Google Translate widget
+   Hide the intrusive banner/tooltip and style the dropdown
+   to blend with the nav.
+   ────────────────────────────────────────────────────────── */
+
+/* Hide the top banner iframe Google injects.
+   Google now uses obfuscated classes like .VIpgJd-ZVi9od-ORHb-OEVmcd
+   for the top banner, in addition to legacy .goog-te-banner-frame. */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.VIpgJd-ZVi9od-ORHb-OEVmcd,
+iframe[class*="VIpgJd-ZVi9od-ORHb"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+body {
+    top: 0 !important;
+    position: static !important;
+}
+html {
+    margin-top: 0 !important;
+}
+
+/* Hide the tooltip balloon that pops over translated text. */
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight {
+    display: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Hide the "powered by Google" branding and image inside the widget. */
+#google_translate_element .goog-logo-link,
+#google_translate_element_mobile .goog-logo-link,
+#google_translate_element img,
+#google_translate_element_mobile img {
+    display: none !important;
+}
+#google_translate_element .goog-te-gadget,
+#google_translate_element_mobile .goog-te-gadget {
+    font-size: 0 !important;   /* hides the trailing "Powered by" text nodes */
+    color: transparent !important;
+}
+
+/* Style the language <select> inside the widget. */
+#google_translate_element .goog-te-combo,
+#google_translate_element_mobile .goog-te-combo {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background: transparent;
+    border: 1px solid var(--color-sage);
+    border-radius: var(--radius-sm, 8px);
+    padding: 6px 10px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    margin: 0;
+}
+#google_translate_element .goog-te-combo:hover,
+#google_translate_element_mobile .goog-te-combo:hover {
+    border-color: var(--color-terracotta);
+    background: rgba(196, 132, 108, 0.05);
+}
+#google_translate_element .goog-te-combo:focus,
+#google_translate_element_mobile .goog-te-combo:focus {
+    border-color: var(--color-terracotta);
+    box-shadow: 0 0 0 2px rgba(196, 132, 108, 0.15);
+}
+
+/* Language-switch loading overlay. Shown while Google Translate re-renders
+   the page after a language change so content doesn't appear to "jump". */
+.lang-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: var(--color-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    pointer-events: none;
+}
+.lang-loader.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+/* When initiating a switch, show loader INSTANTLY — no transition — so the
+   user never sees a half-faded overlay before the page reloads. */
+html.lang-switching .lang-loader {
+    transition: none;
+}
+/* Three-dot "Join the Dots" loading animation: sage → amber → terracotta,
+   pulsing in sequence with a connecting line that sweeps across. */
+.lang-loader-dots {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+}
+.lang-loader-dots .lang-loader-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    opacity: 0.35;
+    transform: scale(0.9);
+    animation: lang-loader-dot-pulse 1.8s ease-in-out infinite;
+}
+.lang-loader-dots .lang-loader-dot:nth-child(1) {
+    background: var(--color-sage);
+    animation-delay: 0s;
+}
+.lang-loader-dots .lang-loader-dot:nth-child(2) {
+    background: var(--color-amber);
+    animation-delay: 0.3s;
+}
+.lang-loader-dots .lang-loader-dot:nth-child(3) {
+    background: var(--color-terracotta);
+    animation-delay: 0.6s;
+}
+/* Connecting line behind the dots, drawn left-to-right on loop. */
+.lang-loader-dots::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 9px;
+    right: 9px;
+    height: 1.5px;
+    background: linear-gradient(to right,
+        var(--color-sage) 0%,
+        var(--color-amber) 50%,
+        var(--color-terracotta) 100%);
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left center;
+    opacity: 0.4;
+    animation: lang-loader-line 1.8s ease-in-out infinite;
+    z-index: -1;
+}
+@keyframes lang-loader-dot-pulse {
+    0%, 100% { opacity: 0.35; transform: scale(0.9); }
+    40%      { opacity: 1;    transform: scale(1.15); }
+    70%      { opacity: 0.6;  transform: scale(1); }
+}
+@keyframes lang-loader-line {
+    0%   { transform: translateY(-50%) scaleX(0); opacity: 0.2; }
+    50%  { transform: translateY(-50%) scaleX(1); opacity: 0.55; }
+    100% { transform: translateY(-50%) scaleX(1); opacity: 0.2; }
+}
+.lang-loader-label {
+    font-family: var(--font-display), serif;
+    font-size: 1.1rem;
+    color: var(--color-sage-dark, var(--color-sage));
+    font-style: italic;
+    opacity: 0.75;
+    letter-spacing: 0.03em;
+}
+
+/* Shared native language <select> — used in both desktop nav and mobile menu.
+   Works with Google Translate's googtrans cookie for consistent behavior. */
+.lang-select {
+    font-family: var(--font-body), sans-serif;
+    color: var(--color-text);
+    background: var(--color-warm-white);
+    border: 1px solid var(--color-sage);
+    border-radius: var(--radius-sm, 8px);
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+}
+.lang-select:hover,
+.lang-select:focus {
+    border-color: var(--color-terracotta);
+    background: rgba(196, 132, 108, 0.05);
+}
+
+/* Desktop variant: compact, fits next to Register button. */
+.lang-select-desktop {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    max-width: 140px;
+}
+
+/* Hide the desktop select on viewports where the mobile nav takes over.
+   The nav collapses to a hamburger at 1200px (see .nav-mobile-toggle). */
+@media (max-width: 1200px) {
+    .lang-select-desktop {
+        display: none;
+    }
+}
+
+/* Dynamic nav overflow: if the translated nav links would collide with the right-side
+   buttons, JS adds .nav-force-hamburger to <html> and we fall back to the mobile nav
+   regardless of viewport width. */
+html.nav-force-hamburger .nav-center {
+    display: none !important;
+}
+html.nav-force-hamburger .nav-mobile-toggle {
+    display: flex !important;
+}
+html.nav-force-hamburger .lang-select-desktop {
+    display: none !important;
+}
+
+/* Mobile variant: larger tap target. */
+.lang-select-mobile {
+    font-size: 1rem;
+    padding: 10px 14px;
+    min-width: 200px;
+}
+
+/* Mobile menu overflow fix: make the menu scrollable so longer translations
+   and the language picker don't get clipped below the viewport on small screens. */
+.mobile-menu {
+    justify-content: flex-start !important;
+    padding-top: 90px !important;
+    padding-bottom: 40px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 18px !important;
+}
+.mobile-menu a {
+    text-align: center;
+    word-break: break-word;
+}

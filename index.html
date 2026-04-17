@@ -16,10 +16,58 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=3" />
+    <!-- Early language-switch loader setup. Must run before <body> paints,
+         otherwise the page briefly shows pre-translation content before the overlay. -->
+    <style>
+      html.lang-switching body > *:not(.lang-loader) {
+        visibility: hidden !important;
+      }
+      html.lang-switching .lang-loader {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: all !important;
+      }
+    </style>
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem('lang-switching') === '1') {
+            document.documentElement.classList.add('lang-switching');
+          }
+        } catch (e) { /* storage blocked */ }
+      })();
+    </script>
   </head>
 
   <body>
+  <div class="lang-loader" id="langLoader" aria-hidden="true" translate="no">
+    <div class="lang-loader-dots" aria-hidden="true">
+      <div class="lang-loader-dot"></div>
+      <div class="lang-loader-dot"></div>
+      <div class="lang-loader-dot"></div>
+    </div>
+    <div class="lang-loader-label notranslate" translate="no">Loading…</div>
+  </div>
+  <script>
+    // If the previous page initiated a language switch, keep the loader visible
+    // from first paint until Google Translate has finished re-rendering.
+    try {
+      if (sessionStorage.getItem('lang-switching') === '1') {
+        document.documentElement.classList.add('lang-switching');
+        // Mark loader active as soon as it exists in the DOM.
+        var _showLoader = function () {
+          var el = document.getElementById('langLoader');
+          if (el) el.classList.add('active');
+        };
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', _showLoader);
+        } else {
+          _showLoader();
+        }
+      }
+    } catch (e) { /* sessionStorage unavailable */ }
+  </script>
     <!-- Animated Background Canvas -->
     <canvas id="bgCanvas" class="bg-canvas"></canvas>
 
@@ -50,7 +98,7 @@
                 id="navExploreTrigger"
                 type="button"
               >
-                <span data-i18n="nav.home">Home</span>
+                <span>Home</span>
                 <svg
                   class="nav-dropdown-chevron"
                   viewBox="0 0 12 12"
@@ -66,42 +114,36 @@
                   href="#home"
                   class="nav-dropdown-item"
                   data-section="home"
-                  data-i18n="nav.home"
                   >Home</a
                 >
                 <a
                   href="#rhythm"
                   class="nav-dropdown-item"
                   data-section="rhythm"
-                  data-i18n="nav.schedule"
                   >Schedule</a
                 >
                 <a
                   href="#journey"
                   class="nav-dropdown-item"
                   data-section="journey"
-                  data-i18n="nav.journey"
                   >The Journey</a
                 >
                 <a
                   href="#pricing"
                   class="nav-dropdown-item"
                   data-section="pricing"
-                  data-i18n="nav.pricing"
                   >Pricing</a
                 >
                 <a
                   href="#compassion"
                   class="nav-dropdown-item"
                   data-section="compassion"
-                  data-i18n="nav.compassionCourse"
                   >Compassion Course</a
                 >
                 <a
                   href="#audience"
                   class="nav-dropdown-item"
                   data-section="audience"
-                  data-i18n="nav.whoIsThisFor"
                   >Who Is This For</a
                 >
               </div>
@@ -110,7 +152,7 @@
               <a
                 href="compassion-course.html"
                 class="nav-link nav-link--dropdown"
-                ><span data-i18n="nav.compassionCourseLabel"
+                ><span
                   >Compassion Course</span
                 >
                 <svg
@@ -126,19 +168,17 @@
                 <a
                   href="compassion-course.html"
                   class="nav-dropdown-item"
-                  data-i18n="nav.ccHindi"
                   >हिंदी — Hindi</a
                 >
                 <a
                   href="empathy-junction\compassion-course-english.html"
                   class="nav-dropdown-item"
-                  data-i18n="nav.ccEnglishSoon"
                   >English — English</a
                 >
               </div>
             </li>
             <li>
-              <a href="about.html" class="nav-link" data-i18n="nav.about"
+              <a href="about.html" class="nav-link"
                 >About Us</a
               >
             </li>
@@ -146,22 +186,26 @@
               <a
                 href="resources.html"
                 class="nav-link"
-                data-i18n="nav.resources"
                 >Resources</a
               >
             </li>
             <li>
-              <a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a>
+              <a href="blog.html" class="nav-link">Blog</a>
             </li>
           </ul>
         </div>
         <div class="nav-right">
-          <div class="lang-toggle">
-            <button class="lang-btn active" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="hi">हि</button>
-            <!-- <button class="lang-btn" data-lang="ur">اردو</button> -->
-          </div>
-          <a href="register.html" class="nav-cta" data-i18n="nav.join"
+          <select class="lang-select lang-select-desktop notranslate" translate="no" aria-label="Choose language" onchange="window._setSiteLang(this.value)">
+        <option value="/en/en">English</option>
+        <option value="/en/hi">हिन्दी (Hindi)</option>
+        <option value="/en/ur">اردو (Urdu)</option>
+        <option value="/en/bn">বাংলা (Bengali)</option>
+        <option value="/en/gu">ગુજરાતી (Gujarati)</option>
+        <option value="/en/kn">ಕನ್ನಡ (Kannada)</option>
+        <option value="/en/mr">मराठी (Marathi)</option>
+        <option value="/en/ta">தமிழ் (Tamil)</option>
+      </select>
+          <a href="register.html" class="nav-cta"
             >Register</a
           >
         </div>
@@ -177,30 +221,35 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-      <span class="mobile-menu-label" data-i18n="nav.home">Home</span>
+      <span class="mobile-menu-label">Home</span>
       <div class="mobile-explore-group">
-        <a href="#rhythm" data-i18n="nav.schedule">Schedule</a>
-        <a href="#journey" data-i18n="nav.journey">The Journey</a>
-        <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
-        <a href="#compassion" data-i18n="nav.compassionCourse"
+        <a href="#rhythm">Schedule</a>
+        <a href="#journey">The Journey</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#compassion"
           >Compassion Course</a
         >
-        <a href="#audience" data-i18n="nav.whoIsThisFor">Who Is This For</a>
+        <a href="#audience">Who Is This For</a>
       </div>
-      <a href="compassion-course.html" data-i18n="nav.compassionCourse"
+      <a href="compassion-course.html"
         >Compassion Course</a
       >
-      <a href="about.html" data-i18n="nav.about">About Us</a>
-      <a href="resources.html" data-i18n="nav.resources">Resources</a>
-      <a href="blog.html" data-i18n="nav.blog">Blog</a>
-      <a href="register.html" class="btn btn-primary" data-i18n="nav.join"
+      <a href="about.html">About Us</a>
+      <a href="resources.html">Resources</a>
+      <a href="blog.html">Blog</a>
+      <a href="register.html" class="btn btn-primary"
         >Register</a
       >
-      <div class="lang-toggle mobile-lang-toggle">
-        <button class="lang-btn active" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="hi">हि</button>
-        <button class="lang-btn" data-lang="ur">اردو</button>
-      </div>
+      <select class="lang-select lang-select-mobile notranslate" translate="no" aria-label="Choose language" onchange="window._setSiteLang(this.value)">
+        <option value="/en/en">English</option>
+        <option value="/en/hi">हिन्दी (Hindi)</option>
+        <option value="/en/ur">اردو (Urdu)</option>
+        <option value="/en/bn">বাংলা (Bengali)</option>
+        <option value="/en/gu">ગુજરાતી (Gujarati)</option>
+        <option value="/en/kn">ಕನ್ನಡ (Kannada)</option>
+        <option value="/en/mr">मराठी (Marathi)</option>
+        <option value="/en/ta">தமிழ் (Tamil)</option>
+      </select>
     </div>
 
     <!-- Hero Section -->
@@ -220,7 +269,7 @@
         aria-label="Open events panel"
       >
         <div class="events-glance-header">
-          <span class="events-glance-label" data-i18n="events.label"
+          <span class="events-glance-label"
             >Events</span
           >
           <svg
@@ -286,13 +335,13 @@
           <span class="logo-letter">T</span>
           <span class="logo-letter">S</span>
         </div>
-        <p class="hero-tagline" data-i18n="hero.tagline">
+        <p class="hero-tagline">
           Connecting Hearts with Nonviolent Communication.
         </p>
         <p class="hero-tagline">
           A Language for Life.
         </p>
-        <p class="journey-intro" data-i18n="hero.intro">
+        <p class="journey-intro">
             A supportive community space to arrive as you are, connect the dots,
             and grow in compassion — through playful and joyful practices that
             bring you home to yourself
@@ -303,7 +352,6 @@
           <a
             href="/sangam.html"
             class="poster-link"
-            data-i18n="hero.posterLink"
           >
             <img
               src="/public/sangam-poster.jpeg"
@@ -321,7 +369,7 @@
               >
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
-              <span class="poster-text" data-i18n="hero.posterText"
+              <span class="poster-text"
                 >Explore Course</span
               >
             </div>
@@ -350,7 +398,7 @@
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-              <span data-i18n="voyage.hint">drag to sail</span>
+              <span>drag to sail</span>
             </div>
           </div>
         </div>
@@ -367,7 +415,7 @@
               <rect x="3" y="4" width="18" height="18" rx="2" />
               <path d="M16 2v4M8 2v4M3 10h18" />
             </svg>
-            <span data-i18n="hero.meta1">Workshop and practice</span>
+            <span>Workshop and practice</span>
           </span>
           <span class="hero-meta-item">
             <svg
@@ -381,7 +429,7 @@
               <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
               <path d="M12 19v3" />
             </svg>
-            <span data-i18n="hero.meta2">Hindi & English</span>
+            <span>Hindi & English</span>
           </span>
           <span class="hero-meta-item">
             <svg
@@ -394,7 +442,7 @@
               <rect x="2" y="3" width="20" height="14" rx="2" />
               <path d="M8 21h8M12 17v4" />
             </svg>
-            <span data-i18n="hero.meta3">Online / Hybrid</span>
+            <span>Online / Hybrid</span>
           </span>
         </div>
       </div>
@@ -403,7 +451,7 @@
     <!-- Events Drawer -->
     <aside class="events-drawer" id="eventsDrawer">
       <div class="events-drawer-header">
-        <h3 class="events-drawer-title" data-i18n="events.drawerTitle">
+        <h3 class="events-drawer-title">
           What's Coming Up
         </h3>
         <button
@@ -425,7 +473,7 @@
       <div class="events-drawer-body">
         <div class="events-upcoming" id="eventsUpcoming"></div>
         <div class="events-section-divider" id="eventsSectionDivider">
-          <span data-i18n="events.alwaysAvailable">Always Available</span>
+          <span>Always Available</span>
         </div>
         <div class="events-upcoming" id="eventsUpcoming"></div>
         <div class="events-persistent" id="eventsPersistent"></div>
@@ -449,15 +497,15 @@
               <rect x="3" y="4" width="18" height="18" rx="2" />
               <path d="M16 2v4M8 2v4M3 10h18" />
             </svg>
-            <span data-i18n="rhythm.badge">Our Monthly Rhythm</span>
+            <span>Our Monthly Rhythm</span>
           </span>
-          <h2 class="section-title" data-i18n="rhythm.title">
+          <h2 class="section-title">
             Fridays made meaningful
           </h2>
         </div>
 
         <div class="time-slots-wrapper animate-on-scroll">
-          <!-- <div class="time-slots-label" data-i18n="rhythm.timeSlotsLabel">Choose Your Time</div> -->
+          <!-- <div class="time-slots-label">Choose Your Time</div> -->
           <div class="time-slots">
             <div class="time-slot">
               <svg
@@ -474,7 +522,7 @@
                 />
                 <circle cx="12" cy="12" r="9" />
               </svg>
-              <span data-i18n="rhythm.timeSlot">6:00 – 7:30 PM </span>
+              <span>6:00 – 7:30 PM </span>
             </div>
           </div>
         </div>
@@ -499,19 +547,19 @@
                 />
               </svg>
             </div>
-            <div class="schedule-card-week" data-i18n="rhythm.week1">
+            <div class="schedule-card-week">
               Week 1
             </div>
-            <p class="schedule-card-day" data-i18n="rhythm.card1.day">
+            <p class="schedule-card-day">
               1st Friday
             </p>
-            <h3 class="schedule-card-title" data-i18n="rhythm.card1.title">
+            <h3 class="schedule-card-title">
               Listening Circle
             </h3>
-            <span class="schedule-card-badge" data-i18n="rhythm.card1.badge"
+            <span class="schedule-card-badge"
               >FREE</span
             >
-            <p class="schedule-card-text" data-i18n="rhythm.card1.text">
+            <p class="schedule-card-text">
               January to June, First Friday every month
             </p>
           </div>
@@ -541,20 +589,20 @@
                 />
               </svg>
             </div>
-            <div class="schedule-card-week" data-i18n="rhythm.lastWeek">
+            <div class="schedule-card-week">
               Week 2
             </div>
-            <p class="schedule-card-day" data-i18n="rhythm.card2.day">
+            <p class="schedule-card-day">
               2nd Friday
             </p>
-            <h3 class="schedule-card-title" data-i18n="rhythm.card3.title">
+            <h3 class="schedule-card-title">
               Empathy Café
             </h3>
-            <span class="schedule-card-badge" data-i18n="rhythm.card1.badge"
+            <span class="schedule-card-badge"
               >FREE</span
             >
 
-            <p class="schedule-card-text" data-i18n="rhythm.card3.text">
+            <p class="schedule-card-text">
               January to June, Second Friday every month.
             </p>
           </div>
@@ -583,20 +631,20 @@
                 />
               </svg>
             </div>
-            <div class="schedule-card-week" data-i18n="rhythm.weeks24">
+            <div class="schedule-card-week">
               Weeks 3–4
             </div>
-            <p class="schedule-card-day" data-i18n="rhythm.card2.day">
+            <p class="schedule-card-day">
               3rd & 4thFriday
             </p>
-            <h3 class="schedule-card-title" data-i18n="rhythm.card2.title">
+            <h3 class="schedule-card-title">
               Monthly Themed Exploration
             </h3>
-            <span class="schedule-card-badge" data-i18n="rhythm.card2.badge"
+            <span class="schedule-card-badge"
               >PAID</span
             >
 
-            <p class="schedule-card-text" data-i18n="rhythm.card2.text">
+            <p class="schedule-card-text">
               January to June 3rd and 4th Friday every month experiential
               workshops on chosen themes
             </p>
@@ -621,12 +669,12 @@
               <path d="M2 17l10 5 10-5" />
               <path d="M2 12l10 5 10-5" />
             </svg>
-            <span data-i18n="journey.badge">The Journey</span>
+            <span>The Journey</span>
           </span>
-          <h2 class="section-title" data-i18n="journey.title">
+          <h2 class="section-title">
             Your Path to Connection
           </h2>
-          <p class="section-subtitle" data-i18n="journey.subtitle">
+          <p class="section-subtitle">
             Each step is an invitation—not a requirement. Move at your own pace.
           </p>
         </div>
@@ -686,29 +734,26 @@
                 <div>
                   <span
                     class="journey-card-badge"
-                    data-i18n="journey.card1.badge"
                     >Free</span
                   >
                   <h3
                     class="journey-card-title"
-                    data-i18n="journey.card1.title"
                   >
                     The Listening Circle
                   </h3>
                   <p
                     class="journey-card-subtitle"
-                    data-i18n="journey.card1.subtitle"
                   >
                     Cultivating Awareness
                   </p>
                 </div>
               </div>
-              <p class="journey-card-text" data-i18n="journey.card1.text">
+              <p class="journey-card-text">
                 jan to June every year; First Friday of the month, an exciting,
                 playful space to explore different thoughts, beliefs,
                 judgements, assumptions and opinions on any given topic.
               </p>
-              <p class="journey-card-theme" data-i18n="journey.card1.theme">
+              <p class="journey-card-theme">
                 Theme: Deep listening and presence
               </p>
               <span class="journey-card-number">01</span>
@@ -744,29 +789,26 @@
                 <div>
                   <span
                     class="journey-card-badge"
-                    data-i18n="journey.card3.badge"
                     >Free</span
                   >
                   <h3
                     class="journey-card-title"
-                    data-i18n="journey.card3.title"
                   >
                     The Empathy Café
                   </h3>
                   <p
                     class="journey-card-subtitle"
-                    data-i18n="journey.card3.subtitle"
                   >
                     Compassion into Community
                   </p>
                 </div>
               </div>
-              <p class="journey-card-text" data-i18n="journey.card3.text">
+              <p class="journey-card-text">
                 jan to June every year; Second Friday of the month, a calm
                 reflective space to practice listening to each other with
                 empathy and without judgement on any given topic.
               </p>
-              <p class="journey-card-theme" data-i18n="journey.card3.theme">
+              <p class="journey-card-theme">
                 Theme: Shared stories and emotional connection
               </p>
               <span class="journey-card-number">02</span>
@@ -829,30 +871,27 @@
                 <div>
                   <span
                     class="journey-card-badge"
-                    data-i18n="journey.card4.badge"
                     >Integration | Paid</span
                   >
                   <h3
                     class="journey-card-title"
-                    data-i18n="journey.card4.title"
                   >
                     Join the Dots
                   </h3>
                   <p
                     class="journey-card-subtitle"
-                    data-i18n="journey.card4.subtitle"
                   >
                     The Complete Picture
                   </p>
                 </div>
               </div>
-              <p class="journey-card-text" data-i18n="journey.card4.text">
+              <p class="journey-card-text">
                 January to June | Every Friday.A meta-space to join the dots.1st
                 & 2nd: Free listening and empathy circles.3rd & 4th: Paid
                 Thematic NVC explorations to integrate learning.Together, these
                 sessions create a connected ecosystem of emotional intelligence.
               </p>
-              <p class="journey-card-theme" data-i18n="journey.card4.theme">
+              <p class="journey-card-theme">
                 Theme: Integration and synthesis
               </p>
               <span class="journey-card-number">03</span>
@@ -881,30 +920,27 @@
                 <div>
                   <span
                     class="journey-card-badge"
-                    data-i18n="journey.card2.badge"
                     >Deep Practice</span
                   >
                   <h3
                     class="journey-card-title"
-                    data-i18n="journey.card2.title"
                   >
                     The Compassion Course
                   </h3>
                   <p
                     class="journey-card-subtitle"
-                    data-i18n="journey.card2.subtitle"
                   >
                     Awareness into Action
                   </p>
                 </div>
               </div>
-              <p class="journey-card-text" data-i18n="journey.card2.text">
+              <p class="journey-card-text">
                 Building on listening, empathy and awareness, learn how to
                 translate reactions to response. A 52-week immersion where
                 understanding becomes caring action—not just something you know,
                 but something you embody.
               </p>
-              <p class="journey-card-theme" data-i18n="journey.card2.theme">
+              <p class="journey-card-theme">
                 Theme: Understanding and responding with care
               </p>
               <span class="journey-card-number">04</span>
@@ -931,12 +967,12 @@
               <path d="M2 17l10 5 10-5" />
               <path d="M2 12l10 5 10-5" />
             </svg>
-            <span data-i18n="pricing.badge">Ways to Join</span>
+            <span>Ways to Join</span>
           </span>
-          <h2 class="section-title" data-i18n="pricing.title">
+          <h2 class="section-title">
             Choose Your Path
           </h2>
-          <p class="section-subtitle" data-i18n="pricing.subtitle">
+          <p class="section-subtitle">
             Flexible options to support your journey
           </p>
         </div>
@@ -960,36 +996,34 @@
                   />
                 </svg>
               </div>
-              <h3 class="pricing-name" data-i18n="pricing.free.name">
+              <h3 class="pricing-name">
                 Listening & Empathy Circles
               </h3>
-              <div class="pricing-amount free" data-i18n="pricing.free.amount">
+              <div class="pricing-amount free">
                 Free
               </div>
               <p
                 class="pricing-description"
-                data-i18n="pricing.free.description"
               >
                 1st and 2nd Fridays every month
               </p>
-              <div class="pricing-period" data-i18n="pricing.free.period">
+              <div class="pricing-period">
                 Always open, always free
               </div>
               <div class="pricing-divider"></div>
               <ul class="pricing-features">
-                <li data-i18n="pricing.free.f1">
+                <li>
                   Ist Friday: Topic-based discussion for 1 hour
                 </li>
-                <li data-i18n="pricing.free.f2">
+                <li>
                   2nd Friday: Empathy Circle for 1 hour
                 </li>
-                <li data-i18n="pricing.free.f3">English & Hindi</li>
-                <li data-i18n="pricing.free.f4">No commitment required</li>
+                <li>English & Hindi</li>
+                <li>No commitment required</li>
               </ul>
               <a
                 href="register.html"
                 class="btn btn-secondary"
-                data-i18n="pricing.free.cta"
                 >Join Free</a
               >
             </div>
@@ -1020,42 +1054,41 @@
                   />
                 </svg>
               </div>
-              <h3 class="pricing-name" data-i18n="pricing.weekly.name">
+              <h3 class="pricing-name">
                 Monthly Pass
               </h3>
-              <div class="pricing-amount" data-i18n="pricing.weekly.amount">
+              <div class="pricing-amount">
                 ₹500
               </div>
-              <div class="pricing-period" data-i18n="pricing.weekly.period">
+              <div class="pricing-period">
                 All Fridays for any month of choice.
               </div>
               <div class="pricing-divider"></div>
               <ul class="pricing-features">
-                <li data-i18n="pricing.weekly.f1">
+                <li>
                   3rd, 4th Fridays, for one month
                 </li>
-                <li data-i18n="pricing.weekly.f2">
+                <li>
                   Two Basic NVC / Thematic workshops of 1.5 hours each
                 </li>
-                <li data-i18n="pricing.weekly.f3">
+                <li>
                   All Listening Circle of 1 hour each
                 </li>
-                <li data-i18n="pricing.weekly.f4">
+                <li>
                   All Empathy Circles of 1 hour each
                 </li>
-                <li data-i18n="pricing.weekly.f5">English & Hindi</li>
+                <li>English & Hindi</li>
               </ul>
               <a
                 href="register.html"
                 class="btn btn-primary"
-                data-i18n="pricing.weekly.cta"
                 >Get Started</a
               >
             </div>
           </div>
 
           <div class="pricing-card featured animate-on-scroll">
-            <span class="pricing-popular" data-i18n="pricing.monthly.popular"
+            <span class="pricing-popular"
               >Best Value</span
             >
             <div class="pricing-card-inner">
@@ -1070,38 +1103,37 @@
                   />
                 </svg>
               </div>
-              <h3 class="pricing-name" data-i18n="pricing.monthly.name">
+              <h3 class="pricing-name">
                 Quarterly Pass
               </h3>
-              <div class="pricing-amount" data-i18n="pricing.monthly.amount">
+              <div class="pricing-amount">
                 ₹1200/- only
               </div>
-              <div class="pricing-period" data-i18n="pricing.monthly.period">
+              <div class="pricing-period">
                 Six workshops any three months of choice. Save ₹600/-
               </div>
               <div class="pricing-divider"></div>
               <ul class="pricing-features">
-                <li data-i18n="pricing.monthly.f1">
+                <li>
                   All Fridays for three months
                 </li>
-                <li data-i18n="pricing.monthly.f2">
+                <li>
                   Six Basic NVC/ thematic workshops of of 1.5 hours each
                 </li>
-                <li data-i18n="pricing.monthly.f3">
+                <li>
                   All Listening Circles ( 1st Fridays) of 1 hour each
                 </li>
-                <li data-i18n="pricing.monthly.f4">
+                <li>
                   All Empathy Circles (2nd Fridays) of 1 hour each
                 </li>
-                <li data-i18n="pricing.monthly.f5">English & Hindi</li>
-                <li data-i18n="pricing.monthly.f6">
+                <li>English & Hindi</li>
+                <li>
                   Unlocks 50% off on the Compassion Course
                 </li>
               </ul>
               <a
                 href="register.html"
                 class="btn btn-warm"
-                data-i18n="pricing.monthly.cta"
                 >Choose This</a
               >
             </div>
@@ -1128,17 +1160,17 @@
               <path d="M2 12h20" />
               <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20" />
             </svg>
-            <span data-i18n="compassion.badge"
+            <span
               >Deeper Journey (Optional Path)</span
             >
           </span>
-          <h2 class="compassion-title" data-i18n="compassion.title">
+          <h2 class="compassion-title">
             The Compassion Course
           </h2>
-          <p class="compassion-duration" data-i18n="compassion.duration">
+          <p class="compassion-duration">
             52 Weeks with Thom Bond (International NVC Trainer)
           </p>
-          <p class="compassion-text" data-i18n="compassion.text">
+          <p class="compassion-text">
             The Compassion Course (52 Weeks) by Thom Bond(International NVC
             Trainer). A year-long transformative journey that begins every July—
             where empathy becomes not just something you practice, but something
@@ -1148,7 +1180,6 @@
           <div class="compassion-pricing">
             <span
               class="compassion-original"
-              data-i18n="compassion.originalPrice"
               >₹16,000</span
             >
             <svg
@@ -1160,18 +1191,17 @@
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-            <span class="compassion-special" data-i18n="compassion.specialPrice"
+            <span class="compassion-special"
               >₹8,000</span
             >
-            <span class="compassion-savings" data-i18n="compassion.savings"
+            <span class="compassion-savings"
               >Save ₹8,000</span
             >
           </div>
-          <!-- <p class="compassion-discount-note" data-i18n="compassion.discountNote">₹6,000 rate is exclusive to Monthly Pass holders. Buy any single Monthly Pass to unlock this 50% discount permanently.</p> -->
+          <!-- <p class="compassion-discount-note">₹6,000 rate is exclusive to Monthly Pass holders. Buy any single Monthly Pass to unlock this 50% discount permanently.</p> -->
           <a
             href="compassion-course.html"
             class="btn btn-warm"
-            data-i18n="compassion.cta"
             >Explore the Compassion Course</a
           >
         </div>
@@ -1196,9 +1226,9 @@
               <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
               <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
-            <span data-i18n="audience.badge">Who Is This For?</span>
+            <span>Who Is This For?</span>
           </span>
-          <h2 class="section-title" data-i18n="audience.title">
+          <h2 class="section-title">
             You Belong Here If...
           </h2>
         </div>
@@ -1219,7 +1249,7 @@
                 />
               </svg>
             </div>
-            <span class="audience-text" data-i18n="audience.item1"
+            <span class="audience-text"
               >Navigating love, conflict, or transitions</span
             >
           </div>
@@ -1255,7 +1285,7 @@
                 />
               </svg>
             </div>
-            <span class="audience-text" data-i18n="audience.item2"
+            <span class="audience-text"
               >Couples & families seeking deeper connection</span
             >
           </div>
@@ -1277,7 +1307,7 @@
                 <path d="M16 16v6" stroke="currentColor" stroke-width="2" />
               </svg>
             </div>
-            <span class="audience-text" data-i18n="audience.item3"
+            <span class="audience-text"
               >Caregivers, teachers, and leaders</span
             >
           </div>
@@ -1291,7 +1321,7 @@
                 />
               </svg>
             </div>
-            <span class="audience-text" data-i18n="audience.item4"
+            <span class="audience-text"
               >Army families & community workers</span
             >
           </div>
@@ -1319,7 +1349,7 @@
                 />
               </svg>
             </div>
-            <span class="audience-text" data-i18n="audience.item5"
+            <span class="audience-text"
               >Anyone longing to be heard</span
             >
           </div>
@@ -1346,7 +1376,7 @@
                 <path d="M16 12v8" stroke="currentColor" stroke-width="2" />
               </svg>
             </div>
-            <span class="audience-text" data-i18n="audience.item6"
+            <span class="audience-text"
               >Those learning to listen with empathy</span
             >
           </div>
@@ -1362,13 +1392,13 @@
       </div>
       <div class="container">
         <div class="cta-content animate-on-scroll">
-          <h2 data-i18n="cta.title">Come Home to Yourself</h2>
+          <h2>Come Home to Yourself</h2>
           <div class="cta-text">
-            <p data-i18n="cta.line1">Come to Join the Dots.</p>
-            <p data-i18n="cta.line2">Sit in the Listening Circle.</p>
-            <p data-i18n="cta.line3">Find your map in Join the Dots.</p>
-            <p data-i18n="cta.line4">Warm yourself in the Empathy Café.</p>
-            <p data-i18n="cta.line5">And slowly, come home to yourself.</p>
+            <p>Come to Join the Dots.</p>
+            <p>Sit in the Listening Circle.</p>
+            <p>Find your map in Join the Dots.</p>
+            <p>Warm yourself in the Empathy Café.</p>
+            <p>And slowly, come home to yourself.</p>
           </div>
           <div class="cta-buttons">
             <a
@@ -1382,18 +1412,16 @@
                   d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
                 />
               </svg>
-              <span data-i18n="cta.whatsapp">Talk to Us on WhatsApp</span>
+              <span>Talk to Us on WhatsApp</span>
             </a>
             <a
               href="register.html"
               class="btn btn-secondary"
-              data-i18n="cta.register"
               >Register for This Month</a
             >
             <a
               href="register.html"
               class="btn btn-warm"
-              data-i18n="cta.joinFree"
               >Join the Free Listening Circle</a
             >
           </div>
@@ -1432,7 +1460,7 @@
                 <span class="logo-letter">S</span>
               </div>
             </h3>
-            <p data-i18n="footer.description" class="footer-description">
+            <p class="footer-description">
               A listening-based wellbeing space where emotions are understood,
               relationships are gently healed, and awareness slowly becomes a
               way of living.
@@ -1440,50 +1468,49 @@
           </div>
           <div class="footer-links-row">
             <div class="footer-links">
-              <h4 data-i18n="footer.journey">Journey</h4>
+              <h4>Journey</h4>
               <ul>
                 <li>
-                  <a href="#journey" data-i18n="footer.yourPath"
+                  <a href="#journey"
                     >Your Path to Connection</a
                   >
                 </li>
                 <li>
                   <a
                     href="compassion-course.html"
-                    data-i18n="footer.compassionCourse"
                     >Compassion Course</a
                   >
                 </li>
                 <li>
-                  <a href="resources.html" data-i18n="nav.resources"
+                  <a href="resources.html"
                     >Resources</a
                   >
                 </li>
               </ul>
             </div>
             <div class="footer-links">
-              <h4 data-i18n="footer.info">Information</h4>
+              <h4>Information</h4>
               <ul>
                 <li>
-                  <a href="#rhythm" data-i18n="footer.schedule">Schedule</a>
+                  <a href="#rhythm">Schedule</a>
                 </li>
                 <li>
-                  <a href="#pricing" data-i18n="footer.pricing">Pricing</a>
+                  <a href="#pricing">Pricing</a>
                 </li>
-                <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+                <li><a href="about.html">About Us</a></li>
               </ul>
             </div>
             <div class="footer-links">
-              <h4 data-i18n="footer.connect">Connect</h4>
+              <h4>Connect</h4>
               <ul>
                 <li>
-                  <a href="contact.html" data-i18n="footer.contactUs"
+                  <a href="contact.html"
                     >Contact Us</a
                   >
                 </li>
-                <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+                <li><a href="blog.html">Blog</a></li>
                 <li>
-                  <a href="register.html" data-i18n="footer.registerNow"
+                  <a href="register.html"
                     >Register Now</a
                   >
                 </li>
@@ -1494,8 +1521,8 @@
         <div class="footer-bottom">
           <p>
             © 2025 Join the Dots.
-            <span data-i18n="footer.madeWith">Made with care</span>
-            <span data-i18n="footer.forThose"
+            <span>Made with care</span>
+            <span
               >for those seeking connection.</span
             >
           </p>
@@ -1504,7 +1531,146 @@
     </footer>
 
     <script src="data/events.js"></script>
-    <script src="animations.js"></script>
-    <script src="translations.js"></script>
+    <script src="animations.js?v=3"></script>
+    <!-- Google Translate Widget -->
+    <script>
+      // Google Translate requires this callback to exist even though we're using
+      // native <select> elements for the UI. It also needs a hidden container to
+      // init into; without it, the script emits console errors. The translation
+      // itself is driven by the googtrans cookie, not by this widget's UI.
+      function googleTranslateElementInit() {
+        var hidden = document.getElementById('google_translate_hidden');
+        if (hidden) {
+          new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_hidden');
+        }
+      }
+      // Language picker: writes the googtrans cookie and reloads so Google
+      // Translate applies the new target language on next load. The cookie is
+      // path=/ so the choice persists across every page. A loading overlay
+      // covers the page during the reload/re-translate so content doesn't jump.
+      // When navigating between pages while a non-English translation is active,
+      // show the same loading overlay so Google Translate has time to re-apply
+      // on the new page without visible content shift.
+      document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest ? e.target.closest('a[href]') : null;
+          if (!a) return;
+          // Skip: modifier-click, new-tab clicks, non-left-button clicks, default-prevented.
+          if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          var href = a.getAttribute('href');
+          if (!href) return;
+          // Skip anchors, external links, downloads, and explicit new-tabs.
+          if (href.charAt(0) === '#') return;
+          if (a.target && a.target !== '_self') return;
+          if (a.hasAttribute('download')) return;
+          try {
+            var dest = new URL(a.href, location.href);
+            if (dest.origin !== location.origin) return;
+            // Same-page hash only — skip.
+            if (dest.pathname === location.pathname && dest.hash && !dest.search) return;
+          } catch (err) { return; }
+          // Only show loader when a non-English translation is active.
+          var m = /googtrans=\/en\/([a-z]+)/.exec(document.cookie);
+          if (!m || m[1] === 'en') return;
+          try { sessionStorage.setItem('lang-switching', '1'); } catch (err) {}
+          document.documentElement.classList.add('lang-switching');
+          var loader = document.getElementById('langLoader');
+          if (loader) loader.classList.add('active');
+        }, true);
+      });
+      window._setSiteLang = function (value) {
+        try {
+          document.cookie = 'googtrans=' + value + '; path=/';
+          document.cookie = 'googtrans=' + value + '; path=/; domain=.' + location.hostname;
+          sessionStorage.setItem('lang-switching', '1');
+        } catch (e) { /* storage disabled */ }
+        // Add the class so CSS forces the loader to full-opacity *instantly*
+        // (no fade), hiding the current page before reload tears down the DOM.
+        document.documentElement.classList.add('lang-switching');
+        var loader = document.getElementById('langLoader');
+        if (loader) loader.classList.add('active');
+        // Two rAFs guarantee the browser has painted the overlay before we reload.
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { location.reload(); });
+        });
+      };
+      // Dynamic nav overflow: measure the visual gap between the three flex
+      // children of .nav-inner (logo / center / right). Since the nav uses
+      // justify-content: space-between, "free" space collapses to the gaps
+      // between items — that's what we need to measure, not the sum of widths.
+      (function setupNavOverflow() {
+        var html = document.documentElement;
+        var MIN_GAP = 40; // px of visible space we require between adjacent nav groups
+        function check() {
+          html.classList.remove('nav-force-hamburger');
+          requestAnimationFrame(function () {
+            var nav = document.querySelector('.nav-inner');
+            var logo = document.querySelector('.nav-logo');
+            var center = document.querySelector('.nav-center');
+            var right = document.querySelector('.nav-right');
+            if (!nav || !center || !right) return;
+            // If the existing media query already hides .nav-center, skip.
+            if (getComputedStyle(center).display === 'none') return;
+            var centerRect = center.getBoundingClientRect();
+            var rightRect = right.getBoundingClientRect();
+            var logoRect = logo ? logo.getBoundingClientRect() : null;
+            var gapLeft = logoRect ? (centerRect.left - logoRect.right) : Infinity;
+            var gapRight = rightRect.left - centerRect.right;
+            var minGap = Math.min(gapLeft, gapRight);
+            // If the center overflows horizontally within its own box, also trigger.
+            var centerOverflows = center.scrollWidth > center.clientWidth + 1;
+            if (minGap < MIN_GAP || centerOverflows) {
+              html.classList.add('nav-force-hamburger');
+            }
+          });
+        }
+        var timer;
+        function schedule() { clearTimeout(timer); timer = setTimeout(check, 60); }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', schedule);
+        } else {
+          schedule();
+        }
+        window.addEventListener('load', schedule);
+        window.addEventListener('resize', schedule);
+        // Google Translate swaps text async — re-check a beat after full load to
+        // catch the translated (often wider) labels.
+        setTimeout(schedule, 1500);
+        setTimeout(schedule, 3000);
+        // Re-check whenever Google Translate changes the page's translated state,
+        // since translated labels are typically a different width from English.
+        if (window.MutationObserver) {
+          new MutationObserver(schedule).observe(html, {
+            attributes: true, attributeFilter: ['class', 'lang']
+          });
+        }
+      })();
+      // Pre-select every <select.lang-select> to reflect the current cookie,
+      // and hide the language-switch loading overlay once the page is stable.
+      document.addEventListener('DOMContentLoaded', function () {
+        var m = /googtrans=(\/en\/[a-z]+)/.exec(document.cookie);
+        var value = m ? m[1] : '/en/en';
+        document.querySelectorAll('.lang-select').forEach(function (sel) {
+          sel.value = value;
+        });
+        // If we're mid language-switch, hide the loader on a short fixed timer.
+        // Waiting for Google Translate's own class to flip proved unreliable and slow,
+        // so we just give it a generous beat and reveal the page.
+        try {
+          if (sessionStorage.getItem('lang-switching') === '1') {
+            setTimeout(function () {
+              sessionStorage.removeItem('lang-switching');
+              document.documentElement.classList.remove('lang-switching');
+              var loader = document.getElementById('langLoader');
+              if (loader) loader.classList.remove('active');
+            }, 1200);
+          }
+        } catch (e) { /* storage disabled */ }
+      });
+    </script>
+    <script
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+      <div id="google_translate_hidden" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"></div>
   </body>
 </html>

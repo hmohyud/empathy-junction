@@ -9,9 +9,57 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="stylesheet" href="styles.css?v=3">
+<!-- Early language-switch loader setup. Must run before <body> paints,
+         otherwise the page briefly shows pre-translation content before the overlay. -->
+    <style>
+      html.lang-switching body > *:not(.lang-loader) {
+        visibility: hidden !important;
+      }
+      html.lang-switching .lang-loader {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: all !important;
+      }
+    </style>
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem('lang-switching') === '1') {
+            document.documentElement.classList.add('lang-switching');
+          }
+        } catch (e) { /* storage blocked */ }
+      })();
+    </script>
+  </head>
 <body>
+  <div class="lang-loader" id="langLoader" aria-hidden="true" translate="no">
+    <div class="lang-loader-dots" aria-hidden="true">
+      <div class="lang-loader-dot"></div>
+      <div class="lang-loader-dot"></div>
+      <div class="lang-loader-dot"></div>
+    </div>
+    <div class="lang-loader-label notranslate" translate="no">Loading…</div>
+  </div>
+  <script>
+    // If the previous page initiated a language switch, keep the loader visible
+    // from first paint until Google Translate has finished re-rendering.
+    try {
+      if (sessionStorage.getItem('lang-switching') === '1') {
+        document.documentElement.classList.add('lang-switching');
+        // Mark loader active as soon as it exists in the DOM.
+        var _showLoader = function () {
+          var el = document.getElementById('langLoader');
+          if (el) el.classList.add('active');
+        };
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', _showLoader);
+        } else {
+          _showLoader();
+        }
+      }
+    } catch (e) { /* sessionStorage unavailable */ }
+  </script>
     <canvas id="bgCanvas" class="bg-canvas"></canvas>
 
     <nav class="nav" id="nav">
@@ -35,35 +83,40 @@
             <div class="nav-center">
                 <ul class="nav-links">
                     <li class="nav-dropdown-wrap nav-explore-wrap">
-                        <a href="index.html" class="nav-link nav-link--dropdown nav-explore-trigger"><span data-i18n="nav.home">Home</span> <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+                        <a href="index.html" class="nav-link nav-link--dropdown nav-explore-trigger"><span>Home</span> <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
                         <div class="nav-dropdown nav-explore-dropdown">
-                            <a href="index.html" class="nav-dropdown-item" data-i18n="nav.home">Home</a>
-                            <a href="index.html#rhythm" class="nav-dropdown-item" data-i18n="nav.schedule">Schedule</a>
-                            <a href="index.html#journey" class="nav-dropdown-item" data-i18n="nav.journey">The Journey</a>
-                            <a href="index.html#pricing" class="nav-dropdown-item" data-i18n="nav.pricing">Pricing</a>
-                            <a href="index.html#compassion" class="nav-dropdown-item" data-i18n="nav.compassionCourse">Compassion Course</a>
-                            <a href="index.html#audience" class="nav-dropdown-item" data-i18n="nav.whoIsThisFor">Who Is This For</a>
+                            <a href="index.html" class="nav-dropdown-item">Home</a>
+                            <a href="index.html#rhythm" class="nav-dropdown-item">Schedule</a>
+                            <a href="index.html#journey" class="nav-dropdown-item">The Journey</a>
+                            <a href="index.html#pricing" class="nav-dropdown-item">Pricing</a>
+                            <a href="index.html#compassion" class="nav-dropdown-item">Compassion Course</a>
+                            <a href="index.html#audience" class="nav-dropdown-item">Who Is This For</a>
                         </div>
                     </li>
                     <li class="nav-dropdown-wrap">
-                        <a href="compassion-course.html" class="nav-link nav-link--dropdown"><span data-i18n="nav.compassionCourseLabel">Compassion Course</span> <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
+                        <a href="compassion-course.html" class="nav-link nav-link--dropdown"><span>Compassion Course</span> <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
                         <div class="nav-dropdown">
-                            <a href="compassion-course.html" class="nav-dropdown-item" data-i18n="nav.ccHindi">हिंदी — Hindi</a>
-                            <span class="nav-dropdown-item nav-dropdown-item--soon" data-i18n="nav.ccEnglishSoon">English — Coming Soon</span>
+                            <a href="compassion-course.html" class="nav-dropdown-item">हिंदी — Hindi</a>
+                            <span class="nav-dropdown-item nav-dropdown-item--soon">English — Coming Soon</span>
                         </div>
                     </li>
-                    <li><a href="about.html" class="nav-link" data-i18n="nav.about">About Us</a></li>
-                    <li><a href="resources.html" class="nav-link active" data-i18n="nav.resources">Resources</a></li>
-                    <li><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="resources.html" class="nav-link active">Resources</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
                 </ul>
             </div>
             <div class="nav-right">
-                <div class="lang-toggle">
-                    <button class="lang-btn active" data-lang="en">EN</button>
-                    <button class="lang-btn" data-lang="hi">हि</button>
-                    <!-- <button class="lang-btn" data-lang="ur">اردو</button> -->
-                </div>
-                <a href="register.html" class="nav-cta" data-i18n="nav.join">Register</a>
+                <select class="lang-select lang-select-desktop notranslate" translate="no" aria-label="Choose language" onchange="window._setSiteLang(this.value)">
+        <option value="/en/en">English</option>
+        <option value="/en/hi">हिन्दी (Hindi)</option>
+        <option value="/en/ur">اردو (Urdu)</option>
+        <option value="/en/bn">বাংলা (Bengali)</option>
+        <option value="/en/gu">ગુજરાતી (Gujarati)</option>
+        <option value="/en/kn">ಕನ್ನಡ (Kannada)</option>
+        <option value="/en/mr">मराठी (Marathi)</option>
+        <option value="/en/ta">தமிழ் (Tamil)</option>
+      </select>
+                <a href="register.html" class="nav-cta">Register</a>
             </div>
             <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
@@ -72,24 +125,29 @@
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
-        <span class="mobile-menu-label" data-i18n="nav.home">Home</span>
+        <span class="mobile-menu-label">Home</span>
         <div class="mobile-explore-group">
-            <a href="index.html#rhythm" data-i18n="nav.schedule">Schedule</a>
-            <a href="index.html#journey" data-i18n="nav.journey">The Journey</a>
-            <a href="index.html#pricing" data-i18n="nav.pricing">Pricing</a>
-            <a href="index.html#compassion" data-i18n="nav.compassionCourse">Compassion Course</a>
-            <a href="index.html#audience" data-i18n="nav.whoIsThisFor">Who Is This For</a>
+            <a href="index.html#rhythm">Schedule</a>
+            <a href="index.html#journey">The Journey</a>
+            <a href="index.html#pricing">Pricing</a>
+            <a href="index.html#compassion">Compassion Course</a>
+            <a href="index.html#audience">Who Is This For</a>
         </div>
-        <a href="compassion-course.html" data-i18n="nav.compassionCourse">Compassion Course</a>
-        <a href="about.html" data-i18n="nav.about">About Us</a>
-        <a href="resources.html" data-i18n="nav.resources">Resources</a>
-        <a href="blog.html" data-i18n="nav.blog">Blog</a>
-        <a href="register.html" class="btn btn-primary" data-i18n="nav.join">Register</a>
-        <div class="lang-toggle mobile-lang-toggle">
-            <button class="lang-btn active" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="hi">हि</button>
-            <button class="lang-btn" data-lang="ur">اردو</button>
-        </div>
+        <a href="compassion-course.html">Compassion Course</a>
+        <a href="about.html">About Us</a>
+        <a href="resources.html">Resources</a>
+        <a href="blog.html">Blog</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+        <select class="lang-select lang-select-mobile notranslate" translate="no" aria-label="Choose language" onchange="window._setSiteLang(this.value)">
+        <option value="/en/en">English</option>
+        <option value="/en/hi">हिन्दी (Hindi)</option>
+        <option value="/en/ur">اردو (Urdu)</option>
+        <option value="/en/bn">বাংলা (Bengali)</option>
+        <option value="/en/gu">ગુજરાતી (Gujarati)</option>
+        <option value="/en/kn">ಕನ್ನಡ (Kannada)</option>
+        <option value="/en/mr">मराठी (Marathi)</option>
+        <option value="/en/ta">தமிழ் (Tamil)</option>
+      </select>
     </div>
 
     <!-- Page Hero -->
@@ -105,10 +163,10 @@
                         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
                         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
                     </svg>
-                    <span data-i18n="resources.badge">Resources</span>
+                    <span>Resources</span>
                 </span>
-                <h1 data-i18n="resources.title">Nourish Your Journey</h1>
-                <p class="page-hero-subtitle" data-i18n="resources.subtitle">Videos, audio, and articles to deepen your practice</p>
+                <h1>Nourish Your Journey</h1>
+                <p class="page-hero-subtitle">Videos, audio, and articles to deepen your practice</p>
             </div>
         </div>
     </section>
@@ -119,24 +177,24 @@
 
             <!-- Filter Buttons -->
             <div class="resources-filters animate-on-scroll">
-                <button class="resource-filter-btn active" data-filter="all" data-i18n="resources.filterAll">All</button>
-                <button class="resource-filter-btn" data-filter="video" data-i18n="resources.filterVideo">
+                <button class="resource-filter-btn active" data-filter="all">All</button>
+                <button class="resource-filter-btn" data-filter="video">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5,3 19,12 5,21"/></svg>
                     Video
                 </button>
-                <button class="resource-filter-btn" data-filter="audio" data-i18n="resources.filterAudio">
+                <button class="resource-filter-btn" data-filter="audio">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
                     Audio
                 </button>
-                <button class="resource-filter-btn" data-filter="list" data-i18n="resources.filterList">
+                <button class="resource-filter-btn" data-filter="list">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
                     Lists
                 </button>
-                <button class="resource-filter-btn" data-filter="link" data-i18n="resources.filterLink">
+                <button class="resource-filter-btn" data-filter="link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                     Links
                 </button>
-                <button class="resource-filter-btn" data-filter="article" data-i18n="resources.filterArticle">
+                <button class="resource-filter-btn" data-filter="article">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
                     Articles
                 </button>
@@ -155,11 +213,11 @@
         </div>
         <div class="container">
             <div class="cta-content animate-on-scroll">
-                <h2 data-i18n="resources.cta.title">Continue Your Journey</h2>
-                <p data-i18n="resources.cta.text">Explore our programs and deepen your practice.</p>
+                <h2>Continue Your Journey</h2>
+                <p>Explore our programs and deepen your practice.</p>
                 <div class="cta-buttons">
-                    <a href="index.html#journey" class="btn btn-primary" data-i18n="resources.cta.button">View Programs</a>
-                    <a href="contact.html" class="btn btn-secondary" data-i18n="about.cta.contact">Contact Us</a>
+                    <a href="index.html#journey" class="btn btn-primary">View Programs</a>
+                    <a href="contact.html" class="btn btn-secondary">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -186,45 +244,184 @@
                             <span class="logo-letter">S</span>
                         </div>
                     </h3>
-                    <p data-i18n="footer.description">A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.</p>
+                    <p>A listening-based wellbeing space where emotions are understood, relationships are gently healed, and awareness slowly becomes a way of living.</p>
                 </div>
                 <div class="footer-links-row">
                 <div class="footer-links">
-                    <h4 data-i18n="footer.journey">Journey</h4>
+                    <h4>Journey</h4>
                     <ul>
-                        <li><a href="index.html#journey" data-i18n="footer.yourPath">Your Path to Connection</a></li>
-                        <li><a href="compassion-course.html" data-i18n="footer.compassionCourse">Compassion Course</a></li>
-                        <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+                        <li><a href="index.html#journey">Your Path to Connection</a></li>
+                        <li><a href="compassion-course.html">Compassion Course</a></li>
+                        <li><a href="resources.html">Resources</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4 data-i18n="footer.info">Information</h4>
+                    <h4>Information</h4>
                     <ul>
-                        <li><a href="index.html#rhythm" data-i18n="footer.schedule">Schedule</a></li>
-                        <li><a href="index.html#pricing" data-i18n="footer.pricing">Pricing</a></li>
-                        <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+                        <li><a href="index.html#rhythm">Schedule</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4 data-i18n="footer.connect">Connect</h4>
+                    <h4>Connect</h4>
                     <ul>
-                        <li><a href="contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
-                        <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
-                        <li><a href="register.html" data-i18n="footer.registerNow">Register Now</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="register.html">Register Now</a></li>
                     </ul>
                 </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Join the Dots. <span data-i18n="footer.madeWith">Made with care</span> <span data-i18n="footer.forThose">for those seeking connection.</span></p>
+                <p>&copy; 2025 Join the Dots. <span>Made with care</span> <span>for those seeking connection.</span></p>
             </div>
         </div>
     </footer>
 
     <script src="data/resources.js"></script>
     <script src="render-resources.js"></script>
-    <script src="animations.js"></script>
+    <script src="animations.js?v=3"></script>
     <script src="resources.js"></script>
-    <script src="translations.js"></script>
-</body>
+    <!-- Google Translate Widget -->
+    <script>
+      // Google Translate requires this callback to exist even though we're using
+      // native <select> elements for the UI. It also needs a hidden container to
+      // init into; without it, the script emits console errors. The translation
+      // itself is driven by the googtrans cookie, not by this widget's UI.
+      function googleTranslateElementInit() {
+        var hidden = document.getElementById('google_translate_hidden');
+        if (hidden) {
+          new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_hidden');
+        }
+      }
+      // Language picker: writes the googtrans cookie and reloads so Google
+      // Translate applies the new target language on next load. The cookie is
+      // path=/ so the choice persists across every page. A loading overlay
+      // covers the page during the reload/re-translate so content doesn't jump.
+      // When navigating between pages while a non-English translation is active,
+      // show the same loading overlay so Google Translate has time to re-apply
+      // on the new page without visible content shift.
+      document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest ? e.target.closest('a[href]') : null;
+          if (!a) return;
+          // Skip: modifier-click, new-tab clicks, non-left-button clicks, default-prevented.
+          if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          var href = a.getAttribute('href');
+          if (!href) return;
+          // Skip anchors, external links, downloads, and explicit new-tabs.
+          if (href.charAt(0) === '#') return;
+          if (a.target && a.target !== '_self') return;
+          if (a.hasAttribute('download')) return;
+          try {
+            var dest = new URL(a.href, location.href);
+            if (dest.origin !== location.origin) return;
+            // Same-page hash only — skip.
+            if (dest.pathname === location.pathname && dest.hash && !dest.search) return;
+          } catch (err) { return; }
+          // Only show loader when a non-English translation is active.
+          var m = /googtrans=\/en\/([a-z]+)/.exec(document.cookie);
+          if (!m || m[1] === 'en') return;
+          try { sessionStorage.setItem('lang-switching', '1'); } catch (err) {}
+          document.documentElement.classList.add('lang-switching');
+          var loader = document.getElementById('langLoader');
+          if (loader) loader.classList.add('active');
+        }, true);
+      });
+      window._setSiteLang = function (value) {
+        try {
+          document.cookie = 'googtrans=' + value + '; path=/';
+          document.cookie = 'googtrans=' + value + '; path=/; domain=.' + location.hostname;
+          sessionStorage.setItem('lang-switching', '1');
+        } catch (e) { /* storage disabled */ }
+        // Add the class so CSS forces the loader to full-opacity *instantly*
+        // (no fade), hiding the current page before reload tears down the DOM.
+        document.documentElement.classList.add('lang-switching');
+        var loader = document.getElementById('langLoader');
+        if (loader) loader.classList.add('active');
+        // Two rAFs guarantee the browser has painted the overlay before we reload.
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { location.reload(); });
+        });
+      };
+      // Dynamic nav overflow: measure the visual gap between the three flex
+      // children of .nav-inner (logo / center / right). Since the nav uses
+      // justify-content: space-between, "free" space collapses to the gaps
+      // between items — that's what we need to measure, not the sum of widths.
+      (function setupNavOverflow() {
+        var html = document.documentElement;
+        var MIN_GAP = 40; // px of visible space we require between adjacent nav groups
+        function check() {
+          html.classList.remove('nav-force-hamburger');
+          requestAnimationFrame(function () {
+            var nav = document.querySelector('.nav-inner');
+            var logo = document.querySelector('.nav-logo');
+            var center = document.querySelector('.nav-center');
+            var right = document.querySelector('.nav-right');
+            if (!nav || !center || !right) return;
+            // If the existing media query already hides .nav-center, skip.
+            if (getComputedStyle(center).display === 'none') return;
+            var centerRect = center.getBoundingClientRect();
+            var rightRect = right.getBoundingClientRect();
+            var logoRect = logo ? logo.getBoundingClientRect() : null;
+            var gapLeft = logoRect ? (centerRect.left - logoRect.right) : Infinity;
+            var gapRight = rightRect.left - centerRect.right;
+            var minGap = Math.min(gapLeft, gapRight);
+            // If the center overflows horizontally within its own box, also trigger.
+            var centerOverflows = center.scrollWidth > center.clientWidth + 1;
+            if (minGap < MIN_GAP || centerOverflows) {
+              html.classList.add('nav-force-hamburger');
+            }
+          });
+        }
+        var timer;
+        function schedule() { clearTimeout(timer); timer = setTimeout(check, 60); }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', schedule);
+        } else {
+          schedule();
+        }
+        window.addEventListener('load', schedule);
+        window.addEventListener('resize', schedule);
+        // Google Translate swaps text async — re-check a beat after full load to
+        // catch the translated (often wider) labels.
+        setTimeout(schedule, 1500);
+        setTimeout(schedule, 3000);
+        // Re-check whenever Google Translate changes the page's translated state,
+        // since translated labels are typically a different width from English.
+        if (window.MutationObserver) {
+          new MutationObserver(schedule).observe(html, {
+            attributes: true, attributeFilter: ['class', 'lang']
+          });
+        }
+      })();
+      // Pre-select every <select.lang-select> to reflect the current cookie,
+      // and hide the language-switch loading overlay once the page is stable.
+      document.addEventListener('DOMContentLoaded', function () {
+        var m = /googtrans=(\/en\/[a-z]+)/.exec(document.cookie);
+        var value = m ? m[1] : '/en/en';
+        document.querySelectorAll('.lang-select').forEach(function (sel) {
+          sel.value = value;
+        });
+        // If we're mid language-switch, hide the loader on a short fixed timer.
+        // Waiting for Google Translate's own class to flip proved unreliable and slow,
+        // so we just give it a generous beat and reveal the page.
+        try {
+          if (sessionStorage.getItem('lang-switching') === '1') {
+            setTimeout(function () {
+              sessionStorage.removeItem('lang-switching');
+              document.documentElement.classList.remove('lang-switching');
+              var loader = document.getElementById('langLoader');
+              if (loader) loader.classList.remove('active');
+            }, 1200);
+          }
+        } catch (e) { /* storage disabled */ }
+      });
+    </script>
+    <script
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+      <div id="google_translate_hidden" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"></div>
+  </body>
 </html>
