@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
 <!-- Early language-switch loader setup. Must run before <body> paints,
          otherwise the page briefly shows pre-translation content before the overlay. -->
     <style>
@@ -260,7 +260,7 @@
         </div>
     </footer>
 
-    <script src="animations.js?v=4"></script>
+    <script src="animations.js?v=5"></script>
     <!-- Google Translate Widget -->
     <script>
       // Google Translate requires this callback to exist even though we're using
@@ -312,8 +312,12 @@
           document.cookie = 'googtrans=' + value + '; path=/';
           document.cookie = 'googtrans=' + value + '; path=/; domain=.' + location.hostname;
           sessionStorage.setItem('lang-switching', '1');
-          // Mark this as a manual choice so the Compassion page stops auto-forcing Hindi.
-          localStorage.setItem('lang-manual-pick', '1');
+          // If the user is currently on the Compassion Course page and picks a
+          // language, remember that as their compassion-specific preference so
+          // future visits to that page respect it instead of auto-forcing Hindi.
+          if (location.pathname.indexOf('compassion-course') !== -1) {
+            localStorage.setItem('compassion-manual-lang', value);
+          }
         } catch (e) { /* storage disabled */ }
         // Add the class so CSS forces the loader to full-opacity *instantly*
         // (no fade), hiding the current page before reload tears down the DOM.

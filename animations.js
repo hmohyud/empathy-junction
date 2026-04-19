@@ -474,9 +474,12 @@ function initExploreSectionTracker() {
     return;
   }
 
-  // Keep references to the SVG chevron and the translatable text span
+  // Keep references to the SVG chevron and the trigger's text span.
+  // Fall back to any <span> inside the trigger (data-i18n was removed when we
+  // moved to Google Translate). Without this fallback the "else" branch below
+  // writes the label into a stray text node, producing "Home Home" etc.
   const chevronSvg = trigger.querySelector(".nav-dropdown-chevron");
-  const triggerSpan = trigger.querySelector("[data-i18n]");
+  const triggerSpan = trigger.querySelector("[data-i18n]") || trigger.querySelector("span");
 
   // Map of section IDs → translation keys (from translations.js)
   const SECTION_I18N_KEYS = {

@@ -19,7 +19,7 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=3" />
+    <link rel="stylesheet" href="styles.css?v=4" />
     <style>
       /* ── Compassion Course page-specific styles ── */
 
@@ -862,21 +862,19 @@
     } catch (e) { /* sessionStorage unavailable */ }
   </script>
   <script>
-    // Compassion Course defaults to Hindi — every visit — UNLESS the visitor has
-    // manually picked a language via the dropdown (tracked by localStorage flag
-    // 'lang-manual-pick'). The googtrans cookie alone can't tell us "manual" vs
-    // "page default", so we need the separate flag.
+    // Compassion Course always opens in Hindi, UNLESS the visitor has manually
+    // picked another language WHILE ON this page before (tracked by the
+    // localStorage flag 'compassion-manual-lang'). Manual picks on other pages
+    // don't affect this — the compassion page has its own memory.
     try {
-      var manual = localStorage.getItem('lang-manual-pick');
-      if (!manual) {
-        // No manual pick — force Hindi on this page.
-        var already = /googtrans=\/en\/hi(;|$)/.test(document.cookie);
-        if (!already) {
-          document.cookie = 'googtrans=/en/hi; path=/';
-          document.cookie = 'googtrans=/en/hi; path=/; domain=.' + location.hostname;
-          if (location.search.indexOf('_gtinit') === -1) {
-            location.replace(location.pathname + '?_gtinit=1' + location.hash);
-          }
+      var override = localStorage.getItem('compassion-manual-lang');
+      var target = override || '/en/hi';
+      var already = new RegExp('googtrans=' + target.replace(/\//g, '\/') + '(;|$)').test(document.cookie);
+      if (!already) {
+        document.cookie = 'googtrans=' + target + '; path=/';
+        document.cookie = 'googtrans=' + target + '; path=/; domain=.' + location.hostname;
+        if (location.search.indexOf('_gtinit') === -1) {
+          location.replace(location.pathname + '?_gtinit=1' + location.hash);
         }
       }
     } catch (e) { /* storage disabled */ }
@@ -967,11 +965,13 @@
               <div class="nav-dropdown">
                 <a
                   href="compassion-course.html"
-                  class="nav-dropdown-item"
+                  class="nav-dropdown-item notranslate"
+                  translate="no"
                   >हिंदी — Hindi</a
                 >
                 <span
-                  class="nav-dropdown-item nav-dropdown-item--soon"
+                  class="nav-dropdown-item nav-dropdown-item--soon notranslate"
+                  translate="no"
                   >English — Coming Soon</span
                 >
               </div>
@@ -2508,7 +2508,7 @@
       </div>
     </footer>
 
-    <script src="animations.js?v=4"></script>
+    <script src="animations.js?v=5"></script>
 <script>
       // FAQ accordion
       document.querySelectorAll(".cc-faq-q").forEach(function (btn) {
@@ -2584,8 +2584,12 @@
           document.cookie = 'googtrans=' + value + '; path=/';
           document.cookie = 'googtrans=' + value + '; path=/; domain=.' + location.hostname;
           sessionStorage.setItem('lang-switching', '1');
-          // Mark this as a manual choice so the Compassion page stops auto-forcing Hindi.
-          localStorage.setItem('lang-manual-pick', '1');
+          // If the user is currently on the Compassion Course page and picks a
+          // language, remember that as their compassion-specific preference so
+          // future visits to that page respect it instead of auto-forcing Hindi.
+          if (location.pathname.indexOf('compassion-course') !== -1) {
+            localStorage.setItem('compassion-manual-lang', value);
+          }
         } catch (e) { /* storage disabled */ }
         // Add the class so CSS forces the loader to full-opacity *instantly*
         // (no fade), hiding the current page before reload tears down the DOM.
