@@ -101,8 +101,8 @@
                     <li class="nav-dropdown-wrap">
                         <a href="compassion-course.html" class="nav-link nav-link--dropdown"><span>Compassion Course</span> <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg></a>
                         <div class="nav-dropdown">
-                            <a href="compassion-course.html" class="nav-dropdown-item">हिंदी — Hindi</a>
-                            <span class="nav-dropdown-item nav-dropdown-item--soon">English — Coming Soon</span>
+                            <a href="compassion-course.html" class="nav-dropdown-item notranslate" translate="no">हिंदी — Hindi</a>
+                            <span class="nav-dropdown-item nav-dropdown-item--soon notranslate" translate="no">English — Coming Soon</span>
                         </div>
                     </li>
                     <li><a href="about.html" class="nav-link">About Us</a></li>
@@ -299,6 +299,21 @@
             if (dest.pathname === location.pathname && dest.hash && !dest.search) return;
           } catch (err) { return; }
           // Only show loader when a non-English translation is active.
+          // Leaving the compassion page? Restore the visitor's pre-compassion
+          // language so the destination page loads in their original lang.
+          var leavingCompassion =
+            location.pathname.indexOf('compassion-course') !== -1 &&
+            dest.pathname.indexOf('compassion-course') === -1;
+          if (leavingCompassion) {
+            try {
+              var pre = sessionStorage.getItem('pre-compassion-lang');
+              if (pre) {
+                document.cookie = 'googtrans=' + pre + '; path=/';
+                document.cookie = 'googtrans=' + pre + '; path=/; domain=.' + location.hostname;
+                sessionStorage.removeItem('pre-compassion-lang');
+              }
+            } catch (err2) {}
+          }
           var m = /googtrans=\/en\/([a-z]+)/.exec(document.cookie);
           if (!m || m[1] === 'en') return;
           try { sessionStorage.setItem('lang-switching', '1'); } catch (err) {}
