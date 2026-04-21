@@ -1,52 +1,50 @@
 <!doctype html>
 <html lang="en" data-lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join the Dots — Connecting Hearts. Celebrating Life.</title>
-    <meta name="description" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M8 20c0-8 6-14 14-14' stroke='%239BAA8F' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 20c0 8-6 14-14 14' stroke='%23C4846C' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='20' cy='20' r='5' fill='%239BAA8F'/%3E%3C/svg%3E"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css?v=4" />
-    <!-- Early language-switch loader setup. Must run before <body> paints,
-         otherwise the page briefly shows pre-translation content before the overlay. -->
-    <style>
-      html.lang-switching body > *:not(.lang-loader) {
-        visibility: hidden !important;
-      }
-      html.lang-switching .lang-loader {
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: all !important;
-      }
-    </style>
-    <script>
-      (function () {
-        try {
-          if (sessionStorage.getItem('lang-switching') === '1') {
-            document.documentElement.classList.add('lang-switching');
-          }
-        } catch (e) { /* storage blocked */ }
-      })();
-    </script>
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Dots — Connecting Hearts. Celebrating Life.</title>
+  <meta name="description" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M8 20c0-8 6-14 14-14' stroke='%239BAA8F' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M32 20c0 8-6 14-14 14' stroke='%23C4846C' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='20' cy='20' r='5' fill='%239BAA8F'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;1,6..12,400&family=Noto+Sans+Devanagari:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Arabic:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <!-- Early language-switch loader setup. Must run before <body> paints,
+         otherwise the page briefly shows pre-translation content before the overlay. -->
+  <style>
+    html.lang-switching body>*:not(.lang-loader) {
+      visibility: hidden !important;
+    }
+
+    html.lang-switching .lang-loader {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: all !important;
+    }
+  </style>
+  <script>
+    (function () {
+      try {
+        if (sessionStorage.getItem('lang-switching') === '1') {
+          document.documentElement.classList.add('lang-switching');
+        }
+      } catch (e) { /* storage blocked */ }
+    })();
+  </script>
+</head>
+
+<body>
   <div class="lang-loader" id="langLoader" aria-hidden="true" translate="no">
     <div class="lang-loader-dots" aria-hidden="true">
       <svg class="lang-loader-svg" viewBox="0 0 60 84" preserveAspectRatio="none">
-        <line class="line-1" x1="51" y1="9"  x2="9"  y2="42" />
-        <line class="line-2" x1="9"  y1="42" x2="51" y2="75" />
-        <line class="line-3" x1="51" y1="75" x2="51" y2="9"  />
+        <line class="line-1" x1="51" y1="9" x2="9" y2="42" />
+        <line class="line-2" x1="9" y1="42" x2="51" y2="75" />
+        <line class="line-3" x1="51" y1="75" x2="51" y2="9" />
       </svg>
       <div class="lang-loader-dot lang-loader-dot--top"></div>
       <div class="lang-loader-dot lang-loader-dot--left"></div>
@@ -73,1648 +71,1113 @@
       }
     } catch (e) { /* sessionStorage unavailable */ }
   </script>
-    <!-- Animated Background Canvas -->
-    <canvas id="bgCanvas" class="bg-canvas"></canvas>
+  <!-- Animated Background Canvas -->
+  <canvas id="bgCanvas" class="bg-canvas"></canvas>
 
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-      <div class="container nav-inner">
-        <a href="#" class="nav-logo" aria-label="Join the Dots">
-          <div class="logo-grid logo-grid--small">
-            <span class="logo-letter">J</span>
-            <div class="logo-dot"></div>
-            <span class="logo-letter">I</span>
-            <span class="logo-letter">N</span>
-            <div class="logo-dot"></div>
-            <span class="logo-letter">T</span>
-            <span class="logo-letter">H</span>
-            <span class="logo-letter">E</span>
-            <span class="logo-letter">D</span>
-            <div class="logo-dot"></div>
-            <span class="logo-letter">T</span>
-            <span class="logo-letter">S</span>
-          </div>
-        </a>
-        <div class="nav-center">
-          <ul class="nav-links">
-            <li class="nav-dropdown-wrap nav-explore-wrap">
-              <button
-                class="nav-link nav-link--dropdown nav-explore-trigger"
-                id="navExploreTrigger"
-                type="button"
-              >
-                <span>Home</span>
-                <svg
-                  class="nav-dropdown-chevron"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M3 5l3 3 3-3" />
-                </svg>
-              </button>
-              <div class="nav-dropdown nav-explore-dropdown">
-                <a
-                  href="#home"
-                  class="nav-dropdown-item"
-                  data-section="home"
-                  >Home</a
-                >
-                <a
-                  href="#rhythm"
-                  class="nav-dropdown-item"
-                  data-section="rhythm"
-                  >Schedule</a
-                >
-                <a
-                  href="#journey"
-                  class="nav-dropdown-item"
-                  data-section="journey"
-                  >The Journey</a
-                >
-                <a
-                  href="#pricing"
-                  class="nav-dropdown-item"
-                  data-section="pricing"
-                  >Pricing</a
-                >
-                <a
-                  href="#compassion"
-                  class="nav-dropdown-item"
-                  data-section="compassion"
-                  >Compassion Course</a
-                >
-                <a
-                  href="#audience"
-                  class="nav-dropdown-item"
-                  data-section="audience"
-                  >Who Is This For</a
-                >
-              </div>
-            </li>
-            
-            <li>
-              <a href="about.html" class="nav-link"
-                >About Us</a
-              >
-            </li>
-            <li class="nav-dropdown-wrap">
-              <a
-                href="compassion-course.html"
-                class="nav-link nav-link--dropdown"
-                ><span style="color: var(--color-terracotta);"
-                  >Compassion Course</span
-                >
-                <svg
-                  class="nav-dropdown-chevron"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M3 5l3 3 3-3" /></svg
-              ></a>
-              <div class="nav-dropdown">
-                <a
-                  href="compassion-course.html"
-                  class="nav-dropdown-item notranslate"
-                  translate="no"
-                  >हिंदी — Hindi</a
-                >
-                <span
-                  class="nav-dropdown-item nav-dropdown-item--soon notranslate"
-                  translate="no"
-                  >English — Coming Soon</span
-                >
-              </div>
-            </li>
-            <li>
-              <a
-                href="resources.html"
-                class="nav-link"
-                >Resources</a
-              >
-            </li>
-            
-            <li>
-              <a href="blog.html" class="nav-link">Blog</a>
-            </li>
-          </ul>
-        </div>
-        <div class="nav-right">
-          <select class="lang-select lang-select-desktop notranslate" translate="no" aria-label="Choose language" onchange="window._setSiteLang(this.value)">
-        <option value="/en/en">English</option>
-        <option value="/en/hi">हिन्दी (Hindi)</option>
-        <option value="/en/ur">اردو (Urdu)</option>
-        <option value="/en/bn">বাংলা (Bengali)</option>
-        <option value="/en/gu">ગુજરાતી (Gujarati)</option>
-        <option value="/en/kn">ಕನ್ನಡ (Kannada)</option>
-        <option value="/en/mr">मराठी (Marathi)</option>
-        <option value="/en/ta">தமிழ் (Tamil)</option>
-      </select>
-          <a href="register.html" class="nav-cta"
-            >Contact Us</a
-          >
-        </div>
-        <button
-          class="nav-mobile-toggle"
-          id="navToggle"
-          aria-label="Toggle menu"
-        >
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-      <span class="mobile-menu-label">Home</span>
-      <div class="mobile-explore-group">
-        <a href="#rhythm">Schedule</a>
-        <a href="#journey">The Journey</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#compassion"
-          >Compassion Course</a
-        >
-        <a href="#audience">Who Is This For</a>
-      </div>
-      <a href="compassion-course.html"
-        >Compassion Course</a
-      >
-      <a href="about.html">About Us</a>
-      <a href="resources.html">Resources</a>
-      <a href="blog.html">Blog</a>
-      <a href="register.html" class="btn btn-primary"
-        >Register</a
-      >
-      <select class="lang-select lang-select-mobile notranslate" translate="no" aria-label="Choose language" onchange="window._setSiteLang(this.value)">
-        <option value="/en/en">English</option>
-        <option value="/en/hi">हिन्दी (Hindi)</option>
-        <option value="/en/ur">اردو (Urdu)</option>
-        <option value="/en/bn">বাংলা (Bengali)</option>
-        <option value="/en/gu">ગુજરાતી (Gujarati)</option>
-        <option value="/en/kn">ಕನ್ನಡ (Kannada)</option>
-        <option value="/en/mr">मराठी (Marathi)</option>
-        <option value="/en/ta">தமிழ் (Tamil)</option>
-      </select>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-      <div class="hero-bg">
-        <div class="hero-orb hero-orb-1"></div>
-        <div class="hero-orb hero-orb-2"></div>
-        <div class="hero-orb hero-orb-3"></div>
-      </div>
-
-      <!-- Events at-a-glance card -->
-      <div
-        class="events-glance"
-        id="eventsTab"
-        role="button"
-        tabindex="0"
-        aria-label="Open events panel"
-      >
-        <div class="events-glance-header">
-          <span class="events-glance-label"
-            >Events</span
-          >
-          <svg
-            class="events-glance-arrow"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </div>
-        <div class="events-glance-list" id="eventsGlanceList"></div>
-      </div>
-
-      <div class="hero-content">
-        <div class="logo-grid logo-grid--hero hero-title"
-          aria-label="Join the Dots"
-        >
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo" aria-label="Join the Dots">
+        <div class="logo-grid logo-grid--small">
           <span class="logo-letter">J</span>
-          <div class="logo-dot">
-            <svg class="circle-text-svg" viewBox="0 0 140 140">
-              <defs>
-                <path
-                  id="hero-cp1"
-                  d="M70,7 a63,63 0 1,0 0,126 a63,63 0 1,0 0,-126"
-                />
-              </defs>
-              <text><textPath href="#hero-cp1">arrive</textPath></text>
-            </svg>
-          </div>
+          <div class="logo-dot"></div>
           <span class="logo-letter">I</span>
           <span class="logo-letter">N</span>
-          <div class="logo-dot">
-            <svg class="circle-text-svg" viewBox="0 0 140 140">
-              <defs>
-                <path
-                  id="hero-cp2"
-                  d="M70,7 a63,63 0 1,0 0,126 a63,63 0 1,0 0,-126"
-                />
-              </defs>
-              <text><textPath href="#hero-cp2">renew</textPath></text>
-            </svg>
-          </div>
+          <div class="logo-dot"></div>
           <span class="logo-letter">T</span>
           <span class="logo-letter">H</span>
           <span class="logo-letter">E</span>
           <span class="logo-letter">D</span>
-          <div class="logo-dot">
-            <svg class="circle-text-svg" viewBox="0 0 140 140">
-              <defs>
-                <path
-                  id="hero-cp3"
-                  d="M70,7 a63,63 0 1,0 0,126 a63,63 0 1,0 0,-126"
-                />
-              </defs>
-              <text><textPath href="#hero-cp3">celebrate</textPath></text>
-            </svg>
-          </div>
+          <div class="logo-dot"></div>
           <span class="logo-letter">T</span>
           <span class="logo-letter">S</span>
         </div>
-        <p class="hero-tagline">
-          Connecting Hearts with Nonviolent Communication.
-        </p>
-        <p class="hero-tagline">
-          A Language for Life.
-        </p>
-        <p class="journey-intro">
-            A supportive community space to arrive as you are, connect the dots,
-            and grow in compassion — through playful and joyful practices that
-            bring you home to yourself
-          </p>
-
-        <div class="hero-poster">
-          <p class="hero-tagline">Upcoming Event</p>
-          <a
-            href="/sangam.html"
-            class="poster-link"
-          >
-            <img
-              src="/public/sangam-poster.jpeg"
-              alt="Hindi Compassion Course Poster"
-              class="poster-image"
-              loading="lazy"
-            />
-            <div class="poster-overlay">
-              <svg
-                class="poster-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="15 18 9 12 15 6"></polyline>
+      </a>
+      <div class="nav-center">
+        <ul class="nav-links">
+          <li class="nav-dropdown-wrap nav-explore-wrap">
+            <button class="nav-link nav-link--dropdown nav-explore-trigger" id="navExploreTrigger" type="button">
+              <span>Home</span>
+              <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 5l3 3 3-3" />
               </svg>
-              <span class="poster-text"
-                >Explore Course</span
-              >
+            </button>
+            <div class="nav-dropdown nav-explore-dropdown">
+              <a href="#home" class="nav-dropdown-item" data-section="home">Home</a>
+              <a href="#rhythm" class="nav-dropdown-item" data-section="rhythm">Schedule</a>
+              <a href="#journey" class="nav-dropdown-item" data-section="journey">The Journey</a>
+              <a href="#pricing" class="nav-dropdown-item" data-section="pricing">Pricing</a>
+              <a href="#compassion" class="nav-dropdown-item" data-section="compassion">Compassion Course</a>
+              <a href="#audience" class="nav-dropdown-item" data-section="audience">Who Is This For</a>
             </div>
-          </a>
-        </div>
+          </li>
 
-        <div class="hero-description">
-          
-
-          <div class="voyage-ocean" id="voyageOcean">
-            <canvas id="voyageCanvas"></canvas>
-            <div class="voyage-text" id="voyageText">
-              <div class="voyage-step-desc" id="voyageDesc">
-                <span class="voyage-step-word" id="voyageWord">Arrive</span> as
-                we are — with our tender imperfect humanity
-              </div>
+          <li>
+            <a href="about.html" class="nav-link">About Us</a>
+          </li>
+          <li class="nav-dropdown-wrap">
+            <a href="compassion-course.html" class="nav-link nav-link--dropdown"><span
+                style="color: var(--color-terracotta);">Compassion Course</span>
+              <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 5l3 3 3-3" />
+              </svg></a>
+            <div class="nav-dropdown">
+              <a href="compassion-course.html" class="nav-dropdown-item notranslate" translate="no">हिंदी — Hindi</a>
+              <span class="nav-dropdown-item nav-dropdown-item--soon notranslate" translate="no">English — Coming
+                Soon</span>
             </div>
-            <div class="voyage-waypoints" id="voyageWaypoints"></div>
-            <div class="voyage-hint" id="voyageHint">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-              <span>drag to sail</span>
-            </div>
-          </div>
-        </div>
+          </li>
+          <li>
+            <a href="resources.html" class="nav-link">Resources</a>
+          </li>
 
-        <div class="hero-meta">
-          <span class="hero-meta-item">
-            <svg
-              class="hero-meta-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <rect x="3" y="4" width="18" height="18" rx="2" />
-              <path d="M16 2v4M8 2v4M3 10h18" />
-            </svg>
-            <span>Workshop and practice</span>
-          </span>
-          <span class="hero-meta-item">
-            <svg
-              class="hero-meta-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-              <path d="M12 19v3" />
-            </svg>
-            <span>Hindi & English</span>
-          </span>
-          <span class="hero-meta-item">
-            <svg
-              class="hero-meta-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <rect x="2" y="3" width="20" height="14" rx="2" />
-              <path d="M8 21h8M12 17v4" />
-            </svg>
-            <span>Online / Hybrid</span>
-          </span>
-        </div>
+          <li>
+            <a href="blog.html" class="nav-link">Blog</a>
+          </li>
+        </ul>
       </div>
-    </section>
-
-    <!-- Events Drawer -->
-    <aside class="events-drawer" id="eventsDrawer">
-      <div class="events-drawer-header">
-        <h3 class="events-drawer-title">
-          What's Coming Up
-        </h3>
-        <button
-          class="events-drawer-close"
-          id="eventsClose"
-          aria-label="Close events"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          >
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
+      <div class="nav-right">
+        <select class="lang-select lang-select-desktop notranslate" translate="no" aria-label="Choose language"
+          onchange="window._setSiteLang(this.value)">
+          <option value="/en/en">English</option>
+          <option value="/en/hi">हिन्दी (Hindi)</option>
+          <option value="/en/ur">اردو (Urdu)</option>
+          <option value="/en/bn">বাংলা (Bengali)</option>
+          <option value="/en/gu">ગુજરાતી (Gujarati)</option>
+          <option value="/en/kn">ಕನ್ನಡ (Kannada)</option>
+          <option value="/en/mr">मराठी (Marathi)</option>
+          <option value="/en/ta">தமிழ் (Tamil)</option>
+        </select>
+        <a href="register.html" class="nav-cta">Contact Us</a>
       </div>
-      <div class="events-drawer-body">
-        <div class="events-upcoming" id="eventsUpcoming"></div>
-        <div class="events-section-divider" id="eventsSectionDivider">
-          <span>Always Available</span>
-        </div>
-        <div class="events-upcoming" id="eventsUpcoming"></div>
-        <div class="events-persistent" id="eventsPersistent"></div>
+      <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="mobile-menu-label">Home</span>
+    <div class="mobile-explore-group">
+      <a href="#rhythm">Schedule</a>
+      <a href="#journey">The Journey</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#compassion">Compassion Course</a>
+      <a href="#audience">Who Is This For</a>
+    </div>
+    <a href="compassion-course.html">Compassion Course</a>
+    <a href="about.html">About Us</a>
+    <a href="resources.html">Resources</a>
+    <a href="blog.html">Blog</a>
+    <a href="register.html" class="btn btn-primary">Register</a>
+    <select class="lang-select lang-select-mobile notranslate" translate="no" aria-label="Choose language"
+      onchange="window._setSiteLang(this.value)">
+      <option value="/en/en">English</option>
+      <option value="/en/hi">हिन्दी (Hindi)</option>
+      <option value="/en/ur">اردو (Urdu)</option>
+      <option value="/en/bn">বাংলা (Bengali)</option>
+      <option value="/en/gu">ગુજરાતી (Gujarati)</option>
+      <option value="/en/kn">ಕನ್ನಡ (Kannada)</option>
+      <option value="/en/mr">मराठी (Marathi)</option>
+      <option value="/en/ta">தமிழ் (Tamil)</option>
+    </select>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+    </div>
+
+    <!-- Events at-a-glance card -->
+    <div class="events-glance" id="eventsTab" role="button" tabindex="0" aria-label="Open events panel">
+      <div class="events-glance-header">
+        <span class="events-glance-label">Events</span>
+        <svg class="events-glance-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
       </div>
-    </aside>
-    <div class="events-drawer-overlay" id="eventsOverlay"></div>
+      <div class="events-glance-list" id="eventsGlanceList"></div>
+    </div>
 
-    <!-- Monthly Rhythm Section -->
-    <section class="rhythm" id="rhythm">
-      <canvas id="rhythmCanvas" class="rhythm-canvas"></canvas>
-      <div class="container rhythm-content">
-        <div class="section-header animate-on-scroll">
-          <span class="section-badge">
-            <svg
-              class="badge-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <rect x="3" y="4" width="18" height="18" rx="2" />
-              <path d="M16 2v4M8 2v4M3 10h18" />
-            </svg>
-            <span>Our Monthly Rhythm</span>
-          </span>
-          <h2 class="section-title">
-            Fridays made meaningful
-          </h2>
-        </div>
-
-        <div class="time-slots-wrapper animate-on-scroll">
-          <!-- <div class="time-slots-label">Choose Your Time</div> -->
-          <div class="time-slots">
-            <div class="time-slot">
-              <svg
-                class="time-slot-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                  fill="currentColor"
-                  opacity="0.2"
-                />
-                <circle cx="12" cy="12" r="9" />
-              </svg>
-              <span>6:00 – 7:30 PM </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="schedule-grid">
-          <div class="schedule-card animate-on-scroll">
-            <div class="schedule-card-icon-wrapper">
-              <svg viewBox="0 0 48 48" fill="none">
-                <rect
-                  x="6"
-                  y="24"
-                  width="36"
-                  height="18"
-                  rx="2"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <path
-                  d="M12 24V14a6 6 0 0 1 6-6h12a6 6 0 0 1 6 6v10"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-              </svg>
-            </div>
-            <div class="schedule-card-week">
-              Week 1
-            </div>
-            <p class="schedule-card-day">
-              1st Friday
-            </p>
-            <h3 class="schedule-card-title">
-              Listening Circle
-            </h3>
-            <span class="schedule-card-badge"
-              >FREE</span
-            >
-            <p class="schedule-card-text">
-              January to June, First Friday every month
-            </p>
-          </div>
-
-          <div class="schedule-card animate-on-scroll">
-            <div class="schedule-card-icon-wrapper">
-              <svg viewBox="0 0 48 48" fill="none">
-                <ellipse
-                  cx="24"
-                  cy="38"
-                  rx="16"
-                  ry="4"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <path
-                  d="M12 38V22c0-8 5-14 12-14s12 6 12 14v16"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <circle
-                  cx="24"
-                  cy="24"
-                  r="4"
-                  fill="currentColor"
-                  opacity="0.3"
-                />
-              </svg>
-            </div>
-            <div class="schedule-card-week">
-              Week 2
-            </div>
-            <p class="schedule-card-day">
-              2nd Friday
-            </p>
-            <h3 class="schedule-card-title">
-              Empathy Café
-            </h3>
-            <span class="schedule-card-badge"
-              >FREE</span
-            >
-
-            <p class="schedule-card-text">
-              January to June, Second Friday every month.
-            </p>
-          </div>
-
-          <div class="schedule-card animate-on-scroll">
-            <div class="schedule-card-icon-wrapper">
-              <svg viewBox="0 0 48 48" fill="none">
-                <circle
-                  cx="24"
-                  cy="24"
-                  r="18"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <circle
-                  cx="24"
-                  cy="24"
-                  r="6"
-                  fill="currentColor"
-                  opacity="0.3"
-                />
-                <path
-                  d="M24 6v6M24 36v6M6 24h6M36 24h6"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-              </svg>
-            </div>
-            <div class="schedule-card-week">
-              Weeks 3–4
-            </div>
-            <p class="schedule-card-day">
-              3rd & 4thFriday
-            </p>
-            <h3 class="schedule-card-title">
-              Monthly Themed Exploration
-            </h3>
-            <span class="schedule-card-badge"
-              >PAID</span
-            >
-
-            <p class="schedule-card-text">
-              January to June 3rd and 4th Friday every month experiential
-              workshops on chosen themes
-            </p>
-          </div>
-        </div>
-      </div>
-      <a href="register.html" class="btn btn-primary"  style=" display: flex; justify-content: center; align-items: center; margin-top: 20px; width: 200px; margin-left: auto; margin-right: auto;"
-        >Contact Us</a
-      >
-    </section>
-
-    <!-- Journey Section -->
-    <section class="journey" id="journey">
-      <div class="container">
-        <div class="section-header animate-on-scroll">
-          <span class="section-badge">
-            <svg
-              class="badge-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-            <span>The Journey</span>
-          </span>
-          <h2 class="section-title">
-            Your Path to Connection
-          </h2>
-          <p class="section-subtitle">
-            Each step is an invitation—not a requirement. Move at your own pace.
-          </p>
-        </div>
-
-        <div class="journey-wrapper">
-          <svg
-            class="journey-path"
-            viewBox="0 0 1000 800"
-            preserveAspectRatio="none"
-          >
+    <div class="hero-content">
+      <div class="logo-grid logo-grid--hero hero-title" aria-label="Join the Dots">
+        <span class="logo-letter">J</span>
+        <div class="logo-dot">
+          <svg class="circle-text-svg" viewBox="0 0 140 140">
             <defs>
-              <linearGradient
-                id="pathGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop offset="0%" stop-color="var(--color-sage)" />
-                <stop offset="50%" stop-color="var(--color-terracotta)" />
-                <stop offset="100%" stop-color="var(--color-amber)" />
-              </linearGradient>
+              <path id="hero-cp1" d="M70,7 a63,63 0 1,0 0,126 a63,63 0 1,0 0,-126" />
             </defs>
-            <path class="journey-path-bg" id="journeyPathBg" d="" />
-            <path class="journey-path-line" id="travelPath" d="" />
+            <text>
+              <textPath href="#hero-cp1">arrive</textPath>
+            </text>
           </svg>
-
-          <div class="journey-grid">
-            <div class="journey-card free animate-on-scroll" data-step="1">
-              <div class="journey-card-glow"></div>
-              <div class="journey-card-header">
-                <div class="journey-card-icon">
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <rect
-                      x="4"
-                      y="20"
-                      width="32"
-                      height="16"
-                      rx="2"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <path
-                      d="M8 20V12a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v8"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <circle
-                      cx="20"
-                      cy="28"
-                      r="4"
-                      fill="currentColor"
-                      opacity="0.3"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <span
-                    class="journey-card-badge"
-                    >Free</span
-                  >
-                  <h3
-                    class="journey-card-title"
-                  >
-                    The Listening Circle
-                  </h3>
-                  <p
-                    class="journey-card-subtitle"
-                  >
-                    Cultivating Awareness
-                  </p>
-                </div>
-              </div>
-              <p class="journey-card-text">
-                jan to June every year; First Friday of the month, an exciting,
-                playful space to explore different thoughts, beliefs,
-                judgements, assumptions and opinions on any given topic.
-              </p>
-              <p class="journey-card-theme">
-                Theme: Deep listening and presence
-              </p>
-              <span class="journey-card-number">01</span>
-            </div>
-
-            <div class="journey-card free animate-on-scroll" data-step="2">
-              <div class="journey-card-glow"></div>
-              <div class="journey-card-header">
-                <div class="journey-card-icon">
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <ellipse
-                      cx="20"
-                      cy="32"
-                      rx="14"
-                      ry="4"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <path
-                      d="M10 32V18c0-6 4-10 10-10s10 4 10 10v14"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <circle
-                      cx="20"
-                      cy="20"
-                      r="4"
-                      fill="currentColor"
-                      opacity="0.3"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <span
-                    class="journey-card-badge"
-                    >Free</span
-                  >
-                  <h3
-                    class="journey-card-title"
-                  >
-                    The Empathy Café
-                  </h3>
-                  <p
-                    class="journey-card-subtitle"
-                  >
-                    Compassion into Community
-                  </p>
-                </div>
-              </div>
-              <p class="journey-card-text">
-                jan to June every year; Second Friday of the month, a calm
-                reflective space to practice listening to each other with
-                empathy and without judgement on any given topic.
-              </p>
-              <p class="journey-card-theme">
-                Theme: Shared stories and emotional connection
-              </p>
-              <span class="journey-card-number">02</span>
-            </div>
-
-            <div class="journey-card animate-on-scroll" data-step="3">
-              <div class="journey-card-glow"></div>
-              <div class="journey-card-header">
-                <div class="journey-card-icon">
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <circle
-                      cx="20"
-                      cy="20"
-                      r="16"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <circle
-                      cx="20"
-                      cy="20"
-                      r="6"
-                      fill="currentColor"
-                      opacity="0.3"
-                    />
-                    <path
-                      d="M20 4v6M20 30v6M4 20h6M30 20h6"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <circle
-                      cx="10"
-                      cy="10"
-                      r="3"
-                      fill="currentColor"
-                      opacity="0.5"
-                    />
-                    <circle
-                      cx="30"
-                      cy="10"
-                      r="3"
-                      fill="currentColor"
-                      opacity="0.5"
-                    />
-                    <circle
-                      cx="10"
-                      cy="30"
-                      r="3"
-                      fill="currentColor"
-                      opacity="0.5"
-                    />
-                    <circle
-                      cx="30"
-                      cy="30"
-                      r="3"
-                      fill="currentColor"
-                      opacity="0.5"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <span
-                    class="journey-card-badge"
-                    >Integration | Paid</span
-                  >
-                  <h3
-                    class="journey-card-title"
-                  >
-                    Join the Dots
-                  </h3>
-                  <p
-                    class="journey-card-subtitle"
-                  >
-                    The Complete Picture
-                  </p>
-                </div>
-              </div>
-              <p class="journey-card-text">
-                January to June | Every Friday.A meta-space to join the dots.1st
-                & 2nd: Free listening and empathy circles.3rd & 4th: Paid
-                Thematic NVC explorations to integrate learning.Together, these
-                sessions create a connected ecosystem of emotional intelligence.
-              </p>
-              <p class="journey-card-theme">
-                Theme: Integration and synthesis
-              </p>
-              <span class="journey-card-number">03</span>
-            </div>
-            <div class="journey-card animate-on-scroll" data-step="4">
-              <div class="journey-card-glow"></div>
-              <div class="journey-card-header">
-                <div class="journey-card-icon">
-                  <svg viewBox="0 0 40 40" fill="none">
-                    <path
-                      d="M8 36V20L20 8l12 12v16H8z"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <rect
-                      x="14"
-                      y="24"
-                      width="12"
-                      height="12"
-                      fill="currentColor"
-                      opacity="0.3"
-                    />
-                    <path d="M20 8v8" stroke="currentColor" stroke-width="2" />
-                  </svg>
-                </div>
-                <div>
-                  <span
-                    class="journey-card-badge"
-                    >Deep Practice</span
-                  >
-                  <h3
-                    class="journey-card-title"
-                  >
-                    The Compassion Course
-                  </h3>
-                  <p
-                    class="journey-card-subtitle"
-                  >
-                    Awareness into Action
-                  </p>
-                </div>
-              </div>
-              <p class="journey-card-text">
-                Building on listening, empathy and awareness, learn how to
-                translate reactions to response. A 52-week immersion where
-                understanding becomes caring action—not just something you know,
-                but something you embody.
-              </p>
-              <p class="journey-card-theme">
-                Theme: Understanding and responding with care
-              </p>
-              <span class="journey-card-number">04</span>
-            </div>
-          </div>
         </div>
+        <span class="logo-letter">I</span>
+        <span class="logo-letter">N</span>
+        <div class="logo-dot">
+          <svg class="circle-text-svg" viewBox="0 0 140 140">
+            <defs>
+              <path id="hero-cp2" d="M70,7 a63,63 0 1,0 0,126 a63,63 0 1,0 0,-126" />
+            </defs>
+            <text>
+              <textPath href="#hero-cp2">renew</textPath>
+            </text>
+          </svg>
+        </div>
+        <span class="logo-letter">T</span>
+        <span class="logo-letter">H</span>
+        <span class="logo-letter">E</span>
+        <span class="logo-letter">D</span>
+        <div class="logo-dot">
+          <svg class="circle-text-svg" viewBox="0 0 140 140">
+            <defs>
+              <path id="hero-cp3" d="M70,7 a63,63 0 1,0 0,126 a63,63 0 1,0 0,-126" />
+            </defs>
+            <text>
+              <textPath href="#hero-cp3">celebrate</textPath>
+            </text>
+          </svg>
+        </div>
+        <span class="logo-letter">T</span>
+        <span class="logo-letter">S</span>
       </div>
-       <a href="register.html" class="btn btn-primary"  style=" display: flex; justify-content: center; align-items: center; margin-top: 20px; width: 200px; margin-left: auto; margin-right: auto;"
-        >Contact Us</a
-      >
-    </section>
+      <p class="hero-tagline">
+        Connecting Hearts with Nonviolent Communication
+      </p>
+      <p class="hero-tagline">
+        A Language of Life
+      </p>
+      <p class="journey-intro">
+        A supportive community space to arrive as you are, connect the dots,
+        and grow in compassion — through playful and joyful practices that
+        bring you home to yourself
+      </p>
 
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-      <canvas id="pricingCanvas" class="pricing-canvas"></canvas>
-      <div class="container">
-        <div class="section-header animate-on-scroll">
-          <span class="section-badge">
-            <svg
-              class="badge-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
+      <div class="hero-poster">
+        <p class="hero-tagline">Upcoming Event</p>
+        <a href="/sangam.html" class="poster-link">
+          <img src="/public/sangam-poster.jpeg" alt="Hindi Compassion Course Poster" class="poster-image"
+            loading="lazy" />
+          <div class="poster-overlay">
+            <svg class="poster-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-            <span>Ways to Join</span>
-          </span>
-          <h2 class="section-title">
-            Choose Your Path
-          </h2>
-          <p class="section-subtitle">
-            Flexible options to support your journey
-          </p>
-        </div>
-
-        <div class="pricing-grid">
-          <div class="pricing-card animate-on-scroll">
-            <div class="pricing-card-inner">
-              <div class="pricing-icon-wrapper">
-                <svg viewBox="0 0 48 48" fill="none">
-                  <circle
-                    cx="24"
-                    cy="24"
-                    r="20"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <path
-                    d="M24 14v20M14 24h20"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                </svg>
-              </div>
-              <h3 class="pricing-name">
-                Listening & Empathy Circles
-              </h3>
-              <div class="pricing-amount free">
-                Free
-              </div>
-              <p
-                class="pricing-description"
-              >
-                1st and 2nd Fridays every month
-              </p>
-              <div class="pricing-period">
-                Always open, always free
-              </div>
-              <div class="pricing-divider"></div>
-              <ul class="pricing-features">
-                <li>
-                  Ist Friday: Topic-based discussion for 1 hour
-                </li>
-                <li>
-                  2nd Friday: Empathy Circle for 1 hour
-                </li>
-                <li>English & Hindi</li>
-                <li>No commitment required</li>
-              </ul>
-              <a
-                href="register.html"
-                class="btn btn-secondary"
-                >Join Free</a
-              >
-            </div>
+            <span class="poster-text">Explore Course</span>
           </div>
-
-          <div class="pricing-card animate-on-scroll">
-            <div class="pricing-card-inner">
-              <div class="pricing-icon-wrapper">
-                <svg viewBox="0 0 48 48" fill="none">
-                  <path
-                    d="M24 4v8M24 36v8M4 24h8M36 24h8"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <circle
-                    cx="24"
-                    cy="24"
-                    r="12"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <circle
-                    cx="24"
-                    cy="24"
-                    r="4"
-                    fill="currentColor"
-                    opacity="0.3"
-                  />
-                </svg>
-              </div>
-              <h3 class="pricing-name">
-                Monthly Pass
-              </h3>
-              <div class="pricing-amount">
-                ₹500
-              </div>
-              <div class="pricing-period">
-                All Fridays for any month of choice.
-              </div>
-              <div class="pricing-divider"></div>
-              <ul class="pricing-features">
-                <li>
-                  3rd, 4th Fridays, for one month
-                </li>
-                <li>
-                  Two Basic NVC / Thematic workshops of 1.5 hours each
-                </li>
-                <li>
-                  All Listening Circle of 1 hour each
-                </li>
-                <li>
-                  All Empathy Circles of 1 hour each
-                </li>
-                <li>English & Hindi</li>
-              </ul>
-              <a
-                href="register.html"
-                class="btn btn-primary"
-                >Get Started</a
-              >
-            </div>
-          </div>
-
-          <div class="pricing-card featured animate-on-scroll">
-            <span class="pricing-popular"
-              >Best Value</span
-            >
-            <div class="pricing-card-inner">
-              <div class="pricing-icon-wrapper">
-                <svg viewBox="0 0 48 48" fill="none">
-                  <path
-                    d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="currentColor"
-                    fill-opacity="0.1"
-                  />
-                </svg>
-              </div>
-              <h3 class="pricing-name">
-                Quarterly Pass
-              </h3>
-              <div class="pricing-amount">
-                ₹1200/- only
-              </div>
-              <div class="pricing-period">
-                Six workshops any three months of choice. Save ₹600/-
-              </div>
-              <div class="pricing-divider"></div>
-              <ul class="pricing-features">
-                <li>
-                  All Fridays for three months
-                </li>
-                <li>
-                  Six Basic NVC/ thematic workshops of of 1.5 hours each
-                </li>
-                <li>
-                  All Listening Circles ( 1st Fridays) of 1 hour each
-                </li>
-                <li>
-                  All Empathy Circles (2nd Fridays) of 1 hour each
-                </li>
-                <li>English & Hindi</li>
-                <li>
-                  Unlocks 50% off on the Compassion Course
-                </li>
-              </ul>
-              <a
-                href="register.html"
-                class="btn btn-warm"
-                >Choose This</a
-              >
-            </div>
-          </div>
-        </div>
+        </a>
       </div>
-    </section>
 
-    <!-- Compassion Course Section -->
-    <section class="compassion" id="compassion">
-      <canvas id="compassionCanvas" class="compassion-canvas"></canvas>
-      <div class="container">
-        <div class="compassion-card animate-on-scroll">
-          <div class="compassion-card-bg"></div>
-          <span class="compassion-badge">
-            <svg
-              class="badge-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path d="M2 12h20" />
-              <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20" />
-            </svg>
-            <span
-              >Deeper Journey (Optional Path)</span
-            >
-          </span>
-          <h2 class="compassion-title">
-            The Compassion Course
-          </h2>
-          <p class="compassion-duration">
-            52 Weeks with Thom Bond (International NVC Trainer)
-          </p>
-          <p class="compassion-text">
-            The Compassion Course (52 Weeks) by Thom Bond(International NVC
-            Trainer). A year-long transformative journey that begins every July—
-            where empathy becomes not just something you practice, but something
-            you live. Buy any Quarterly Pass to unlock a 50% supported fee for
-            the full course ₹12,000 (instead of ₹24,000)
-          </p>
-          <div class="compassion-pricing">
-            <span
-              class="compassion-original"
-              >₹24,000</span
-            >
-            <svg
-              class="compassion-arrow"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+      <div class="hero-description">
+
+
+        <div class="voyage-ocean" id="voyageOcean">
+          <canvas id="voyageCanvas"></canvas>
+          <div class="voyage-text" id="voyageText">
+            <div class="voyage-step-desc" id="voyageDesc">
+              <span class="voyage-step-word" id="voyageWord">Arrive</span> as
+              we are — with our tender imperfect humanity
+            </div>
+          </div>
+          <div class="voyage-waypoints" id="voyageWaypoints"></div>
+          <div class="voyage-hint" id="voyageHint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-            <span class="compassion-special"
-              >₹12,000</span
-            >
-            <span class="compassion-savings"
-              >Save ₹8,000</span
-            >
+            <span>drag to sail</span>
           </div>
-          <!-- <p class="compassion-discount-note">₹6,000 rate is exclusive to Monthly Pass holders. Buy any single Monthly Pass to unlock this 50% discount permanently.</p> -->
-          <div class="compassion-actions">
-  <a href="compassion-course.html" class="btn btn-warm">
-    Explore the Compassion Course
-  </a>
-
-  <a href="register.html" class="btn btn-outline" style=" margin-left: 10px; margin-top: 20px; border: 1px solid var(--color-terracotta); color: var(--color-terracotta); background: transparent;">
-    Contact Us
-  </a>
-</div>
         </div>
       </div>
-    </section>
 
-    <!-- Audience Section -->
-    <section class="audience" id="audience">
-      <canvas id="audienceCanvas" class="audience-canvas"></canvas>
-      <div class="container">
-        <div class="section-header animate-on-scroll">
-          <span class="section-badge">
-            <svg
-              class="badge-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg class="hero-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M16 2v4M8 2v4M3 10h18" />
+          </svg>
+          <span>Workshop and practice</span>
+        </span>
+        <span class="hero-meta-item">
+          <svg class="hero-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <path d="M12 19v3" />
+          </svg>
+          <span>Hindi & English</span>
+        </span>
+        <span class="hero-meta-item">
+          <svg class="hero-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <path d="M8 21h8M12 17v4" />
+          </svg>
+          <span>Online / Hybrid</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Drawer -->
+  <aside class="events-drawer" id="eventsDrawer">
+    <div class="events-drawer-header">
+      <h3 class="events-drawer-title">
+        What's Coming Up
+      </h3>
+      <button class="events-drawer-close" id="eventsClose" aria-label="Close events">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="events-drawer-body">
+      <div class="events-upcoming" id="eventsUpcoming"></div>
+      <div class="events-section-divider" id="eventsSectionDivider">
+        <span>Always Available</span>
+      </div>
+      <div class="events-upcoming" id="eventsUpcoming"></div>
+      <div class="events-persistent" id="eventsPersistent"></div>
+    </div>
+  </aside>
+  <div class="events-drawer-overlay" id="eventsOverlay"></div>
+
+  <!-- Monthly Rhythm Section -->
+  <section class="rhythm" id="rhythm">
+    <canvas id="rhythmCanvas" class="rhythm-canvas"></canvas>
+    <div class="container rhythm-content">
+      <div class="section-header animate-on-scroll">
+        <span class="section-badge">
+          <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M16 2v4M8 2v4M3 10h18" />
+          </svg>
+          <span>Our Monthly Rhythm</span>
+        </span>
+        <h2 class="section-title">
+          Fridays made meaningful
+        </h2>
+      </div>
+
+      <div class="time-slots-wrapper animate-on-scroll">
+        <!-- <div class="time-slots-label">Choose Your Time</div> -->
+        <div class="time-slots">
+          <div class="time-slot">
+            <svg class="time-slot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" opacity="0.2" />
+              <circle cx="12" cy="12" r="9" />
             </svg>
-            <span>Who Is This For?</span>
-          </span>
-          <h2 class="section-title">
-            You Belong Here If...
-          </h2>
-        </div>
-
-        <div class="audience-grid">
-          <div class="audience-item animate-on-scroll">
-            <div class="audience-icon">
-              <svg viewBox="0 0 32 32" fill="none">
-                <path
-                  d="M16 6c-4 0-8 4-8 10s4 10 8 10 8-4 8-10-4-10-8-10z"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <path
-                  d="M12 16l4 4 4-4"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-              </svg>
-            </div>
-            <span class="audience-text"
-              >Navigating love, conflict, or transitions</span
-            >
-          </div>
-          <div class="audience-item animate-on-scroll">
-            <div class="audience-icon">
-              <svg viewBox="0 0 32 32" fill="none">
-                <circle
-                  cx="10"
-                  cy="10"
-                  r="4"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <circle
-                  cx="22"
-                  cy="10"
-                  r="4"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <circle
-                  cx="16"
-                  cy="22"
-                  r="4"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <path
-                  d="M12 13l2 6M20 13l-2 6"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  opacity="0.5"
-                />
-              </svg>
-            </div>
-            <span class="audience-text"
-              >Couples & families seeking deeper connection</span
-            >
-          </div>
-          <div class="audience-item animate-on-scroll">
-            <div class="audience-icon">
-              <svg viewBox="0 0 32 32" fill="none">
-                <circle
-                  cx="16"
-                  cy="8"
-                  r="4"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <path
-                  d="M8 28v-6a8 8 0 0 1 16 0v6"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <path d="M16 16v6" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </div>
-            <span class="audience-text"
-              >Caregivers, teachers, and leaders</span
-            >
-          </div>
-          <div class="audience-item animate-on-scroll">
-            <div class="audience-icon">
-              <svg viewBox="0 0 32 32" fill="none">
-                <path
-                  d="M16 4l4 8h8l-6 6 2 10-8-4-8 4 2-10-6-6h8l4-8z"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-              </svg>
-            </div>
-            <span class="audience-text"
-              >Army families & community workers</span
-            >
-          </div>
-          <div class="audience-item animate-on-scroll">
-            <div class="audience-icon">
-              <svg viewBox="0 0 32 32" fill="none">
-                <circle
-                  cx="16"
-                  cy="16"
-                  r="10"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <circle
-                  cx="16"
-                  cy="16"
-                  r="4"
-                  fill="currentColor"
-                  opacity="0.3"
-                />
-                <path
-                  d="M16 6v4M16 22v4"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                />
-              </svg>
-            </div>
-            <span class="audience-text"
-              >Anyone longing to be heard</span
-            >
-          </div>
-          <div class="audience-item animate-on-scroll">
-            <div class="audience-icon">
-              <svg viewBox="0 0 32 32" fill="none">
-                <path
-                  d="M6 16a10 10 0 0 1 10-10"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <path
-                  d="M6 16a10 10 0 0 0 10 10"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <circle
-                  cx="22"
-                  cy="16"
-                  r="4"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-                <path d="M16 12v8" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </div>
-            <span class="audience-text"
-              >Those learning to listen with empathy</span
-            >
+            <span>6:00 – 7:30 PM </span>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="cta">
-      <div class="cta-bg">
-        <div class="cta-orb cta-orb-1"></div>
-        <div class="cta-orb cta-orb-2"></div>
-      </div>
-      <div class="container">
-        <div class="cta-content animate-on-scroll">
-          <h2>Come Home to Yourself</h2>
-          <div class="cta-text">
-            <p>Come to Join the Dots.</p>
-            <p>Sit in the Listening Circle.</p>
-            <p>Find your map in Join the Dots.</p>
-            <p>Warm yourself in the Empathy Café.</p>
-            <p>And slowly, come home to yourself.</p>
+      <div class="schedule-grid">
+        <div class="schedule-card animate-on-scroll">
+          <div class="schedule-card-icon-wrapper">
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect x="6" y="24" width="36" height="18" rx="2" stroke="currentColor" stroke-width="2" />
+              <path d="M12 24V14a6 6 0 0 1 6-6h12a6 6 0 0 1 6 6v10" stroke="currentColor" stroke-width="2" />
+            </svg>
           </div>
-          <div class="cta-buttons">
-            <a
-              href="https://wa.me/your-number"
-              class="btn btn-primary"
-              target="_blank"
-              rel="noopener"
-            >
-              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                />
-              </svg>
-              <span>Talk to Us on WhatsApp</span>
-            </a>
-            <a
-              href="register.html"
-              class="btn btn-secondary"
-              >Register for This Month</a
-            >
-            <a
-              href="register.html"
-              class="btn btn-warm"
-              >Join the Free Listening Circle</a
-            >
+          <div class="schedule-card-week">
+            Week 1
+          </div>
+          <p class="schedule-card-day">
+            1st Friday
+          </p>
+          <h3 class="schedule-card-title">
+            Listening Circle
+          </h3>
+          <span class="schedule-card-badge">FREE</span>
+          <p class="schedule-card-text">
+            January to June, First Friday every month
+          </p>
+        </div>
+
+        <div class="schedule-card animate-on-scroll">
+          <div class="schedule-card-icon-wrapper">
+            <svg viewBox="0 0 48 48" fill="none">
+              <ellipse cx="24" cy="38" rx="16" ry="4" stroke="currentColor" stroke-width="2" />
+              <path d="M12 38V22c0-8 5-14 12-14s12 6 12 14v16" stroke="currentColor" stroke-width="2" />
+              <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.3" />
+            </svg>
+          </div>
+          <div class="schedule-card-week">
+            Week 2
+          </div>
+          <p class="schedule-card-day">
+            2nd Friday
+          </p>
+          <h3 class="schedule-card-title">
+            Empathy Café
+          </h3>
+          <span class="schedule-card-badge">FREE</span>
+
+          <p class="schedule-card-text">
+            January to June, Second Friday every month.
+          </p>
+        </div>
+
+        <div class="schedule-card animate-on-scroll">
+          <div class="schedule-card-icon-wrapper">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2" />
+              <circle cx="24" cy="24" r="6" fill="currentColor" opacity="0.3" />
+              <path d="M24 6v6M24 36v6M6 24h6M36 24h6" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </div>
+          <div class="schedule-card-week">
+            Weeks 3–4
+          </div>
+          <p class="schedule-card-day">
+            3rd & 4thFriday
+          </p>
+          <h3 class="schedule-card-title">
+            Monthly Themed Exploration
+          </h3>
+          <span class="schedule-card-badge">PAID</span>
+
+          <p class="schedule-card-text">
+            January to June 3rd and 4th Friday every month experiential
+            workshops on chosen themes
+          </p>
+        </div>
+      </div>
+    </div>
+    <a href="register.html" class="btn btn-primary"
+      style=" display: flex; justify-content: center; align-items: center; margin-top: 20px; width: 200px; margin-left: auto; margin-right: auto;">Contact
+      Us</a>
+  </section>
+
+  <!-- Journey Section -->
+  <section class="journey" id="journey">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <span class="section-badge">
+          <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+          <span>The Journey</span>
+        </span>
+        <h2 class="section-title">
+          Your Path to Connection
+        </h2>
+        <p class="section-subtitle">
+          Each step is an invitation—not a requirement. Move at your own pace.
+        </p>
+      </div>
+
+      <div class="journey-wrapper">
+        <svg class="journey-path" viewBox="0 0 1000 800" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--color-sage)" />
+              <stop offset="50%" stop-color="var(--color-terracotta)" />
+              <stop offset="100%" stop-color="var(--color-amber)" />
+            </linearGradient>
+          </defs>
+          <path class="journey-path-bg" id="journeyPathBg" d="" />
+          <path class="journey-path-line" id="travelPath" d="" />
+        </svg>
+
+        <div class="journey-grid">
+          <div class="journey-card free animate-on-scroll" data-step="1">
+            <div class="journey-card-glow"></div>
+            <div class="journey-card-header">
+              <div class="journey-card-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <rect x="4" y="20" width="32" height="16" rx="2" stroke="currentColor" stroke-width="2" />
+                  <path d="M8 20V12a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v8" stroke="currentColor" stroke-width="2" />
+                  <circle cx="20" cy="28" r="4" fill="currentColor" opacity="0.3" />
+                </svg>
+              </div>
+              <div>
+                <span class="journey-card-badge">Free</span>
+                <h3 class="journey-card-title">
+                  The Listening Circle
+                </h3>
+                <p class="journey-card-subtitle">
+                  Cultivating Awareness
+                </p>
+              </div>
+            </div>
+            <p class="journey-card-text">
+              jan to June every year; First Friday of the month, an exciting,
+              playful space to explore different thoughts, beliefs,
+              judgements, assumptions and opinions on any given topic.
+            </p>
+            <p class="journey-card-theme">
+              Theme: Deep listening and presence
+            </p>
+            <span class="journey-card-number">01</span>
+          </div>
+
+          <div class="journey-card free animate-on-scroll" data-step="2">
+            <div class="journey-card-glow"></div>
+            <div class="journey-card-header">
+              <div class="journey-card-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <ellipse cx="20" cy="32" rx="14" ry="4" stroke="currentColor" stroke-width="2" />
+                  <path d="M10 32V18c0-6 4-10 10-10s10 4 10 10v14" stroke="currentColor" stroke-width="2" />
+                  <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.3" />
+                </svg>
+              </div>
+              <div>
+                <span class="journey-card-badge">Free</span>
+                <h3 class="journey-card-title">
+                  The Empathy Café
+                </h3>
+                <p class="journey-card-subtitle">
+                  Compassion into Community
+                </p>
+              </div>
+            </div>
+            <p class="journey-card-text">
+              jan to June every year; Second Friday of the month, a calm
+              reflective space to practice listening to each other with
+              empathy and without judgement on any given topic.
+            </p>
+            <p class="journey-card-theme">
+              Theme: Shared stories and emotional connection
+            </p>
+            <span class="journey-card-number">02</span>
+          </div>
+
+          <div class="journey-card animate-on-scroll" data-step="3">
+            <div class="journey-card-glow"></div>
+            <div class="journey-card-header">
+              <div class="journey-card-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="2" />
+                  <circle cx="20" cy="20" r="6" fill="currentColor" opacity="0.3" />
+                  <path d="M20 4v6M20 30v6M4 20h6M30 20h6" stroke="currentColor" stroke-width="2" />
+                  <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.5" />
+                  <circle cx="30" cy="10" r="3" fill="currentColor" opacity="0.5" />
+                  <circle cx="10" cy="30" r="3" fill="currentColor" opacity="0.5" />
+                  <circle cx="30" cy="30" r="3" fill="currentColor" opacity="0.5" />
+                </svg>
+              </div>
+              <div>
+                <span class="journey-card-badge">Integration | Paid</span>
+                <h3 class="journey-card-title">
+                  Join the Dots
+                </h3>
+                <p class="journey-card-subtitle">
+                  The Complete Picture
+                </p>
+              </div>
+            </div>
+            <p class="journey-card-text">
+              January to June | Every Friday.A meta-space to join the dots.1st
+              & 2nd: Free listening and empathy circles.3rd & 4th: Paid
+              Thematic NVC explorations to integrate learning.Together, these
+              sessions create a connected ecosystem of emotional intelligence.
+            </p>
+            <p class="journey-card-theme">
+              Theme: Integration and synthesis
+            </p>
+            <span class="journey-card-number">03</span>
+          </div>
+          <div class="journey-card animate-on-scroll" data-step="4">
+            <div class="journey-card-glow"></div>
+            <div class="journey-card-header">
+              <div class="journey-card-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <path d="M8 36V20L20 8l12 12v16H8z" stroke="currentColor" stroke-width="2" />
+                  <rect x="14" y="24" width="12" height="12" fill="currentColor" opacity="0.3" />
+                  <path d="M20 8v8" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </div>
+              <div>
+                <span class="journey-card-badge">Deep Practice</span>
+                <h3 class="journey-card-title">
+                  The Compassion Course
+                </h3>
+                <p class="journey-card-subtitle">
+                  Awareness into Action
+                </p>
+              </div>
+            </div>
+            <p class="journey-card-text">
+              Building on listening, empathy and awareness, learn how to
+              translate reactions to response. A 52-week immersion where
+              understanding becomes caring action—not just something you know,
+              but something you embody.
+            </p>
+            <p class="journey-card-theme">
+              Theme: Understanding and responding with care
+            </p>
+            <span class="journey-card-number">04</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+    <a href="register.html" class="btn btn-primary"
+      style=" display: flex; justify-content: center; align-items: center; margin-top: 20px; width: 200px; margin-left: auto; margin-right: auto;">Contact
+      Us</a>
+  </section>
 
-    <!-- Subtle Contact Button -->
-    <!-- <a href="https://wa.me/your-number" class="contact-float" target="_blank" rel="noopener" aria-label="Contact us">
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <canvas id="pricingCanvas" class="pricing-canvas"></canvas>
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <span class="section-badge">
+          <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+          <span>Ways to Join</span>
+        </span>
+        <h2 class="section-title">
+          Choose Your Path
+        </h2>
+        <p class="section-subtitle">
+          Flexible options to support your journey
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card animate-on-scroll">
+          <div class="pricing-card-inner">
+            <div class="pricing-icon-wrapper">
+              <svg viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2" />
+                <path d="M24 14v20M14 24h20" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="pricing-name">
+              Listening & Empathy Circles
+            </h3>
+            <div class="pricing-amount free">
+              Free
+            </div>
+            <p class="pricing-description">
+              1st and 2nd Fridays every month
+            </p>
+            <div class="pricing-period">
+              Always open, always free
+            </div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+              <li>
+                Ist Friday: Topic-based discussion for 1 hour
+              </li>
+              <li>
+                2nd Friday: Empathy Circle for 1 hour
+              </li>
+              <li>English & Hindi</li>
+              <li>No commitment required</li>
+            </ul>
+            <a href="register.html" class="btn btn-secondary">Join Free</a>
+          </div>
+        </div>
+
+        <div class="pricing-card animate-on-scroll">
+          <div class="pricing-card-inner">
+            <div class="pricing-icon-wrapper">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M24 4v8M24 36v8M4 24h8M36 24h8" stroke="currentColor" stroke-width="2" />
+                <circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="2" />
+                <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.3" />
+              </svg>
+            </div>
+            <h3 class="pricing-name">
+              Monthly Pass
+            </h3>
+            <div class="pricing-amount">
+              ₹500
+            </div>
+            <div class="pricing-period">
+              All Fridays for any month of choice.
+            </div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+              <li>
+                3rd, 4th Fridays, for one month
+              </li>
+              <li>
+                Two Basic NVC / Thematic workshops of 1.5 hours each
+              </li>
+              <li>
+                All Listening Circle of 1 hour each
+              </li>
+              <li>
+                All Empathy Circles of 1 hour each
+              </li>
+              <li>English & Hindi</li>
+            </ul>
+            <a href="register.html" class="btn btn-primary">Get Started</a>
+          </div>
+        </div>
+
+        <div class="pricing-card featured animate-on-scroll">
+          <span class="pricing-popular">Best Value</span>
+          <div class="pricing-card-inner">
+            <div class="pricing-icon-wrapper">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z" stroke="currentColor"
+                  stroke-width="2" fill="currentColor" fill-opacity="0.1" />
+              </svg>
+            </div>
+            <h3 class="pricing-name">
+              Quarterly Pass
+            </h3>
+            <div class="pricing-amount">
+              ₹1200/- only
+            </div>
+            <div class="pricing-period">
+              Six workshops any three months of choice. Save ₹600/-
+            </div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+              <li>
+                All Fridays for three months
+              </li>
+              <li>
+                Six Basic NVC/ thematic workshops of of 1.5 hours each
+              </li>
+              <li>
+                All Listening Circles ( 1st Fridays) of 1 hour each
+              </li>
+              <li>
+                All Empathy Circles (2nd Fridays) of 1 hour each
+              </li>
+              <li>English & Hindi</li>
+              <li>
+                Unlocks 50% off on the Compassion Course
+              </li>
+            </ul>
+            <a href="register.html" class="btn btn-warm">Choose This</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compassion Course Section -->
+  <section class="compassion" id="compassion">
+    <canvas id="compassionCanvas" class="compassion-canvas"></canvas>
+    <div class="container">
+      <div class="compassion-card animate-on-scroll">
+        <div class="compassion-card-bg"></div>
+        <span class="compassion-badge">
+          <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M2 12h20" />
+            <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20" />
+          </svg>
+          <span>Deeper Journey (Optional Path)</span>
+        </span>
+        <h2 class="compassion-title">
+          The Compassion Course
+        </h2>
+        <p class="compassion-duration">
+          52 Weeks with Thom Bond (International NVC Trainer)
+        </p>
+        <p class="compassion-text">
+          The Compassion Course (52 Weeks) by Thom Bond(International NVC
+          Trainer). A year-long transformative journey that begins every July—
+          where empathy becomes not just something you practice, but something
+          you live. Buy any Quarterly Pass to unlock a 50% supported fee for
+          the full course ₹12,000 (instead of ₹24,000)
+        </p>
+        <div class="compassion-pricing">
+          <span class="compassion-original">₹24,000</span>
+          <svg class="compassion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+          <span class="compassion-special">₹12,000</span>
+          <span class="compassion-savings">Save ₹12,000</span>
+        </div>
+        <!-- <p class="compassion-discount-note">₹6,000 rate is exclusive to Monthly Pass holders. Buy any single Monthly Pass to unlock this 50% discount permanently.</p> -->
+        <div class="compassion-actions">
+          <a href="compassion-course.html" class="btn btn-warm">
+            Explore the Compassion Course
+          </a>
+
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0W5WgXjMlb4cH_I30S7yjDZyZQLUTyX3F-8XrnFozM_Lulw/viewform" class="btn btn-outline"
+            style=" margin-left: 10px; margin-top: 20px; border: 1px solid var(--color-terracotta); color: var(--color-terracotta); background: transparent;">
+            Register Here
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audience Section -->
+  <section class="audience" id="audience">
+    <canvas id="audienceCanvas" class="audience-canvas"></canvas>
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <span class="section-badge">
+          <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <span>Who Is This For?</span>
+        </span>
+        <h2 class="section-title">
+          You Belong Here If...
+        </h2>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience-item animate-on-scroll">
+          <div class="audience-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 6c-4 0-8 4-8 10s4 10 8 10 8-4 8-10-4-10-8-10z" stroke="currentColor" stroke-width="2" />
+              <path d="M12 16l4 4 4-4" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </div>
+          <span class="audience-text">Navigating love, conflict, or transitions</span>
+        </div>
+        <div class="audience-item animate-on-scroll">
+          <div class="audience-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2" />
+              <circle cx="22" cy="10" r="4" stroke="currentColor" stroke-width="2" />
+              <circle cx="16" cy="22" r="4" stroke="currentColor" stroke-width="2" />
+              <path d="M12 13l2 6M20 13l-2 6" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
+            </svg>
+          </div>
+          <span class="audience-text">Couples & families seeking deeper connection</span>
+        </div>
+        <div class="audience-item animate-on-scroll">
+          <div class="audience-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="8" r="4" stroke="currentColor" stroke-width="2" />
+              <path d="M8 28v-6a8 8 0 0 1 16 0v6" stroke="currentColor" stroke-width="2" />
+              <path d="M16 16v6" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </div>
+          <span class="audience-text">Caregivers, teachers, and leaders</span>
+        </div>
+        <div class="audience-item animate-on-scroll">
+          <div class="audience-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 4l4 8h8l-6 6 2 10-8-4-8 4 2-10-6-6h8l4-8z" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </div>
+          <span class="audience-text">Army families & community workers</span>
+        </div>
+        <div class="audience-item animate-on-scroll">
+          <div class="audience-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2" />
+              <circle cx="16" cy="16" r="4" fill="currentColor" opacity="0.3" />
+              <path d="M16 6v4M16 22v4" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+          </div>
+          <span class="audience-text">Anyone longing to be heard</span>
+        </div>
+        <div class="audience-item animate-on-scroll">
+          <div class="audience-icon">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 16a10 10 0 0 1 10-10" stroke="currentColor" stroke-width="2" />
+              <path d="M6 16a10 10 0 0 0 10 10" stroke="currentColor" stroke-width="2" />
+              <circle cx="22" cy="16" r="4" stroke="currentColor" stroke-width="2" />
+              <path d="M16 12v8" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </div>
+          <span class="audience-text">Those learning to listen with empathy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta" id="cta">
+    <div class="cta-bg">
+      <div class="cta-orb cta-orb-1"></div>
+      <div class="cta-orb cta-orb-2"></div>
+    </div>
+    <div class="container">
+      <div class="cta-content animate-on-scroll">
+        <h2>Come Home to Yourself</h2>
+        <div class="cta-text">
+          <p>Come to Join the Dots.</p>
+          <p>Sit in the Listening Circle.</p>
+          <p>Find your map in Join the Dots.</p>
+          <p>Warm yourself in the Empathy Café.</p>
+          <p>And slowly, come home to yourself.</p>
+        </div>
+        <div class="cta-buttons">
+          <a href="https://wa.me/your-number" class="btn btn-primary" target="_blank" rel="noopener">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            <span>Talk to Us on WhatsApp</span>
+          </a>
+          <a href="register.html" class="btn btn-secondary">Register for This Month</a>
+          <a href="register.html" class="btn btn-warm">Join the Free Listening Circle</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subtle Contact Button -->
+  <!-- <a href="https://wa.me/your-number" class="contact-float" target="_blank" rel="noopener" aria-label="Contact us">
         <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
         </svg>
     </a> -->
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-brand">
-            <h3>
-              <div class="logo-grid logo-grid--footer"
-                aria-label="Join the Dots"
-              >
-                <span class="logo-letter">J</span>
-                <div class="logo-dot"></div>
-                <span class="logo-letter">I</span>
-                <span class="logo-letter">N</span>
-                <div class="logo-dot"></div>
-                <span class="logo-letter">T</span>
-                <span class="logo-letter">H</span>
-                <span class="logo-letter">E</span>
-                <span class="logo-letter">D</span>
-                <div class="logo-dot"></div>
-                <span class="logo-letter">T</span>
-                <span class="logo-letter">S</span>
-              </div>
-            </h3>
-            <p class="footer-description">
-              A listening-based wellbeing space where emotions are understood,
-              relationships are gently healed, and awareness slowly becomes a
-              way of living.
-            </p>
-          </div>
-          <div class="footer-links-row">
-            <div class="footer-links">
-              <h4>Journey</h4>
-              <ul>
-                <li>
-                  <a href="#journey"
-                    >Your Path to Connection</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="compassion-course.html"
-                    >Compassion Course</a
-                  >
-                </li>
-                <li>
-                  <a href="resources.html"
-                    >Resources</a
-                  >
-                </li>
-              </ul>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>
+            <div class="logo-grid logo-grid--footer" aria-label="Join the Dots">
+              <span class="logo-letter">J</span>
+              <div class="logo-dot"></div>
+              <span class="logo-letter">I</span>
+              <span class="logo-letter">N</span>
+              <div class="logo-dot"></div>
+              <span class="logo-letter">T</span>
+              <span class="logo-letter">H</span>
+              <span class="logo-letter">E</span>
+              <span class="logo-letter">D</span>
+              <div class="logo-dot"></div>
+              <span class="logo-letter">T</span>
+              <span class="logo-letter">S</span>
             </div>
-            <div class="footer-links">
-              <h4>Information</h4>
-              <ul>
-                <li>
-                  <a href="#rhythm">Schedule</a>
-                </li>
-                <li>
-                  <a href="#pricing">Pricing</a>
-                </li>
-                <li><a href="about.html">About Us</a></li>
-              </ul>
-            </div>
-            <div class="footer-links">
-              <h4>Connect</h4>
-              <ul>
-                <li>
-                  <a href="contact.html"
-                    >Contact Us</a
-                  >
-                </li>
-                <li><a href="blog.html">Blog</a></li>
-                <li>
-                  <a href="register.html"
-                    >Register Now</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>
-            © 2025 Join the Dots.
-            <span>Made with care</span>
-            <span
-              >for those seeking connection.</span
-            >
+          </h3>
+          <p class="footer-description">
+            A listening-based wellbeing space where emotions are understood,
+            relationships are gently healed, and awareness slowly becomes a
+            way of living.
           </p>
         </div>
+        <div class="footer-links-row">
+          <div class="footer-links">
+            <h4>Journey</h4>
+            <ul>
+              <li>
+                <a href="#journey">Your Path to Connection</a>
+              </li>
+              <li>
+                <a href="compassion-course.html">Compassion Course</a>
+              </li>
+              <li>
+                <a href="resources.html">Resources</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Information</h4>
+            <ul>
+              <li>
+                <a href="#rhythm">Schedule</a>
+              </li>
+              <li>
+                <a href="#pricing">Pricing</a>
+              </li>
+              <li><a href="about.html">About Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Connect</h4>
+            <ul>
+              <li>
+                <a href="contact.html">Contact Us</a>
+              </li>
+              <li><a href="blog.html">Blog</a></li>
+              <li>
+                <a href="register.html">Register Now</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </footer>
+      <div class="footer-bottom">
+        <p>
+          © 2025 Join the Dots.
+          <span>Made with care</span>
+          <span>for those seeking connection.</span>
+        </p>
+      </div>
+    </div>
+  </footer>
 
-    <script src="data/events.js"></script>
-    <script src="animations.js?v=5"></script>
-    <!-- Google Translate Widget -->
-    <script>
-      // Google Translate requires this callback to exist even though we're using
-      // native <select> elements for the UI. It also needs a hidden container to
-      // init into; without it, the script emits console errors. The translation
-      // itself is driven by the googtrans cookie, not by this widget's UI.
-      function googleTranslateElementInit() {
-        var hidden = document.getElementById('google_translate_hidden');
-        if (hidden) {
-          new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_hidden');
-        }
+  <script src="data/events.js"></script>
+  <script src="animations.js?v=5"></script>
+  <!-- Google Translate Widget -->
+  <script>
+    // Google Translate requires this callback to exist even though we're using
+    // native <select> elements for the UI. It also needs a hidden container to
+    // init into; without it, the script emits console errors. The translation
+    // itself is driven by the googtrans cookie, not by this widget's UI.
+    function googleTranslateElementInit() {
+      var hidden = document.getElementById('google_translate_hidden');
+      if (hidden) {
+        new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_hidden');
       }
-      // Language picker: writes the googtrans cookie and reloads so Google
-      // Translate applies the new target language on next load. The cookie is
-      // path=/ so the choice persists across every page. A loading overlay
-      // covers the page during the reload/re-translate so content doesn't jump.
-      // When navigating between pages while a non-English translation is active,
-      // show the same loading overlay so Google Translate has time to re-apply
-      // on the new page without visible content shift.
-      document.addEventListener('DOMContentLoaded', function () {
-        document.addEventListener('click', function (e) {
-          var a = e.target.closest ? e.target.closest('a[href]') : null;
-          if (!a) return;
-          // Skip: modifier-click, new-tab clicks, non-left-button clicks, default-prevented.
-          if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-          var href = a.getAttribute('href');
-          if (!href) return;
-          // Skip anchors, external links, downloads, and explicit new-tabs.
-          if (href.charAt(0) === '#') return;
-          if (a.target && a.target !== '_self') return;
-          if (a.hasAttribute('download')) return;
-          try {
-            var dest = new URL(a.href, location.href);
-            if (dest.origin !== location.origin) return;
-            // Same-page hash only — skip.
-            if (dest.pathname === location.pathname && dest.hash && !dest.search) return;
-          } catch (err) { return; }
-          // Only show loader when a non-English translation is active.
-          // Leaving the compassion page? Restore the visitor's pre-compassion
-          // language so the destination page loads in their original lang.
-          var leavingCompassion =
-            location.pathname.indexOf('compassion-course') !== -1 &&
-            dest.pathname.indexOf('compassion-course') === -1;
-          if (leavingCompassion) {
-            try {
-              var pre = sessionStorage.getItem('pre-compassion-lang');
-              if (pre) {
-                document.cookie = 'googtrans=' + pre + '; path=/';
-                document.cookie = 'googtrans=' + pre + '; path=/; domain=.' + location.hostname;
-                sessionStorage.removeItem('pre-compassion-lang');
-              }
-            } catch (err2) {}
-          }
-          var m = /googtrans=\/en\/([a-z]+)/.exec(document.cookie);
-          if (!m || m[1] === 'en') return;
-          try { sessionStorage.setItem('lang-switching', '1'); } catch (err) {}
-          document.documentElement.classList.add('lang-switching');
-          var loader = document.getElementById('langLoader');
-          if (loader) loader.classList.add('active');
-        }, true);
-      });
-      window._setSiteLang = function (value) {
+    }
+    // Language picker: writes the googtrans cookie and reloads so Google
+    // Translate applies the new target language on next load. The cookie is
+    // path=/ so the choice persists across every page. A loading overlay
+    // covers the page during the reload/re-translate so content doesn't jump.
+    // When navigating between pages while a non-English translation is active,
+    // show the same loading overlay so Google Translate has time to re-apply
+    // on the new page without visible content shift.
+    document.addEventListener('DOMContentLoaded', function () {
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a[href]') : null;
+        if (!a) return;
+        // Skip: modifier-click, new-tab clicks, non-left-button clicks, default-prevented.
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        var href = a.getAttribute('href');
+        if (!href) return;
+        // Skip anchors, external links, downloads, and explicit new-tabs.
+        if (href.charAt(0) === '#') return;
+        if (a.target && a.target !== '_self') return;
+        if (a.hasAttribute('download')) return;
         try {
-          document.cookie = 'googtrans=' + value + '; path=/';
-          document.cookie = 'googtrans=' + value + '; path=/; domain=.' + location.hostname;
-          sessionStorage.setItem('lang-switching', '1');
-          // If the user is currently on the Compassion Course page and picks a
-          // language, remember that as their compassion-specific preference so
-          // future visits to that page respect it instead of auto-forcing Hindi.
-          if (location.pathname.indexOf('compassion-course') !== -1) {
-            localStorage.setItem('compassion-manual-lang', value);
-          }
-        } catch (e) { /* storage disabled */ }
-        // Add the class so CSS forces the loader to full-opacity *instantly*
-        // (no fade), hiding the current page before reload tears down the DOM.
+          var dest = new URL(a.href, location.href);
+          if (dest.origin !== location.origin) return;
+          // Same-page hash only — skip.
+          if (dest.pathname === location.pathname && dest.hash && !dest.search) return;
+        } catch (err) { return; }
+        // Only show loader when a non-English translation is active.
+        // Leaving the compassion page? Restore the visitor's pre-compassion
+        // language so the destination page loads in their original lang.
+        var leavingCompassion =
+          location.pathname.indexOf('compassion-course') !== -1 &&
+          dest.pathname.indexOf('compassion-course') === -1;
+        if (leavingCompassion) {
+          try {
+            var pre = sessionStorage.getItem('pre-compassion-lang');
+            if (pre) {
+              document.cookie = 'googtrans=' + pre + '; path=/';
+              document.cookie = 'googtrans=' + pre + '; path=/; domain=.' + location.hostname;
+              sessionStorage.removeItem('pre-compassion-lang');
+            }
+          } catch (err2) { }
+        }
+        var m = /googtrans=\/en\/([a-z]+)/.exec(document.cookie);
+        if (!m || m[1] === 'en') return;
+        try { sessionStorage.setItem('lang-switching', '1'); } catch (err) { }
         document.documentElement.classList.add('lang-switching');
         var loader = document.getElementById('langLoader');
         if (loader) loader.classList.add('active');
-        // Two rAFs guarantee the browser has painted the overlay before we reload.
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () { location.reload(); });
-        });
-      };
-      // Dynamic nav overflow: measure the gap between the right edge of the
-      // center-nav content and the left edge of the ACTUAL visible right-side
-      // content (the first child of .nav-right — typically the language select),
-      // because .nav-right has flex:1 and its wrapper extends leftward into
-      // empty space. Comparing against its visible child gives an honest gap.
-      (function setupNavOverflow() {
-        var html = document.documentElement;
-        var MIN_GAP = 20; // px of visible space we want between center text and right buttons
-        function check() {
-          html.classList.remove('nav-force-hamburger');
-          requestAnimationFrame(function () {
-            var nav = document.querySelector('.nav-inner');
-            var center = document.querySelector('.nav-center');
-            var right = document.querySelector('.nav-right');
-            if (!nav || !center || !right) return;
-            // If the existing media query already hides .nav-center, skip.
-            if (getComputedStyle(center).display === 'none') return;
-            // Find the leftmost visible child of nav-right (its wrapper may extend
-            // left via flex:1 into empty space — we want the actual UI boundary).
-            var rightChildren = Array.from(right.children).filter(function (el) {
-              return el.offsetWidth > 0 && getComputedStyle(el).display !== 'none';
-            });
-            if (!rightChildren.length) return;
-            var leftmostRightChild = rightChildren.reduce(function (a, b) {
-              return a.getBoundingClientRect().left < b.getBoundingClientRect().left ? a : b;
-            });
-            var centerRect = center.getBoundingClientRect();
-            var rightContentLeft = leftmostRightChild.getBoundingClientRect().left;
-            var gap = rightContentLeft - centerRect.right;
-            // Also detect actual overflow within the center (nav-links overflowing).
-            var navLinks = center.querySelector('.nav-links');
-            var linksOverflow = navLinks && navLinks.scrollWidth > navLinks.clientWidth + 1;
-            if (gap < MIN_GAP || linksOverflow) {
-              html.classList.add('nav-force-hamburger');
-            }
-          });
+      }, true);
+    });
+    window._setSiteLang = function (value) {
+      try {
+        document.cookie = 'googtrans=' + value + '; path=/';
+        document.cookie = 'googtrans=' + value + '; path=/; domain=.' + location.hostname;
+        sessionStorage.setItem('lang-switching', '1');
+        // If the user is currently on the Compassion Course page and picks a
+        // language, remember that as their compassion-specific preference so
+        // future visits to that page respect it instead of auto-forcing Hindi.
+        if (location.pathname.indexOf('compassion-course') !== -1) {
+          localStorage.setItem('compassion-manual-lang', value);
         }
-        var timer;
-        function schedule() { clearTimeout(timer); timer = setTimeout(check, 60); }
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', schedule);
-        } else {
-          schedule();
-        }
-        window.addEventListener('load', schedule);
-        window.addEventListener('resize', schedule);
-        // Google Translate swaps text async — re-check a beat after full load to
-        // catch the translated (often wider) labels.
-        setTimeout(schedule, 1500);
-        setTimeout(schedule, 3000);
-        // Re-check whenever Google Translate changes the page's translated state,
-        // since translated labels are typically a different width from English.
-        if (window.MutationObserver) {
-          new MutationObserver(schedule).observe(html, {
-            attributes: true, attributeFilter: ['class', 'lang']
-          });
-        }
-      })();
-      // Pre-select every <select.lang-select> to reflect the current cookie,
-      // and hide the language-switch loading overlay once the page is stable.
-      document.addEventListener('DOMContentLoaded', function () {
-        var m = /googtrans=(\/en\/[a-z]+)/.exec(document.cookie);
-        var value = m ? m[1] : '/en/en';
-        document.querySelectorAll('.lang-select').forEach(function (sel) {
-          sel.value = value;
-        });
-        // If we're mid language-switch, hide the loader on a short fixed timer.
-        // Waiting for Google Translate's own class to flip proved unreliable and slow,
-        // so we just give it a generous beat and reveal the page.
-        try {
-          if (sessionStorage.getItem('lang-switching') === '1') {
-            setTimeout(function () {
-              sessionStorage.removeItem('lang-switching');
-              document.documentElement.classList.remove('lang-switching');
-              var loader = document.getElementById('langLoader');
-              if (loader) loader.classList.remove('active');
-            }, 1200);
-          }
-        } catch (e) { /* storage disabled */ }
+      } catch (e) { /* storage disabled */ }
+      // Add the class so CSS forces the loader to full-opacity *instantly*
+      // (no fade), hiding the current page before reload tears down the DOM.
+      document.documentElement.classList.add('lang-switching');
+      var loader = document.getElementById('langLoader');
+      if (loader) loader.classList.add('active');
+      // Two rAFs guarantee the browser has painted the overlay before we reload.
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { location.reload(); });
       });
-    </script>
-    <script
-      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    ></script>
-      <div id="google_translate_hidden" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"></div>
-  </body>
+    };
+    // Dynamic nav overflow: measure the gap between the right edge of the
+    // center-nav content and the left edge of the ACTUAL visible right-side
+    // content (the first child of .nav-right — typically the language select),
+    // because .nav-right has flex:1 and its wrapper extends leftward into
+    // empty space. Comparing against its visible child gives an honest gap.
+    (function setupNavOverflow() {
+      var html = document.documentElement;
+      var MIN_GAP = 20; // px of visible space we want between center text and right buttons
+      function check() {
+        html.classList.remove('nav-force-hamburger');
+        requestAnimationFrame(function () {
+          var nav = document.querySelector('.nav-inner');
+          var center = document.querySelector('.nav-center');
+          var right = document.querySelector('.nav-right');
+          if (!nav || !center || !right) return;
+          // If the existing media query already hides .nav-center, skip.
+          if (getComputedStyle(center).display === 'none') return;
+          // Find the leftmost visible child of nav-right (its wrapper may extend
+          // left via flex:1 into empty space — we want the actual UI boundary).
+          var rightChildren = Array.from(right.children).filter(function (el) {
+            return el.offsetWidth > 0 && getComputedStyle(el).display !== 'none';
+          });
+          if (!rightChildren.length) return;
+          var leftmostRightChild = rightChildren.reduce(function (a, b) {
+            return a.getBoundingClientRect().left < b.getBoundingClientRect().left ? a : b;
+          });
+          var centerRect = center.getBoundingClientRect();
+          var rightContentLeft = leftmostRightChild.getBoundingClientRect().left;
+          var gap = rightContentLeft - centerRect.right;
+          // Also detect actual overflow within the center (nav-links overflowing).
+          var navLinks = center.querySelector('.nav-links');
+          var linksOverflow = navLinks && navLinks.scrollWidth > navLinks.clientWidth + 1;
+          if (gap < MIN_GAP || linksOverflow) {
+            html.classList.add('nav-force-hamburger');
+          }
+        });
+      }
+      var timer;
+      function schedule() { clearTimeout(timer); timer = setTimeout(check, 60); }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', schedule);
+      } else {
+        schedule();
+      }
+      window.addEventListener('load', schedule);
+      window.addEventListener('resize', schedule);
+      // Google Translate swaps text async — re-check a beat after full load to
+      // catch the translated (often wider) labels.
+      setTimeout(schedule, 1500);
+      setTimeout(schedule, 3000);
+      // Re-check whenever Google Translate changes the page's translated state,
+      // since translated labels are typically a different width from English.
+      if (window.MutationObserver) {
+        new MutationObserver(schedule).observe(html, {
+          attributes: true, attributeFilter: ['class', 'lang']
+        });
+      }
+    })();
+    // Pre-select every <select.lang-select> to reflect the current cookie,
+    // and hide the language-switch loading overlay once the page is stable.
+    document.addEventListener('DOMContentLoaded', function () {
+      var m = /googtrans=(\/en\/[a-z]+)/.exec(document.cookie);
+      var value = m ? m[1] : '/en/en';
+      document.querySelectorAll('.lang-select').forEach(function (sel) {
+        sel.value = value;
+      });
+      // If we're mid language-switch, hide the loader on a short fixed timer.
+      // Waiting for Google Translate's own class to flip proved unreliable and slow,
+      // so we just give it a generous beat and reveal the page.
+      try {
+        if (sessionStorage.getItem('lang-switching') === '1') {
+          setTimeout(function () {
+            sessionStorage.removeItem('lang-switching');
+            document.documentElement.classList.remove('lang-switching');
+            var loader = document.getElementById('langLoader');
+            if (loader) loader.classList.remove('active');
+          }, 1200);
+        }
+      } catch (e) { /* storage disabled */ }
+    });
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <div id="google_translate_hidden" aria-hidden="true"
+    style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"></div>
+</body>
+
 </html>
