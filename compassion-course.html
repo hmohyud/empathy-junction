@@ -117,7 +117,9 @@
       border: 1px solid rgba(155, 170, 143, 0.1);
       border-radius: var(--radius-lg);
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     }
 
     .cc-detail-card:hover {
@@ -567,6 +569,7 @@
     }
 
     /* Contribution section */
+
     .cc-contribution {
       padding: var(--space-xl);
       background: linear-gradient(135deg,
@@ -914,10 +917,12 @@
   <script>
     (function () {
       try {
-        if (sessionStorage.getItem('lang-switching') === '1') {
-          document.documentElement.classList.add('lang-switching');
+        if (sessionStorage.getItem("lang-switching") === "1") {
+          document.documentElement.classList.add("lang-switching");
         }
-      } catch (e) { /* storage blocked */ }
+      } catch (e) {
+        /* storage blocked */
+      }
     })();
   </script>
 </head>
@@ -940,43 +945,53 @@
     // If the previous page initiated a language switch, keep the loader visible
     // from first paint until Google Translate has finished re-rendering.
     try {
-      if (sessionStorage.getItem('lang-switching') === '1') {
-        document.documentElement.classList.add('lang-switching');
+      if (sessionStorage.getItem("lang-switching") === "1") {
+        document.documentElement.classList.add("lang-switching");
         // Mark loader active as soon as it exists in the DOM.
         var _showLoader = function () {
-          var el = document.getElementById('langLoader');
-          if (el) el.classList.add('active');
+          var el = document.getElementById("langLoader");
+          if (el) el.classList.add("active");
         };
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', _showLoader);
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", _showLoader);
         } else {
           _showLoader();
         }
       }
-    } catch (e) { /* sessionStorage unavailable */ }
+    } catch (e) {
+      /* sessionStorage unavailable */
+    }
   </script>
   <script>
     // Compassion Course auto-applies Hindi on arrival (or a per-page manual
     // override), and remembers the visitor's previous site-wide language so
     // leaving compassion restores it on the next page.
     try {
-      var override = localStorage.getItem('compassion-manual-lang');
-      var target = override || '/en/hi';
+      var override = localStorage.getItem("compassion-manual-lang");
+      var target = override || "/en/hi";
       // Capture the pre-compassion language once per visit. Cleared when the
       // user navigates away from the compassion page (see click handler).
-      if (!sessionStorage.getItem('pre-compassion-lang')) {
+      if (!sessionStorage.getItem("pre-compassion-lang")) {
         var preMatch = /googtrans=(\/en\/[a-z]+)/.exec(document.cookie);
-        sessionStorage.setItem('pre-compassion-lang', preMatch ? preMatch[1] : '/en/en');
+        sessionStorage.setItem(
+          "pre-compassion-lang",
+          preMatch ? preMatch[1] : "/en/en",
+        );
       }
-      var targetPattern = new RegExp('googtrans=' + target.replace(/\//g, '\/') + '(;|$)');
+      var targetPattern = new RegExp(
+        "googtrans=" + target.replace(/\//g, "\/") + "(;|$)",
+      );
       if (!targetPattern.test(document.cookie)) {
-        document.cookie = 'googtrans=' + target + '; path=/';
-        document.cookie = 'googtrans=' + target + '; path=/; domain=.' + location.hostname;
-        if (location.search.indexOf('_gtinit') === -1) {
-          location.replace(location.pathname + '?_gtinit=1' + location.hash);
+        document.cookie = "googtrans=" + target + "; path=/";
+        document.cookie =
+          "googtrans=" + target + "; path=/; domain=." + location.hostname;
+        if (location.search.indexOf("_gtinit") === -1) {
+          location.replace(location.pathname + "?_gtinit=1" + location.hash);
         }
       }
-    } catch (e) { /* storage disabled */ }
+    } catch (e) {
+      /* storage disabled */
+    }
   </script>
 
   <canvas id="bgCanvas" class="bg-canvas"></canvas>
@@ -1017,7 +1032,7 @@
           </li>
           <li class="nav-dropdown-wrap">
             <a href="compassion-course.html" class="nav-link nav-link--dropdown"><span
-                style="color: var(--color-terracotta);">Compassion Course</span>
+                style="color: var(--color-terracotta)">Compassion Course</span>
               <svg class="nav-dropdown-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M3 5l3 3 3-3" />
               </svg></a>
@@ -1098,7 +1113,7 @@
           </svg>
           <span>The Compassion Course</span>
         </span>
-        <h1 style="font-size: 2rem;">A Journey into Compassion</h1>
+        <h1 style="font-size: 2rem">A Journey into Compassion</h1>
         <p class="page-hero-subtitle">
           Learn Compassionate Communication — a 52-week journey into empathy,
           honesty, and deeper connection.
@@ -1106,7 +1121,6 @@
       </div>
     </div>
   </section>
-
 
   <!-- Body -->
   <div class="cc-page-body">
@@ -1130,7 +1144,6 @@
             <span><i>Do you want to resolve differences peacefully?</i></span>
           </p>
         </div>
-
 
         <!-- <div class="cc-intro-body">
             <p>
@@ -1161,7 +1174,6 @@
 
       <!-- Course details -->
       <div class="cc-details animate-on-scroll">
-
         <!-- Starts -->
         <div class="cc-detail-card">
           <span class="cc-detail-icon">
@@ -1199,8 +1211,7 @@
           </span>
           <div>
             <strong>Every Tuesday</strong>
-            <span>7:00 - 9:00 PM</span>
-            <span>(Hindi Batch)</span>
+            <span>7:00 PM - 9:00 PM</span>
           </div>
         </div>
 
@@ -1250,24 +1261,45 @@
             </a>
           </div>
         </div>
-
       </div>
+      <div class="parent-container">
+        <div class="cc-contribution animate-on-scroll cc-highlight-box">
+          <h3>
+            <svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+            </svg>
+            <span>Payment Options</span>
+          </h3>
 
-      <div class="cc-contribution animate-on-scroll cc-highlight-box">
-        <h3>
-          <svg class="cc-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path
-              d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-          </svg>
-          <span>Payment Options</span>
-        </h3>
+          <!-- Highlighted Payment Plans -->
+          <div class="cc-payment-options">
+            🌱 Payment in two installments: ₹6,500 (July) + ₹5,500 (October)
+            (~50% discount)<br />
+            🌼 Scholarship (Students): Only ₹4,000 (~75% discount)<br />
+            🌍 International Participants: Indian rates + sponsorship support
+            available<br />
+            🌿 Alumni (Previous Participants): Contribute any amount as per
+            your willingness and capacity<br />
+          </div>
+        </div>
 
-        <!-- Highlighted Payment Plans -->
-        <div class="cc-payment-options">
-          🌱 Payment in two installments: ₹6,500 (July) + ₹5,500 (October) (~50% discount)<br />
-          🌼 Scholarship (Students): Only ₹4,000 (~75% discount)<br />
-          🌍 International Participants: Indian rates + sponsorship support available<br />
-          🌿 Alumni (Previous Participants): Contribute any amount as per your willingness and capacity<br />
+        <div class="cc-contribution animate-on-scroll cc-highlight-box cc-secondary-box">
+          <h3>
+            <span>Scholarship Eligibility</span>
+          </h3>
+
+          <div class="cc-payment-options">
+            🌱 Please note that you may be eligible to pay a fixed and discounted
+            fee under the <strong>Scholarship category</strong> if: <br/>
+            
+               ➤ You have been referred by a Compassion Course alumni<br/>
+               ➤ You have previously completed any JTD course or retreat<br/>
+              
+              ➤ You have been selected for a special scholarship by the course
+                coordinators<br/>
+              
+          </div>
         </div>
       </div>
 
@@ -1286,9 +1318,7 @@
 
       <!-- What is it -->
       <div class="animate-on-scroll">
-        <h2 class="cc-section-title">
-          What is the Compassion Course?
-        </h2>
+        <h2 class="cc-section-title">What is the Compassion Course?</h2>
         <p class="cc-section-sub">
           Created by international trainer Thom Bond and taught for over 14
           years. Over 30,000 participants across 16 languages worldwide — a
@@ -1309,23 +1339,15 @@
 
       <!-- Outcomes -->
       <div class="animate-on-scroll">
-        <h2 class="cc-section-title">
-          By the end of 12 months, you will
-        </h2>
+        <h2 class="cc-section-title">By the end of 12 months, you will</h2>
         <ul class="cc-outcomes">
-          <li>
-            Express yourself with honesty, clarity, and compassion
-          </li>
+          <li>Express yourself with honesty, clarity, and compassion</li>
           <li>Listen with depth and openness</li>
           <li>Say 'yes' and 'no' with awareness</li>
           <li>Resolve conflicts peacefully</li>
-          <li>
-            Experience more joy in life and relationships
-          </li>
+          <li>Experience more joy in life and relationships</li>
         </ul>
       </div>
-
-
 
       <!-- Contribution -->
       <!-- <div class="cc-contribution animate-on-scroll">
@@ -1449,23 +1471,17 @@
 
       <!-- FAQ -->
       <div class="animate-on-scroll">
-        <h2 class="cc-section-title">
-          Frequently Asked Questions
-        </h2>
+        <h2 class="cc-section-title">Frequently Asked Questions</h2>
         <p class="cc-section-sub">
           Questions that will help you better understand this process.
         </p>
       </div>
 
       <div class="cc-faq" id="ccFaq">
-        <div class="cc-faq-group-title">
-          About the Course
-        </div>
+        <div class="cc-faq-group-title">About the Course</div>
 
         <div class="cc-faq-item">
-          <button class="cc-faq-q">
-            What is the Compassion Course?
-          </button>
+          <button class="cc-faq-q">What is the Compassion Course?</button>
           <div class="cc-faq-a">
             <div class="cc-faq-a-inner">
               <p>
@@ -1479,15 +1495,14 @@
         </div>
 
         <div class="cc-faq-item">
-          <button class="cc-faq-q">
-            Who is this group for?
-          </button>
+          <button class="cc-faq-q">Who is this group for?</button>
           <div class="cc-faq-a">
             <div class="cc-faq-a-inner">
               <p>
-                This group is for anyone interested in learning the basics of NVC and building more authentic, loving
-                relationships. We work in close partnership with Thom Bond and follow the exact syllabus from the
-                Compassion Course
+                This group is for anyone interested in learning the basics of
+                NVC and building more authentic, loving relationships. We work
+                in close partnership with Thom Bond and follow the exact
+                syllabus from the Compassion Course
                 <a href="https://compassioncourse.org/" target="_blank" rel="noopener">Compassion Course website</a>.
               </p>
             </div>
@@ -1510,9 +1525,7 @@
         </div>
 
         <div class="cc-faq-item">
-          <button class="cc-faq-q">
-            What is Nonviolent Communication?
-          </button>
+          <button class="cc-faq-q">What is Nonviolent Communication?</button>
           <div class="cc-faq-a">
             <div class="cc-faq-a-inner">
               <p>
@@ -1528,9 +1541,7 @@
         </div>
 
         <div class="cc-faq-item">
-          <button class="cc-faq-q">
-            How will this course play out?
-          </button>
+          <button class="cc-faq-q">How will this course play out?</button>
           <div class="cc-faq-a">
             <div class="cc-faq-a-inner">
               <p>
@@ -1559,14 +1570,10 @@
           </div>
         </div>
 
-        <div class="cc-faq-group-title">
-          Registration &amp; Contribution
-        </div>
+        <div class="cc-faq-group-title">Registration &amp; Contribution</div>
 
         <div class="cc-faq-item">
-          <button class="cc-faq-q">
-            How do we start?
-          </button>
+          <button class="cc-faq-q">How do we start?</button>
           <div class="cc-faq-a">
             <div class="cc-faq-a-inner">
               <p>
@@ -1579,15 +1586,15 @@
         </div>
 
         <div class="cc-faq-item">
-          <button class="cc-faq-q">
-            How much do I pay?
-          </button>
+          <button class="cc-faq-q">How much do I pay?</button>
           <div class="cc-faq-a">
             <div class="cc-faq-a-inner">
               <p>
-                Payment in two installments: ₹6,500 (July) + ₹5,500 (October) (~50% discount). Scholarship (Students):
-                Only ₹4,000 (~75% discount). International Participants: Indian rates + sponsorship support available.
-                Alumni (Previous Participants): Contribute any amount as per your willingness and capacity.
+                Payment in two installments: ₹6,500 (July) + ₹5,500 (October)
+                (~50% discount). Scholarship (Students): Only ₹4,000 (~75%
+                discount). International Participants: Indian rates +
+                sponsorship support available. Alumni (Previous Participants):
+                Contribute any amount as per your willingness and capacity.
               </p>
             </div>
           </div>
@@ -1628,9 +1635,7 @@
         </div>
 
         <div class="cc-faq-item">
-          <button class="cc-faq-q">
-            Can I get a partial scholarship?
-          </button>
+          <button class="cc-faq-q">Can I get a partial scholarship?</button>
           <div class="cc-faq-a">
             <div class="cc-faq-a-inner">
               <p>
@@ -1643,14 +1648,10 @@
           </div>
         </div>
 
-        <div class="cc-faq-group-title">
-          Sessions &amp; Participation
-        </div>
+        <div class="cc-faq-group-title">Sessions &amp; Participation</div>
 
         <div class="cc-faq-item">
-          <button class="cc-faq-q">
-            How many sessions?
-          </button>
+          <button class="cc-faq-q">How many sessions?</button>
           <div class="cc-faq-a">
             <div class="cc-faq-a-inner">
               <p>
@@ -1667,9 +1668,9 @@
           <div class="cc-faq-a">
             <div class="cc-faq-a-inner">
               <p>
-                Yes, you can still join. You can catch up with written material
-                . However, we strongly recommend attending
-                most sessions in the first 3 months — that's when foundational
+                Yes, you can still join. You can catch up with written
+                material . However, we strongly recommend attending most
+                sessions in the first 3 months — that's when foundational
                 principles are covered.
               </p>
             </div>
@@ -1712,9 +1713,7 @@
       </div>
 
       <div class="animate-on-scroll">
-        <h2 class="cc-section-title">
-          What past participants say
-        </h2>
+        <h2 class="cc-section-title">What past participants say</h2>
       </div>
 
       <div class="cc-testimonials">
@@ -1802,168 +1801,76 @@
             <li>
               <strong>1.</strong> Everything We Do, We Do to Meet a Need
             </li>
-            <li>
-              <strong>2.</strong> Most of Us Were Taught Something Else
-            </li>
+            <li><strong>2.</strong> Most of Us Were Taught Something Else</li>
             <li>
               <strong>3.</strong> We Are All Equipped with Onboard Need Radar
             </li>
-            <li>
-              <strong>4.</strong> What's the Big Deal with Needs?
-            </li>
-            <li>
-              <strong>5.</strong> Empathy, the Breath of Compassion
-            </li>
-            <li>
-              <strong>6.</strong> Hidden Judgments
-            </li>
-            <li>
-              <strong>7.</strong> More About Feelings
-            </li>
-            <li>
-              <strong>8.</strong> The Wisdom Inside the Judgment
-            </li>
-            <li>
-              <strong>9.</strong> Why Is This So Bleeping Hard?
-            </li>
-            <li>
-              <strong>10.</strong> What Empathy Is... and What It's Not
-            </li>
-            <li>
-              <strong>11.</strong> Creating Your Life of Compassion
-            </li>
-            <li>
-              <strong>12.</strong> Slowing Down
-            </li>
+            <li><strong>4.</strong> What's the Big Deal with Needs?</li>
+            <li><strong>5.</strong> Empathy, the Breath of Compassion</li>
+            <li><strong>6.</strong> Hidden Judgments</li>
+            <li><strong>7.</strong> More About Feelings</li>
+            <li><strong>8.</strong> The Wisdom Inside the Judgment</li>
+            <li><strong>9.</strong> Why Is This So Bleeping Hard?</li>
+            <li><strong>10.</strong> What Empathy Is... and What It's Not</li>
+            <li><strong>11.</strong> Creating Your Life of Compassion</li>
+            <li><strong>12.</strong> Slowing Down</li>
             <li>
               <strong>13.</strong> Making Life More Wonderful with Requests
             </li>
-            <li>
-              <strong>14.</strong> More about Self-Empathy
-            </li>
-            <li>
-              <strong>15.</strong> More About Requests
-            </li>
-            <li>
-              <strong>16.</strong> Saying 'No' with Compassion
-            </li>
-            <li>
-              <strong>17.</strong> Compassionate Use of Force
-            </li>
-            <li>
-              <strong>18.</strong> Beliefs and Needs: Habitual Thoughts
-            </li>
-            <li>
-              <strong>19.</strong> The Art of Observation
-            </li>
-            <li>
-              <strong>20.</strong> Scary Honesty
-            </li>
+            <li><strong>14.</strong> More about Self-Empathy</li>
+            <li><strong>15.</strong> More About Requests</li>
+            <li><strong>16.</strong> Saying 'No' with Compassion</li>
+            <li><strong>17.</strong> Compassionate Use of Force</li>
+            <li><strong>18.</strong> Beliefs and Needs: Habitual Thoughts</li>
+            <li><strong>19.</strong> The Art of Observation</li>
+            <li><strong>20.</strong> Scary Honesty</li>
             <li>
               <strong>21.</strong> Giving Thanks — Appreciation from the Heart
             </li>
-            <li>
-              <strong>22.</strong> The Power of Thanks
-            </li>
-            <li>
-              <strong>23.</strong> Apologies Versus Restoration
-            </li>
-            <li>
-              <strong>24.</strong> Hearing 'NO' with Compassion
-            </li>
-            <li>
-              <strong>25.</strong> Living a Life of Compassion
-            </li>
-            <li>
-              <strong>26.</strong> Clarity About Judgments
-            </li>
-            <li>
-              <strong>27.</strong> Connecting to Life Energy
-            </li>
-            <li>
-              <strong>28.</strong> The Layering of Needs
-            </li>
-            <li>
-              <strong>29.</strong> Self-Connection
-            </li>
-            <li>
-              <strong>30.</strong> Enjoying Pain
-            </li>
-            <li>
-              <strong>31.</strong> Shift versus Compromise
-            </li>
-            <li>
-              <strong>32.</strong> Stimulus Vs Cause
-            </li>
-            <li>
-              <strong>33.</strong> Understanding Anger
-            </li>
+            <li><strong>22.</strong> The Power of Thanks</li>
+            <li><strong>23.</strong> Apologies Versus Restoration</li>
+            <li><strong>24.</strong> Hearing 'NO' with Compassion</li>
+            <li><strong>25.</strong> Living a Life of Compassion</li>
+            <li><strong>26.</strong> Clarity About Judgments</li>
+            <li><strong>27.</strong> Connecting to Life Energy</li>
+            <li><strong>28.</strong> The Layering of Needs</li>
+            <li><strong>29.</strong> Self-Connection</li>
+            <li><strong>30.</strong> Enjoying Pain</li>
+            <li><strong>31.</strong> Shift versus Compromise</li>
+            <li><strong>32.</strong> Stimulus Vs Cause</li>
+            <li><strong>33.</strong> Understanding Anger</li>
             <li>
               <strong>34.</strong> Being Responsive vs Being Responsible
             </li>
             <li>
               <strong>35.</strong> Acting Angry vs Consciously Feeling Anger
             </li>
-            <li>
-              <strong>36.</strong> Surfing Intensity
-            </li>
-            <li>
-              <strong>37.</strong> Compassionate Intensity
-            </li>
+            <li><strong>36.</strong> Surfing Intensity</li>
+            <li><strong>37.</strong> Compassionate Intensity</li>
             <li>
               <strong>38.</strong> Words That Fuel Anger and Deny Choice
             </li>
-            <li>
-              <strong>39.</strong> Agreements versus Rules
-            </li>
-            <li>
-              <strong>40.</strong> The Art of Mourning
-            </li>
-            <li>
-              <strong>41.</strong> Enemy Images
-            </li>
-            <li>
-              <strong>42.</strong> Power With Vs Power Over
-            </li>
-            <li>
-              <strong>43.</strong> Compassionate Self-Discipline
-            </li>
-            <li>
-              <strong>44.</strong> Habitual vs Life-Connected Authority
-            </li>
-            <li>
-              <strong>45.</strong> Compassion and Vulnerability
-            </li>
-            <li>
-              <strong>46.</strong> Demanding versus Persisting
-            </li>
-            <li>
-              <strong>47.</strong> A Compassionate View of Triggers
-            </li>
-            <li>
-              <strong>48.</strong> Pervasive Feelings
-            </li>
-            <li>
-              <strong>49.</strong> Campaigns
-            </li>
-            <li>
-              <strong>50.</strong> Speaking Your Compassion
-            </li>
-            <li>
-              <strong>51.</strong> Compassion As a Spiritual Practice
-            </li>
-            <li>
-              <strong>52.</strong> Living With Compassion
-            </li>
+            <li><strong>39.</strong> Agreements versus Rules</li>
+            <li><strong>40.</strong> The Art of Mourning</li>
+            <li><strong>41.</strong> Enemy Images</li>
+            <li><strong>42.</strong> Power With Vs Power Over</li>
+            <li><strong>43.</strong> Compassionate Self-Discipline</li>
+            <li><strong>44.</strong> Habitual vs Life-Connected Authority</li>
+            <li><strong>45.</strong> Compassion and Vulnerability</li>
+            <li><strong>46.</strong> Demanding versus Persisting</li>
+            <li><strong>47.</strong> A Compassionate View of Triggers</li>
+            <li><strong>48.</strong> Pervasive Feelings</li>
+            <li><strong>49.</strong> Campaigns</li>
+            <li><strong>50.</strong> Speaking Your Compassion</li>
+            <li><strong>51.</strong> Compassion As a Spiritual Practice</li>
+            <li><strong>52.</strong> Living With Compassion</li>
           </ol>
         </div>
       </div>
 
       <!-- Team -->
       <div class="animate-on-scroll">
-        <h2 class="cc-section-title">
-          Meet the Hindi Facilitators
-        </h2>
+        <h2 class="cc-section-title">Meet the Hindi Facilitators</h2>
         <!-- <p class="cc-section-sub">
             Our facilitators have been learning and teaching NVC for 3–4 years.
             We are all driven by the need to spread compassion in the world.
@@ -1976,9 +1883,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Jaya.jpg" alt="Jayalakshmi Sengupta" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Jayalakshmi Sengupta
-            </div>
+            <div class="cc-person-name">Jayalakshmi Sengupta</div>
             <div class="cc-person-bio">
               Retired senior editor &amp; journalist. Laadli Media Awardee
               2011. NVC Certification Candidate. Facilitator, Compassion
@@ -1990,9 +1895,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Priti.jpg" alt="Priti Surekha" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Priti Surekha
-            </div>
+            <div class="cc-person-name">Priti Surekha</div>
             <div class="cc-person-bio">
               Priti is a facilitator, trainer, and coach working at the
               intersection of NVC, wellbeing, and leadership, designing deeply
@@ -2005,9 +1908,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Astha.jpg" alt="Astha Agrawal" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Astha Agrawal
-            </div>
+            <div class="cc-person-name">Astha Agrawal</div>
             <div class="cc-person-bio">
               Astha is a Self-leadership and Dialogue Coach and
               Mindfulness-based Listening facilitator with nearly twelve years
@@ -2020,9 +1921,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Muzaffar.jpg" alt="Muzaffar Sheikh" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Muzaffar Sheikh
-            </div>
+            <div class="cc-person-name">Muzaffar Sheikh</div>
             <div class="cc-person-bio">
               Muzaffar is a web developer, grassroots NVC trainer,
               facilitator, and translator engaged in exploring consciousness
@@ -2035,9 +1934,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Vinita.png" alt="Vinita Singh" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Vinita Singh
-            </div>
+            <div class="cc-person-name">Vinita Singh</div>
             <div class="cc-person-bio">
               Vinita is an OD consultant and certified coach with over 22
               years of experience working with senior leaders across
@@ -2058,9 +1955,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Rajiv.jpg" alt="Rajiv Thanawala" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Rajiv Thanawala
-            </div>
+            <div class="cc-person-name">Rajiv Thanawala</div>
             <div class="cc-person-bio">
               Rajiv brings 36+ years of leadership experience in the IT
               industry and is a CNVC Certification Candidate working with
@@ -2074,9 +1969,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Priyanka.jpeg" alt="Priyanka Sharma" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Priyanka Sharma
-            </div>
+            <div class="cc-person-name">Priyanka Sharma</div>
             <div class="cc-person-bio">
               Priyanka is a facilitator, coach, and CNVC Certification
               Candidate, and a trainee with the Focusing Institute,
@@ -2091,18 +1984,14 @@
 
       <!--Translator Team -->
       <div class="animate-on-scroll">
-        <h2 class="cc-section-title">
-          Meet the Translators
-        </h2>
+        <h2 class="cc-section-title">Meet the Translators</h2>
       </div>
 
       <div class="cc-team">
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Ashok.jpeg" alt="Ashok Kumar" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Ashok Kumar
-            </div>
+            <div class="cc-person-name">Ashok Kumar</div>
             <div class="cc-person-bio">
               Ashok K. Gupta is a retired Professor of Marketing in the US,
               with over 36 years of experience in academia, industry, and
@@ -2114,9 +2003,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Abhishek.jpeg" alt="Abhishek Dass" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Abhishek Dass
-            </div>
+            <div class="cc-person-name">Abhishek Dass</div>
             <div class="cc-person-bio">
               Abhishek is an educator and social innovator working with youth
               and grassroots communities across India. He focuses on dialogue
@@ -2128,9 +2015,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Astha.jpg" alt="Astha Agrawal" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Astha Agrawal
-            </div>
+            <div class="cc-person-name">Astha Agrawal</div>
             <div class="cc-person-bio">
               Astha is a Self-leadership and Dialogue Coach and
               Mindfulness-based Listening facilitator with nearly twelve years
@@ -2143,9 +2028,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Muzaffar.jpg" alt="Muzaffar Sheikh" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Muzaffar Sheikh
-            </div>
+            <div class="cc-person-name">Muzaffar Sheikh</div>
             <div class="cc-person-bio">
               Muzaffar is a web developer, grassroots NVC trainer,
               facilitator, and translator engaged in exploring consciousness
@@ -2158,9 +2041,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Anupa.jpeg" alt="Anupa Sharma" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Anupa Sharma
-            </div>
+            <div class="cc-person-name">Anupa Sharma</div>
             <div class="cc-person-bio">
               Anupa is a social development practitioner with 25+ years of
               experience in gender justice, governance, and community
@@ -2172,9 +2053,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/Nidhi.jpeg" alt="Nidhi Sharma" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Nidhi Sharma
-            </div>
+            <div class="cc-person-name">Nidhi Sharma</div>
             <div class="cc-person-bio">
               Nidhi is a multilingual communication specialist with 20+ years
               of experience in translation and social development. Her work is
@@ -2186,9 +2065,7 @@
         <div class="cc-person animate-on-scroll">
           <img class="cc-person-photo" src="public/kiran.jpeg" alt="Nidhi Sharma" loading="lazy" />
           <div>
-            <div class="cc-person-name">
-              Kiran Shaheen
-            </div>
+            <div class="cc-person-name">Kiran Shaheen</div>
             <div class="cc-person-bio">
               Kiran Shaheen is an activist, writer, journalist, and filmmaker
               with over four decades of experience across gender justice,
@@ -2327,9 +2204,12 @@
     // init into; without it, the script emits console errors. The translation
     // itself is driven by the googtrans cookie, not by this widget's UI.
     function googleTranslateElementInit() {
-      var hidden = document.getElementById('google_translate_hidden');
+      var hidden = document.getElementById("google_translate_hidden");
       if (hidden) {
-        new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_hidden');
+        new google.translate.TranslateElement(
+          { pageLanguage: "en" },
+          "google_translate_hidden",
+        );
       }
     }
     // Language picker: writes the googtrans cookie and reloads so Google
@@ -2339,68 +2219,98 @@
     // When navigating between pages while a non-English translation is active,
     // show the same loading overlay so Google Translate has time to re-apply
     // on the new page without visible content shift.
-    document.addEventListener('DOMContentLoaded', function () {
-      document.addEventListener('click', function (e) {
-        var a = e.target.closest ? e.target.closest('a[href]') : null;
-        if (!a) return;
-        // Skip: modifier-click, new-tab clicks, non-left-button clicks, default-prevented.
-        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-        var href = a.getAttribute('href');
-        if (!href) return;
-        // Skip anchors, external links, downloads, and explicit new-tabs.
-        if (href.charAt(0) === '#') return;
-        if (a.target && a.target !== '_self') return;
-        if (a.hasAttribute('download')) return;
-        try {
-          var dest = new URL(a.href, location.href);
-          if (dest.origin !== location.origin) return;
-          // Same-page hash only — skip.
-          if (dest.pathname === location.pathname && dest.hash && !dest.search) return;
-        } catch (err) { return; }
-        // Only show loader when a non-English translation is active.
-        // Leaving the compassion page? Restore the visitor's pre-compassion
-        // language so the destination page loads in their original lang.
-        var leavingCompassion =
-          location.pathname.indexOf('compassion-course') !== -1 &&
-          dest.pathname.indexOf('compassion-course') === -1;
-        if (leavingCompassion) {
+    document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener(
+        "click",
+        function (e) {
+          var a = e.target.closest ? e.target.closest("a[href]") : null;
+          if (!a) return;
+          // Skip: modifier-click, new-tab clicks, non-left-button clicks, default-prevented.
+          if (
+            e.defaultPrevented ||
+            e.button !== 0 ||
+            e.metaKey ||
+            e.ctrlKey ||
+            e.shiftKey ||
+            e.altKey
+          )
+            return;
+          var href = a.getAttribute("href");
+          if (!href) return;
+          // Skip anchors, external links, downloads, and explicit new-tabs.
+          if (href.charAt(0) === "#") return;
+          if (a.target && a.target !== "_self") return;
+          if (a.hasAttribute("download")) return;
           try {
-            var pre = sessionStorage.getItem('pre-compassion-lang');
-            if (pre) {
-              document.cookie = 'googtrans=' + pre + '; path=/';
-              document.cookie = 'googtrans=' + pre + '; path=/; domain=.' + location.hostname;
-              sessionStorage.removeItem('pre-compassion-lang');
-            }
-          } catch (err2) { }
-        }
-        var m = /googtrans=\/en\/([a-z]+)/.exec(document.cookie);
-        if (!m || m[1] === 'en') return;
-        try { sessionStorage.setItem('lang-switching', '1'); } catch (err) { }
-        document.documentElement.classList.add('lang-switching');
-        var loader = document.getElementById('langLoader');
-        if (loader) loader.classList.add('active');
-      }, true);
+            var dest = new URL(a.href, location.href);
+            if (dest.origin !== location.origin) return;
+            // Same-page hash only — skip.
+            if (
+              dest.pathname === location.pathname &&
+              dest.hash &&
+              !dest.search
+            )
+              return;
+          } catch (err) {
+            return;
+          }
+          // Only show loader when a non-English translation is active.
+          // Leaving the compassion page? Restore the visitor's pre-compassion
+          // language so the destination page loads in their original lang.
+          var leavingCompassion =
+            location.pathname.indexOf("compassion-course") !== -1 &&
+            dest.pathname.indexOf("compassion-course") === -1;
+          if (leavingCompassion) {
+            try {
+              var pre = sessionStorage.getItem("pre-compassion-lang");
+              if (pre) {
+                document.cookie = "googtrans=" + pre + "; path=/";
+                document.cookie =
+                  "googtrans=" +
+                  pre +
+                  "; path=/; domain=." +
+                  location.hostname;
+                sessionStorage.removeItem("pre-compassion-lang");
+              }
+            } catch (err2) { }
+          }
+          var m = /googtrans=\/en\/([a-z]+)/.exec(document.cookie);
+          if (!m || m[1] === "en") return;
+          try {
+            sessionStorage.setItem("lang-switching", "1");
+          } catch (err) { }
+          document.documentElement.classList.add("lang-switching");
+          var loader = document.getElementById("langLoader");
+          if (loader) loader.classList.add("active");
+        },
+        true,
+      );
     });
     window._setSiteLang = function (value) {
       try {
-        document.cookie = 'googtrans=' + value + '; path=/';
-        document.cookie = 'googtrans=' + value + '; path=/; domain=.' + location.hostname;
-        sessionStorage.setItem('lang-switching', '1');
+        document.cookie = "googtrans=" + value + "; path=/";
+        document.cookie =
+          "googtrans=" + value + "; path=/; domain=." + location.hostname;
+        sessionStorage.setItem("lang-switching", "1");
         // If the user is currently on the Compassion Course page and picks a
         // language, remember that as their compassion-specific preference so
         // future visits to that page respect it instead of auto-forcing Hindi.
-        if (location.pathname.indexOf('compassion-course') !== -1) {
-          localStorage.setItem('compassion-manual-lang', value);
+        if (location.pathname.indexOf("compassion-course") !== -1) {
+          localStorage.setItem("compassion-manual-lang", value);
         }
-      } catch (e) { /* storage disabled */ }
+      } catch (e) {
+        /* storage disabled */
+      }
       // Add the class so CSS forces the loader to full-opacity *instantly*
       // (no fade), hiding the current page before reload tears down the DOM.
-      document.documentElement.classList.add('lang-switching');
-      var loader = document.getElementById('langLoader');
-      if (loader) loader.classList.add('active');
+      document.documentElement.classList.add("lang-switching");
+      var loader = document.getElementById("langLoader");
+      if (loader) loader.classList.add("active");
       // Two rAFs guarantee the browser has painted the overlay before we reload.
       requestAnimationFrame(function () {
-        requestAnimationFrame(function () { location.reload(); });
+        requestAnimationFrame(function () {
+          location.reload();
+        });
       });
     };
     // Dynamic nav overflow: measure the gap between the right edge of the
@@ -2412,43 +2322,55 @@
       var html = document.documentElement;
       var MIN_GAP = 20; // px of visible space we want between center text and right buttons
       function check() {
-        html.classList.remove('nav-force-hamburger');
+        html.classList.remove("nav-force-hamburger");
         requestAnimationFrame(function () {
-          var nav = document.querySelector('.nav-inner');
-          var center = document.querySelector('.nav-center');
-          var right = document.querySelector('.nav-right');
+          var nav = document.querySelector(".nav-inner");
+          var center = document.querySelector(".nav-center");
+          var right = document.querySelector(".nav-right");
           if (!nav || !center || !right) return;
           // If the existing media query already hides .nav-center, skip.
-          if (getComputedStyle(center).display === 'none') return;
+          if (getComputedStyle(center).display === "none") return;
           // Find the leftmost visible child of nav-right (its wrapper may extend
           // left via flex:1 into empty space — we want the actual UI boundary).
-          var rightChildren = Array.from(right.children).filter(function (el) {
-            return el.offsetWidth > 0 && getComputedStyle(el).display !== 'none';
-          });
+          var rightChildren = Array.from(right.children).filter(
+            function (el) {
+              return (
+                el.offsetWidth > 0 && getComputedStyle(el).display !== "none"
+              );
+            },
+          );
           if (!rightChildren.length) return;
           var leftmostRightChild = rightChildren.reduce(function (a, b) {
-            return a.getBoundingClientRect().left < b.getBoundingClientRect().left ? a : b;
+            return a.getBoundingClientRect().left <
+              b.getBoundingClientRect().left
+              ? a
+              : b;
           });
           var centerRect = center.getBoundingClientRect();
-          var rightContentLeft = leftmostRightChild.getBoundingClientRect().left;
+          var rightContentLeft =
+            leftmostRightChild.getBoundingClientRect().left;
           var gap = rightContentLeft - centerRect.right;
           // Also detect actual overflow within the center (nav-links overflowing).
-          var navLinks = center.querySelector('.nav-links');
-          var linksOverflow = navLinks && navLinks.scrollWidth > navLinks.clientWidth + 1;
+          var navLinks = center.querySelector(".nav-links");
+          var linksOverflow =
+            navLinks && navLinks.scrollWidth > navLinks.clientWidth + 1;
           if (gap < MIN_GAP || linksOverflow) {
-            html.classList.add('nav-force-hamburger');
+            html.classList.add("nav-force-hamburger");
           }
         });
       }
       var timer;
-      function schedule() { clearTimeout(timer); timer = setTimeout(check, 60); }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', schedule);
+      function schedule() {
+        clearTimeout(timer);
+        timer = setTimeout(check, 60);
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", schedule);
       } else {
         schedule();
       }
-      window.addEventListener('load', schedule);
-      window.addEventListener('resize', schedule);
+      window.addEventListener("load", schedule);
+      window.addEventListener("resize", schedule);
       // Google Translate swaps text async — re-check a beat after full load to
       // catch the translated (often wider) labels.
       setTimeout(schedule, 1500);
@@ -2457,36 +2379,45 @@
       // since translated labels are typically a different width from English.
       if (window.MutationObserver) {
         new MutationObserver(schedule).observe(html, {
-          attributes: true, attributeFilter: ['class', 'lang']
+          attributes: true,
+          attributeFilter: ["class", "lang"],
         });
       }
     })();
     // Pre-select every <select.lang-select> to reflect the current cookie,
     // and hide the language-switch loading overlay once the page is stable.
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener("DOMContentLoaded", function () {
       var m = /googtrans=(\/en\/[a-z]+)/.exec(document.cookie);
-      var value = m ? m[1] : '/en/en';
-      document.querySelectorAll('.lang-select').forEach(function (sel) {
+      var value = m ? m[1] : "/en/en";
+      document.querySelectorAll(".lang-select").forEach(function (sel) {
         sel.value = value;
       });
       // If we're mid language-switch, hide the loader on a short fixed timer.
       // Waiting for Google Translate's own class to flip proved unreliable and slow,
       // so we just give it a generous beat and reveal the page.
       try {
-        if (sessionStorage.getItem('lang-switching') === '1') {
+        if (sessionStorage.getItem("lang-switching") === "1") {
           setTimeout(function () {
-            sessionStorage.removeItem('lang-switching');
-            document.documentElement.classList.remove('lang-switching');
-            var loader = document.getElementById('langLoader');
-            if (loader) loader.classList.remove('active');
+            sessionStorage.removeItem("lang-switching");
+            document.documentElement.classList.remove("lang-switching");
+            var loader = document.getElementById("langLoader");
+            if (loader) loader.classList.remove("active");
           }, 1200);
         }
-      } catch (e) { /* storage disabled */ }
+      } catch (e) {
+        /* storage disabled */
+      }
     });
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <div id="google_translate_hidden" aria-hidden="true"
-    style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"></div>
+  <div id="google_translate_hidden" aria-hidden="true" style="
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      "></div>
 </body>
 
 </html>
