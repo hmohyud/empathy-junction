@@ -162,6 +162,44 @@
         font-weight: 500;
       }
 
+      /* Apply card — a course-detail-card variant with a call-to-action
+         button inline, so visitors can apply right from the details grid. */
+      .cc-apply-card {
+        border: 1px solid rgba(196, 132, 108, 0.25);
+      }
+      .cc-apply-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        padding: 8px 16px;
+        border-radius: var(--radius-md);
+        background: var(--color-terracotta);
+        color: #fff;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.25s ease;
+        width: fit-content;
+      }
+      .cc-apply-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      /* Details grid responsive — collapse to 2 columns on tablet,
+         1 column on phone so the cards never get squished. */
+      @media (max-width: 992px) {
+        .cc-details {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 640px) {
+        .cc-details {
+          grid-template-columns: 1fr;
+        }
+      }
+
       /* CTA banner */
       .cc-cta-banner {
         text-align: center;
@@ -985,7 +1023,7 @@
                 <option value="/en/mr">मराठी (Marathi)</option>
                 <option value="/en/ta">தமிழ் (Tamil)</option>
               </select>
-              <a href="register.html" class="nav-cta" data-nav-key="register">Register</a>
+              <a href="register.html" class="nav-cta" data-nav-key="register">Contact Us</a>
             </div>
             <button
               class="nav-mobile-toggle"
@@ -996,7 +1034,7 @@
             </button>
           </div>
         </nav>
-        <div class="mobile-menu" id="mobileMenu">
+                <div class="mobile-menu" id="mobileMenu">
           <span class="mobile-menu-label">Home</span>
           <div class="mobile-explore-group">
             <a href="index.html#rhythm">Schedule</a>
@@ -1223,6 +1261,31 @@
                 >Original course fee Rs
                 <span class="cc-strikethrough">16000</span> /- Now ₹8000/-
                 only</span
+              >
+            </div>
+          </div>
+          <div class="cc-detail-card cc-apply-card">
+            <span class="cc-detail-icon">
+              <svg
+                class="cc-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                <path d="M22 4L12 14.01l-3-3" />
+              </svg>
+            </span>
+            <div>
+              <strong>Last date to apply</strong>
+              <span>1st July 2026</span>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSe0W5WgXjMlb4cH_I30S7yjDZyZQLUTyX3F-8XrnFozM_Lulw/viewform"
+                target="_blank"
+                rel="noopener"
+                class="cc-apply-btn"
+                >Apply</a
               >
             </div>
           </div>
