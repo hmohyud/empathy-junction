@@ -1843,7 +1843,7 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
 .compassion {
     background: linear-gradient(135deg, var(--color-terracotta-pale) 0%, var(--color-amber-light) 50%, var(--color-sand) 100%);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .compassion-canvas {
@@ -1872,7 +1872,7 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
     text-align: center;
     box-shadow: var(--shadow-lifted);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .compassion-card-bg {
@@ -1881,6 +1881,7 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
     left: 0;
     right: 0;
     height: 6px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     background: linear-gradient(90deg, var(--color-terracotta), var(--color-amber), var(--color-sage));
     background-size: 200% 100%;
     animation: shimmer 3s linear infinite;
@@ -1966,6 +1967,113 @@ a.nav-dropdown-item:hover { background: rgba(155,170,143,0.08); }
     padding: var(--space-xs) var(--space-md);
     background: rgba(184, 92, 56, 0.08);
     border-radius: var(--radius-sm);
+}
+
+.compassion-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 14px;
+    margin: var(--space-md) auto 0;
+    max-width: 560px;
+}
+
+.cc-dropdown {
+    position: relative;
+    flex: 1 1 220px;
+    min-width: 0;
+}
+
+.cc-dropdown > summary {
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 28px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    text-align: center;
+    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+
+.cc-dropdown > summary::-webkit-details-marker,
+.cc-dropdown > summary::marker { display: none; content: ''; }
+
+.cc-dropdown-trigger--solid {
+    background: linear-gradient(135deg, var(--color-terracotta) 0%, var(--color-hearth) 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(184, 92, 56, 0.3);
+    border: 1px solid transparent;
+}
+
+.cc-dropdown-trigger--solid:hover {
+    box-shadow: 0 12px 35px rgba(184, 92, 56, 0.4);
+}
+
+.cc-dropdown-trigger--ghost {
+    background: transparent;
+    color: var(--color-terracotta);
+    border: 1px solid var(--color-terracotta);
+}
+
+.cc-dropdown-trigger--ghost:hover {
+    background: var(--color-terracotta);
+    color: white;
+}
+
+.cc-dropdown-chevron {
+    width: 12px;
+    height: 12px;
+    opacity: 0.85;
+    transition: transform 0.2s;
+}
+
+.cc-dropdown[open] .cc-dropdown-chevron {
+    transform: rotate(180deg);
+}
+
+.cc-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 180px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(155, 170, 143, 0.18);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+    padding: 6px;
+    z-index: 50;
+}
+
+.cc-dropdown-item {
+    display: block;
+    padding: 10px 16px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+}
+
+.cc-dropdown-item:hover {
+    background: rgba(196, 132, 108, 0.1);
+    color: var(--color-hearth);
+}
+
+@media (max-width: 480px) {
+    .cc-dropdown { flex-basis: 100%; }
 }
 
 /* ==================== REFLECTION SECTION ==================== */
